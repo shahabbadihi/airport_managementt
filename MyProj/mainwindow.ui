@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>425</width>
+    <height>232</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>425</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Add</string>
+    </property>
+    <addaction name="actionAddPilot"/>
+    <addaction name="actionAdd_Host"/>
+    <addaction name="separator"/>
+    <addaction name="actionAddDeliverier"/>
+    <addaction name="actionAddAirplane"/>
+    <addaction name="separator"/>
+    <addaction name="actionAddTicket"/>
+    <addaction name="actionAddFlight"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAddPilot">
+   <property name="text">
+    <string>Pilot</string>
+   </property>
+  </action>
+  <action name="actionAdd_Host">
+   <property name="text">
+    <string>Host</string>
+   </property>
+  </action>
+  <action name="actionAddDeliverier">
+   <property name="text">
+    <string>Deliverier</string>
+   </property>
+  </action>
+  <action name="actionAddAirplane">
+   <property name="text">
+    <string>Airplane</string>
+   </property>
+  </action>
+  <action name="actionAddTicket">
+   <property name="text">
+    <string>Ticket</string>
+   </property>
+  </action>
+  <action name="actionAddFlight">
+   <property name="text">
+    <string>Flight</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
