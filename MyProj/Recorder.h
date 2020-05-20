@@ -77,7 +77,7 @@ public:
             while (!txt.atEnd())
             {
                 QString data_str = txt.readLine();
-                if (data_str == a->get_data())
+                if (data_str + "\n" == a->get_data())
                 {
                     flag = 1;
                     break;
@@ -90,7 +90,7 @@ public:
                 QTextStream out(&file);
                 for (int i = 0; i < lines_count; i++)
                 {
-                    if (i == num_of_line - 1)
+                    if (i == num_of_line)
                         continue;
                     out << Recorder<T>::get_dataList().at(i)->get_data();
                 }
@@ -160,6 +160,7 @@ public:
         file.close();
         delete[] s;
 
+        Recorder<T>::print_dataList();
     }
     static T * searchPersonnelCode(long p){
         for (int i = 0; i < Recorder<T>::dataList.size(); i++)
@@ -167,11 +168,8 @@ public:
             if(Recorder<T>::dataList.at(i)->get_personnelCode()==p){
                 return Recorder<T>::dataList.at(i);
             }
-            else  {
-                return nullptr;
-            }
         }
-
+        return nullptr;
     }
     static void remove(T * a){
         Recorder<T>::dataList.removeOne(a);

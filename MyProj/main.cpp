@@ -7,7 +7,7 @@
 #include "TList.h"
 #include "Recorder.h"
 //#include "Airplane.h"
-//#include "Host.h"
+#include "Host.h"
 //#include "Passenger.h"
 #include "Pilot.h"
 //#include "Deliverier.h"
@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QDir::setCurrent("..");
     //qDebug() << QDir::currentPath();
     Recorder<Pilot>::import();
+    Recorder<Host>::import();
     //Recorder<Pilot>::print_dataList();
     QApplication a(argc, argv);
     MainWindow w;

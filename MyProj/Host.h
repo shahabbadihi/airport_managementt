@@ -12,7 +12,7 @@ private:
 
 public:
     Host() {}
-    //Host(QString& dataStr);
+    Host(QString& dataStr);
     ~Host(){}
 
     //QString get_data();
