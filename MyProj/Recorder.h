@@ -172,6 +172,9 @@ public:
         return nullptr;
     }
     static void remove(T * a){
+
+        delete a;
+
         Recorder<T>::dataList.removeOne(a);
     }
 private:
