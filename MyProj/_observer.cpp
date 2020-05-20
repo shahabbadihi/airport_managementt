@@ -4,3 +4,8 @@ _Observer::_Observer()
 {
 
 }
+
+void _Observer::update()
+{
+
+}

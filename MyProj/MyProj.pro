@@ -19,6 +19,8 @@ SOURCES += \
     Employee.cpp \
     Host.cpp \
     Pilot.cpp \
+    _observer.cpp \
+    _subject.cpp \
     addhost.cpp \
     dialog.cpp \
     main.cpp \
@@ -38,6 +40,8 @@ HEADERS += \
     TList.h \
     Ticket.h \
     Vehicle.h \
+    _observer.h \
+    _subject.h \
     addhost.h \
     dialog.h \
     mainwindow.h
