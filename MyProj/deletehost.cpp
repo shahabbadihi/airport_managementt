@@ -6,6 +6,9 @@
 #include <iostream>
 #include <QString>
 #include <string>
+
+
+#include <QMessageBox>
 template <class T>
 QVector<T*> Recorder<T>::dataList;
 
@@ -32,6 +35,13 @@ void deleteHost::on_pushButton_clicked()
     if(h){
         if(h->get_name()==ui->txtFname->text() && h->get_family()==ui->txtLname->text()){
            Recorder<Host>::remove(h);
+           //
+           //
+           QMessageBox msg;
+           msg.setText("Delete Successfully!");
+           msg.exec();
+           qDebug() << "List of hosts after delete:";
+           Recorder<Host>::print_dataList();
         }
     }
 }

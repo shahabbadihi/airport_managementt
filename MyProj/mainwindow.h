@@ -24,7 +24,7 @@ private slots:
 
     void on_actionAdd_Host_triggered();
 
-    void on_actionhost_triggered();
+    //void on_actionhost_triggered();
 
     void on_actionDeleteHost_triggered();
 
