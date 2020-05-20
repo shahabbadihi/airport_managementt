@@ -69,7 +69,15 @@ public:
     {
         this->employmentDate.setDate(date.year(), date.month(), date.day());
     }
-
+    long get_personnelCode(){
+        return this->personnelCode;
+    }
+    QString &get_name(){
+        return this->fname;
+    }
+    QString &get_family(){
+        return this->lname;
+    }
 };
 
 #endif // EMPLOYEE_H

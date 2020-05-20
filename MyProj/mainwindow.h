@@ -3,6 +3,7 @@
 
 #include "dialog.h"
 #include "addhost.h"
+#include "deletehost.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -23,9 +24,14 @@ private slots:
 
     void on_actionAdd_Host_triggered();
 
+    void on_actionhost_triggered();
+
+    void on_actionDeleteHost_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
     AddHost* addHostDialog;
+    deleteHost* deleteHostDialog;
 };
 #endif // MAINWINDOW_H

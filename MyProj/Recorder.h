@@ -100,6 +100,21 @@ public:
         delete[] s;
 
     }
+    static T * searchPersonnelCode(long p){
+        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
+        {
+            if(Recorder<T>::dataList.at(i)->get_personnelCode()==p){
+                return Recorder<T>::dataList.at(i);
+            }
+            else  {
+                return nullptr;
+            }
+        }
+
+    }
+    static void remove(T * a){
+        Recorder<T>::dataList.removeOne(a);
+    }
 private:
     static QVector<T*> dataList;
 };

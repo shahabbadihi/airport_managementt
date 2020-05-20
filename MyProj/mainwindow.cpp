@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "dialog.h"
 #include "addhost.h"
+#include "deletehost.h"
 #include <QString>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -32,4 +33,13 @@ void MainWindow::on_actionAdd_Host_triggered()
     addHostDialog->setModal(true);
     addHostDialog->exec();
     delete addHostDialog;
+}
+
+
+void MainWindow::on_actionDeleteHost_triggered()
+{
+    this->deleteHostDialog = new deleteHost();
+    deleteHostDialog->setModal(true);
+    deleteHostDialog->exec();
+    delete deleteHostDialog;
 }

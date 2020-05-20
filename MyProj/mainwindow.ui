@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>425</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -36,7 +36,14 @@
     <addaction name="actionAddTicket"/>
     <addaction name="actionAddFlight"/>
    </widget>
+   <widget class="QMenu" name="menudelete">
+    <property name="title">
+     <string>delete</string>
+    </property>
+    <addaction name="actionDeleteHost"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menudelete"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAddPilot">
@@ -67,6 +74,11 @@
   <action name="actionAddFlight">
    <property name="text">
     <string>Flight</string>
+   </property>
+  </action>
+  <action name="actionDeleteHost">
+   <property name="text">
+    <string>host</string>
    </property>
   </action>
  </widget>
