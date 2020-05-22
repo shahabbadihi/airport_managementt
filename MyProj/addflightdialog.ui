@@ -59,28 +59,28 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QLabel" name="lblFlightDate">
+      <widget class="QLabel" name="lblDateTimeDeparture">
        <property name="text">
-        <string>Date:</string>
+        <string>Date &amp; Time Departure:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDateEdit" name="dtDate"/>
+      <widget class="QDateTimeEdit" name="dttmDeparture"/>
      </item>
     </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QLabel" name="lblFlightTime">
+      <widget class="QLabel" name="lblDateTimeArrival">
        <property name="text">
-        <string>Time:</string>
+        <string>Date &amp; Time Arrival:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="tmTime"/>
+      <widget class="QDateTimeEdit" name="dttmArrival"/>
      </item>
     </layout>
    </item>
