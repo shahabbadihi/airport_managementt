@@ -24,8 +24,10 @@ private:
     QString airplaneSerial;
     QString source;
     QString destination;
-    QDate date;
-    QTime time;
+    //QDate date;
+    //QTime time;
+    QDateTime dateTimeDeparture;
+    QDateTime dateTimeArrival;
     int numOfPassengers;
     Pilot* pilot;
     QVector<Host*> hosts;
@@ -37,12 +39,10 @@ public:
     void setAirplaneSerial(long);
     void setSource(const QString&);
     void setDestination(const QString&);
-    void setDate(const QDate&);
-    void setDate(const QDate&&);
-    void setDate(int year, int month, int day);
-    void setTime(const QTime&);
-    void setTime(const QTime&&);
-    void setTime(int hour, int minute, int second);
+    void setDateTimeArrival(const QDateTime&);
+    void setDateTimeArrival(const QDateTime&&);
+    void setDateTimeDeparture(const QDateTime&);
+    void setDateTimeDeparture(const QDateTime&&);
 };
 
 #endif // FLIGHT_H
