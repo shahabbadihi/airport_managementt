@@ -15,6 +15,11 @@ public:
     explicit AddFlightDialog(QWidget *parent = nullptr);
     ~AddFlightDialog();
 
+private slots:
+    void on_btnSubmit_clicked();
+
+    void on_btnCancel_clicked();
+
 private:
     Ui::AddFlightDialog *ui;
 };

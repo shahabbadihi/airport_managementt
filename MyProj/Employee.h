@@ -40,7 +40,7 @@ public:
     void set_employmentDate(QDate& date);
     void set_employmentDate(QDate&& date);
 
-
+    bool isFree(Flight*);
 };
 
 #endif // EMPLOYEE_H

@@ -43,6 +43,11 @@ public:
     void setDateTimeArrival(const QDateTime&&);
     void setDateTimeDeparture(const QDateTime&);
     void setDateTimeDeparture(const QDateTime&&);
+
+    QDateTime getDateTimeArrival();
+    QDateTime getDateTimeDeparture();
+    QString getSource();
+    QString getDestination();
 };
 
 #endif // FLIGHT_H

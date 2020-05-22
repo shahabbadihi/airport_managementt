@@ -1,4 +1,5 @@
 #include "Employee.h"
+#include "Flight.h"
 #include <QString>
 QString Employee::get_data()
 {
@@ -63,9 +64,22 @@ void Employee::set_employmentDate(QDate &&date)
     this->employmentDate.setDate(date.year(), date.month(), date.day());
 }
 
-bool Employee::isFree()
+bool Employee::isFree(Flight* f)
 {
-
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if ( !(
+            (this->list.at(i)->getDateTimeDeparture() > f->getDateTimeArrival() &&
+             this->list.at(i)->getSource() == f->getDestination()) ||
+            (this->list.at(i)->getDateTimeArrival() < f->getDateTimeDeparture() &&
+             this->list.at(i)->getDestination() == f->getSource())
+              )
+           )
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 Employee::Employee(QString &dataStr)

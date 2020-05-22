@@ -43,6 +43,26 @@ void Flight::setDateTimeDeparture(const QDateTime && d)
     this->dateTimeDeparture.setTime(d.time());
 }
 
+QDateTime Flight::getDateTimeArrival()
+{
+    return this->dateTimeArrival;
+}
+
+QDateTime Flight::getDateTimeDeparture()
+{
+    return this->dateTimeDeparture;
+}
+
+QString Flight::getSource()
+{
+    return this->source;
+}
+
+QString Flight::getDestination()
+{
+    return this->destination;
+}
+
 //void Flight::setDate(const QDate & d)
 //{
 //    this->date.setDate(d.year(), d.month(), d.day());

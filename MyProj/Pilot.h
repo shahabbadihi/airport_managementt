@@ -22,6 +22,7 @@ public:
 
     QString get_data();
 
+
 };
 
 //#endif // PILOT_H
