@@ -13,6 +13,61 @@ QString Employee::get_data()
     return data;
 }
 
+void Employee::set_fname(const QString &name)
+{
+    this->fname = name;
+}
+
+void Employee::set_fname(const QString &&name)
+{
+    this->fname = name;
+}
+
+void Employee::set_lname(const QString &family)
+{
+    this->lname = family;
+}
+
+void Employee::set_lname(const QString &&family)
+{
+    this->lname = family;
+}
+
+void Employee::set_nationalCode(long code)
+{
+    this->nationalCode = code;
+}
+
+void Employee::set_personnelCode(long code)
+{
+    this->personnelCode = code;
+}
+
+void Employee::set_birthDate(QDate &date)
+{
+    this->birthDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_birthDate(QDate &&date)
+{
+    this->birthDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_employmentDate(QDate &date)
+{
+    this->employmentDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_employmentDate(QDate &&date)
+{
+    this->employmentDate.setDate(date.year(), date.month(), date.day());
+}
+
+bool Employee::isFree()
+{
+
+}
+
 Employee::Employee(QString &dataStr)
 {
     QStringList strList = dataStr.split('|');

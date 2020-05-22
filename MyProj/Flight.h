@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QDate>
 #include <QDateTime>
+
 //#include "Pilot.h"
 class Pilot;
 //#include "Passenger.h"
@@ -24,14 +25,24 @@ private:
     QString source;
     QString destination;
     QDate date;
-    QDateTime time;
+    QTime time;
     int numOfPassengers;
     Pilot* pilot;
     QVector<Host*> hosts;
     QVector<Passenger*> passengers;
     Price ticketsSaleCost;
 public:
-    QString get_data()
+    QString get_data();
+    void setSerial(long);
+    void setAirplaneSerial(long);
+    void setSource(const QString&);
+    void setDestination(const QString&);
+    void setDate(const QDate&);
+    void setDate(const QDate&&);
+    void setDate(int year, int month, int day);
+    void setTime(const QTime&);
+    void setTime(const QTime&&);
+    void setTime(int hour, int minute, int second);
 };
 
 #endif // FLIGHT_H

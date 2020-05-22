@@ -28,47 +28,18 @@ public:
 
     QString get_data();
 
-    void set_fname(const QString& name)
-    {
-        this->fname = name;
-    }
-    void set_fname(const QString&& name)
-    {
-        this->fname = name;
-    }
+    void set_fname(const QString& name);
+    void set_fname(const QString&& name);
 
-    void set_lname(const QString& family)
-    {
-        this->lname = family;
-    }
-    void set_lname(const QString&& family)
-    {
-        this->lname = family;
-    }
-    void set_nationalCode(long code)
-    {
-        this->nationalCode = code;
-    }
-    void set_personnelCode(long code)
-    {
-        this->personnelCode = code;
-    }
-    void set_birthDate(QDate& date)
-    {
-        this->birthDate.setDate(date.year(), date.month(), date.day());
-    }
-    void set_birthDate(QDate&& date)
-    {
-        this->birthDate.setDate(date.year(), date.month(), date.day());
-    }
-    void set_employmentDate(QDate& date)
-    {
-        this->employmentDate.setDate(date.year(), date.month(), date.day());
-    }
-    void set_employmentDate(QDate&& date)
-    {
-        this->employmentDate.setDate(date.year(), date.month(), date.day());
-    }
+    void set_lname(const QString& family);
+    void set_lname(const QString&& family);
+    void set_nationalCode(long code);
+    void set_personnelCode(long code);
+    void set_birthDate(QDate& date);
+    void set_birthDate(QDate&& date);
+    void set_employmentDate(QDate& date);
+    void set_employmentDate(QDate&& date);
+
 
 };
 

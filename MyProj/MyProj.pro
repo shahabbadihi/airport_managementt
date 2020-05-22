@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Employee.cpp \
+    Flight.cpp \
     Host.cpp \
     Pilot.cpp \
     _observer.cpp \
     _subject.cpp \
+    addflightdialog.cpp \
     addhost.cpp \
     dialog.cpp \
     main.cpp \
@@ -42,11 +44,13 @@ HEADERS += \
     Vehicle.h \
     _observer.h \
     _subject.h \
+    addflightdialog.h \
     addhost.h \
     dialog.h \
     mainwindow.h
 
 FORMS += \
+    addflightdialog.ui \
     addhost.ui \
     dialog.ui \
     mainwindow.ui
