@@ -4,7 +4,11 @@
 #include "Employee.h"
 #include "Pilot.h"
 #include "Host.h"
+#include "Recorder.h"
 #include <QMessageBox>
+
+template <class T>
+QVector<T*> Recorder<T>::dataList;
 
 AddFlightDialog::AddFlightDialog(QWidget *parent) :
     QDialog(parent),
@@ -21,7 +25,7 @@ AddFlightDialog::~AddFlightDialog()
 void AddFlightDialog::on_btnSubmit_clicked()
 {
     Flight* flight = new Flight();
-    flight->setSerial(ui->txtFlightSerial->text().toLong());
+    flight->setSerial(ui->txtFlightSerial->text());
     flight->setSource(ui->txtSource->text());
     flight->setDestination(ui->txtDest->text());
     flight->setDateTimeArrival(ui->dttmArrival->dateTime());
@@ -30,10 +34,34 @@ void AddFlightDialog::on_btnSubmit_clicked()
     flight->setNumOfPassengers(ui->spnPassengers->value());
 
     flight->setPilot(Recorder<Pilot>::getFirstFree(flight));
+
     for (int i = 0; i < flight->getNumOfHosts(); i++)
     {
         flight->attachHost(Recorder<Host>::getFirstFree(flight));
     }
+
+    if (flight->getPilot() == nullptr)
+    {
+        QMessageBox msg;
+        msg.setText("There Is No Free Pilot!");
+        msg.exec();
+        delete flight;
+        flight = nullptr;
+        return;
+    }
+    foreach (Host* h, flight->getHostsList())
+    {
+        if (h == nullptr)
+        {
+            QMessageBox msg;
+            msg.setText("Not Enough Hosts!");
+            msg.exec();
+            delete flight;
+            flight = nullptr;
+            return;
+        }
+    }
+    Recorder<Flight>::add(flight);
 
     QMessageBox msg;
     QString str = "Submit Successfully!\n";

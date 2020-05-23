@@ -43,6 +43,7 @@ public:
 
     QString getFname();
     QString getLname();
+    long getPersonnelCode();
 
     bool isFree(Flight*);
 };

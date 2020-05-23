@@ -65,7 +65,11 @@ public:
             qDebug() << Recorder<T>::dataList.at(i)->get_data();
         }
     }
-
+    static void add(T* a)
+    {
+        Recorder<T>::record(a);
+        Recorder<T>::addToFile(a);
+    }
     static void import()
     {
         QDir dataDir(QDir::currentPath() + "/data");

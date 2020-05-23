@@ -79,6 +79,11 @@ QString Employee::getLname()
     return this->lname;
 }
 
+long Employee::getPersonnelCode()
+{
+    return this->personnelCode;
+}
+
 bool Employee::isFree(Flight* f)
 {
     for (int i = 0; i < this->list.size(); i++)

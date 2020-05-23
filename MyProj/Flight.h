@@ -36,17 +36,20 @@ private:
     Price ticketsSaleCost;
 public:
     Flight() {}
+    Flight(QString&);
     ~Flight() {}
 
-    QString get_data() {}
-    void setSerial(long);
-    void setAirplaneSerial(long);
+    QString get_data();
+    void setSerial(const QString&);
+    void setAirplaneSerial(const QString&);
     void setSource(const QString&);
     void setDestination(const QString&);
     void setDateTimeArrival(const QDateTime&);
     void setDateTimeArrival(const QDateTime&&);
+    void setDateTimeArrival(int year, int month, int day, int hour, int minute, int second);
     void setDateTimeDeparture(const QDateTime&);
     void setDateTimeDeparture(const QDateTime&&);
+    void setDateTimeDeparture(int year, int month, int day, int hour, int minute, int second);
     void setPilot(Pilot*);
     void setNumOfHosts(int);
     void setNumOfPassengers(int);
@@ -61,6 +64,7 @@ public:
     int getNumOfPassengers();
     Pilot *getPilot();
     QVector<Host *> getHostsList();
+    QString getSerial();
 };
 
 #endif // FLIGHT_H
