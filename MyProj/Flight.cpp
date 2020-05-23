@@ -1,4 +1,5 @@
 #include "Flight.h"
+#include "Host.h"
 void Flight::setSerial(long s)
 {
     this->serial = s;
@@ -43,6 +44,33 @@ void Flight::setDateTimeDeparture(const QDateTime && d)
     this->dateTimeDeparture.setTime(d.time());
 }
 
+void Flight::setPilot(Pilot * p)
+{
+    this->pilot = p;
+    p->attachFlight(this);
+}
+
+void Flight::setNumOfHosts(int n)
+{
+    this->numOfHosts = n;
+}
+
+void Flight::setNumOfPassengers(int n)
+{
+    this->numOfPassengers = n;
+}
+
+void Flight::attachHost(Host * h)
+{
+    this->hosts.push_back(h);
+    h->attachFlight(this);
+}
+
+void Flight::attachPassenger(Passenger * p)
+{
+    this->passengers.push_back(p);
+}
+
 QDateTime Flight::getDateTimeArrival()
 {
     return this->dateTimeArrival;
@@ -61,6 +89,26 @@ QString Flight::getSource()
 QString Flight::getDestination()
 {
     return this->destination;
+}
+
+int Flight::getNumOfHosts()
+{
+    return this->numOfHosts;
+}
+
+int Flight::getNumOfPassengers()
+{
+    return this->numOfPassengers;
+}
+
+Pilot *Flight::getPilot()
+{
+    return this->pilot;
+}
+
+QVector<Host *> Flight::getHostsList()
+{
+    return this->hosts;
 }
 
 //void Flight::setDate(const QDate & d)

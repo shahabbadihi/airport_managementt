@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "dialog.h"
 #include "addhost.h"
+#include "addflightdialog.h"
 #include <QString>
 #include <QDesktopWidget>
 #include <QHeaderView>
@@ -39,4 +40,12 @@ void MainWindow::on_actionAdd_Host_triggered()
 void MainWindow::on_btnBuyTicket_clicked()
 {
 
+}
+
+void MainWindow::on_actionAddFlight_triggered()
+{
+    this->addFlightDialog = new AddFlightDialog();
+    addFlightDialog->setModal(true);
+    addFlightDialog->exec();
+    delete addFlightDialog;
 }

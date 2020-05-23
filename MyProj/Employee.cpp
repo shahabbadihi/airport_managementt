@@ -64,6 +64,21 @@ void Employee::set_employmentDate(QDate &&date)
     this->employmentDate.setDate(date.year(), date.month(), date.day());
 }
 
+void Employee::attachFlight(Flight* f)
+{
+    this->list.push_back(f);
+}
+
+QString Employee::getFname()
+{
+    return this->fname;
+}
+
+QString Employee::getLname()
+{
+    return this->lname;
+}
+
 bool Employee::isFree(Flight* f)
 {
     for (int i = 0; i < this->list.size(); i++)

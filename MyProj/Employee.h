@@ -39,6 +39,10 @@ public:
     void set_birthDate(QDate&& date);
     void set_employmentDate(QDate& date);
     void set_employmentDate(QDate&& date);
+    void attachFlight(Flight*);
+
+    QString getFname();
+    QString getLname();
 
     bool isFree(Flight*);
 };

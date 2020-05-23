@@ -3,6 +3,7 @@
 
 #include "dialog.h"
 #include "addhost.h"
+#include "addflightdialog.h"
 #include <QMainWindow>
 #include <QTableWidget>
 
@@ -26,13 +27,12 @@ private slots:
 
     void on_btnBuyTicket_clicked();
 
+    void on_actionAddFlight_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
     AddHost* addHostDialog;
-
-    QTableWidget* m_pTableWidget;
-
-    QStringList m_TableHeader;
+    AddFlightDialog* addFlightDialog;
 };
 #endif // MAINWINDOW_H

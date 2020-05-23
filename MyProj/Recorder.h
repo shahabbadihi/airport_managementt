@@ -2,6 +2,9 @@
 #define RECORDER_H
 
 #include "TList.h"
+//#include "Employee.h"
+//#include "Pilot.h"
+//#include "Host.h"
 #include <QFile>
 #include <QDir>
 #include <QString>
@@ -12,6 +15,10 @@
 #include <QException>
 #include <QDebug>
 //#include <string>
+//class Employee;
+//class Pilot;
+//class Host;
+class Flight;
 template <class T>
 class Recorder
 {
@@ -99,6 +106,18 @@ public:
         file.close();
         delete[] s;
 
+        Recorder<T>::print_dataList();
+    }
+
+    static T* getFirstFree(Flight* f)
+    {
+        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
+        {
+            T* a = Recorder<T>::dataList.at(i);
+            if (a->isFree(f))
+                return a;
+        }
+        return nullptr;
     }
 private:
     static QVector<T*> dataList;
