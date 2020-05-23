@@ -178,7 +178,7 @@ public:
     static T * searchPersonnelCode(long p){
         for (int i = 0; i < Recorder<T>::dataList.size(); i++)
         {
-            if(Recorder<T>::dataList.at(i)->get_personnelCode()==p){
+            if(Recorder<T>::dataList.at(i)->getPersonnelCode()==p){
                 return Recorder<T>::dataList.at(i);
             }
         }
