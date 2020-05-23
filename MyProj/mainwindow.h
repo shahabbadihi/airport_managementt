@@ -5,6 +5,7 @@
 #include "addhost.h"
 #include "deletehost.h"
 #include "addflightdialog.h"
+#include "addticket.h"
 #include <QMainWindow>
 #include <QTableWidget>
 
@@ -33,11 +34,14 @@ private slots:
     void on_actionAddFlight_triggered();
 
 
+    void on_actionAddTicket_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
     AddHost* addHostDialog;
     deleteHost* deleteHostDialog;
     AddFlightDialog* addFlightDialog;
+    AddTicket* addTicketDialog;
 };
 #endif // MAINWINDOW_H

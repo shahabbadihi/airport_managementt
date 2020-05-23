@@ -11,12 +11,13 @@
 #include "Pilot.h"
 class Pilot;
 //#include "Passenger.h"
-class Passenger;
+//class Passenger;
 #include "Price.h"
 //class Price;
 //#include "Host.h"
 #include "Object.h"
 class Host;
+class Ticket;
 class Flight : public Object
 {
 private:
@@ -32,7 +33,7 @@ private:
     int numOfHosts;
     Pilot* pilot;
     QVector<Host*> hosts;
-    QVector<Passenger*> passengers;
+    QVector<Ticket*> tickets;
     Price ticketsSaleCost;
 public:
     Flight() {}
@@ -54,7 +55,7 @@ public:
     void setNumOfHosts(int);
     void setNumOfPassengers(int);
     void attachHost(Host*);
-    void attachPassenger(Passenger*);
+    void attachTicket(Ticket*);
 
     QDateTime getDateTimeArrival();
     QDateTime getDateTimeDeparture();
@@ -62,7 +63,7 @@ public:
     QString getDestination();
     int getNumOfHosts();
     int getNumOfPassengers();
-    Pilot *getPilot();
+    Pilot *getPilot() const;
     QVector<Host *> getHostsList();
     QString getSerial();
 };

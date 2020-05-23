@@ -1,5 +1,6 @@
 #include "Flight.h"
 #include "Host.h"
+#include "Ticket.h"
 #include <QString>
 #include <QStringList>
 Flight::Flight(QString & data_str)
@@ -34,10 +35,13 @@ Flight::Flight(QString & data_str)
 
     this->setNumOfHosts(str_list.at(8).toInt());
 
-    for (int i = 9; i < 9 + this->numOfHosts; i++)
+    int i = 9;
+    for (; i < 9 + this->numOfHosts; i++)
     {
         this->attachHost(Recorder<Host>::searchPersonnelCode(str_list.at(i).toLong()));
     }
+
+    this->setNumOfPassengers(str_list.at(i).toInt());
 }
 
 QString Flight::get_data()
@@ -71,7 +75,7 @@ QString Flight::get_data()
         data_str += QString::number(h->getPersonnelCode()) + "|";
     }
 
-    data_str += "\n";
+    data_str += QString::number(this->getNumOfPassengers()) + "\n";
 
     return data_str;
 
@@ -161,9 +165,12 @@ void Flight::attachHost(Host * h)
         h->attachFlight(this);
 }
 
-void Flight::attachPassenger(Passenger * p)
+void Flight::attachTicket(Ticket * p)
 {
-    this->passengers.push_back(p);
+    this->tickets.push_back(p);
+    if (p)
+        p->setFlight(this);
+    this->numOfPassengers--;
 }
 
 QDateTime Flight::getDateTimeArrival()
@@ -196,7 +203,7 @@ int Flight::getNumOfPassengers()
     return this->numOfPassengers;
 }
 
-Pilot *Flight::getPilot()
+Pilot *Flight::getPilot() const
 {
     return this->pilot;
 }

@@ -19,11 +19,14 @@ SOURCES += \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
+    Passenger.cpp \
     Pilot.cpp \
+    Ticket.cpp \
     _observer.cpp \
     _subject.cpp \
     addflightdialog.cpp \
     addhost.cpp \
+    addticket.cpp \
     deletehost.cpp \
     dialog.cpp \
     main.cpp \
@@ -47,6 +50,7 @@ HEADERS += \
     _subject.h \
     addflightdialog.h \
     addhost.h \
+    addticket.h \
     deletehost.h \
     dialog.h \
     mainwindow.h
@@ -54,6 +58,7 @@ HEADERS += \
 FORMS += \
     addflightdialog.ui \
     addhost.ui \
+    addticket.ui \
     deletehost.ui \
     dialog.ui \
     mainwindow.ui
