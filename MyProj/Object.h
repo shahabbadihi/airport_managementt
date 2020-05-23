@@ -7,8 +7,8 @@ class Object
 {
 public:
     virtual QString get_data() = 0;
-    Object() {}
-    ~Object() {}
+    //Object() {}
+    //~Object() {}
     /*Recorder<Object>& get_recorder()
     {
         return *recorder;

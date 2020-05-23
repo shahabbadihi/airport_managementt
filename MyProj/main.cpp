@@ -12,6 +12,7 @@
 #include "Pilot.h"
 //#include "Deliverier.h"
 //#include "Ticket.h"
+#include "Flight.h"
 #include <QDebug>
 #include <QDir>
 
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
     //qDebug() << QDir::currentPath();
     Recorder<Pilot>::import();
     Recorder<Host>::import();
+    Recorder<Flight>::import();
     //Recorder<Pilot>::print_dataList();
     QApplication a(argc, argv);
     MainWindow w;

@@ -30,7 +30,14 @@ Flight::Flight(QString & data_str)
                                time_arrival.at(1).toInt(),
                                time_arrival.at(2).toInt());
 
-    //this->setPilot()
+    this->setPilot(Recorder<Pilot>::searchPersonnelCode(str_list.at(7).toLong()));
+
+    this->setNumOfHosts(str_list.at(8).toInt());
+
+    for (int i = 9; i < 9 + this->numOfHosts; i++)
+    {
+        this->attachHost(Recorder<Host>::searchPersonnelCode(str_list.at(i).toLong()));
+    }
 }
 
 QString Flight::get_data()
