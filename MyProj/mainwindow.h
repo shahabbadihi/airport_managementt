@@ -4,7 +4,9 @@
 #include "dialog.h"
 #include "addhost.h"
 #include "deletehost.h"
+#include "addflightdialog.h"
 #include <QMainWindow>
+#include <QTableWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,10 +30,14 @@ private slots:
 
     void on_actionDeleteHost_triggered();
 
+    void on_actionAddFlight_triggered();
+
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
     AddHost* addHostDialog;
     deleteHost* deleteHostDialog;
+    AddFlightDialog* addFlightDialog;
 };
 #endif // MAINWINDOW_H

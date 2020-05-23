@@ -1,6 +1,6 @@
-#pragma once
-//#ifndef HOST_H
-//#define HOST_H
+//#pragma once
+#ifndef HOST_H
+#define HOST_H
 
 #include <QVector>
 #include "Employee.h"
@@ -19,4 +19,4 @@ public:
 
 };
 
-//#endif // HOST_H
+#endif // HOST_H

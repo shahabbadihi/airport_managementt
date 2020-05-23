@@ -48,9 +48,10 @@ void Dialog::on_pushButton_clicked()
     else if (radio3->isChecked())
         pilot->set_degree(radio3->text().toInt());
 
-    Recorder<Pilot>::record(pilot);
-    Recorder<Pilot>::addToFile(pilot);
+    //Recorder<Pilot>::record(pilot);
+    //Recorder<Pilot>::addToFile(pilot);
     //pilot->get_recorder().addToFile(pilot);
+    Recorder<Pilot>::add(pilot);
 
     QMessageBox msg;
     msg.setText("Submit Successfully!");

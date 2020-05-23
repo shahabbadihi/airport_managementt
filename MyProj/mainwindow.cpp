@@ -3,7 +3,10 @@
 #include "dialog.h"
 #include "addhost.h"
 #include "deletehost.h"
+#include "addflightdialog.h"
 #include <QString>
+#include <QDesktopWidget>
+#include <QHeaderView>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,11 +38,18 @@ void MainWindow::on_actionAdd_Host_triggered()
     delete addHostDialog;
 }
 
-
 void MainWindow::on_actionDeleteHost_triggered()
 {
     this->deleteHostDialog = new deleteHost();
     deleteHostDialog->setModal(true);
     deleteHostDialog->exec();
     delete deleteHostDialog;
+}
+
+void MainWindow::on_actionAddFlight_triggered()
+{
+    this->addFlightDialog = new AddFlightDialog();
+    addFlightDialog->setModal(true);
+    addFlightDialog->exec();
+    delete addFlightDialog;
 }

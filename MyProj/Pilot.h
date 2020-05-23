@@ -1,6 +1,6 @@
-#pragma once
-//#ifndef PILOT_H
-//#define PILOT_H
+//#pragma once
+#ifndef PILOT_H
+#define PILOT_H
 
 #include <QVector>
 #include <QString>
@@ -22,6 +22,7 @@ public:
 
     QString get_data();
 
+
 };
 
-//#endif // PILOT_H
+#endif // PILOT_H

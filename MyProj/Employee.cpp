@@ -1,4 +1,5 @@
 #include "Employee.h"
+#include "Flight.h"
 #include <QString>
 QString Employee::get_data()
 {
@@ -11,6 +12,94 @@ QString Employee::get_data()
             + QString::number(this->employmentDate.day()) +
             "/" + QString::number(this->employmentDate.year()) + "\n";
     return data;
+}
+
+void Employee::set_fname(const QString &name)
+{
+    this->fname = name;
+}
+
+void Employee::set_fname(const QString &&name)
+{
+    this->fname = name;
+}
+
+void Employee::set_lname(const QString &family)
+{
+    this->lname = family;
+}
+
+void Employee::set_lname(const QString &&family)
+{
+    this->lname = family;
+}
+
+void Employee::set_nationalCode(long code)
+{
+    this->nationalCode = code;
+}
+
+void Employee::set_personnelCode(long code)
+{
+    this->personnelCode = code;
+}
+
+void Employee::set_birthDate(QDate &date)
+{
+    this->birthDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_birthDate(QDate &&date)
+{
+    this->birthDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_employmentDate(QDate &date)
+{
+    this->employmentDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::set_employmentDate(QDate &&date)
+{
+    this->employmentDate.setDate(date.year(), date.month(), date.day());
+}
+
+void Employee::attachFlight(Flight* f)
+{
+    this->list.push_back(f);
+}
+
+QString Employee::getFname()
+{
+    return this->fname;
+}
+
+QString Employee::getLname()
+{
+    return this->lname;
+}
+
+long Employee::getPersonnelCode()
+{
+    return this->personnelCode;
+}
+
+bool Employee::isFree(Flight* f)
+{
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if ( !(
+            (this->list.at(i)->getDateTimeDeparture() > f->getDateTimeArrival() &&
+             this->list.at(i)->getSource() == f->getDestination()) ||
+            (this->list.at(i)->getDateTimeArrival() < f->getDateTimeDeparture() &&
+             this->list.at(i)->getDestination() == f->getSource())
+              )
+           )
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 Employee::Employee(QString &dataStr)

@@ -37,9 +37,10 @@ void AddHost::on_pushButton_clicked()
     host->set_nationalCode(ui->txtNationalCode->text().toLong());
     host->set_personnelCode(ui->txtPersonnelCode->text().toLong());
 
-    Recorder<Host>::record(host);
-    Recorder<Host>::addToFile(host);
+    //Recorder<Host>::record(host);
+    //Recorder<Host>::addToFile(host);
     //pilot->get_recorder().addToFile(pilot);
+    Recorder<Host>::add(host);
 
     QMessageBox msg;
     msg.setText("Submit Successfully!");
