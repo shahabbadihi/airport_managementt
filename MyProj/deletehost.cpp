@@ -44,6 +44,7 @@ void deleteHost::on_pushButton_clicked()
            msg.exec();
            qDebug() << "List of hosts after delete:";
            Recorder<Host>::print_dataList();
+           Recorder<Flight>::print_dataList();
         }
     }
 }
