@@ -175,10 +175,10 @@ public:
         Recorder<T>::print_dataList();
     }
 
-    static T * searchPersonnelCode(long p){
+    static T * searchByCode(const QString& p){
         for (int i = 0; i < Recorder<T>::dataList.size(); i++)
         {
-            if(Recorder<T>::dataList.at(i)->getPersonnelCode()==p){
+            if(Recorder<T>::dataList.at(i)->getSearchCode()==p){
                 return Recorder<T>::dataList.at(i);
             }
         }

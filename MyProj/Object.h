@@ -13,8 +13,14 @@ public:
     {
         return *recorder;
     }*/
-private:
+    QString getSearchCode() const
+    {
+        return this->search_code;
+    };
+
+protected:
     //Recorder<Object>* recorder;
+    QString search_code;
 };
 
 #endif // OBJECT_H

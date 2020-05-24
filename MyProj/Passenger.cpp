@@ -12,6 +12,9 @@ Passenger::Passenger(QString & data_str)
                        birth_date.at(0).toInt(),
                        birth_date.at(1).toInt());
     this->setNationalCode(str_list.at(4).toLong());
+    this->setTicketNo(str_list.at(5).toLong());
+
+    this->setTicket(Recorder<Ticket>::searchByCode(this->search_code));
 }
 
 QString Passenger::get_data()
@@ -22,7 +25,7 @@ QString Passenger::get_data()
             QString::number(this->birthDate.month()) + "/" +
             QString::number(this->birthDate.day()) + "/" +
             QString::number(this->birthDate.year()) + "|" +
-            QString::number(this->nationalCode) + "\n";
+            QString::number(this->nationalCode);
     return data_str;
 }
 
@@ -44,6 +47,7 @@ void Passenger::setFatherName(const QString & father_name)
 void Passenger::setNationalCode(long n)
 {
     this->nationalCode = n;
+    this->search_code = QString::number(n);
 }
 
 void Passenger::setBirthDate(const QDate & date)
@@ -59,6 +63,16 @@ void Passenger::setBirthDate(const QDate && date)
 void Passenger::setBirthDate(int year, int month, int day)
 {
     this->birthDate.setDate(year, month, day);
+}
+
+void Passenger::setTicketNo(long n)
+{
+    this->ticket_no = n;
+}
+
+void Passenger::setTicket(Ticket * t)
+{
+    this->ticket = t;
 }
 
 QString Passenger::getFname()

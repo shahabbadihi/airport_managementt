@@ -22,7 +22,7 @@ protected:
     QDate employmentDate;
     QVector<Flight*> list;
 public:
-    Employee(){}
+    Employee() {}
     Employee(QString& dataStr);
     ~Employee(){}
 

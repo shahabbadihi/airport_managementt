@@ -10,7 +10,16 @@ QString Employee::get_data()
             + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
             + "|" + QString::number(this->employmentDate.month()) + "/"
             + QString::number(this->employmentDate.day()) +
-            "/" + QString::number(this->employmentDate.year()) + "\n";
+            "/" + QString::number(this->employmentDate.year()) + "|";
+            ;
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if (i == this->list.size() - 1)
+            data += this->list.at(i)->getSerial();
+        else
+            data += this->list.at(i)->getSerial() + "/";
+    }
+    data += "\n";
     return data;
 }
 
@@ -42,6 +51,7 @@ void Employee::set_nationalCode(long code)
 void Employee::set_personnelCode(long code)
 {
     this->personnelCode = code;
+    this->search_code = QString::number(code);
 }
 
 void Employee::set_birthDate(QDate &date)
@@ -124,4 +134,11 @@ Employee::Employee(QString &dataStr)
 
     set_birthDate(birthDate);
     set_employmentDate(empDate);
+
+    QStringList str_list_flights = strList.at(6).split('/');
+
+    foreach (QString s, str_list_flights)
+    {
+        this->attachFlight(Recorder<Flight>::searchByCode(s));
+    }
 }

@@ -31,7 +31,7 @@ void deleteHost::on_pushButton_2_clicked()
 
 void deleteHost::on_pushButton_clicked()
 {
-    Host * h = Recorder<Host>::searchPersonnelCode(ui->txtPersonnelCode->text().toLong());
+    Host * h = Recorder<Host>::searchByCode(ui->txtPersonnelCode->text());
     if(h){
         if(h->getFname()==ui->txtFname->text() && h->getLname()==ui->txtLname->text()){
            Recorder<Host>::removeFromFile(h);

@@ -1,10 +1,22 @@
 #include "Ticket.h"
 #include "Flight.h"
 #include "Passenger.h"
+#include <QString>
+
+long Ticket::getNo() const
+{
+    return this->no;
+}
+
+void Ticket::setNo(long value)
+{
+    this->no = value;
+    this->search_code = QString::number(value);
+}
 
 QString Ticket::get_data()
 {
-
+    QString str_data = this->;
 }
 
 void Ticket::setDestination(const QString & d)

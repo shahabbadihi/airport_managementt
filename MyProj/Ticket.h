@@ -31,6 +31,7 @@ private:
     Price price;
     int interestRate;
 
+    long no;
 public:
     Ticket() : flight(nullptr), passenger(nullptr) {}
     ~Ticket() {}
@@ -52,11 +53,13 @@ public:
     void setPassengerBirthDate(const QDate&);
     void setPassengerBirthDate(const QDate&&);
     void setPassengerFatherName(const QString&);
+    void setNo(long value);
 
     QString getSource();
     QString getDestination();
     QDate getDateFlight();
     Flight *getFlight() const;
+    long getNo() const;
 };
 
 
