@@ -1,5 +1,6 @@
 #include "Pilot.h"
 #include "Employee.h"
+#include "Flight.h"
 #include <QString>
 
 Pilot::Pilot(QString& dataStr)
@@ -24,6 +25,13 @@ Pilot::Pilot(QString& dataStr)
 
     set_birthDate(birthDate);
     set_employmentDate(empDate);
+
+    QStringList str_list_flights = strList.at(7).split('/');
+
+    foreach (QString s, str_list_flights)
+    {
+        this->attachFlight(Recorder<Flight>::searchByCode(s));
+    }
 }
 
 QString Pilot::get_data()
@@ -48,7 +56,16 @@ QString Pilot::get_data()
             + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
             + "|" + QString::number(this->employmentDate.month()) + "/"
             + QString::number(this->employmentDate.day()) +
-            "/" + QString::number(this->employmentDate.year()) + "\n";
+            "/" + QString::number(this->employmentDate.year()) + "|";
+
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if (i == this->list.size() - 1)
+            data += this->list.at(i)->getSerial();
+        else
+            data += this->list.at(i)->getSerial() + "/";
+    }
+    data += "\n";
     return data;
 }
 
