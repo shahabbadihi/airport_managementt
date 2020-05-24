@@ -14,7 +14,7 @@ Passenger::Passenger(QString & data_str)
     this->setNationalCode(str_list.at(4).toLong());
     this->setTicketNo(str_list.at(5).toLong());
 
-    this->setTicket(Recorder<Ticket>::searchByCode(this->search_code));
+    this->setTicket(Recorder<Ticket>::searchByCode(QString::number(this->ticket_no)));
 }
 
 QString Passenger::get_data()
@@ -25,7 +25,8 @@ QString Passenger::get_data()
             QString::number(this->birthDate.month()) + "/" +
             QString::number(this->birthDate.day()) + "/" +
             QString::number(this->birthDate.year()) + "|" +
-            QString::number(this->nationalCode);
+            QString::number(this->nationalCode) + "|" +
+            QString::number(this->ticket_no) + "\n";
     return data_str;
 }
 
