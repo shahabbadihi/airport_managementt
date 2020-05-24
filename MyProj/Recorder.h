@@ -186,10 +186,9 @@ public:
     }
     static void remove(T * a)
     {
-
-        delete a;
-
+        Recorder<T>::removeFromFile(a);
         Recorder<T>::dataList.removeOne(a);
+        delete a;
     }
 
     static T* getFirstFree(Flight* f)
@@ -201,6 +200,29 @@ public:
                 return a;
         }
         return nullptr;
+    }
+
+    static void updateFile(const QString& search_code, const QString& replace_code)
+    {
+        QDir d(QDir::currentPath() + "/data");
+        std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
+        int len = f.length();
+        char* s = new char[len];
+        strcpy(s, f.c_str());
+        QString filename = QString(s);
+
+        QFile file(filename);
+        if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+            throw QException();
+
+        QTextStream in(&file);
+        QString str;
+        in >> str;
+
+        str.replace(search_code, replace_code);
+
+        file.close();
+        delete[] s;
     }
 private:
     static QVector<T*> dataList;

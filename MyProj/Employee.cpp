@@ -142,3 +142,8 @@ Employee::Employee(QString &dataStr)
         this->attachFlight(Recorder<Flight>::searchByCode(s));
     }
 }
+int Employee::flightListSize(){
+    int i =0;
+    for(; i < this->list.size(); i++){}
+    return i;
+}

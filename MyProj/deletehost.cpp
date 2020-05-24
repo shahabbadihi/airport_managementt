@@ -34,7 +34,8 @@ void deleteHost::on_pushButton_clicked()
     Host * h = Recorder<Host>::searchByCode(ui->txtPersonnelCode->text());
     if(h){
         if(h->getFname()==ui->txtFname->text() && h->getLname()==ui->txtLname->text()){
-           Recorder<Host>::removeFromFile(h);
+
+           //Recorder<Host>::removeFromFile(h);
            Recorder<Host>::remove(h);
            //
            //
@@ -43,6 +44,7 @@ void deleteHost::on_pushButton_clicked()
            msg.exec();
            qDebug() << "List of hosts after delete:";
            Recorder<Host>::print_dataList();
+           Recorder<Flight>::print_dataList();
         }
     }
 }
