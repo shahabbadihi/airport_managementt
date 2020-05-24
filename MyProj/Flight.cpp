@@ -161,6 +161,31 @@ void Flight::attachHost(Host * h)
         h->attachFlight(this);
 }
 
+void Flight::removeHost(Host* h){
+    this->hosts.removeOne(h);
+    this->attachHost(Recorder<Host>::getFirstFree(this));
+    foreach (Host* h, this->getHostsList())
+    {
+        if (h == nullptr)
+        {
+            QMessageBox msg;
+            msg.setText("Not Enough Hosts!");
+            msg.exec();
+            delete this;
+            //this = nullptr;
+            return;
+        }
+    }
+    QMessageBox msg;
+    QString str3 = "The Flight's new Hosts Are:\n";
+    foreach (Host* h, this->getHostsList())
+    {
+        str3 += h->getFname() + " " + h->getLname() + "\n";
+    }
+    msg.setText(str3);
+    msg.exec();
+}
+
 void Flight::attachPassenger(Passenger * p)
 {
     this->passengers.push_back(p);

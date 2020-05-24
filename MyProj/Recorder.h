@@ -184,12 +184,10 @@ public:
         }
         return nullptr;
     }
-    static void remove(T * a)
+    static void removeEmp(T * a)
     {
-
-        delete a;
-
         Recorder<T>::dataList.removeOne(a);
+        delete a;
     }
 
     static T* getFirstFree(Flight* f)

@@ -34,8 +34,9 @@ void deleteHost::on_pushButton_clicked()
     Host * h = Recorder<Host>::searchPersonnelCode(ui->txtPersonnelCode->text().toLong());
     if(h){
         if(h->getFname()==ui->txtFname->text() && h->getLname()==ui->txtLname->text()){
+
            Recorder<Host>::removeFromFile(h);
-           Recorder<Host>::remove(h);
+           Recorder<Host>::removeEmp(h);
            //
            //
            QMessageBox msg;

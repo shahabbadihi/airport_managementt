@@ -54,6 +54,7 @@ public:
     void setNumOfHosts(int);
     void setNumOfPassengers(int);
     void attachHost(Host*);
+    void removeHost(Host*);
     void attachPassenger(Passenger*);
 
     QDateTime getDateTimeArrival();

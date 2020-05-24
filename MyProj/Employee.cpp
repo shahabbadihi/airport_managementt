@@ -125,3 +125,8 @@ Employee::Employee(QString &dataStr)
     set_birthDate(birthDate);
     set_employmentDate(empDate);
 }
+int Employee::flightListSize(){
+    int i =0;
+    for(; i < this->list.size(); i++){}
+    return i;
+}

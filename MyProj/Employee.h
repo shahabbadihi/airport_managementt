@@ -41,6 +41,7 @@ public:
     void set_employmentDate(QDate& date);
     void set_employmentDate(QDate&& date);
     void attachFlight(Flight*);
+    int flightListSize();
 
     QString getFname();
     QString getLname();
