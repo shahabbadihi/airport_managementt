@@ -162,6 +162,7 @@ void Flight::attachHost(Host * h)
 }
 
 void Flight::removeHost(Host* h){
+
     this->hosts.removeOne(h);
     this->attachHost(Recorder<Host>::getFirstFree(this));
     foreach (Host* h, this->getHostsList())
