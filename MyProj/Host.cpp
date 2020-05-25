@@ -8,6 +8,7 @@ Host::Host(QString &dataStr)
 
     set_fname(strList.at(0));
     set_lname(strList.at(1));
+    //set_degree(strList.at(2).toInt());
     set_nationalCode(strList.at(2).toLong());
     set_personnelCode(strList.at(3).toLong());
 
@@ -22,4 +23,17 @@ Host::Host(QString &dataStr)
 
     set_birthDate(birthDate);
     set_employmentDate(empDate);
+
+    QStringList str_list_flights = strList.at(6).split('/');
+
+    foreach (QString s, str_list_flights)
+    {
+        this->attachFlight(Recorder<Flight>::searchByCode(s));
+    }
+}
+
+void Host::attachFlight(Flight * f)
+{
+    this->list.push_back(f);
+    Recorder<Host>::updateFile(this);
 }

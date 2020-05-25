@@ -22,6 +22,7 @@ public:
 
     //QString get_data();
 
+    void attachFlight(Flight *f);
 };
 
 #endif // HOST_H

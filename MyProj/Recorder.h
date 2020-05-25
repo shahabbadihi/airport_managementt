@@ -202,7 +202,7 @@ public:
         return nullptr;
     }
 
-    static void updateFile(const QString& search_code, const QString& replace_code)
+    static void updateFile(T * ptr)
     {
         QDir d(QDir::currentPath() + "/data");
         std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
@@ -215,12 +215,27 @@ public:
         if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
             throw QException();
 
-        QTextStream in(&file);
-        QString str;
-        in >> str;
+        QString str = file.readAll();
+        QStringList str_list = str.split('\n');
 
-        str.replace(search_code, replace_code);
+        for (int i = 0; i < str_list.size(); i++)
+        {
+            if (str_list[i].indexOf(ptr->getSearchCode()) != -1)
+            {
+                str_list[i] = ptr->get_data();
+                break;
+            }
+        }
 
+        str_list.replaceInStrings("\n", "");
+        QString str2 = str_list.join('\n');
+        file.resize(0);
+
+
+        QTextStream out(&file);
+        out << str2;
+
+        file.flush();
         file.close();
         delete[] s;
     }

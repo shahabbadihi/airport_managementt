@@ -34,6 +34,12 @@ Pilot::Pilot(QString& dataStr)
     }
 }
 
+void Pilot::attachFlight(Flight * f)
+{
+    this->list.push_back(f);
+    Recorder<Pilot>::updateFile(this);
+}
+
 QString Pilot::get_data()
 {
     QString deg;

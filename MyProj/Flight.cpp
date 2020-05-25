@@ -161,9 +161,11 @@ void Flight::setNumOfPassengers(int n)
 
 void Flight::attachHost(Host * h)
 {
+    if (!h)
+        throw QException();
     this->hosts.push_back(h);
-    if (h)
-        h->attachFlight(this);
+    //if (h)
+    h->attachFlight(this);
 }
 
 
@@ -175,22 +177,26 @@ void Flight::attachTicket(Ticket * p)
     this->numOfPassengers--;
 }
 
-void Flight::removeHost(Host* h){
+void Flight::removeHost(Host* h)
+{
 
+    try
+    {
     this->hosts.removeOne(h);
     this->attachHost(Recorder<Host>::getFirstFree(this));
-    foreach (Host* h, this->getHostsList())
-    {
-        if (h == nullptr)
-        {
-            QMessageBox msg;
-            msg.setText("Not Enough Hosts!");
-            msg.exec();
-            delete this;
-            //this = nullptr;
-            return;
-        }
-    }
+    Recorder<Flight>::updateFile(this);
+//    foreach (Host* h, this->getHostsList())
+//    {
+//        if (h == nullptr)
+//        {
+//            QMessageBox msg;
+//            msg.setText("Not Enough Hosts!");
+//            msg.exec();
+//            delete this;
+//            //this = nullptr;
+//            return;
+//        }
+//    }
     QMessageBox msg;
     QString str3 = "The Flight's new Hosts Are:\n";
     foreach (Host* h, this->getHostsList())
@@ -199,6 +205,17 @@ void Flight::removeHost(Host* h){
     }
     msg.setText(str3);
     msg.exec();
+    }
+    catch (QException e)
+    {
+        Recorder<Flight>::updateFile(this);
+        QMessageBox msg;
+        msg.setText("Not Enough Hosts!");
+        msg.exec();
+//        delete this;
+//        //this = nullptr;
+        return;
+    }
 }
 
 //void Flight::attachPassenger(Passenger * p)

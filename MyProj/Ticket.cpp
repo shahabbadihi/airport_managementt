@@ -16,7 +16,7 @@ void Ticket::setNo(long value)
 
 QString Ticket::get_data()
 {
-    QString str_data = this->;
+    //QString str_data = this->;
 }
 
 void Ticket::setDestination(const QString & d)

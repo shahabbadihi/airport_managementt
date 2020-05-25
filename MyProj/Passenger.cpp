@@ -1,4 +1,5 @@
 #include "Passenger.h"
+#include "Ticket.h"
 #include <QStringList>
 Passenger::Passenger(QString & data_str)
 {

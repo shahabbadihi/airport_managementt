@@ -17,7 +17,7 @@ public:
     Pilot() {}
     Pilot(QString& dataStr);
     ~Pilot();
-
+    void attachFlight(Flight*);
     void set_degree(int deg);
 
     QString get_data();
