@@ -5,6 +5,7 @@
 #include <QVector>
 #include "Host.h"
 #include "Recorder.h"
+#include "Airline.h"
 
 template <class T>
 QVector<T*> Recorder<T>::dataList;
@@ -14,6 +15,11 @@ AddHost::AddHost(QWidget *parent) :
     ui(new Ui::AddHost)
 {
     ui->setupUi(this);
+
+    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    {
+        ui->comboAirline->addItem(a->getName());
+    }
 }
 
 AddHost::~AddHost()
@@ -29,7 +35,7 @@ void AddHost::on_pushButton_2_clicked()
 void AddHost::on_pushButton_clicked()
 {
     Host* host = new Host();
-
+    host->setAirline(Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()]);
     host->set_fname(ui->txtFname->text());
     host->set_lname(ui->txtLname->text());
     host->set_birthDate(ui->dtBirthDate->date());

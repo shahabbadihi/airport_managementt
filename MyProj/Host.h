@@ -12,7 +12,7 @@ private:
 
 public:
     Host() {}
-    Host(QString& dataStr);
+    Host(QString& dataStr) : Employee(dataStr) {}
     ~Host(){
         for (int i = 0; i < this->flightListSize(); i++)
         {

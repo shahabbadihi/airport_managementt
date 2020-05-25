@@ -10,7 +10,7 @@
 //#include "Flight.h"
 #include "Object.h"
 class Flight;
-
+class Airline;
 class Employee : public Object
 {
 protected:
@@ -21,6 +21,7 @@ protected:
     QDate birthDate;
     QDate employmentDate;
     QVector<Flight*> list;
+    Airline* airline;
 public:
     Employee() {}
     Employee(QString& dataStr);
@@ -49,6 +50,8 @@ public:
 
     bool isFree(Flight*);
 
+    Airline *getAirline() const;
+    void setAirline(Airline *value);
 };
 
 #endif // EMPLOYEE_H

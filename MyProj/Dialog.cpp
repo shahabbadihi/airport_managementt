@@ -4,6 +4,7 @@
 #include "Recorder.h"
 #include <QMessageBox>
 #include <QVector>
+#include <Airline.h>
 
 template <class T>
 QVector<T*> Recorder<T>::dataList;
@@ -13,6 +14,11 @@ Dialog::Dialog(QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+
+    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    {
+        ui->comboAirline->addItem(a->getName());
+    }
 }
 
 Dialog::~Dialog()
@@ -29,7 +35,7 @@ void Dialog::on_pushButton_2_clicked()
 void Dialog::on_pushButton_clicked()
 {
     Pilot* pilot = new Pilot();
-
+    pilot->setAirline(Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()]);
     pilot->set_fname(ui->txtFname->text());
     pilot->set_lname(ui->txtLname->text());
     pilot->set_birthDate(ui->dtBirthDate->date());

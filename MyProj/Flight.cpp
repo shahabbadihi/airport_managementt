@@ -1,8 +1,20 @@
 #include "Flight.h"
 #include "Host.h"
 #include "Ticket.h"
+#include "Airline.h"
 #include <QString>
 #include <QStringList>
+Airline *Flight::getAirline() const
+{
+    return airline;
+}
+
+void Flight::setAirline(Airline *value)
+{
+    airline = value;
+    value->attachFlight(this);
+}
+
 Flight::Flight(QString & data_str)
 {
     QStringList str_list = data_str.split('|');

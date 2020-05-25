@@ -1,9 +1,11 @@
 #include "Employee.h"
 #include "Flight.h"
+#include "Airline.h"
 #include <QString>
 QString Employee::get_data()
 {
-    QString data = this->fname + "|" + this->lname + "|"
+    QString data = this->airline->getCode() + "|"
+            + this->fname + "|" + this->lname + "|"
             + QString::number(this->nationalCode) + "|"
             + QString::number(this->personnelCode) + "|"
             + QString::number(this->birthDate.month()) + "/"
@@ -112,19 +114,31 @@ bool Employee::isFree(Flight* f)
     return true;
 }
 
+Airline *Employee::getAirline() const
+{
+    return airline;
+}
+
+void Employee::setAirline(Airline *value)
+{
+    airline = value;
+    value->attachEmp(this);
+}
+
 Employee::Employee(QString &dataStr)
 {
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    set_fname(strList.at(0));
-    set_lname(strList.at(1));
+    setAirline(Recorder<Airline>::searchByCode(strList[0]));
+    set_fname(strList.at(1));
+    set_lname(strList.at(2));
     //set_degree(strList.at(2).toInt());
-    set_nationalCode(strList.at(2).toLong());
-    set_personnelCode(strList.at(3).toLong());
+    set_nationalCode(strList.at(3).toLong());
+    set_personnelCode(strList.at(4).toLong());
 
-    QStringList strListBirthDate = strList.at(4).split('/');
-    QStringList strListEmpDate = strList.at(5).split('/');
+    QStringList strListBirthDate = strList.at(5).split('/');
+    QStringList strListEmpDate = strList.at(6).split('/');
     QDate birthDate(strListBirthDate.at(2).toInt(),
                     strListBirthDate.at(0).toInt(),
                     strListBirthDate.at(1).toInt());
@@ -135,7 +149,7 @@ Employee::Employee(QString &dataStr)
     set_birthDate(birthDate);
     set_employmentDate(empDate);
 
-    QStringList str_list_flights = strList.at(6).split('/');
+    QStringList str_list_flights = strList.at(7).split('/');
 
     foreach (QString s, str_list_flights)
     {

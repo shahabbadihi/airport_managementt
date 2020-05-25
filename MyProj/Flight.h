@@ -18,6 +18,7 @@ class Pilot;
 #include "Object.h"
 class Host;
 class Ticket;
+class Airline;
 class Flight : public Object
 {
 private:
@@ -34,6 +35,7 @@ private:
     Pilot* pilot;
     QVector<Host*> hosts;
     QVector<Ticket*> tickets;
+    Airline* airline;
     Price ticketsSaleCost;
 public:
     Flight() {}
@@ -71,6 +73,8 @@ public:
     Pilot *getPilot() const;
     QVector<Host *> getHostsList();
     QString getSerial();
+    Airline *getAirline() const;
+    void setAirline(Airline *value);
 };
 
 #endif // FLIGHT_H

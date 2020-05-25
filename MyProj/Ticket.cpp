@@ -16,7 +16,10 @@ void Ticket::setNo(long value)
 
 QString Ticket::get_data()
 {
-    //QString str_data = this->;
+//    QString str_data = QString::number(this->no) + "|" +
+//            QString::number(this->flightSerialCode) + "|" +
+//            QString::number(this->passengerNationalCode) + "|" +
+//            ;
 }
 
 void Ticket::setDestination(const QString & d)

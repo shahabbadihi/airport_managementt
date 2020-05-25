@@ -26,7 +26,7 @@ private:
     Passenger* passenger;
     long passengerNationalCode;
     long airplaneSerial;
-    long pilotPersonnelCode;
+    //long pilotPersonnelCode;
     long deliverierCode;
     Price price;
     int interestRate;

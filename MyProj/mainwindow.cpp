@@ -62,3 +62,11 @@ void MainWindow::on_actionAddTicket_triggered()
     addTicketDialog->exec();
     delete addTicketDialog;
 }
+
+void MainWindow::on_actionAddAirline_triggered()
+{
+    this->addAirlineDialog = new AddAirlineDialog();
+    addAirlineDialog->setModal(true);
+    addAirlineDialog->exec();
+    delete addAirlineDialog;
+}

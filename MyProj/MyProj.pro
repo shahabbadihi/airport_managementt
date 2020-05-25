@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Airline.cpp \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     Ticket.cpp \
     _observer.cpp \
     _subject.cpp \
+    addairlinedialog.cpp \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
@@ -33,6 +35,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Airline.h \
     Airplane.h \
     Deliverier.h \
     Employee.h \
@@ -48,6 +51,7 @@ HEADERS += \
     Vehicle.h \
     _observer.h \
     _subject.h \
+    addairlinedialog.h \
     addflightdialog.h \
     addhost.h \
     addticket.h \
@@ -56,6 +60,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    addairlinedialog.ui \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \

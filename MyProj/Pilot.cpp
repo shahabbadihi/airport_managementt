@@ -2,20 +2,22 @@
 #include "Employee.h"
 #include "Flight.h"
 #include <QString>
+#include <Airline.h>
 
 Pilot::Pilot(QString& dataStr)
 {
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    set_fname(strList.at(0));
-    set_lname(strList.at(1));
-    set_degree(strList.at(2).toInt());
-    set_nationalCode(strList.at(3).toLong());
-    set_personnelCode(strList.at(4).toLong());
+    setAirline(Recorder<Airline>::searchByCode(strList[0]));
+    set_fname(strList.at(1));
+    set_lname(strList.at(2));
+    set_degree(strList.at(3).toInt());
+    set_nationalCode(strList.at(4).toLong());
+    set_personnelCode(strList.at(5).toLong());
 
-    QStringList strListBirthDate = strList.at(5).split('/');
-    QStringList strListEmpDate = strList.at(6).split('/');
+    QStringList strListBirthDate = strList.at(6).split('/');
+    QStringList strListEmpDate = strList.at(7).split('/');
     QDate birthDate(strListBirthDate.at(2).toInt(),
                     strListBirthDate.at(0).toInt(),
                     strListBirthDate.at(1).toInt());
@@ -26,7 +28,7 @@ Pilot::Pilot(QString& dataStr)
     set_birthDate(birthDate);
     set_employmentDate(empDate);
 
-    QStringList str_list_flights = strList.at(7).split('/');
+    QStringList str_list_flights = strList.at(8).split('/');
 
     foreach (QString s, str_list_flights)
     {
@@ -55,7 +57,7 @@ QString Pilot::get_data()
         deg = "3";
         break;
     }
-    QString data = this->fname + "|" + this->lname + "|"
+    QString data = this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
             + deg + "|" + QString::number(this->nationalCode) + "|"
             + QString::number(this->personnelCode) + "|"
             + QString::number(this->birthDate.month()) + "/"

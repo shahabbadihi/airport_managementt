@@ -5,6 +5,7 @@
 #include "Pilot.h"
 #include "Host.h"
 #include "Recorder.h"
+#include "Airline.h"
 #include <QMessageBox>
 
 template <class T>
@@ -15,6 +16,11 @@ AddFlightDialog::AddFlightDialog(QWidget *parent) :
     ui(new Ui::AddFlightDialog)
 {
     ui->setupUi(this);
+
+    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    {
+        ui->comboAirline->addItem(a->getName());
+    }
 }
 
 AddFlightDialog::~AddFlightDialog()
@@ -25,6 +31,7 @@ AddFlightDialog::~AddFlightDialog()
 void AddFlightDialog::on_btnSubmit_clicked()
 {
     Flight* flight = new Flight();
+    flight->setAirline(Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()]);
     flight->setSerial(ui->txtFlightSerial->text());
     flight->setSource(ui->txtSource->text());
     flight->setDestination(ui->txtDest->text());

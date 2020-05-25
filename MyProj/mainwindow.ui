@@ -37,6 +37,7 @@
     <addaction name="separator"/>
     <addaction name="actionAddTicket"/>
     <addaction name="actionAddFlight"/>
+    <addaction name="actionAddAirline"/>
    </widget>
    <widget class="QMenu" name="menuDelete">
     <property name="title">
@@ -81,6 +82,11 @@
   <action name="actionDeleteHost">
    <property name="text">
     <string>Host</string>
+   </property>
+  </action>
+  <action name="actionAddAirline">
+   <property name="text">
+    <string>Airline</string>
    </property>
   </action>
  </widget>
