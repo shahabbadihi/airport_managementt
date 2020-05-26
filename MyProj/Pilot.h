@@ -16,12 +16,8 @@ private:
 public:
     Pilot() {}
     Pilot(QString& dataStr);
-    ~Pilot(){
-        for (int i = 0; i < this->flightListSize(); i++)
-        {
-           this->list[i]->removePilot(this);
-        }
-    }
+    ~Pilot();
+
 
     void set_degree(int deg);
 

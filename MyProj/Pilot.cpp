@@ -1,5 +1,6 @@
 #include "Pilot.h"
 #include "Employee.h"
+#include "Flight.h"
 #include <QString>
 
 Pilot::Pilot(QString& dataStr)
@@ -25,7 +26,12 @@ Pilot::Pilot(QString& dataStr)
     set_birthDate(birthDate);
     set_employmentDate(empDate);
 }
-
+Pilot::~Pilot(){
+    for (int i = 0; i < this->flightListSize(); i++)
+    {
+       this->list[i]->removePilot(this);
+    }
+}
 QString Pilot::get_data()
 {
     QString deg;
