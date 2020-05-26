@@ -25,6 +25,7 @@ SOURCES += \
     addflightdialog.cpp \
     addhost.cpp \
     deletehost.cpp \
+    deletepilot.cpp \
     dialog.cpp \
     main.cpp \
     mainwindow.cpp
@@ -48,6 +49,7 @@ HEADERS += \
     addflightdialog.h \
     addhost.h \
     deletehost.h \
+    deletepilot.h \
     dialog.h \
     mainwindow.h
 
@@ -55,6 +57,7 @@ FORMS += \
     addflightdialog.ui \
     addhost.ui \
     deletehost.ui \
+    deletepilot.ui \
     dialog.ui \
     mainwindow.ui
 

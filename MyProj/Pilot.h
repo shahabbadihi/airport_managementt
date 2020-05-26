@@ -5,7 +5,7 @@
 #include <QVector>
 #include <QString>
 #include "Employee.h"
-//#include "Flight.h"
+#include "Flight.h"
 class Flight;
 class Pilot : public Employee
 {
@@ -16,7 +16,12 @@ private:
 public:
     Pilot() {}
     Pilot(QString& dataStr);
-    ~Pilot();
+    ~Pilot(){
+        for (int i = 0; i < this->flightListSize(); i++)
+        {
+           this->list[i]->removePilot(this);
+        }
+    }
 
     void set_degree(int deg);
 

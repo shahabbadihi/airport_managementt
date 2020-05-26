@@ -184,7 +184,7 @@ public:
         }
         return nullptr;
     }
-    static void removeEmp(T * a)
+    static void remove(T * a)
     {
         Recorder<T>::dataList.removeOne(a);
         delete a;

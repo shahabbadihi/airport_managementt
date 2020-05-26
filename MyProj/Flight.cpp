@@ -173,6 +173,7 @@ void Flight::removeHost(Host* h){
             msg.exec();
             delete this;
             //this = nullptr;
+            Recorder<Flight>::remove(this);
             return;
         }
     }
@@ -184,6 +185,24 @@ void Flight::removeHost(Host* h){
     }
     msg.setText(str3);
     msg.exec();
+}
+void Flight::removePilot(Pilot* h){
+    //this->pilot->removeOne(h);
+    this->setPilot(Recorder<Pilot>::getFirstFree(this));
+    if (this->getPilot() == nullptr)
+    {
+        QMessageBox msg;
+        msg.setText("There Is No Free Pilot!");
+        msg.exec();
+        delete this;
+        //this = nullptr;
+        Recorder<Flight>::remove(this);
+        return;
+    }
+    QMessageBox msg;
+   QString str2 = "The Flight's Pilot Is: " + this->getPilot()->getFname() + " " + this->getPilot()->getLname() + "\n";
+   msg.setText(str2);
+   msg.exec();
 }
 
 void Flight::attachPassenger(Passenger * p)

@@ -3,6 +3,7 @@
 #include "dialog.h"
 #include "addhost.h"
 #include "deletehost.h"
+#include "deletepilot.h"
 #include "addflightdialog.h"
 #include <QString>
 #include <QDesktopWidget>
@@ -52,4 +53,12 @@ void MainWindow::on_actionAddFlight_triggered()
     addFlightDialog->setModal(true);
     addFlightDialog->exec();
     delete addFlightDialog;
+}
+
+void MainWindow::on_actionPilot_triggered()
+{
+    this->deletePilotDialog = new deleteEmp();
+    deletePilotDialog->setModal(true);
+    deletePilotDialog->exec();
+    delete deletePilotDialog;
 }

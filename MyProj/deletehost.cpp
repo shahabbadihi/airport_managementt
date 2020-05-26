@@ -36,7 +36,7 @@ void deleteHost::on_pushButton_clicked()
         if(h->getFname()==ui->txtFname->text() && h->getLname()==ui->txtLname->text()){
 
            Recorder<Host>::removeFromFile(h);
-           Recorder<Host>::removeEmp(h);
+           Recorder<Host>::remove(h);
            //
            //
            QMessageBox msg;
