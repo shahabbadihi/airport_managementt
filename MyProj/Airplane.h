@@ -1,23 +1,38 @@
-#pragma once
-//#ifndef AIRPLANE_H
-//#define AIRPLANE_H
+//#pragma once
+#ifndef AIRPLANE_H
+#define AIRPLANE_H
 
 #include <QVector>
 #include <QString>
-#include "Vehicle.h"
+//#include "Vehicle.h"
 //#include "Flight.h"
+#include "Object.h"
+class Airline;
 class Flight;
-class Airplane : public Vehicle
+
+class Airplane : public Object
 {
 private:
-    int chairCount;
-    QVector<Flight*> list;
+    int numOfSeats;
+    QString serial;
+    QVector<Flight*> list_of_flights;
+    Airline* airline;
 public:
+    Airplane() {}
+    Airplane(QString&);
+    ~Airplane() {}
 
-    QString& get_data()
-    {
-        //QString data = this->
-    }
+    QString get_data();
+    int getChairCount() const;
+
+    void attachFlight(Flight* f);
+
+    Airline* getAirline() const;
+    void setAirline(Airline *value);
+    int getNumOfSeats() const;
+    void setNumOfSeats(int value);
+    QString getSerial() const;
+    void setSerial(const QString &value);
 };
 
-//#endif // AIRPLANE_H
+#endif // AIRPLANE_H

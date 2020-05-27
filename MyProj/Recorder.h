@@ -191,16 +191,16 @@ public:
         delete a;
     }
 
-    static T* getFirstFree(Flight* f)
-    {
-        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
-        {
-            T* a = Recorder<T>::dataList.at(i);
-            if (a->isFree(f))
-                return a;
-        }
-        return nullptr;
-    }
+//    static T* getFirstFree(Flight* f)
+//    {
+//        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
+//        {
+//            T* a = Recorder<T>::dataList.at(i);
+//            if (a->isFree(f))
+//                return a;
+//        }
+//        return nullptr;
+//    }
 
     static void updateFile(T * ptr)
     {

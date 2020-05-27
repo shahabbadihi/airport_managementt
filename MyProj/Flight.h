@@ -19,11 +19,14 @@ class Pilot;
 class Host;
 class Ticket;
 class Airline;
+class Airplane;
+class Carrier;
+class Employee;
 class Flight : public Object
 {
 private:
     QString serial;
-    QString airplaneSerial;
+    //QString airplaneSerial;
     QString source;
     QString destination;
     //QDate date;
@@ -34,8 +37,11 @@ private:
     int numOfHosts;
     Pilot* pilot;
     QVector<Host*> hosts;
+    //QVector<Employee*> emps;
     QVector<Ticket*> tickets;
     Airline* airline;
+    Airplane* airplane;
+    Carrier* carrier;
     Price ticketsSaleCost;
 public:
     Flight() {}
@@ -75,6 +81,9 @@ public:
     QString getSerial();
     Airline *getAirline() const;
     void setAirline(Airline *value);
+    void setAirplane(Airplane *value);
+    Deliverier *getDeliverier() const;
+    void setDeliverier(Deliverier *value);
 };
 
 #endif // FLIGHT_H

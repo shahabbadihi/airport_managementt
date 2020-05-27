@@ -41,6 +41,7 @@ void AddTicket::on_btnSubmit_clicked()
             passenger->setBirthDate(ui->dtBirthDate->date());
             passenger->setFatherName(ui->txtPassFatherName->text());
             passenger->setNationalCode(ui->txtNationalCode->text().toLong());
+            passenger->setTicket(ticket);
 
             Recorder<Passenger>::add(passenger);
 

@@ -1,11 +1,17 @@
 #include "Ticket.h"
 #include "Flight.h"
 #include "Passenger.h"
+#include "Airline.h"
 #include <QString>
 
 long Ticket::getNo() const
 {
     return this->no;
+}
+
+void Ticket::setAirline(Airline *value)
+{
+    airline = value;
 }
 
 void Ticket::setNo(long value)
@@ -14,12 +20,22 @@ void Ticket::setNo(long value)
     this->search_code = QString::number(value);
 }
 
+Ticket::Ticket(QString & str_data)
+{
+    QStringList str_list = str_data.split('|');
+
+    this->setAirline(Recorder<Airline>::searchByCode(str_list[0]));
+    this->setNo(str_list[1].toLong());
+    this->setFlight(this->airline->searchFlightByCode(str_list[2]));
+    this->setPassenger(Recorder<Passenger>::searchByCode(str_list[3]));
+}
+
 QString Ticket::get_data()
 {
-//    QString str_data = QString::number(this->no) + "|" +
-//            QString::number(this->flightSerialCode) + "|" +
-//            QString::number(this->passengerNationalCode) + "|" +
-//            ;
+    QString str_data = this->airline->getCode() + "|" + QString::number(this->no) + "|" +
+            QString::number(this->flightSerialCode) + "|" +
+            QString::number(this->passengerNationalCode) + "|\n"
+            ;
 }
 
 void Ticket::setDestination(const QString & d)

@@ -4,6 +4,7 @@
 #include "addhost.h"
 #include "deletehost.h"
 #include "addflightdialog.h"
+#include "addairplanedialog.h"
 #include "addticket.h"
 #include <QString>
 #include <QDesktopWidget>
@@ -69,4 +70,12 @@ void MainWindow::on_actionAddAirline_triggered()
     addAirlineDialog->setModal(true);
     addAirlineDialog->exec();
     delete addAirlineDialog;
+}
+
+void MainWindow::on_actionAddAirplane_triggered()
+{
+    this->addAirplaneDialog = new AddAirplaneDialog();
+    addAirplaneDialog->setModal(true);
+    addAirplaneDialog->exec();
+    delete addAirplaneDialog;
 }

@@ -2,6 +2,7 @@
 #include "Host.h"
 #include "Ticket.h"
 #include "Airline.h"
+#include "Airplane.h"
 #include <QString>
 #include <QStringList>
 Airline *Flight::getAirline() const
@@ -12,7 +13,25 @@ Airline *Flight::getAirline() const
 void Flight::setAirline(Airline *value)
 {
     airline = value;
-    value->attachFlight(this);
+    if (value)
+        value->attachFlight(this);
+}
+
+void Flight::setAirplane(Airplane *value)
+{
+    airplane = value;
+    if (value)
+        value->attachFlight(this);
+}
+
+Deliverier *Flight::getDeliverier() const
+{
+    return deliverier;
+}
+
+void Flight::setDeliverier(Deliverier *value)
+{
+    deliverier = value;
 }
 
 Flight::Flight(QString & data_str)
@@ -195,7 +214,8 @@ void Flight::removeHost(Host* h)
     try
     {
     this->hosts.removeOne(h);
-    this->attachHost(Recorder<Host>::getFirstFree(this));
+    //this->attachHost(Recorder<Host>::getFirstFree(this));
+    this->attachHost(Recorder<Airline>::searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
     Recorder<Flight>::updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {

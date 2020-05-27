@@ -21,7 +21,7 @@ public:
     void set_degree(int deg);
 
     QString get_data();
-
+    void setAirline(Airline *value);
 
 };
 

@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Airline.cpp \
+    Airplane.cpp \
+    Carrier.cpp \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
@@ -26,6 +28,8 @@ SOURCES += \
     _observer.cpp \
     _subject.cpp \
     addairlinedialog.cpp \
+    addairplanedialog.cpp \
+    addcarrierdialog.cpp \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
@@ -37,7 +41,7 @@ SOURCES += \
 HEADERS += \
     Airline.h \
     Airplane.h \
-    Deliverier.h \
+    Carrier.h \
     Employee.h \
     Flight.h \
     Host.h \
@@ -46,12 +50,12 @@ HEADERS += \
     Pilot.h \
     Price.h \
     Recorder.h \
-    TList.h \
     Ticket.h \
-    Vehicle.h \
     _observer.h \
     _subject.h \
     addairlinedialog.h \
+    addairplanedialog.h \
+    addcarrierdialog.h \
     addflightdialog.h \
     addhost.h \
     addticket.h \
@@ -61,6 +65,8 @@ HEADERS += \
 
 FORMS += \
     addairlinedialog.ui \
+    addairplanedialog.ui \
+    addcarrierdialog.ui \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \

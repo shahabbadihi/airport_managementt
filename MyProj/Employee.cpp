@@ -122,7 +122,7 @@ Airline *Employee::getAirline() const
 void Employee::setAirline(Airline *value)
 {
     airline = value;
-    value->attachEmp(this);
+    //value->attachEmp(this);
 }
 
 Employee::Employee(QString &dataStr)

@@ -75,6 +75,7 @@ void Passenger::setTicketNo(long n)
 void Passenger::setTicket(Ticket * t)
 {
     this->ticket = t;
+    this->ticket_no = t->getNo();
 }
 
 QString Passenger::getFname()

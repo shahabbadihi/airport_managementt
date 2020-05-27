@@ -1,4 +1,5 @@
 #include "Host.h"
+#include "Airline.h"
 #include <QString>
 
 //Host::Host(QString &dataStr)
@@ -36,4 +37,11 @@ void Host::attachFlight(Flight * f)
 {
     this->list.push_back(f);
     Recorder<Host>::updateFile(this);
+}
+
+void Host::setAirline(Airline *value)
+{
+    airline = value;
+    if (value)
+        value->attachHost(this);
 }

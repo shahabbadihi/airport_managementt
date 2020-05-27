@@ -77,6 +77,12 @@ QString Pilot::get_data()
     return data;
 }
 
+void Pilot::setAirline(Airline *value)
+{
+    airline = value;
+    value->attachPilot(this);
+}
+
 void Pilot::set_degree(int deg)
 {
     if (deg == 1)
