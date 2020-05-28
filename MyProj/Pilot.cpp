@@ -41,7 +41,12 @@ void Pilot::attachFlight(Flight * f)
     this->list.push_back(f);
     Recorder<Pilot>::updateFile(this);
 }
-
+Pilot::~Pilot(){
+    for (int i = 0; i < this->flightListSize(); i++)
+    {
+       this->list[i]->removePilot(this);
+    }
+}
 QString Pilot::get_data()
 {
     QString deg;

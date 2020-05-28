@@ -3,6 +3,7 @@
 #include "dialog.h"
 #include "addhost.h"
 #include "deletehost.h"
+#include "deletepilot.h"
 #include "addflightdialog.h"
 #include "addairplanedialog.h"
 #include "addticket.h"
@@ -78,4 +79,12 @@ void MainWindow::on_actionAddAirplane_triggered()
     addAirplaneDialog->setModal(true);
     addAirplaneDialog->exec();
     delete addAirplaneDialog;
+}
+
+void MainWindow::on_actionDeletePilot_triggered()
+{
+    this->deletePilotDialog = new DeletePilot();
+    deletePilotDialog->setModal(true);
+    deletePilotDialog->exec();
+    delete deletePilotDialog;
 }

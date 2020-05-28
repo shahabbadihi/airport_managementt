@@ -69,6 +69,8 @@ public:
     void removeHost(Host*);
     //void attachPassenger(Passenger*);
 
+    void removePilot(Pilot *);
+    //void attachPassenger(Passenger*);
 
     QDateTime getDateTimeArrival();
     QDateTime getDateTimeDeparture();
@@ -82,8 +84,8 @@ public:
     Airline *getAirline() const;
     void setAirline(Airline *value);
     void setAirplane(Airplane *value);
-    Deliverier *getDeliverier() const;
-    void setDeliverier(Deliverier *value);
+    Carrier *getCarrier() const;
+    void setCarrier(Carrier *value);
 };
 
 #endif // FLIGHT_H

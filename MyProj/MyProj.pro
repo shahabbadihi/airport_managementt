@@ -34,6 +34,7 @@ SOURCES += \
     addhost.cpp \
     addticket.cpp \
     deletehost.cpp \
+    deletepilot.cpp \
     dialog.cpp \
     main.cpp \
     mainwindow.cpp
@@ -60,6 +61,7 @@ HEADERS += \
     addhost.h \
     addticket.h \
     deletehost.h \
+    deletepilot.h \
     dialog.h \
     mainwindow.h
 
@@ -71,6 +73,7 @@ FORMS += \
     addhost.ui \
     addticket.ui \
     deletehost.ui \
+    deletepilot.ui \
     dialog.ui \
     mainwindow.ui
 

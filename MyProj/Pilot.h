@@ -5,7 +5,7 @@
 #include <QVector>
 #include <QString>
 #include "Employee.h"
-//#include "Flight.h"
+#include "Flight.h"
 class Flight;
 class Pilot : public Employee
 {
@@ -18,6 +18,8 @@ public:
     Pilot(QString& dataStr);
     ~Pilot();
     void attachFlight(Flight*);
+
+
     void set_degree(int deg);
 
     QString get_data();
