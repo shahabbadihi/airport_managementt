@@ -15,6 +15,11 @@ public:
     explicit AddCarrierDialog(QWidget *parent = nullptr);
     ~AddCarrierDialog();
 
+private slots:
+    void on_btnSubmit_clicked();
+
+    void on_btnCancel_clicked();
+
 private:
     Ui::AddCarrierDialog *ui;
 };

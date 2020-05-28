@@ -22,7 +22,7 @@
      <x>0</x>
      <y>0</y>
      <width>731</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -44,8 +44,7 @@
      <string>Delete</string>
     </property>
     <addaction name="actionDeleteHost"/>
-    <addaction name="actionPilot"/>
-    <addaction name="separator"/>
+    <addaction name="actionDeletePilot"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDelete"/>
@@ -86,15 +85,14 @@
     <string>Host</string>
    </property>
   </action>
-<<<<<<< HEAD
   <action name="actionAddAirline">
    <property name="text">
     <string>Airline</string>
-=======
-  <action name="actionPilot">
+   </property>
+  </action>
+  <action name="actionDeletePilot">
    <property name="text">
     <string>Pilot</string>
->>>>>>> 8b0d16b406aa6402bd985e3928dba4c12f9ce8df
    </property>
   </action>
  </widget>

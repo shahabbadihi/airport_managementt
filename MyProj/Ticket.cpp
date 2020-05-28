@@ -36,6 +36,7 @@ QString Ticket::get_data()
             QString::number(this->flightSerialCode) + "|" +
             QString::number(this->passengerNationalCode) + "|\n"
             ;
+    return str_data;
 }
 
 void Ticket::setDestination(const QString & d)

@@ -1,6 +1,6 @@
-#pragma once
-//#ifndef TICKET_H
-//#define TICKET_H
+//#pragma once
+#ifndef TICKET_H
+#define TICKET_H
 
 #include <QVector>
 #include <QString>
@@ -10,6 +10,7 @@
 #include "Object.h"
 class Flight;
 class Airline;
+class Passenger;
 class Ticket : public Object
 {
 private:
@@ -69,4 +70,4 @@ public:
 };
 
 
-//#endif // TICKET_H
+#endif // TICKET_H

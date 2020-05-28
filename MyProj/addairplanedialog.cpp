@@ -3,6 +3,9 @@
 #include "Airline.h"
 #include "Airplane.h"
 
+template <class T>
+QVector<T*> Recorder<T>::dataList;
+
 AddAirplaneDialog::AddAirplaneDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddAirplaneDialog)

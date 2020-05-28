@@ -18,6 +18,8 @@ public:
 private slots:
     void on_btnSubmit_clicked();
 
+    void on_btnCancel_clicked();
+
 private:
     Ui::AddAirplaneDialog *ui;
 };

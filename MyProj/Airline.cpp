@@ -153,6 +153,17 @@ Pilot *Airline::getFirstFreePilot(Flight* f) const
     return nullptr;
 }
 
+Host *Airline::getFirstFreeHost(Flight* f) const
+{
+    for (int i = 0; i < this->list_of_hosts.size(); i++)
+    {
+        Host* a = this->list_of_hosts[i];
+        if (a->isFree(f))
+            return a;
+    }
+    return nullptr;
+}
+
 //Employee *Airline::getFirstFreeEmp(Flight * f) const
 //{
 //    for (int i = 0; i < this->list_of_emps.size(); i++)

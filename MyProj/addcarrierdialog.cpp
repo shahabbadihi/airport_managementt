@@ -4,6 +4,9 @@
 #include "Recorder.h"
 #include "Airline.h"
 
+template <class T>
+QVector<T*> Recorder<T>::dataList;
+
 AddCarrierDialog::AddCarrierDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddCarrierDialog)
@@ -33,3 +36,5 @@ void AddCarrierDialog::on_btnCancel_clicked()
 {
     this->close();
 }
+
+
