@@ -10,6 +10,7 @@
 #include <QString>
 #include <QDesktopWidget>
 #include <QHeaderView>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->timer = new QTimer(this);
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
+    timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -87,4 +91,9 @@ void MainWindow::on_actionDeletePilot_triggered()
     deletePilotDialog->setModal(true);
     deletePilotDialog->exec();
     delete deletePilotDialog;
+}
+
+void MainWindow::showClock()
+{
+    ui->lblClock->setText(QTime::currentTime().toString());
 }
