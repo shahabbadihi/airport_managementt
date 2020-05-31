@@ -20,7 +20,7 @@ public:
     ~Carrier() {}
     QString get_data();
 
-    QString attachFlight(Flight* f);
+    void attachFlight(Flight* f);
     QString getSerial() const;
     void setSerial(const QString &value);
     Airline *getAirline() const;

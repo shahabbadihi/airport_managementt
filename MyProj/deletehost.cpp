@@ -10,7 +10,7 @@
 
 #include <QMessageBox>
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 deleteHost::deleteHost(QWidget *parent) :
     QDialog(parent),
@@ -31,21 +31,21 @@ void deleteHost::on_pushButton_2_clicked()
 
 void deleteHost::on_pushButton_clicked()
 {
-    Host * h = Recorder<Host>::searchByCode(ui->txtPersonnelCode->text());
+    Host * h = Recorder<Host>::getInstance()->searchByCode(ui->txtPersonnelCode->text());
     if(h){
         if(h->getFname()==ui->txtFname->text() && h->getLname()==ui->txtLname->text()){
 
            //Recorder<Host>::removeFromFile(h);
            //Recorder<Host>::removeFromFile(h);
-           Recorder<Host>::remove(h);
+           Recorder<Host>::getInstance()->remove(h);
            //
            //
            QMessageBox msg;
            msg.setText("Delete Successfully!");
            msg.exec();
            qDebug() << "List of hosts after delete:";
-           Recorder<Host>::print_dataList();
-           Recorder<Flight>::print_dataList();
+           Recorder<Host>::getInstance()->print_dataList();
+           Recorder<Flight>::getInstance()->print_dataList();
         }
     }
 }

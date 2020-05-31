@@ -4,7 +4,7 @@
 #include "Airplane.h"
 
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 AddAirplaneDialog::AddAirplaneDialog(QWidget *parent) :
     QDialog(parent),
@@ -12,7 +12,7 @@ AddAirplaneDialog::AddAirplaneDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    foreach (Airline* a, Recorder<Airline>::getInstance()->get_dataList())
     {
         ui->comboAirline->addItem(a->getName());
     }
@@ -26,11 +26,11 @@ AddAirplaneDialog::~AddAirplaneDialog()
 void AddAirplaneDialog::on_btnSubmit_clicked()
 {
     Airplane * airplane = new Airplane;
-    airplane->setAirline(Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()]);
+    airplane->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
     airplane->setSerial(ui->txtSerial->text());
     airplane->setNumOfSeats(ui->spnNumOfSeats->value());
 
-    Recorder<Airplane>::add(airplane);
+    Recorder<Airplane>::getInstance()->add(airplane);
 }
 
 void AddAirplaneDialog::on_btnCancel_clicked()

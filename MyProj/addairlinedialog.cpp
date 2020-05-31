@@ -4,7 +4,7 @@
 #include "Recorder.h"
 
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 AddAirlineDialog::AddAirlineDialog(QWidget *parent) :
     QDialog(parent),
@@ -23,7 +23,7 @@ void AddAirlineDialog::on_btnSubmit_clicked()
     Airline* airline = new Airline(ui->txtName->text(), ui->txtCode->text());
 
 
-    Recorder<Airline>::add(airline);
+    Recorder<Airline>::getInstance()->add(airline);
 }
 
 void AddAirlineDialog::on_btnCancel_clicked()

@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
 {    
     QDir::setCurrent("..");
     //qDebug() << QDir::currentPath();
-    Recorder<Pilot>::import();
-    Recorder<Host>::import();
-    Recorder<Flight>::import();
+    Recorder<Pilot>::getInstance()->import();
+    Recorder<Host>::getInstance()->import();
+    Recorder<Flight>::getInstance()->import();
     //Recorder<Pilot>::print_dataList();
     QApplication a(argc, argv);
     MainWindow w;

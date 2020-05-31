@@ -5,7 +5,7 @@
 #include "Airline.h"
 
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 AddCarrierDialog::AddCarrierDialog(QWidget *parent) :
     QDialog(parent),
@@ -13,7 +13,7 @@ AddCarrierDialog::AddCarrierDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    foreach (Airline* a, Recorder<Airline>::getInstance()->get_dataList())
     {
         ui->comboAirline->addItem(a->getName());
     }
@@ -27,7 +27,7 @@ AddCarrierDialog::~AddCarrierDialog()
 void AddCarrierDialog::on_btnSubmit_clicked()
 {
     Carrier* carrier = new Carrier;
-    Airline* currentAirline = Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()];
+    Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
     carrier->setSerial(ui->txtSerial->text());
     carrier->setAirline(currentAirline);
 }

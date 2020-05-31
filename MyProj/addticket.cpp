@@ -7,7 +7,7 @@
 #include <QMessageBox>
 
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 AddTicket::AddTicket(QWidget *parent) :
     QDialog(parent),
@@ -24,7 +24,7 @@ AddTicket::~AddTicket()
 void AddTicket::on_btnSubmit_clicked()
 {
     Ticket* ticket = nullptr;
-    foreach (Flight* f, Recorder<Flight>::get_dataList())
+    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
     {
         if (f->getSource() == ui->txtSource->text() &&
                 f->getDestination() == ui->txtDest->text() &&
@@ -43,7 +43,7 @@ void AddTicket::on_btnSubmit_clicked()
             passenger->setNationalCode(ui->txtNationalCode->text().toLong());
             passenger->setTicket(ticket);
 
-            Recorder<Passenger>::add(passenger);
+            Recorder<Passenger>::getInstance()->add(passenger);
 
             ticket->setPassenger(passenger);
             ticket->setDateFlight(ui->dtDate->date());
@@ -51,7 +51,7 @@ void AddTicket::on_btnSubmit_clicked()
             ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
             ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
 
-            Recorder<Ticket>::add(ticket);
+            Recorder<Ticket>::getInstance()->add(ticket);
 
             break;
         }

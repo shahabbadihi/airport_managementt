@@ -15,7 +15,7 @@ Passenger::Passenger(QString & data_str)
     this->setNationalCode(str_list.at(4).toLong());
     this->setTicketNo(str_list.at(5).toLong());
 
-    this->setTicket(Recorder<Ticket>::searchByCode(QString::number(this->ticket_no)));
+    this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(QString::number(this->ticket_no)));
 }
 
 QString Passenger::get_data()

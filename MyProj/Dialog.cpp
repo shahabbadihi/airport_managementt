@@ -6,8 +6,8 @@
 #include <QVector>
 #include <Airline.h>
 
-template <class T>
-QVector<T*> Recorder<T>::dataList;
+//template <class T>
+//QVector<T*> Recorder<T>::dataList;
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -15,7 +15,7 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    foreach (Airline* a, Recorder<Airline>::getInstance()->get_dataList())
     {
         ui->comboAirline->addItem(a->getName());
     }
@@ -35,7 +35,7 @@ void Dialog::on_pushButton_2_clicked()
 void Dialog::on_pushButton_clicked()
 {
     Pilot* pilot = new Pilot();
-    pilot->setAirline(Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()]);
+    pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
     pilot->set_fname(ui->txtFname->text());
     pilot->set_lname(ui->txtLname->text());
     pilot->set_birthDate(ui->dtBirthDate->date());
@@ -57,12 +57,12 @@ void Dialog::on_pushButton_clicked()
     //Recorder<Pilot>::record(pilot);
     //Recorder<Pilot>::addToFile(pilot);
     //pilot->get_recorder().addToFile(pilot);
-    Recorder<Pilot>::add(pilot);
+    Recorder<Pilot>::getInstance()->add(pilot);
 
     QMessageBox msg;
     msg.setText("Submit Successfully!");
     msg.exec();
 
-    Recorder<Pilot>::print_dataList();
+    Recorder<Pilot>::getInstance()->print_dataList();
     //delete pilot;
 }

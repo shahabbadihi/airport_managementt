@@ -19,6 +19,7 @@ SOURCES += \
     Airline.cpp \
     Airplane.cpp \
     Carrier.cpp \
+    DepartureCarrier.cpp \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     Airline.h \
     Airplane.h \
     Carrier.h \
+    DepartureCarrier.h \
     Employee.h \
     Flight.h \
     Host.h \

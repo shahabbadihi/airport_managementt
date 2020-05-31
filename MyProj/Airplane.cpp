@@ -44,7 +44,7 @@ void Airplane::setSerial(const QString &value)
 Airplane::Airplane(QString & str_data)
 {
     QStringList str_list = str_data.split('|');
-    this->setAirline(Recorder<Airline>::searchByCode(str_list[0]));
+    this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
     this->setSerial(str_list[1]);
 
     //QStringList product_date = str_list[2].split('/');

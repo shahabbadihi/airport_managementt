@@ -26,19 +26,19 @@ Airline::Airline(QString & str_data)
     QStringList pilots = str_list[2].split('/');
     foreach (QString s, pilots)
     {
-        this->attachPilot(Recorder<Pilot>::searchByCode(s));
+        this->attachPilot(Recorder<Pilot>::getInstance()->searchByCode(s));
     }
 
     QStringList hosts = str_list[3].split('/');
     foreach (QString s, hosts)
     {
-        this->attachHost(Recorder<Host>::searchByCode(s));
+        this->attachHost(Recorder<Host>::getInstance()->searchByCode(s));
     }
 
     QStringList flights = str_list[4].split('/');
     foreach (QString s, flights)
     {
-        this->attachFlight(Recorder<Flight>::searchByCode(s));
+        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 
 //    QStringList tickets = str_list[5].split('/');

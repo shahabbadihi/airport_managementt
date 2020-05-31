@@ -15,6 +15,7 @@
 #include <QException>
 #include <QDebug>
 #include <QMessageBox>
+//#include "Carrier.h"
 //#include <string>
 //class Employee;
 //class Pilot;
@@ -24,25 +25,25 @@ template <class T>
 class Recorder
 {
 public:
-    static void record(T* a)
+    void record(T* a)
     {
-        Recorder<T>::dataList.push_back(a);
+        this->dataList.push_back(a);
         //Recorder<T>::print_dataList();
     }
 
-    static void addToFile(T* a)
+    void addToFile(T* a)
     {
         QDir d(QDir::currentPath() + "/data");
         if (!d.exists())
             d.mkpath(QDir::currentPath() + "/data");
-        std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
-        int len = f.length();
-        char* s = new char[len];
-        strcpy(s, f.c_str());
-        QString filename = QString(s);
+//        std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
+//        int len = f.length();
+//        char* s = new char[len];
+//        strcpy(s, f.c_str());
+//        QString filename = QString(s);
 
 
-        QFile file(filename);
+        QFile file("data/" + this->getClassName() + ".txt");
         if (!file.open(QIODevice::Append | QIODevice::Text))
             throw QException();
 
@@ -54,20 +55,18 @@ public:
 
         file.flush();
         file.close();
-
-        delete[] s;
     }
-    static void removeFromFile(T* a)
+    void removeFromFile(T* a)
     {
         QDir d(QDir::currentPath() + "/data");
         try {
-            std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
-            int len = f.length();
-            char* s = new char[len];
-            strcpy(s, f.c_str());
-            QString filename = QString(s);
+//            std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
+//            int len = f.length();
+//            char* s = new char[len];
+//            strcpy(s, f.c_str());
+//            QString filename = QString(s);
 
-            QFile file(filename);
+            QFile file("data/" + this->getClassName() + ".txt");
             if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
                 throw QException();
 
@@ -100,7 +99,7 @@ public:
                 {
                     if (i == num_of_line)
                         continue;
-                    out << Recorder<T>::get_dataList().at(i)->get_data();
+                    out << this->get_dataList().at(i)->get_data();
                 }
             }
             file.flush();
@@ -115,40 +114,40 @@ public:
 
     }
 
-    static QVector<T*> get_dataList()
+    QVector<T*> get_dataList()
     {
-        return Recorder<T>::dataList;
+        return this->dataList;
     }
 
-    static void print_dataList()
+    void print_dataList()
     {
-        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
+        for (int i = 0; i < this->dataList.size(); i++)
         {
-            qDebug() << Recorder<T>::dataList.at(i)->get_data();
+            qDebug() << this->dataList.at(i)->get_data();
         }
     }
-    static void add(T* a)
+    void add(T* a)
     {
-        Recorder<T>::record(a);
-        Recorder<T>::addToFile(a);
+        this->record(a);
+        this->addToFile(a);
     }
-    static void import()
+    void import()
     {
         QDir dataDir(QDir::currentPath() + "/data");
         if (!dataDir.exists())
             dataDir.mkpath(QDir::currentPath() + "/data");
-        std::string f = std::string(typeid(T).name()).substr(1);
-        int len = f.length();
-        char* s = new char[len];
-        strcpy(s, f.c_str());
-        QString classname = QString(s);
+//        std::string f = std::string(typeid(T).name()).substr(1);
+//        int len = f.length();
+//        char* s = new char[len];
+//        strcpy(s, f.c_str());
+//        QString classname = QString(s);
 
 
         QString filename = "";
         foreach (QFileInfo finfo, dataDir.entryInfoList())
         {
             //qDebug() << finfo.fileName();
-            if (finfo.fileName().startsWith(classname))
+            if (finfo.fileName().startsWith(this->getClassName()))
             {
                 filename = finfo.fileName();
                 break;
@@ -166,28 +165,27 @@ public:
         {
             QString dataString = in.readLine();
             T* newObj = new T(dataString);
-            Recorder<T>::record(newObj);
+            this->record(newObj);
         }
 
         file.close();
-        delete[] s;
 
-        Recorder<T>::print_dataList();
+        this->print_dataList();
     }
 
-    static T * searchByCode(const QString& p){
-        for (int i = 0; i < Recorder<T>::dataList.size(); i++)
+    T * searchByCode(const QString& p){
+        for (int i = 0; i < this->dataList.size(); i++)
         {
-            if(Recorder<T>::dataList.at(i)->getSearchCode()==p){
-                return Recorder<T>::dataList.at(i);
+            if(this->dataList.at(i)->getSearchCode()==p){
+                return this->dataList.at(i);
             }
         }
         return nullptr;
     }
-    static void remove(T * a)
+    void remove(T * a)
     {
-        Recorder<T>::removeFromFile(a);
-        Recorder<T>::dataList.removeOne(a);
+        this->removeFromFile(a);
+        this->dataList.removeOne(a);
         delete a;
     }
 
@@ -202,16 +200,16 @@ public:
 //        return nullptr;
 //    }
 
-    static void updateFile(T * ptr)
+    void updateFile(T * ptr)
     {
         QDir d(QDir::currentPath() + "/data");
-        std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
-        int len = f.length();
-        char* s = new char[len];
-        strcpy(s, f.c_str());
-        QString filename = QString(s);
+//        std::string f = "data/" + std::string(typeid(T).name()).substr(1) + ".txt";
+//        int len = f.length();
+//        char* s = new char[len];
+//        strcpy(s, f.c_str());
+//        QString filename = QString(s);
 
-        QFile file(filename);
+        QFile file("data/" + this->getClassName() + ".txt");
         if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
             throw QException();
 
@@ -237,9 +235,29 @@ public:
 
         file.flush();
         file.close();
-        delete[] s;
     }
+
+    QString getClassName()
+    {
+        std::string f = std::string(typeid(T).name()).substr(1);
+        int len = f.length();
+        char* s = new char[len];
+        strcpy(s, f.c_str());
+        QString filename = QString(s);
+        delete[] s;
+        return filename;
+    }
+    static Recorder<T>* getInstance()
+    {
+        if (instance == nullptr)
+            instance = new Recorder<T>;
+        return instance;
+    }
+
+    Recorder<T>() {}
 private:
-    static QVector<T*> dataList;
+    QVector<T*> dataList;
+    static Recorder<T>* instance;
 };
+
 #endif // RECORDER_H

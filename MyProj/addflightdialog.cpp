@@ -9,7 +9,7 @@
 #include <QMessageBox>
 
 template <class T>
-QVector<T*> Recorder<T>::dataList;
+Recorder<T>* Recorder<T>::instance;
 
 AddFlightDialog::AddFlightDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,7 +17,7 @@ AddFlightDialog::AddFlightDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    foreach (Airline* a, Recorder<Airline>::get_dataList())
+    foreach (Airline* a, Recorder<Airline>::getInstance()->get_dataList())
     {
         ui->comboAirline->addItem(a->getName());
     }
@@ -33,7 +33,7 @@ void AddFlightDialog::on_btnSubmit_clicked()
     try
     {
         Flight* flight = new Flight();
-        Airline* currentAirline = Recorder<Airline>::get_dataList()[ui->comboAirline->currentIndex()];
+        Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
         flight->setAirline(currentAirline);
         flight->setSerial(ui->txtFlightSerial->text());
         flight->setSource(ui->txtSource->text());
@@ -71,7 +71,7 @@ void AddFlightDialog::on_btnSubmit_clicked()
                 return;
             }
         }
-        Recorder<Flight>::add(flight);
+        Recorder<Flight>::getInstance()->add(flight);
 
         QMessageBox msg;
         QString str = "Submit Successfully!\n";

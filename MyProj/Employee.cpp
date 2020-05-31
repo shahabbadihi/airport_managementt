@@ -130,7 +130,7 @@ Employee::Employee(QString &dataStr)
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    setAirline(Recorder<Airline>::searchByCode(strList[0]));
+    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[0]));
     set_fname(strList.at(1));
     set_lname(strList.at(2));
     //set_degree(strList.at(2).toInt());
@@ -153,7 +153,7 @@ Employee::Employee(QString &dataStr)
 
     foreach (QString s, str_list_flights)
     {
-        this->attachFlight(Recorder<Flight>::searchByCode(s));
+        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 }
 int Employee::flightListSize(){

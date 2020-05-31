@@ -27,7 +27,7 @@ void Carrier::setAirline(Airline *value)
 Carrier::Carrier(QString & str_data)
 {
     QStringList str_list = str_data.split('|');
-    this->setAirline(Recorder<Airline>::searchByCode(str_list[0]));
+    this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
     this->setSerial(str_list[1]);
 
     QStringList flights = str_list[2].split('/');
@@ -52,7 +52,7 @@ QString Carrier::get_data()
     return str;
 }
 
-QString Carrier::attachFlight(Flight* f)
+void Carrier::attachFlight(Flight* f)
 {
     this->list_of_flights.push_back(f);
 }

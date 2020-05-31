@@ -62,14 +62,14 @@ Flight::Flight(QString & data_str)
                                time_arrival.at(1).toInt(),
                                time_arrival.at(2).toInt());
 
-    this->setPilot(Recorder<Pilot>::searchByCode(str_list.at(7)));
+    this->setPilot(Recorder<Pilot>::getInstance()->searchByCode(str_list.at(7)));
 
     this->setNumOfHosts(str_list.at(8).toInt());
 
     int i = 9;
     for (; i < 9 + this->numOfHosts; i++)
     {
-        this->attachHost(Recorder<Host>::searchByCode(str_list.at(i)));
+        this->attachHost(Recorder<Host>::getInstance()->searchByCode(str_list.at(i)));
     }
 
     this->setNumOfPassengers(str_list.at(i).toInt());
@@ -215,8 +215,8 @@ void Flight::removeHost(Host* h)
     {
     this->hosts.removeOne(h);
     //this->attachHost(Recorder<Host>::getFirstFree(this));
-    this->attachHost(Recorder<Airline>::searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
-    Recorder<Flight>::updateFile(this);
+    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
+    Recorder<Flight>::getInstance()->updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {
 //        if (h == nullptr)
@@ -252,7 +252,7 @@ void Flight::removeHost(Host* h)
     }
     catch (QException e)
     {
-        Recorder<Flight>::updateFile(this);
+        Recorder<Flight>::getInstance()->updateFile(this);
         QMessageBox msg;
         msg.setText("Not Enough Hosts!");
         msg.exec();
@@ -266,8 +266,8 @@ void Flight::removePilot(Pilot* h){
     //{
     this->pilot = nullptr;
     //this->attachHost(Recorder<Host>::getFirstFree(this));
-    this->setPilot(Recorder<Airline>::searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
-    Recorder<Flight>::updateFile(this);
+    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
+    Recorder<Flight>::getInstance()->updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {
 //        if (h == nullptr)
