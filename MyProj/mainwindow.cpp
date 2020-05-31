@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
+    //connect(this->timer, SIGNAL(timeout()), this, SLOT(print()));
     timer->start(1000);
 }
 
@@ -97,3 +98,8 @@ void MainWindow::showClock()
 {
     ui->lblClock->setText(QTime::currentTime().toString());
 }
+
+//void MainWindow::print()
+//{
+//    qDebug() << "salam";
+//}

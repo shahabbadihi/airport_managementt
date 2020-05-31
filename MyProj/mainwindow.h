@@ -50,6 +50,7 @@ private slots:
     void on_actionDeletePilot_triggered();
 
     void showClock();
+    //void print();
 
 private:
     Ui::MainWindow *ui;
