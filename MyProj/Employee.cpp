@@ -4,17 +4,18 @@
 #include <QString>
 QString Employee::get_data()
 {
-    QString data = this->airline->getCode() + "|"
+    QString data = QString::number(this->personnelCode) + "|"
+            + (this->airline ? this->airline->getCode() : "") + "|"
             + this->fname + "|" + this->lname + "|"
             + QString::number(this->nationalCode) + "|"
-            + QString::number(this->personnelCode) + "|"
+
             + QString::number(this->birthDate.month()) + "/"
             + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
             + "|" + QString::number(this->employmentDate.month()) + "/"
             + QString::number(this->employmentDate.day()) +
             "/" + QString::number(this->employmentDate.year()) + "|";
             ;
-    for (int i = 0; i < this->list.size(); i++)
+    for (int i = 0; i < this->list.size() && this->list[i]; i++)
     {
         if (i == this->list.size() - 1)
             data += this->list.at(i)->getSerial();
@@ -53,7 +54,8 @@ void Employee::set_nationalCode(long code)
 void Employee::set_personnelCode(long code)
 {
     this->personnelCode = code;
-    this->search_code = QString::number(code);
+//    this->search_code = QString::number(code);
+    this->setSearchCode(QString::number(code));
 }
 
 void Employee::set_birthDate(QDate &date)
@@ -126,16 +128,18 @@ void Employee::setAirline(Airline *value)
 }
 
 Employee::Employee(QString &dataStr)
+    : airline(nullptr)
 {
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[0]));
+    set_personnelCode(strList.at(0).toLong());
+
     set_fname(strList.at(1));
     set_lname(strList.at(2));
     //set_degree(strList.at(2).toInt());
     set_nationalCode(strList.at(3).toLong());
-    set_personnelCode(strList.at(4).toLong());
+    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[4]));
 
     QStringList strListBirthDate = strList.at(5).split('/');
     QStringList strListEmpDate = strList.at(6).split('/');

@@ -11,40 +11,87 @@ QString Carrier::getSerial() const
 void Carrier::setSerial(const QString &value)
 {
     serial = value;
-    this->search_code = value;
+//    this->search_code = value;
+    this->setSearchCode(value);
+    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
-Airline *Carrier::getAirline() const
+bool Carrier::isFree(const QDateTime & t, const QString & s)
 {
-    return airline;
+    if (s != this->place)
+        return false;
+    else
+    {
+        foreach (QString str, this->list_of_missions)
+        {
+            if (str.contains(t.toString()))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
-void Carrier::setAirline(Airline *value)
+//Airline *Carrier::getAirline() const
+//{
+//    return airline;
+//}
+
+//void Carrier::setAirline(Airline *value)
+//{
+//    airline = value;
+//}
+
+QString Carrier::getPlace() const
 {
-    airline = value;
+    return place;
+}
+
+void Carrier::setPlace(const QString &value)
+{
+    place = value;
+    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 Carrier::Carrier(QString & str_data)
 {
     QStringList str_list = str_data.split('|');
-    this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
-    this->setSerial(str_list[1]);
+    //this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
+    this->setSerial(str_list[0]);
+    this->setPlace(str_list[1]);
 
     QStringList flights = str_list[2].split('/');
 
     foreach (QString s, flights)
     {
-        this->attachFlight(this->airline->searchFlightByCode(s));
+        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
+    }
+
+    QStringList missions = str_list[3].split('/');
+
+    foreach (QString s, missions)
+    {
+        this->attachMission(s);
     }
 }
 
 QString Carrier::get_data()
 {
-    QString str = this->airline->getSearchCode() + "|" +
-            this->serial + "|";
+    QString str = /*this->airline->getSearchCode() + "|" +*/
+            this->serial + "|" +
+            this->place + "|";
     foreach (Flight* f, this->list_of_flights)
     {
-        str += f->getSearchCode() + "/";
+        if (f)
+            str += f->getSearchCode() + "/";
+    }
+
+    str += "|";
+
+    foreach (QString s, this->list_of_missions)
+    {
+        str += s + "/";
     }
 
     str += "\n";
@@ -55,4 +102,11 @@ QString Carrier::get_data()
 void Carrier::attachFlight(Flight* f)
 {
     this->list_of_flights.push_back(f);
+    Recorder<Carrier>::getInstance()->updateFile(this);
+}
+
+void Carrier::attachMission(const QString & m)
+{
+    this->list_of_missions.push_back(m);
+    Recorder<Carrier>::getInstance()->updateFile(this);
 }

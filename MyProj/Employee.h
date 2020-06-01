@@ -23,7 +23,7 @@ protected:
     QVector<Flight*> list;
     Airline* airline;
 public:
-    Employee() {}
+    Employee() : airline(nullptr) {}
     Employee(QString& dataStr);
     ~Employee(){}
 

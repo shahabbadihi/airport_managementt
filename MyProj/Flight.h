@@ -41,10 +41,11 @@ private:
     QVector<Ticket*> tickets;
     Airline* airline;
     Airplane* airplane;
-    Carrier* carrier;
+    Carrier* departure_carrier;
+    Carrier* arrival_carrier;
     Price ticketsSaleCost;
 public:
-    Flight() {}
+    Flight()  : airline(nullptr) {}
     Flight(QString&);
     ~Flight() {}
 
@@ -84,8 +85,13 @@ public:
     Airline *getAirline() const;
     void setAirline(Airline *value);
     void setAirplane(Airplane *value);
-    Carrier *getCarrier() const;
-    void setCarrier(Carrier *value);
+//    Carrier *getCarrier() const;
+//    void setCarrier(Carrier *value);
+    Carrier *getDeparture_carrier() const;
+    void setDeparture_carrier(Carrier *value);
+    Carrier *getArrival_carrier() const;
+    void setArrival_carrier(Carrier *value);
+    Airplane *getAirplane() const;
 };
 
 #endif // FLIGHT_H

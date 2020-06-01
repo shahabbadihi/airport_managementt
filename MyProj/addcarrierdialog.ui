@@ -17,14 +17,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="lblAirline">
+      <widget class="QLabel" name="lblPlace">
        <property name="text">
-        <string>Airline:</string>
+        <string>Place:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboAirline"/>
+      <widget class="QLineEdit" name="txtPlace"/>
      </item>
     </layout>
    </item>

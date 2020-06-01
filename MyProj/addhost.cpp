@@ -35,13 +35,14 @@ void AddHost::on_pushButton_2_clicked()
 void AddHost::on_pushButton_clicked()
 {
     Host* host = new Host();
+    host->set_personnelCode(ui->txtPersonnelCode->text().toLong());
     host->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
     host->set_fname(ui->txtFname->text());
     host->set_lname(ui->txtLname->text());
     host->set_birthDate(ui->dtBirthDate->date());
     host->set_employmentDate(ui->dtEmploymentDate->date());
     host->set_nationalCode(ui->txtNationalCode->text().toLong());
-    host->set_personnelCode(ui->txtPersonnelCode->text().toLong());
+
 
     //Recorder<Host>::record(host);
     //Recorder<Host>::addToFile(host);

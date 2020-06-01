@@ -88,3 +88,11 @@ void MainWindow::on_actionDeletePilot_triggered()
     deletePilotDialog->exec();
     delete deletePilotDialog;
 }
+
+void MainWindow::on_actionAddCarrier_triggered()
+{
+    this->addCarrierDialog = new AddCarrierDialog();
+    addCarrierDialog->setModal(true);
+    addCarrierDialog->exec();
+    delete addCarrierDialog;
+}

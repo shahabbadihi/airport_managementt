@@ -6,6 +6,7 @@
 void Airplane::attachFlight(Flight *f)
 {
     this->list_of_flights.push_back(f);
+    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 Airline *Airplane::getAirline() const
@@ -18,6 +19,7 @@ void Airplane::setAirline(Airline *value)
     this->airline = value;
     if (value)
         value->attachAirplane(this);
+    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 int Airplane::getNumOfSeats() const
@@ -28,6 +30,7 @@ int Airplane::getNumOfSeats() const
 void Airplane::setNumOfSeats(int value)
 {
     numOfSeats = value;
+    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 QString Airplane::getSerial() const
@@ -38,14 +41,38 @@ QString Airplane::getSerial() const
 void Airplane::setSerial(const QString &value)
 {
     serial = value;
-    this->search_code = value;
+//    this->search_code = value;
+    this->setSearchCode(value);
+    Recorder<Airplane>::getInstance()->updateFile(this);
+}
+
+bool Airplane::isFree(Flight * f)
+{
+    if (this->numOfSeats < f->getNumOfPassengers())
+        return false;
+    for (int i = 0; i < this->list_of_flights.size(); i++)
+    {
+        if ( !(
+            (this->list_of_flights.at(i)->getDateTimeDeparture() > f->getDateTimeArrival() &&
+             this->list_of_flights.at(i)->getSource() == f->getDestination()) ||
+            (this->list_of_flights.at(i)->getDateTimeArrival() < f->getDateTimeDeparture() &&
+             this->list_of_flights.at(i)->getDestination() == f->getSource())
+              )
+           )
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 Airplane::Airplane(QString & str_data)
+    : airline(nullptr)
 {
     QStringList str_list = str_data.split('|');
-    this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
-    this->setSerial(str_list[1]);
+    this->setSerial(str_list[0]);
+    this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[1]));
+
 
     //QStringList product_date = str_list[2].split('/');
     //this->setProductDate(product_date[2].toInt(), product_date[0].toInt(), product_date[1].toInt());
@@ -62,12 +89,11 @@ Airplane::Airplane(QString & str_data)
 
 QString Airplane::get_data()
 {
-    QString str = this->airline->getSearchCode() + "|" +
-            this->search_code + "|" +
+    QString str = this->search_code + "|" +
+            (this->airline ? this->airline->getSearchCode() : "") + "|" +
+            QString::number(this->numOfSeats) + "|";
 
-            this->numOfSeats + "|";
-
-    for (int i = 0; i < this->list_of_flights.size(); i++)
+    for (int i = 0; i < this->list_of_flights.size() && this->list_of_flights[i]; i++)
     {
         if (i == this->list_of_flights.size() - 1)
             str += this->list_of_flights[i]->getSearchCode();

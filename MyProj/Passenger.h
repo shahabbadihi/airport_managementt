@@ -16,7 +16,7 @@ private:
     long nationalCode;
     QDate birthDate;
     Ticket* ticket;
-    long ticket_no;
+    //long ticket_no;
 public:
     Passenger() {}
     Passenger(QString&);
@@ -31,7 +31,7 @@ public:
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);
-    void setTicketNo(long);
+    //void setTicketNo(long);
     void setTicket(Ticket*);
 
     QString getFname();

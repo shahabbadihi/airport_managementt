@@ -18,7 +18,7 @@ private:
     QVector<Flight*> list_of_flights;
     Airline* airline;
 public:
-    Airplane() {}
+    Airplane()  : airline(nullptr) {}
     Airplane(QString&);
     ~Airplane() {}
 
@@ -33,6 +33,8 @@ public:
     void setNumOfSeats(int value);
     QString getSerial() const;
     void setSerial(const QString &value);
+
+    bool isFree(Flight*);
 };
 
 #endif // AIRPLANE_H

@@ -35,13 +35,14 @@ void Dialog::on_pushButton_2_clicked()
 void Dialog::on_pushButton_clicked()
 {
     Pilot* pilot = new Pilot();
+    pilot->set_personnelCode(ui->txtPersonnelCode->text().toLong());
     pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
     pilot->set_fname(ui->txtFname->text());
     pilot->set_lname(ui->txtLname->text());
     pilot->set_birthDate(ui->dtBirthDate->date());
     pilot->set_employmentDate(ui->dtEmploymentDate->date());
     pilot->set_nationalCode(ui->txtNationalCode->text().toLong());
-    pilot->set_personnelCode(ui->txtPersonnelCode->text().toLong());
+
 
     QRadioButton* radio1 = ui->radio1;
     QRadioButton* radio2 = ui->radio2;

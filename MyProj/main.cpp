@@ -13,6 +13,8 @@
 //#include "Deliverier.h"
 //#include "Ticket.h"
 #include "Flight.h"
+#include "Carrier.h"
+#include "Passenger.h"
 #include <QDebug>
 #include <QDir>
 
@@ -21,9 +23,14 @@ int main(int argc, char *argv[])
 {    
     QDir::setCurrent("..");
     //qDebug() << QDir::currentPath();
+    Recorder<Airline>::getInstance()->import();
     Recorder<Pilot>::getInstance()->import();
     Recorder<Host>::getInstance()->import();
+    Recorder<Airplane>::getInstance()->import();
+    Recorder<Carrier>::getInstance()->import();
     Recorder<Flight>::getInstance()->import();
+    Recorder<Ticket>::getInstance()->import();
+    Recorder<Passenger>::getInstance()->import();
     //Recorder<Pilot>::print_dataList();
     QApplication a(argc, argv);
     MainWindow w;

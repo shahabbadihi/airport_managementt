@@ -32,24 +32,26 @@ void AddTicket::on_btnSubmit_clicked()
                 f->getNumOfPassengers() > 0)
         {
             ticket = new Ticket();
-            ticket->setSource(ui->txtSource->text());
-            ticket->setDestination(ui->txtDest->text());
+            ticket->setNo(ui->txtNo->text().toLong());
+            //ticket->setSource(ui->txtSource->text());
+            //ticket->setDestination(ui->txtDest->text());
 
             Passenger* passenger = new Passenger;
+            passenger->setNationalCode(ui->txtNationalCode->text().toLong());
             passenger->setFname(ui->txtFName->text());
             passenger->setLname(ui->txtLName->text());
             passenger->setBirthDate(ui->dtBirthDate->date());
             passenger->setFatherName(ui->txtPassFatherName->text());
-            passenger->setNationalCode(ui->txtNationalCode->text().toLong());
+
             passenger->setTicket(ticket);
 
             Recorder<Passenger>::getInstance()->add(passenger);
 
             ticket->setPassenger(passenger);
-            ticket->setDateFlight(ui->dtDate->date());
+            //ticket->setDateFlight(ui->dtDate->date());
             ticket->setFlight(f);
-            ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
-            ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
+            //ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
+            //ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
 
             Recorder<Ticket>::getInstance()->add(ticket);
 
@@ -67,7 +69,8 @@ void AddTicket::on_btnSubmit_clicked()
     else
     {
         QMessageBox msg;
-        msg.setText("Submit Successfully!\nThe Flight Serial Is: " + ticket->getFlight()->getSerial());
+        msg.setText("Submit Successfully!\nThe Flight Serial Is: " + ticket->getFlight()->getSerial()
+                    + "\nDeparture Time: " + ticket->getFlight()->getDateTimeDeparture().time().toString());
         msg.exec();
     }
 

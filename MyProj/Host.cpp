@@ -44,4 +44,5 @@ void Host::setAirline(Airline *value)
     airline = value;
     if (value)
         value->attachHost(this);
+    Recorder<Host>::getInstance()->updateFile(this);
 }

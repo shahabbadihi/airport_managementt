@@ -18,6 +18,12 @@ public:
         return this->search_code;
     };
 
+    void setSearchCode(const QString& s)
+    {
+        this->search_code = s;
+
+    }
+
 protected:
     //Recorder<Object>* recorder;
     QString search_code;

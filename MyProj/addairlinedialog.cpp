@@ -24,6 +24,10 @@ void AddAirlineDialog::on_btnSubmit_clicked()
 
 
     Recorder<Airline>::getInstance()->add(airline);
+
+    QMessageBox msg;
+    msg.setText("Submit Successfully!");
+    msg.exec();
 }
 
 void AddAirlineDialog::on_btnCancel_clicked()

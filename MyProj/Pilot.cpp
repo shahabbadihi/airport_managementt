@@ -9,12 +9,13 @@ Pilot::Pilot(QString& dataStr)
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[0]));
-    set_fname(strList.at(1));
-    set_lname(strList.at(2));
-    set_degree(strList.at(3).toInt());
-    set_nationalCode(strList.at(4).toLong());
-    set_personnelCode(strList.at(5).toLong());
+    set_personnelCode(strList.at(0).toLong());
+    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[1]));
+    set_fname(strList.at(2));
+    set_lname(strList.at(3));
+    set_degree(strList.at(4).toInt());
+    set_nationalCode(strList.at(5).toLong());
+
 
     QStringList strListBirthDate = strList.at(6).split('/');
     QStringList strListEmpDate = strList.at(7).split('/');
@@ -62,16 +63,17 @@ QString Pilot::get_data()
         deg = "3";
         break;
     }
-    QString data = this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
+    QString data = QString::number(this->personnelCode) + "|" +
+            this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
             + deg + "|" + QString::number(this->nationalCode) + "|"
-            + QString::number(this->personnelCode) + "|"
+
             + QString::number(this->birthDate.month()) + "/"
             + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
             + "|" + QString::number(this->employmentDate.month()) + "/"
             + QString::number(this->employmentDate.day()) +
             "/" + QString::number(this->employmentDate.year()) + "|";
 
-    for (int i = 0; i < this->list.size(); i++)
+    for (int i = 0; i < this->list.size() && this->list[i]; i++)
     {
         if (i == this->list.size() - 1)
             data += this->list.at(i)->getSerial();
@@ -85,7 +87,9 @@ QString Pilot::get_data()
 void Pilot::setAirline(Airline *value)
 {
     airline = value;
-    value->attachPilot(this);
+    if (value)
+        value->attachPilot(this);
+    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 
 void Pilot::set_degree(int deg)
@@ -96,4 +100,5 @@ void Pilot::set_degree(int deg)
         this->degree = Two;
     if (deg == 3)
         this->degree = Three;
+    Recorder<Pilot>::getInstance()->updateFile(this);
 }

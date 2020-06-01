@@ -14,10 +14,10 @@ class Carrier;
 class Airline : public Object
 {
 public:
-    Airline();
+    Airline() {}
     Airline(const QString& name, const QString& code);
     Airline(QString&);
-    ~Airline();
+    ~Airline() {}
 
     QString get_data();
 
@@ -26,7 +26,7 @@ public:
     void attachFlight(Flight*);
     void attachAirplane(Airplane*);
     //void attachTicket(Ticket*);
-    void attachCarrier(Carrier*);
+    //void attachCarrier(Carrier*);
     void setName(const QString &value);
 
     void setCode(const QString &value);
@@ -37,6 +37,7 @@ public:
 
     Pilot* getFirstFreePilot(Flight*) const;
     Host* getFirstFreeHost(Flight*) const;
+    Airplane* getFirstFreeAirplane(Flight*) const;
     //Employee* getFirstFreeEmp(Flight*) const;
 
     Flight* searchFlightByCode(QString&);
@@ -51,7 +52,7 @@ private:
     QVector<Flight*> list_of_flights;
     QVector<Airplane*> list_of_airplanes;
     //QVector<Ticket*> list_of_tickets;
-    QVector<Carrier*> list_of_carriers;
+    //QVector<Carrier*> list_of_carriers;
     //QVector<Vehicle*> list_of_vehicles;
 };
 

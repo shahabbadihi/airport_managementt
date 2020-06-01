@@ -32,7 +32,7 @@
     <addaction name="actionAddPilot"/>
     <addaction name="actionAdd_Host"/>
     <addaction name="separator"/>
-    <addaction name="actionAddDeliverier"/>
+    <addaction name="actionAddCarrier"/>
     <addaction name="actionAddAirplane"/>
     <addaction name="separator"/>
     <addaction name="actionAddTicket"/>
@@ -60,9 +60,9 @@
     <string>Host</string>
    </property>
   </action>
-  <action name="actionAddDeliverier">
+  <action name="actionAddCarrier">
    <property name="text">
-    <string>Deliverier</string>
+    <string>Carrier</string>
    </property>
   </action>
   <action name="actionAddAirplane">
