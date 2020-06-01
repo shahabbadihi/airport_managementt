@@ -29,7 +29,7 @@ QString Passenger::get_data()
             QString::number(this->birthDate.day()) + "/" +
             QString::number(this->birthDate.year()) + "|" +
 
-            QString::number(this->ticket_no) + "\n";
+            this->ticket->getSearchCode() + "\n";
     return data_str;
 }
 

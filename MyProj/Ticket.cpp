@@ -44,17 +44,17 @@ QString Ticket::get_data()
     return str_data;
 }
 
-void Ticket::setDestination(const QString & d)
-{
-    this->destination = d;
-    Recorder<Ticket>::getInstance()->updateFile(this);
-}
+//void Ticket::setDestination(const QString & d)
+//{
+//    this->destination = d;
+//    Recorder<Ticket>::getInstance()->updateFile(this);
+//}
 
-void Ticket::setSource(const QString & s)
-{
-    this->source = s;
-    Recorder<Ticket>::getInstance()->updateFile(this);
-}
+//void Ticket::setSource(const QString & s)
+//{
+//    this->source = s;
+//    Recorder<Ticket>::getInstance()->updateFile(this);
+//}
 
 //void Ticket::setPassengerFname(const QString & fname)
 //{
@@ -152,20 +152,20 @@ void Ticket::setPassenger(Passenger * p)
 //    Recorder<Ticket>::getInstance()->updateFile(this);
 //}
 
-QString Ticket::getSource()
-{
-    return this->source;
-}
+//QString Ticket::getSource()
+//{
+//    return this->source;
+//}
 
-QString Ticket::getDestination()
-{
-    return this->destination;
-}
+//QString Ticket::getDestination()
+//{
+//    return this->destination;
+//}
 
-QDate Ticket::getDateFlight()
-{
-    return this->flightDate;
-}
+//QDate Ticket::getDateFlight()
+//{
+//    return this->flightDate;
+//}
 
 Flight *Ticket::getFlight() const
 {
