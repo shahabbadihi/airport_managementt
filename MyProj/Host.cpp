@@ -2,47 +2,65 @@
 #include "Airline.h"
 #include <QString>
 
-//Host::Host(QString &dataStr)
-//{
-//    QStringList strList = dataStr.split('|');
-//    strList.replaceInStrings("\n", "");
+Host::Host(QString &dataStr)
+{
+    QStringList strList = dataStr.split('|');
+    strList.replaceInStrings("\n", "");
 
-//    set_fname(strList.at(0));
-//    set_lname(strList.at(1));
-//    //set_degree(strList.at(2).toInt());
-//    set_nationalCode(strList.at(2).toLong());
-//    set_personnelCode(strList.at(3).toLong());
+    set_personnelCode(strList.at(0).toLong());
+    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[1]));
+    set_fname(strList.at(2));
+    set_lname(strList.at(3));
+    //set_degree(strList.at(2).toInt());
+    set_nationalCode(strList.at(4).toLong());
 
-//    QStringList strListBirthDate = strList.at(4).split('/');
-//    QStringList strListEmpDate = strList.at(5).split('/');
-//    QDate birthDate(strListBirthDate.at(2).toInt(),
-//                    strListBirthDate.at(0).toInt(),
-//                    strListBirthDate.at(1).toInt());
-//    QDate empDate(strListEmpDate.at(2).toInt(),
-//                  strListEmpDate.at(0).toInt(),
-//                  strListEmpDate.at(1).toInt());
 
-//    set_birthDate(birthDate);
-//    set_employmentDate(empDate);
+    QStringList strListBirthDate = strList.at(5).split('/');
+    QStringList strListEmpDate = strList.at(6).split('/');
+    QDate birthDate(strListBirthDate.at(2).toInt(),
+                    strListBirthDate.at(0).toInt(),
+                    strListBirthDate.at(1).toInt());
+    QDate empDate(strListEmpDate.at(2).toInt(),
+                  strListEmpDate.at(0).toInt(),
+                  strListEmpDate.at(1).toInt());
 
-//    QStringList str_list_flights = strList.at(6).split('/');
+    set_birthDate(birthDate);
+    set_employmentDate(empDate);
 
-//    foreach (QString s, str_list_flights)
-//    {
-//        this->attachFlight(Recorder<Flight>::searchByCode(s));
-//    }
-//}
+    QStringList str_list_flights = strList.at(7).split('/');
+
+    foreach (QString s, str_list_flights)
+    {
+        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
+    }
+}
+
+Host::~Host()
+{
+    for (int i = 0; i < this->flightListSize(); i++)
+    {
+       this->list[i]->removeHost(this);
+    }
+    this->airline->removeHost(this);
+}
 
 void Host::attachFlight(Flight * f)
 {
-    this->list.push_back(f);
+    if (f && !this->isFlightInList(f))
+    {
+        this->list.push_back(f);
+        f->attachHost(this);
+    }
 //    Recorder<Host>::getInstance()->updateFile(this);
 }
 
 void Host::setAirline(Airline *value)
 {
-    airline = value;
-    if (value)
+    if (value && !this->airline)
+    {
+        airline = value;
+
         value->attachHost(this);
+    }
 //    Recorder<Host>::getInstance()->updateFile(this);
 }

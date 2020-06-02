@@ -12,13 +12,8 @@ private:
 
 public:
     Host() {}
-    Host(QString& dataStr) : Employee(dataStr) {}
-    ~Host(){
-        for (int i = 0; i < this->flightListSize(); i++)
-        {
-           this->list[i]->removeHost(this);
-        }
-    }
+    Host(QString& dataStr);
+    ~Host();
 
     //QString get_data();
 

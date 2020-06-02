@@ -16,7 +16,7 @@ Passenger::Passenger(QString & data_str)
     
     //this->setTicketNo(str_list.at(5).toLong());
 
-    this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(this->ticket->getSearchCode()));
+    this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(str_list[5]));
 }
 
 QString Passenger::get_data()
@@ -85,7 +85,10 @@ void Passenger::setBirthDate(int year, int month, int day)
 
 void Passenger::setTicket(Ticket * t)
 {
-    this->ticket = t;
+    if (t && !this->ticket)
+    {
+        this->ticket = t;
+    }
     //this->ticket_no = t->getNo();
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }

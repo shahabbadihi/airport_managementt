@@ -90,26 +90,50 @@ QString Airline::get_data()
 
 void Airline::attachHost(Host * t)
 {
-    this->list_of_hosts.push_back(t);
+    if (t)
+        this->list_of_hosts.push_back(t);
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachPilot(Pilot * t)
 {
-    this->list_of_pilots.push_back(t);
+    if (t)
+        this->list_of_pilots.push_back(t);
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachFlight(Flight * t)
 {
-    this->list_of_flights.push_back(t);
+    if (t)
+        this->list_of_flights.push_back(t);
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachAirplane(Airplane * t)
 {
-    this->list_of_airplanes.push_back(t);
-//    Recorder<Airline>::getInstance()->updateFile(this);
+    if (t)
+        this->list_of_airplanes.push_back(t);
+    //    Recorder<Airline>::getInstance()->updateFile(this);
+}
+
+void Airline::removeHost(Host * host)
+{
+    this->list_of_hosts.removeOne(host);
+}
+
+void Airline::removePilot(Pilot * pilot)
+{
+    this->list_of_pilots.removeOne(pilot);
+}
+
+void Airline::removeFlight(Flight *)
+{
+
+}
+
+void Airline::removeAirplane(Airplane *)
+{
+
 }
 
 //void Airline::attachTicket(Ticket * t)

@@ -39,14 +39,19 @@ Pilot::Pilot(QString& dataStr)
 
 void Pilot::attachFlight(Flight * f)
 {
-    this->list.push_back(f);
+    if (f && !this->isFlightInList(f))
+    {
+        this->list.push_back(f);
+        f->setPilot(this);
+    }
 //    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 Pilot::~Pilot(){
     for (int i = 0; i < this->flightListSize(); i++)
     {
-       this->list[i]->removePilot(this);
+       this->list[i]->removePilot();
     }
+    this->airline->removePilot(this);
 }
 QString Pilot::get_data()
 {
@@ -86,9 +91,12 @@ QString Pilot::get_data()
 
 void Pilot::setAirline(Airline *value)
 {
-    airline = value;
-    if (value)
+    if (value && !this->airline)
+    {
+        airline = value;
+
         value->attachPilot(this);
+    }
 //    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 

@@ -25,6 +25,10 @@ public:
     void attachPilot(Pilot*);
     void attachFlight(Flight*);
     void attachAirplane(Airplane*);
+    void removeHost(Host*);
+    void removePilot(Pilot*);
+    void removeFlight(Flight*);
+    void removeAirplane(Airplane*);
     //void attachTicket(Ticket*);
     //void attachCarrier(Carrier*);
     void setName(const QString &value);

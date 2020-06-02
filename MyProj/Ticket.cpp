@@ -114,9 +114,9 @@ QString Ticket::get_data()
 
 void Ticket::setFlight(Flight * f)
 {
-    this->flight = f;
-    if (f)
+    if (f && !this->flight)
     {
+        this->flight = f;
         f->attachTicket(this);
     }
 //    Recorder<Ticket>::getInstance()->updateFile(this);
@@ -124,7 +124,11 @@ void Ticket::setFlight(Flight * f)
 
 void Ticket::setPassenger(Passenger * p)
 {
-    this->passenger = p;
+    if (p && !this->passenger)
+    {
+        this->passenger = p;
+        p->setTicket(this);
+    }
 //    this->setPassengerFname(p->getFname());
 //    this->setPassengerLname(p->getLname());
 //    this->setPassengerNationalCode(p->getNationalCode());

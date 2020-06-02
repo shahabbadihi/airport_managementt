@@ -11,6 +11,18 @@
 #include <QDesktopWidget>
 #include <QHeaderView>
 #include <QTime>
+#include "Recorder.h"
+#include "Airline.h"
+#include "Airplane.h"
+#include "Host.h"
+#include "Pilot.h"
+#include "Passenger.h"
+#include "Carrier.h"
+#include "Flight.h"
+#include "Ticket.h"
+
+template <class T>
+Recorder<T>* Recorder<T>::instance;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
     //connect(this->timer, SIGNAL(timeout()), this, SLOT(print()));
     timer->start(1000);
 
@@ -101,6 +114,18 @@ void MainWindow::on_actionAddCarrier_triggered()
     addCarrierDialog->setModal(true);
     addCarrierDialog->exec();
     delete addCarrierDialog;
+}
+
+void MainWindow::updateFiles()
+{
+    Recorder<Airline>::getInstance()->updateFileAll();
+    Recorder<Airplane>::getInstance()->updateFileAll();
+    Recorder<Host>::getInstance()->updateFileAll();
+    Recorder<Pilot>::getInstance()->updateFileAll();
+    Recorder<Flight>::getInstance()->updateFileAll();
+    Recorder<Passenger>::getInstance()->updateFileAll();
+    Recorder<Ticket>::getInstance()->updateFileAll();
+    Recorder<Carrier>::getInstance()->updateFileAll();
 }
 
 void MainWindow::showClock()

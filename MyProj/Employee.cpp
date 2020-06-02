@@ -2,6 +2,10 @@
 #include "Flight.h"
 #include "Airline.h"
 #include <QString>
+
+template <class T>
+Recorder<T>* Recorder<T>::instance;
+
 QString Employee::get_data()
 {
     QString data = QString::number(this->personnelCode) + "|"
@@ -80,7 +84,8 @@ void Employee::set_employmentDate(QDate &&date)
 
 void Employee::attachFlight(Flight* f)
 {
-    this->list.push_back(f);
+    if (f)
+        this->list.push_back(f);
 }
 
 QString Employee::getFname()
@@ -116,50 +121,61 @@ bool Employee::isFree(Flight* f)
     return true;
 }
 
+bool Employee::isFlightInList(Flight * f)
+{
+    foreach (Flight* fl, this->list)
+    {
+        if (fl == f)
+            return true;
+    }
+    return false;
+}
+
 Airline *Employee::getAirline() const
 {
     return airline;
 }
 
-void Employee::setAirline(Airline *value)
-{
-    airline = value;
-    //value->attachEmp(this);
-}
+//void Employee::setAirline(Airline *value)
+//{
+//    if (value)
+//        airline = value;
+//    //value->attachEmp(this);
+//}
 
-Employee::Employee(QString &dataStr)
-    : airline(nullptr)
-{
-    QStringList strList = dataStr.split('|');
-    strList.replaceInStrings("\n", "");
+//Employee::Employee(QString &dataStr)
+//    : airline(nullptr)
+//{
+//    QStringList strList = dataStr.split('|');
+//    strList.replaceInStrings("\n", "");
 
-    set_personnelCode(strList.at(0).toLong());
+//    set_personnelCode(strList.at(0).toLong());
+//    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[1]));
+//    set_fname(strList.at(2));
+//    set_lname(strList.at(3));
+//    //set_degree(strList.at(2).toInt());
+//    set_nationalCode(strList.at(4).toLong());
 
-    set_fname(strList.at(1));
-    set_lname(strList.at(2));
-    //set_degree(strList.at(2).toInt());
-    set_nationalCode(strList.at(3).toLong());
-    setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[4]));
 
-    QStringList strListBirthDate = strList.at(5).split('/');
-    QStringList strListEmpDate = strList.at(6).split('/');
-    QDate birthDate(strListBirthDate.at(2).toInt(),
-                    strListBirthDate.at(0).toInt(),
-                    strListBirthDate.at(1).toInt());
-    QDate empDate(strListEmpDate.at(2).toInt(),
-                  strListEmpDate.at(0).toInt(),
-                  strListEmpDate.at(1).toInt());
+//    QStringList strListBirthDate = strList.at(5).split('/');
+//    QStringList strListEmpDate = strList.at(6).split('/');
+//    QDate birthDate(strListBirthDate.at(2).toInt(),
+//                    strListBirthDate.at(0).toInt(),
+//                    strListBirthDate.at(1).toInt());
+//    QDate empDate(strListEmpDate.at(2).toInt(),
+//                  strListEmpDate.at(0).toInt(),
+//                  strListEmpDate.at(1).toInt());
 
-    set_birthDate(birthDate);
-    set_employmentDate(empDate);
+//    set_birthDate(birthDate);
+//    set_employmentDate(empDate);
 
-    QStringList str_list_flights = strList.at(7).split('/');
+//    QStringList str_list_flights = strList.at(7).split('/');
 
-    foreach (QString s, str_list_flights)
-    {
-        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
-    }
-}
+//    foreach (QString s, str_list_flights)
+//    {
+//        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
+//    }
+//}
 int Employee::flightListSize(){
     int i =0;
     for(; i < this->list.size(); i++){}

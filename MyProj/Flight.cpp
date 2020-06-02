@@ -13,17 +13,23 @@ Airline *Flight::getAirline() const
 
 void Flight::setAirline(Airline *value)
 {
-    airline = value;
-    if (value)
+    if (value && !this->airline)
+    {
+        airline = value;
+
         value->attachFlight(this);
+    }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setAirplane(Airplane *value)
 {
-    airplane = value;
-    if (value)
+    if (value && !this->airplane)
+    {
+        airplane = value;
+
         value->attachFlight(this);
+    }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -44,9 +50,10 @@ Carrier *Flight::getDeparture_carrier() const
 
 void Flight::setDeparture_carrier(Carrier *value)
 {
-    departure_carrier = value;
-    if (value)
+
+    if (value && !this->departure_carrier)
     {
+        departure_carrier = value;
         value->attachFlight(this);
         value->attachMission(this->dateTimeDeparture.toString() + "DEP");
     }
@@ -60,10 +67,9 @@ Carrier *Flight::getArrival_carrier() const
 
 void Flight::setArrival_carrier(Carrier *value)
 {
-    arrival_carrier = value;
-
-    if (value)
+    if (value && !this->arrival_carrier)
     {
+        arrival_carrier = value;
         value->attachFlight(this);
         value->attachMission(this->dateTimeArrival.toString() + "ARR");
     }
@@ -73,6 +79,26 @@ void Flight::setArrival_carrier(Carrier *value)
 Airplane *Flight::getAirplane() const
 {
     return airplane;
+}
+
+bool Flight::isHostInList(Host* h)
+{
+    foreach (Host* ho, this->hosts)
+    {
+        if (ho == h)
+            return true;
+    }
+    return false;
+}
+
+bool Flight::isTicketInList(Ticket * t)
+{
+    foreach (Ticket* ti, this->tickets)
+    {
+        if (ti == t)
+            return true;
+    }
+    return false;
 }
 
 Flight::Flight(QString & data_str)
@@ -105,17 +131,27 @@ Flight::Flight(QString & data_str)
                                time_arrival.at(1).toInt(),
                                time_arrival.at(2).toInt());
 
-    this->setPilot(Recorder<Pilot>::getInstance()->searchByCode(str_list.at(8)));
+    this->setAirplane(Recorder<Airplane>::getInstance()->searchByCode(str_list[8]));
+    this->setDeparture_carrier(Recorder<Carrier>::getInstance()->searchByCode(str_list[9]));
+    this->setArrival_carrier(Recorder<Carrier>::getInstance()->searchByCode(str_list[10]));
+    this->setPilot(Recorder<Pilot>::getInstance()->searchByCode(str_list.at(11)));
 
-    this->setNumOfHosts(str_list.at(9).toInt());
+    this->setNumOfHosts(str_list.at(12).toInt());
 
-    int i = 10;
-    for (; i < 10 + this->numOfHosts; i++)
+    QStringList hosts = str_list[13].split('/');
+    //int i = 13;
+    foreach (QString s, hosts)
     {
-        this->attachHost(Recorder<Host>::getInstance()->searchByCode(str_list.at(i)));
+        this->attachHost(Recorder<Host>::getInstance()->searchByCode(s));
     }
 
-    this->setNumOfPassengers(str_list.at(i).toInt());
+    this->setNumOfPassengers(str_list.at(14).toInt());
+
+    QStringList tickets = str_list[15].split('/');
+    foreach (QString s, tickets)
+    {
+        this->attachTicket(Recorder<Ticket>::getInstance()->searchByCode(s));
+    }
 }
 
 QString Flight::get_data()
@@ -142,16 +178,27 @@ QString Flight::get_data()
              QString::number(this->dateTimeArrival.time().minute()) + ":" +
              QString::number(this->dateTimeArrival.time().second()) + "|";
 
+    data_str += this->airplane->getSearchCode() + "|" +
+            this->departure_carrier->getSearchCode() + "|" +
+            this->arrival_carrier->getSearchCode() + "|";
+
     data_str += QString::number(this->pilot->getPersonnelCode()) + "|" +
             QString::number(this->numOfHosts) + "|";
 
     foreach (Host* h, this->hosts)
     {
         if (h)
-            data_str += QString::number(h->getPersonnelCode()) + "|";
+            data_str += h->getSearchCode() + "/";
     }
 
-    data_str += QString::number(this->getNumOfPassengers()) + "\n";
+    data_str += "|" + QString::number(this->getNumOfPassengers()) + "|";
+
+    foreach (Ticket* t, this->tickets)
+    {
+        if (t)
+            data_str += t->getSearchCode() + "/";
+    }
+    data_str += "|\n";
 
     return data_str;
 
@@ -230,9 +277,12 @@ void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int mi
 
 void Flight::setPilot(Pilot * p)
 {
-    this->pilot = p;
-    if (p)
+    if (p && !this->pilot)
+    {
+        this->pilot = p;
+
         p->attachFlight(this);
+    }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -252,19 +302,26 @@ void Flight::attachHost(Host * h)
 {
 //    if (!h)
 //        throw QException();
-    this->hosts.push_back(h);
-    if (h)
+    if (h && !this->isHostInList(h))
+    {
+        this->hosts.push_back(h);
+
         h->attachFlight(this);
+    }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 
 void Flight::attachTicket(Ticket * p)
 {
-    this->tickets.push_back(p);
+    if (p && !this->isTicketInList(p))
+    {
+        this->tickets.push_back(p);
 //    if (p)
 //        p->setFlight(this);
-    this->numOfPassengers--;
+        this->numOfPassengers--;
+        p->setFlight(this);
+    }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -322,14 +379,14 @@ void Flight::removeHost(Host* h)
         return;
     }
 }
-void Flight::removePilot(Pilot* h){
+void Flight::removePilot(){
     //try
     //{
     this->pilot = nullptr;
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
     this->setPilot(this->getAirline()->getFirstFreePilot(this));
-    Recorder<Flight>::getInstance()->updateFile(this);
+    //Recorder<Flight>::getInstance()->updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {
 //        if (h == nullptr)

@@ -41,6 +41,7 @@ public:
     void remove(T * a);
 
     void updateFile(T * ptr);
+    void updateFileAll();
 
     QString getClassName();
     static Recorder<T>* getInstance();

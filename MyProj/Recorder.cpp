@@ -113,7 +113,7 @@ template<class T>
 void Recorder<T>::add(T *a)
 {
     this->record(a);
-    this->addToFile(a);
+    //this->addToFile(a);
 }
 
 template<class T>
@@ -168,7 +168,7 @@ T *Recorder<T>::searchByCode(const QString &p){
 template<class T>
 void Recorder<T>::remove(T *a)
 {
-    this->removeFromFile(a);
+    //this->removeFromFile(a);
     this->dataList.removeOne(a);
     delete a;
 }
@@ -199,6 +199,34 @@ void Recorder<T>::updateFile(T *ptr)
 
     QTextStream out(&file);
     out << str2;
+
+    file.flush();
+    file.close();
+}
+
+template<class T>
+void Recorder<T>::updateFileAll()
+{
+    QFile file("data/" + this->getClassName() + ".txt");
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+        throw QException();
+
+    //QString str = file.readAll();
+    //QStringList str_list = str.split('\n', Qt::SkipEmptyParts);
+    QString str = "";
+    for (int i = 0; i < this->dataList.size(); i++)
+    {
+        //str_list[i] = this->dataList[i]->get_data();
+        str += this->dataList[i]->get_data();
+    }
+
+    //str_list.replaceInStrings("\n", "");
+    //QString str2 = str_list.join('\n');
+    file.resize(0);
+
+
+    QTextStream out(&file);
+    out << str;
 
     file.flush();
     file.close();

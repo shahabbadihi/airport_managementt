@@ -33,6 +33,16 @@ bool Carrier::isFree(const QDateTime & t, const QString & s)
     return true;
 }
 
+bool Carrier::isFlightInList(Flight * f)
+{
+    foreach (Flight* fl, this->list_of_flights)
+    {
+        if (fl == f)
+            return true;
+    }
+    return false;
+}
+
 //Airline *Carrier::getAirline() const
 //{
 //    return airline;
@@ -101,7 +111,10 @@ QString Carrier::get_data()
 
 void Carrier::attachFlight(Flight* f)
 {
-    this->list_of_flights.push_back(f);
+    if (f)
+    {
+        this->list_of_flights.push_back(f);
+    }
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 

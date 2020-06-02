@@ -70,7 +70,7 @@ public:
     void removeHost(Host*);
     //void attachPassenger(Passenger*);
 
-    void removePilot(Pilot *);
+    void removePilot();
     //void attachPassenger(Passenger*);
 
     QDateTime getDateTimeArrival();
@@ -92,6 +92,9 @@ public:
     Carrier *getArrival_carrier() const;
     void setArrival_carrier(Carrier *value);
     Airplane *getAirplane() const;
+
+    bool isHostInList(Host*);
+    bool isTicketInList(Ticket*);
 };
 
 #endif // FLIGHT_H

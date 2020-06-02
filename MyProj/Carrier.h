@@ -30,6 +30,7 @@ public:
     //void setAirline(Airline *value);
 
     bool isFree(const QDateTime&, const QString&);
+    bool isFlightInList(Flight*);
     QString getPlace() const;
     void setPlace(const QString &value);
 };

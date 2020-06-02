@@ -5,7 +5,8 @@
 
 void Airplane::attachFlight(Flight *f)
 {
-    this->list_of_flights.push_back(f);
+    if (f)
+        this->list_of_flights.push_back(f);
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
@@ -16,9 +17,12 @@ Airline *Airplane::getAirline() const
 
 void Airplane::setAirline(Airline *value)
 {
-    this->airline = value;
     if (value)
+    {
+        this->airline = value;
+
         value->attachAirplane(this);
+    }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 

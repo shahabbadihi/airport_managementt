@@ -49,6 +49,7 @@ public:
     long getPersonnelCode();
 
     bool isFree(Flight*);
+    bool isFlightInList(Flight*);
 
     Airline *getAirline() const;
     void setAirline(Airline *value);
