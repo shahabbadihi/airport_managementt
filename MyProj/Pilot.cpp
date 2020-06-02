@@ -17,8 +17,8 @@ Pilot::Pilot(QString& dataStr)
     set_nationalCode(strList.at(5).toLong());
 
 
-    QStringList strListBirthDate = strList.at(6).split('/');
-    QStringList strListEmpDate = strList.at(7).split('/');
+    QStringList strListBirthDate = strList.at(6).split('/', Qt::SkipEmptyParts);
+    QStringList strListEmpDate = strList.at(7).split('/', Qt::SkipEmptyParts);
     QDate birthDate(strListBirthDate.at(2).toInt(),
                     strListBirthDate.at(0).toInt(),
                     strListBirthDate.at(1).toInt());
@@ -29,7 +29,7 @@ Pilot::Pilot(QString& dataStr)
     set_birthDate(birthDate);
     set_employmentDate(empDate);
 
-    QStringList str_list_flights = strList.at(8).split('/');
+    QStringList str_list_flights = strList.at(8).split('/', Qt::SkipEmptyParts);
 
     foreach (QString s, str_list_flights)
     {

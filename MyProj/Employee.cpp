@@ -157,8 +157,8 @@ Airline *Employee::getAirline() const
 //    set_nationalCode(strList.at(4).toLong());
 
 
-//    QStringList strListBirthDate = strList.at(5).split('/');
-//    QStringList strListEmpDate = strList.at(6).split('/');
+//    QStringList strListBirthDate = strList.at(5).split('/', Qt::SkipEmptyParts);
+//    QStringList strListEmpDate = strList.at(6).split('/', Qt::SkipEmptyParts);
 //    QDate birthDate(strListBirthDate.at(2).toInt(),
 //                    strListBirthDate.at(0).toInt(),
 //                    strListBirthDate.at(1).toInt());
@@ -169,7 +169,7 @@ Airline *Employee::getAirline() const
 //    set_birthDate(birthDate);
 //    set_employmentDate(empDate);
 
-//    QStringList str_list_flights = strList.at(7).split('/');
+//    QStringList str_list_flights = strList.at(7).split('/', Qt::SkipEmptyParts);
 
 //    foreach (QString s, str_list_flights)
 //    {

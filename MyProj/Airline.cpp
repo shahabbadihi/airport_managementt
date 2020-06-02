@@ -20,25 +20,25 @@ Airline::Airline(QString & str_data)
     this->setName(str_list[1]);
 
 
-    QStringList pilots = str_list[2].split('/');
+    QStringList pilots = str_list[2].split('/', Qt::SkipEmptyParts);
     foreach (QString s, pilots)
     {
         this->attachPilot(Recorder<Pilot>::getInstance()->searchByCode(s));
     }
 
-    QStringList hosts = str_list[3].split('/');
+    QStringList hosts = str_list[3].split('/', Qt::SkipEmptyParts);
     foreach (QString s, hosts)
     {
         this->attachHost(Recorder<Host>::getInstance()->searchByCode(s));
     }
 
-    QStringList flights = str_list[4].split('/');
+    QStringList flights = str_list[4].split('/', Qt::SkipEmptyParts);
     foreach (QString s, flights)
     {
         this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 
-//    QStringList tickets = str_list[5].split('/');
+//    QStringList tickets = str_list[5].split('/', Qt::SkipEmptyParts);
 //    foreach (QString s, tickets)
 //    {
 //        this->attachTicket(Recorder<Ticket>::searchByCode(s));

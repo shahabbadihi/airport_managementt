@@ -101,8 +101,18 @@ bool Flight::isTicketInList(Ticket * t)
     return false;
 }
 
+int Flight::getCapacity() const
+{
+    return capacity;
+}
+
+void Flight::setCapacity(int value)
+{
+    capacity = value;
+}
+
 Flight::Flight(QString & data_str)
-     : airline(nullptr)
+    : numOfPassengers(0), airline(nullptr)
 {
     QStringList str_list = data_str.split('|');
     str_list.replaceInStrings("\n", "");
@@ -112,9 +122,9 @@ Flight::Flight(QString & data_str)
     this->setSource(str_list.at(2));
     this->setDestination(str_list.at(3));
 
-    QStringList date_departure = str_list.at(4).split('/');
+    QStringList date_departure = str_list.at(4).split('/', Qt::SkipEmptyParts);
     QStringList time_departure = str_list.at(5).split(':');
-    QStringList date_arrival = str_list.at(6).split('/');
+    QStringList date_arrival = str_list.at(6).split('/', Qt::SkipEmptyParts);
     QStringList time_arrival = str_list.at(7).split(':');
 
     this->setDateTimeDeparture(date_departure.at(2).toInt(),
@@ -138,16 +148,17 @@ Flight::Flight(QString & data_str)
 
     this->setNumOfHosts(str_list.at(12).toInt());
 
-    QStringList hosts = str_list[13].split('/');
+    QStringList hosts = str_list[13].split('/', Qt::SkipEmptyParts);
     //int i = 13;
     foreach (QString s, hosts)
     {
         this->attachHost(Recorder<Host>::getInstance()->searchByCode(s));
     }
 
-    this->setNumOfPassengers(str_list.at(14).toInt());
+    this->setCapacity(str_list[14].toInt());
+    //this->setNumOfPassengers(str_list.at(15).toInt());
 
-    QStringList tickets = str_list[15].split('/');
+    QStringList tickets = str_list[15].split('/', Qt::SkipEmptyParts);
     foreach (QString s, tickets)
     {
         this->attachTicket(Recorder<Ticket>::getInstance()->searchByCode(s));
@@ -182,8 +193,8 @@ QString Flight::get_data()
             this->departure_carrier->getSearchCode() + "|" +
             this->arrival_carrier->getSearchCode() + "|";
 
-    data_str += QString::number(this->pilot->getPersonnelCode()) + "|" +
-            QString::number(this->numOfHosts) + "|";
+    data_str += QString::number(this->pilot->getPersonnelCode()) + "|";
+    data_str += QString::number(this->numOfHosts) + "|";
 
     foreach (Host* h, this->hosts)
     {
@@ -191,7 +202,8 @@ QString Flight::get_data()
             data_str += h->getSearchCode() + "/";
     }
 
-    data_str += "|" + QString::number(this->getNumOfPassengers()) + "|";
+    data_str += "|" + QString::number(this->capacity) + "|";
+//            QString::number(this->getNumOfPassengers()) + "|";
 
     foreach (Ticket* t, this->tickets)
     {
@@ -319,7 +331,7 @@ void Flight::attachTicket(Ticket * p)
         this->tickets.push_back(p);
 //    if (p)
 //        p->setFlight(this);
-        this->numOfPassengers--;
+        this->numOfPassengers++;
         p->setFlight(this);
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);

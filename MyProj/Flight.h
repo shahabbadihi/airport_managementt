@@ -34,6 +34,7 @@ private:
     QDateTime dateTimeDeparture;
     QDateTime dateTimeArrival;
     int numOfPassengers;
+    int capacity;
     int numOfHosts;
     Pilot* pilot;
     QVector<Host*> hosts;
@@ -45,7 +46,7 @@ private:
     Carrier* arrival_carrier;
     Price ticketsSaleCost;
 public:
-    Flight()  : airline(nullptr) {}
+    Flight()  : numOfPassengers(0), airline(nullptr) {}
     Flight(QString&);
     ~Flight() {}
 
@@ -95,6 +96,8 @@ public:
 
     bool isHostInList(Host*);
     bool isTicketInList(Ticket*);
+    int getCapacity() const;
+    void setCapacity(int value);
 };
 
 #endif // FLIGHT_H

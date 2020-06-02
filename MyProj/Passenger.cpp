@@ -9,7 +9,7 @@ Passenger::Passenger(QString & data_str)
     this->setLname(str_list.at(2));
     this->setFatherName(str_list.at(3));
 
-    QStringList birth_date = str_list.at(4).split('/');
+    QStringList birth_date = str_list.at(4).split('/', Qt::SkipEmptyParts);
     this->setBirthDate(birth_date.at(2).toInt(),
                        birth_date.at(0).toInt(),
                        birth_date.at(1).toInt());
@@ -88,6 +88,7 @@ void Passenger::setTicket(Ticket * t)
     if (t && !this->ticket)
     {
         this->ticket = t;
+        t->setPassenger(this);
     }
     //this->ticket_no = t->getNo();
 //    Recorder<Passenger>::getInstance()->updateFile(this);

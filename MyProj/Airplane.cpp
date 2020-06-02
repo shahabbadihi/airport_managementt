@@ -78,12 +78,12 @@ Airplane::Airplane(QString & str_data)
     this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[1]));
 
 
-    //QStringList product_date = str_list[2].split('/');
+    //QStringList product_date = str_list[2].split('/', Qt::SkipEmptyParts);
     //this->setProductDate(product_date[2].toInt(), product_date[0].toInt(), product_date[1].toInt());
 
     this->setNumOfSeats(str_list[2].toInt());
 
-    QStringList flights = str_list[3].split('/');
+    QStringList flights = str_list[3].split('/', Qt::SkipEmptyParts);
 
     foreach (QString s, flights)
     {

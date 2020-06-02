@@ -31,6 +31,7 @@ public:
 
     bool isFree(const QDateTime&, const QString&);
     bool isFlightInList(Flight*);
+    bool isMissionInList(const QString&);
     QString getPlace() const;
     void setPlace(const QString &value);
 };

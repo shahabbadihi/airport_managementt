@@ -29,7 +29,7 @@ void AddTicket::on_btnSubmit_clicked()
         if (f->getSource() == ui->txtSource->text() &&
                 f->getDestination() == ui->txtDest->text() &&
                 f->getDateTimeDeparture().date() == ui->dtDate->date() &&
-                f->getNumOfPassengers() > 0)
+                f->getNumOfPassengers() < f->getCapacity())
         {
             ticket = new Ticket();
             ticket->setNo(ui->txtNo->text().toLong());

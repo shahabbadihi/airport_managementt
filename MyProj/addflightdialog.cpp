@@ -40,7 +40,7 @@ void AddFlightDialog::on_btnSubmit_clicked()
     flight->setDateTimeArrival(ui->dttmArrival->dateTime());
     flight->setDateTimeDeparture(ui->dttmDeparture->dateTime());
     flight->setNumOfHosts(ui->spnHosts->value());
-    flight->setNumOfPassengers(ui->spnPassengers->value());
+    flight->setCapacity(ui->spnPassengers->value());
 
     flight->setPilot(currentAirline->getFirstFreePilot(flight));
 
