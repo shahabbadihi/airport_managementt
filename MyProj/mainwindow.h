@@ -53,6 +53,9 @@ private slots:
 
     void updateFiles();
 
+    void showClock();
+    //void print();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -66,5 +69,7 @@ private:
     DeletePilot* deletePilotDialog;//pilot
 
     QTimer * timer;
+
+
 };
 #endif // MAINWINDOW_H

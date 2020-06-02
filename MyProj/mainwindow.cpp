@@ -10,12 +10,19 @@
 #include <QString>
 #include <QDesktopWidget>
 #include <QHeaderView>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    this->timer = new QTimer(this);
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
+    //connect(this->timer, SIGNAL(timeout()), this, SLOT(print()));
+    timer->start(1000);
+
 }
 
 MainWindow::~MainWindow()
@@ -94,4 +101,9 @@ void MainWindow::on_actionAddCarrier_triggered()
     addCarrierDialog->setModal(true);
     addCarrierDialog->exec();
     delete addCarrierDialog;
+}
+
+void MainWindow::showClock()
+{
+    ui->lblClock->setText(QTime::currentTime().toString());
 }
