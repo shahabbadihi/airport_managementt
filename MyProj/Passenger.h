@@ -18,7 +18,7 @@ private:
     Ticket* ticket;
     //long ticket_no;
 public:
-    Passenger() {}
+    Passenger() : ticket(nullptr) {}
     Passenger(QString&);
     ~Passenger() {}
 

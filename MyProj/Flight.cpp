@@ -112,7 +112,7 @@ void Flight::setCapacity(int value)
 }
 
 Flight::Flight(QString & data_str)
-    : numOfPassengers(0), airline(nullptr)
+    : numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
 {
     QStringList str_list = data_str.split('|');
     str_list.replaceInStrings("\n", "");

@@ -2,6 +2,7 @@
 #include "Ticket.h"
 #include <QStringList>
 Passenger::Passenger(QString & data_str)
+    : ticket(nullptr)
 {
     QStringList str_list = data_str.split('|');
     this->setNationalCode(str_list.at(0).toLong());
