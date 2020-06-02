@@ -13,7 +13,7 @@ void Carrier::setSerial(const QString &value)
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
-    Recorder<Carrier>::getInstance()->updateFile(this);
+//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 bool Carrier::isFree(const QDateTime & t, const QString & s)
@@ -51,7 +51,7 @@ QString Carrier::getPlace() const
 void Carrier::setPlace(const QString &value)
 {
     place = value;
-    Recorder<Carrier>::getInstance()->updateFile(this);
+//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 Carrier::Carrier(QString & str_data)
@@ -102,11 +102,11 @@ QString Carrier::get_data()
 void Carrier::attachFlight(Flight* f)
 {
     this->list_of_flights.push_back(f);
-    Recorder<Carrier>::getInstance()->updateFile(this);
+//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 void Carrier::attachMission(const QString & m)
 {
     this->list_of_missions.push_back(m);
-    Recorder<Carrier>::getInstance()->updateFile(this);
+//    Recorder<Carrier>::getInstance()->updateFile(this);
 }

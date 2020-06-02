@@ -40,7 +40,7 @@ Pilot::Pilot(QString& dataStr)
 void Pilot::attachFlight(Flight * f)
 {
     this->list.push_back(f);
-    Recorder<Pilot>::getInstance()->updateFile(this);
+//    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 Pilot::~Pilot(){
     for (int i = 0; i < this->flightListSize(); i++)
@@ -89,7 +89,7 @@ void Pilot::setAirline(Airline *value)
     airline = value;
     if (value)
         value->attachPilot(this);
-    Recorder<Pilot>::getInstance()->updateFile(this);
+//    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 
 void Pilot::set_degree(int deg)
@@ -100,5 +100,5 @@ void Pilot::set_degree(int deg)
         this->degree = Two;
     if (deg == 3)
         this->degree = Three;
-    Recorder<Pilot>::getInstance()->updateFile(this);
+//    Recorder<Pilot>::getInstance()->updateFile(this);
 }

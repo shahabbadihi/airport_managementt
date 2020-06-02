@@ -20,7 +20,7 @@ void Ticket::setNo(long value)
     this->no = value;
 //    this->search_code = QString::number(value);
     this->setSearchCode(QString::number(value));
-    Recorder<Ticket>::getInstance()->updateFile(this);
+//    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
 Ticket::Ticket(QString & str_data)
@@ -119,7 +119,7 @@ void Ticket::setFlight(Flight * f)
     {
         f->attachTicket(this);
     }
-    Recorder<Ticket>::getInstance()->updateFile(this);
+//    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
 void Ticket::setPassenger(Passenger * p)
@@ -131,7 +131,7 @@ void Ticket::setPassenger(Passenger * p)
 //    this->setPassengerFatherName(p->getFatherName());
 //    this->setPassengerBirthDate(p->getBirthDate());
 
-    Recorder<Ticket>::getInstance()->updateFile(this);
+//    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
 //void Ticket::setPassengerBirthDate(const QDate & date)

@@ -91,25 +91,25 @@ QString Airline::get_data()
 void Airline::attachHost(Host * t)
 {
     this->list_of_hosts.push_back(t);
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachPilot(Pilot * t)
 {
     this->list_of_pilots.push_back(t);
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachFlight(Flight * t)
 {
     this->list_of_flights.push_back(t);
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachAirplane(Airplane * t)
 {
     this->list_of_airplanes.push_back(t);
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 //void Airline::attachTicket(Ticket * t)
@@ -125,14 +125,14 @@ void Airline::attachAirplane(Airplane * t)
 void Airline::setName(const QString &value)
 {
     name = value;
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::setCode(const QString &value)
 {
     this->code = value;
     this->setSearchCode(value);
-    Recorder<Airline>::getInstance()->updateFile(this);
+//    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 QString Airline::getName() const

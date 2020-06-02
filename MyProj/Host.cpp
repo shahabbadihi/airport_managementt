@@ -36,7 +36,7 @@
 void Host::attachFlight(Flight * f)
 {
     this->list.push_back(f);
-    Recorder<Host>::getInstance()->updateFile(this);
+//    Recorder<Host>::getInstance()->updateFile(this);
 }
 
 void Host::setAirline(Airline *value)
@@ -44,5 +44,5 @@ void Host::setAirline(Airline *value)
     airline = value;
     if (value)
         value->attachHost(this);
-    Recorder<Host>::getInstance()->updateFile(this);
+//    Recorder<Host>::getInstance()->updateFile(this);
 }

@@ -16,7 +16,7 @@ void Flight::setAirline(Airline *value)
     airline = value;
     if (value)
         value->attachFlight(this);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setAirplane(Airplane *value)
@@ -24,7 +24,7 @@ void Flight::setAirplane(Airplane *value)
     airplane = value;
     if (value)
         value->attachFlight(this);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 //Carrier *Flight::getCarrier() const
@@ -50,7 +50,7 @@ void Flight::setDeparture_carrier(Carrier *value)
         value->attachFlight(this);
         value->attachMission(this->dateTimeDeparture.toString() + "DEP");
     }
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 Carrier *Flight::getArrival_carrier() const
@@ -67,7 +67,7 @@ void Flight::setArrival_carrier(Carrier *value)
         value->attachFlight(this);
         value->attachMission(this->dateTimeArrival.toString() + "ARR");
     }
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 Airplane *Flight::getAirplane() const
@@ -162,7 +162,7 @@ void Flight::setSerial(const QString& s)
     this->serial = s;
 //    this->search_code = s;
     this->setSearchCode(s);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 //void Flight::setAirplaneSerial(const QString& s)
@@ -173,27 +173,27 @@ void Flight::setSerial(const QString& s)
 void Flight::setSource(const QString & s)
 {
     this->source = s;
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDestination(const QString & s)
 {
     this->destination = s;
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(const QDateTime &d)
 {
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(const QDateTime && d)
 {
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minute, int second)
@@ -202,21 +202,21 @@ void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minu
     QTime time(hour, minute, second);
     this->dateTimeArrival.setDate(date);
     this->dateTimeArrival.setTime(time);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(const QDateTime & d)
 {
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(const QDateTime && d)
 {
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int minute, int second)
@@ -225,7 +225,7 @@ void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int mi
     QTime time(hour, minute, second);
     this->dateTimeDeparture.setDate(date);
     this->dateTimeDeparture.setTime(time);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setPilot(Pilot * p)
@@ -233,19 +233,19 @@ void Flight::setPilot(Pilot * p)
     this->pilot = p;
     if (p)
         p->attachFlight(this);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setNumOfHosts(int n)
 {
     this->numOfHosts = n;
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setNumOfPassengers(int n)
 {
     this->numOfPassengers = n;
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::attachHost(Host * h)
@@ -255,7 +255,7 @@ void Flight::attachHost(Host * h)
     this->hosts.push_back(h);
     if (h)
         h->attachFlight(this);
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 
@@ -265,7 +265,7 @@ void Flight::attachTicket(Ticket * p)
 //    if (p)
 //        p->setFlight(this);
     this->numOfPassengers--;
-    Recorder<Flight>::getInstance()->updateFile(this);
+//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::removeHost(Host* h)

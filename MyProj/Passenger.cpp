@@ -36,19 +36,19 @@ QString Passenger::get_data()
 void Passenger::setLname(const QString & lname)
 {
     this->lname = lname;
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setFname(const QString & fname)
 {
     this->fname = fname;
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setFatherName(const QString & father_name)
 {
     this->fatherName = father_name;
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setNationalCode(long n)
@@ -56,25 +56,25 @@ void Passenger::setNationalCode(long n)
     this->nationalCode = n;
 //    this->search_code = QString::number(n);
     this->setSearchCode(QString::number(n));
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(const QDate & date)
 {
     this->birthDate.setDate(date.year(), date.month(), date.day());
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(const QDate && date)
 {
     this->birthDate.setDate(date.year(), date.month(), date.day());
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(int year, int month, int day)
 {
     this->birthDate.setDate(year, month, day);
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 //void Passenger::setTicketNo(long n)
@@ -87,7 +87,7 @@ void Passenger::setTicket(Ticket * t)
 {
     this->ticket = t;
     //this->ticket_no = t->getNo();
-    Recorder<Passenger>::getInstance()->updateFile(this);
+//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 QString Passenger::getFname()

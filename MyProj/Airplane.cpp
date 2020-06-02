@@ -6,7 +6,7 @@
 void Airplane::attachFlight(Flight *f)
 {
     this->list_of_flights.push_back(f);
-    Recorder<Airplane>::getInstance()->updateFile(this);
+//    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 Airline *Airplane::getAirline() const
@@ -19,7 +19,7 @@ void Airplane::setAirline(Airline *value)
     this->airline = value;
     if (value)
         value->attachAirplane(this);
-    Recorder<Airplane>::getInstance()->updateFile(this);
+//    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 int Airplane::getNumOfSeats() const
@@ -30,7 +30,7 @@ int Airplane::getNumOfSeats() const
 void Airplane::setNumOfSeats(int value)
 {
     numOfSeats = value;
-    Recorder<Airplane>::getInstance()->updateFile(this);
+//    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 QString Airplane::getSerial() const
@@ -43,7 +43,7 @@ void Airplane::setSerial(const QString &value)
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
-    Recorder<Airplane>::getInstance()->updateFile(this);
+//    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 bool Airplane::isFree(Flight * f)

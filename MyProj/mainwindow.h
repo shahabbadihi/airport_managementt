@@ -12,6 +12,7 @@
 #include "deletepilot.h"
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -50,6 +51,8 @@ private slots:
 
     void on_actionAddCarrier_triggered();
 
+    void updateFiles();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -61,5 +64,7 @@ private:
     AddAirplaneDialog* addAirplaneDialog;
     AddCarrierDialog* addCarrierDialog;
     DeletePilot* deletePilotDialog;//pilot
+
+    QTimer * timer;
 };
 #endif // MAINWINDOW_H
