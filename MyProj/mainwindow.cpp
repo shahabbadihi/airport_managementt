@@ -33,9 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
     connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
-    //connect(this->timer, SIGNAL(timeout()), this, SLOT(print()));
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
     timer->start(1000);
 
+    //ui->tableView.setC
+    //ui->tableView->setModel();
 }
 
 MainWindow::~MainWindow()
@@ -131,4 +133,12 @@ void MainWindow::updateFiles()
 void MainWindow::showClock()
 {
     ui->lblClock->setText(QTime::currentTime().toString());
+}
+
+void MainWindow::updateFlightState()
+{
+    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
+    {
+
+    }
 }

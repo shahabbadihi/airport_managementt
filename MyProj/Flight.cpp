@@ -101,6 +101,36 @@ bool Flight::isTicketInList(Ticket * t)
     return false;
 }
 
+bool Flight::isPilotSetted()
+{
+    return this->pilot ? true : false;
+}
+
+bool Flight::isHostEnough()
+{
+    return this->numOfHosts == this->hosts.size() ? true : false;
+}
+
+bool Flight::isPassengerEnough()
+{
+    return this->numOfPassengers >= (this->capacity * 7) / 10 ? true : false;
+}
+
+bool Flight::isAirplaneSetted()
+{
+    return this->airplane ? true : false;
+}
+
+bool Flight::isDepartureCarrierSetted()
+{
+    return this->departure_carrier ? true : false;
+}
+
+bool Flight::isArrivalCarrierSetted()
+{
+    return this->arrival_carrier ? true : false;
+}
+
 int Flight::getCapacity() const
 {
     return capacity;
@@ -111,8 +141,18 @@ void Flight::setCapacity(int value)
     capacity = value;
 }
 
+state Flight::getFlightState() const
+{
+    return flightState;
+}
+
+void Flight::setFlightState(const state &value)
+{
+    flightState = value;
+}
+
 Flight::Flight(QString & data_str)
-    : numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
+    : flightState(SUSPENDED), numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
 {
     QStringList str_list = data_str.split('|');
     str_list.replaceInStrings("\n", "");
