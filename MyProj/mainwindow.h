@@ -55,6 +55,8 @@ private slots:
     void updateFiles();
 
     void showClock();
+
+    void updateFlightState();
     //void print();
 
 private:

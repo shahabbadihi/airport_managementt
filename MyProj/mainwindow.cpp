@@ -53,9 +53,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
     connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
-    //connect(this->timer, SIGNAL(timeout()), this, SLOT(print()));
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
     timer->start(1000);
 
+    //ui->tableView.setC
+    //ui->tableView->setModel();
 }
 
 MainWindow::~MainWindow()
@@ -151,4 +153,72 @@ void MainWindow::updateFiles()
 void MainWindow::showClock()
 {
     ui->lblClock->setText(QTime::currentTime().toString());
+}
+
+void MainWindow::updateFlightState()
+{
+    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
+    {
+        if (f->getDateTimeDeparture() <= QDateTime::currentDateTime() &&
+                QDateTime::currentDateTime() < f->getDateTimeArrival())
+        {
+            f->setFlightState(ONAIR);
+        }
+
+        if (f->getDateTimeArrival() >= QDateTime::currentDateTime())
+        {
+            f->setFlightState(DONE);
+        }
+
+        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&
+                f->getDateTimeDeparture().msecsTo(QDateTime::currentDateTime()) <= 10 * 60 * 1000)
+        {
+            f->delay(30 * 60 * 1000);
+            f->setFlightState(DELAYED);
+        }
+
+        if (f->isPilotSetted() && f->isHostEnough() && f->isAirplaneSetted() &&
+                f->isArrivalCarrierSetted() && f->isDepartureCarrierSetted() &&
+                f->isPassengerEnough())
+        {
+            f->setFlightState(READY);
+        }
+
+        if (!f->isPilotSetted())
+        {
+            f->setFlightState(SUSPENDED);
+            f->setPilot(f->getAirline()->getFirstFreePilot(f));
+        }
+
+        if (!f->isHostEnough())
+        {
+            f->setFlightState(SUSPENDED);
+            f->attachHost(f->getAirline()->getFirstFreeHost(f));
+        }
+
+        if (!f->isAirplaneSetted())
+        {
+            f->setFlightState(SUSPENDED);
+            f->setAirplane(f->getAirline()->getFirstFreeAirplane(f));
+        }
+
+        if (!f->isArrivalCarrierSetted())
+        {
+            f->setFlightState(SUSPENDED);
+            f->setArrival_carrier(Recorder<Carrier>::getInstance()->getFirstFree(f->getDateTimeArrival(),
+                                                                                 f->getDestination()));
+        }
+
+        if (!f->isDepartureCarrierSetted())
+        {
+            f->setFlightState(SUSPENDED);
+            f->setDeparture_carrier(Recorder<Carrier>::getInstance()->getFirstFree(f->getDateTimeDeparture(),
+                                                                                 f->getSource()));
+        }
+
+        if (!f->isPassengerEnough())
+        {
+            f->setFlightState(SUSPENDED);
+        }
+    }
 }

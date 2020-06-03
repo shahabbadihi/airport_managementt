@@ -22,10 +22,14 @@ class Airline;
 class Airplane;
 class Carrier;
 class Employee;
+
+enum state {READY, CANCELED, SUSPENDED, DELAYED, DONE, ONAIR};
+
 class Flight : public Object
 {
 private:
     QString serial;
+    state flightState;
     //QString airplaneSerial;
     QString source;
     QString destination;
@@ -46,7 +50,7 @@ private:
     Carrier* arrival_carrier;
     Price ticketsSaleCost;
 public:
-    Flight()  : numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
+    Flight()  : flightState(SUSPENDED), numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
     Flight(QString&);
     ~Flight() {}
 
@@ -96,8 +100,22 @@ public:
 
     bool isHostInList(Host*);
     bool isTicketInList(Ticket*);
+
+    bool isPilotSetted();
+    bool isHostEnough();
+    bool isPassengerEnough();
+    bool isAirplaneSetted();
+    bool isDepartureCarrierSetted();
+    bool isArrivalCarrierSetted();
+
+    void delay(qint64 milliseconds);
+
+    static bool haveInterference(Flight* f1, Flight* f2);
+
     int getCapacity() const;
     void setCapacity(int value);
+    state getFlightState() const;
+    void setFlightState(const state &value);
 };
 
 #endif // FLIGHT_H
