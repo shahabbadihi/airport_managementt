@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
+#include <QStandardItemModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -70,6 +71,6 @@ private:
 
     QTimer * timer;
 
-
+    QStandardItemModel * model;
 };
 #endif // MAINWINDOW_H

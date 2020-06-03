@@ -11,6 +11,7 @@
 #include <QDesktopWidget>
 #include <QHeaderView>
 #include <QTime>
+#include <QStandardItemModel>
 #include "Recorder.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -29,6 +30,25 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    this->model = new QStandardItemModel(Recorder<Flight>::getInstance()->get_dataList().size(), 6, this);
+    for (int row = 0; row < Recorder<Flight>::getInstance()->get_dataList().size(); row++)
+    {
+        QModelIndex index0 = this->model->index(row, 0);
+        this->model->setData(index0, Recorder<Flight>::getInstance()->get_dataList()[row]->getAirline()->getName());
+        QModelIndex index1 = this->model->index(row, 1);
+        this->model->setData(index1, Recorder<Flight>::getInstance()->get_dataList()[row]->getSerial());
+        QModelIndex index2 = this->model->index(row, 2);
+        this->model->setData(index2, Recorder<Flight>::getInstance()->get_dataList()[row]->getSource());
+        QModelIndex index3 = this->model->index(row, 3);
+        this->model->setData(index3, Recorder<Flight>::getInstance()->get_dataList()[row]->getDestination());
+        QModelIndex index4 = this->model->index(row, 4);
+        this->model->setData(index4, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeDeparture());
+        QModelIndex index5 = this->model->index(row, 5);
+        this->model->setData(index5, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeArrival());
+    }
+
+    ui->tableView->setModel(model);
 
     this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
