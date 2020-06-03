@@ -108,6 +108,10 @@ public:
     bool isDepartureCarrierSetted();
     bool isArrivalCarrierSetted();
 
+    void delay(qint64 milliseconds);
+
+    static bool haveInterference(Flight* f1, Flight* f2);
+
     int getCapacity() const;
     void setCapacity(int value);
     state getFlightState() const;

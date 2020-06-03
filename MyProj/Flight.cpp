@@ -131,6 +131,19 @@ bool Flight::isArrivalCarrierSetted()
     return this->arrival_carrier ? true : false;
 }
 
+static bool haveInterference(Flight* f1, Flight* f2)
+{
+
+}
+
+void Flight::delay(qint64 milliseconds)
+{
+    this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
+    this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
+
+
+}
+
 int Flight::getCapacity() const
 {
     return capacity;
@@ -359,6 +372,7 @@ void Flight::attachHost(Host * h)
         this->hosts.push_back(h);
 
         h->attachFlight(this);
+        this->setFlightState()
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
