@@ -32,6 +32,9 @@ int main(int argc, char *argv[])
     Recorder<Ticket>::getInstance()->import();
     Recorder<Passenger>::getInstance()->import();
     //Recorder<Pilot>::print_dataList();
+    //
+
+    //
     QApplication a(argc, argv);
     MainWindow w;
     w.setWindowTitle("Main");

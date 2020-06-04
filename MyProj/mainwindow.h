@@ -10,6 +10,7 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
+#include "mymodel.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -27,6 +28,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+//signals:
+//    void updateFlightModel();
 private slots:
 
     void on_actionAddPilot_triggered();
@@ -57,6 +60,8 @@ private slots:
     void showClock();
 
     void updateFlightState();
+
+    //void updateFlightModel();
     //void print();
 
 private:
@@ -73,6 +78,6 @@ private:
 
     QTimer * timer;
 
-    QStandardItemModel * model;
+    MyModel * model;
 };
 #endif // MAINWINDOW_H

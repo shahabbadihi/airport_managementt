@@ -115,7 +115,9 @@ public:
     int getCapacity() const;
     void setCapacity(int value);
     state getFlightState() const;
+    QString getFlightStateAsString();
     void setFlightState(const state &value);
+    void setFlightStateAsString(const QString &value);
 };
 
 #endif // FLIGHT_H

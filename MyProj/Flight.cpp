@@ -113,7 +113,7 @@ bool Flight::isHostEnough()
 
 bool Flight::isPassengerEnough()
 {
-    return this->numOfPassengers >= (this->capacity * 7) / 10 ? true : false;
+    return this->numOfPassengers >= this->capacity * 0.7 ? true : false;
 }
 
 bool Flight::isAirplaneSetted()
@@ -159,9 +159,50 @@ state Flight::getFlightState() const
     return flightState;
 }
 
+QString Flight::getFlightStateAsString()
+{
+    switch (this->flightState)
+    {
+    case READY:
+        return "READY";
+        break;
+    case SUSPENDED:
+        return "SUSPENDED";
+        break;
+    case ONAIR:
+        return "ONAIR";
+        break;
+    case CANCELED:
+        return "CANCELED";
+        break;
+    case DELAYED:
+        return "DELAYED";
+        break;
+    case DONE:
+        return "DONE";
+        break;
+    }
+}
+
 void Flight::setFlightState(const state &value)
 {
     flightState = value;
+}
+
+void Flight::setFlightStateAsString(const QString &value)
+{
+    if (value == "CANCELED")
+        this->setFlightState(CANCELED);
+    else if (value == "ONAIR")
+        this->setFlightState(ONAIR);
+    else if (value == "DONE")
+        this->setFlightState(DONE);
+    else if (value == "SUSPENDED")
+        this->setFlightState(SUSPENDED);
+    else if (value == "DELAYED")
+        this->setFlightState(DELAYED);
+    else if (value == "READY")
+        this->setFlightState(READY);
 }
 
 Flight::Flight(QString & data_str)
@@ -216,6 +257,8 @@ Flight::Flight(QString & data_str)
     {
         this->attachTicket(Recorder<Ticket>::getInstance()->searchByCode(s));
     }
+
+    this->setFlightStateAsString(str_list[16]);
 }
 
 QString Flight::get_data()
@@ -242,11 +285,11 @@ QString Flight::get_data()
              QString::number(this->dateTimeArrival.time().minute()) + ":" +
              QString::number(this->dateTimeArrival.time().second()) + "|";
 
-    data_str += this->airplane->getSearchCode() + "|" +
-            this->departure_carrier->getSearchCode() + "|" +
-            this->arrival_carrier->getSearchCode() + "|";
+    data_str += (this->airplane ? this->airplane->getSearchCode() : "") + "|" +
+            (this->departure_carrier ? this->departure_carrier->getSearchCode() : "") + "|" +
+            (this->arrival_carrier ? this->arrival_carrier->getSearchCode() : "") + "|";
 
-    data_str += QString::number(this->pilot->getPersonnelCode()) + "|";
+    data_str += (this->pilot ? QString::number(this->pilot->getPersonnelCode()) : "") + "|";
     data_str += QString::number(this->numOfHosts) + "|";
 
     foreach (Host* h, this->hosts)
@@ -263,7 +306,7 @@ QString Flight::get_data()
         if (t)
             data_str += t->getSearchCode() + "/";
     }
-    data_str += "|\n";
+    data_str += "|" + this->getFlightStateAsString() + "\n";
 
     return data_str;
 
@@ -372,7 +415,7 @@ void Flight::attachHost(Host * h)
         this->hosts.push_back(h);
 
         h->attachFlight(this);
-        this->setFlightState()
+        //this->setFlightState()
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }

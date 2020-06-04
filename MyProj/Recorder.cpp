@@ -7,6 +7,7 @@
 #include "Passenger.h"
 #include "Airline.h"
 #include "Airplane.h"
+#include "mymodel.h"
 
 template <class T>
 Recorder<T>* Recorder<T>::instance;
@@ -250,6 +251,13 @@ Recorder<T> *Recorder<T>::getInstance()
     if (instance == nullptr)
         instance = new Recorder<T>;
     return instance;
+}
+
+template<class T>
+Recorder<T>::Recorder()
+{
+    //this->model_ptr = MyModel::getInstance();
+    //connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
 }
 
 template<>

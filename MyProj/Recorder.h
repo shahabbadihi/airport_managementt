@@ -15,6 +15,7 @@
 #include <QException>
 #include <QDebug>
 #include <QMessageBox>
+#include <QObject>
 //#include "Carrier.h"
 //#include <string>
 //class Employee;
@@ -22,8 +23,9 @@
 //class Host;
 //class Flight;
 class Carrier;
+class MyModel;
 template <class T>
-class Recorder
+class Recorder// : public QObject
 {
 public:
     void record(T* a);
@@ -46,12 +48,16 @@ public:
     QString getClassName();
     static Recorder<T>* getInstance();
 
-    Recorder<T>() {}
+    Recorder<T>();
 
     Carrier* getFirstFree(const QDateTime&, const QString&);
 private:
     QVector<T*> dataList;
     static Recorder<T>* instance;
+    //MyModel * model_ptr;
+
+//signals:
+    //void recordAdded();
 };
 
 

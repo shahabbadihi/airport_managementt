@@ -38,7 +38,8 @@ SOURCES += \
     deletepilot.cpp \
     dialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mymodel.cpp
 
 HEADERS += \
     Airline.h \
@@ -64,7 +65,8 @@ HEADERS += \
     deletehost.h \
     deletepilot.h \
     dialog.h \
-    mainwindow.h
+    mainwindow.h \
+    mymodel.h
 
 FORMS += \
     addairlinedialog.ui \

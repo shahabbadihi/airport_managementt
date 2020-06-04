@@ -12,6 +12,7 @@
 #include <QHeaderView>
 #include <QTime>
 #include <QStandardItemModel>
+#include "mymodel.h"
 #include "Recorder.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -28,33 +29,25 @@ Recorder<T>* Recorder<T>::instance;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , timer(new QTimer(this))
 {
     ui->setupUi(this);
 
-    this->model = new QStandardItemModel(Recorder<Flight>::getInstance()->get_dataList().size(), 6, this);
-    for (int row = 0; row < Recorder<Flight>::getInstance()->get_dataList().size(); row++)
-    {
-        QModelIndex index0 = this->model->index(row, 0);
-        this->model->setData(index0, Recorder<Flight>::getInstance()->get_dataList()[row]->getAirline()->getName());
-        QModelIndex index1 = this->model->index(row, 1);
-        this->model->setData(index1, Recorder<Flight>::getInstance()->get_dataList()[row]->getSerial());
-        QModelIndex index2 = this->model->index(row, 2);
-        this->model->setData(index2, Recorder<Flight>::getInstance()->get_dataList()[row]->getSource());
-        QModelIndex index3 = this->model->index(row, 3);
-        this->model->setData(index3, Recorder<Flight>::getInstance()->get_dataList()[row]->getDestination());
-        QModelIndex index4 = this->model->index(row, 4);
-        this->model->setData(index4, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeDeparture());
-        QModelIndex index5 = this->model->index(row, 5);
-        this->model->setData(index5, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeArrival());
-    }
+    this->model = MyModel::getInstance();
+
 
     ui->tableView->setModel(model);
 
-    this->timer = new QTimer(this);
+
+
+    //this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
     connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
     connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
+//    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
     timer->start(1000);
+
+    //connect(this->model, SIGNAL(dataChanged()), ui->tableView, SLOT(refresh()));
 
     //ui->tableView.setC
     //ui->tableView->setModel();
@@ -162,7 +155,10 @@ void MainWindow::updateFlightState()
         if (f->getDateTimeDeparture() <= QDateTime::currentDateTime() &&
                 QDateTime::currentDateTime() < f->getDateTimeArrival())
         {
-            f->setFlightState(ONAIR);
+            if (f->getFlightState() != CANCELED && f->getFlightState() != SUSPENDED)
+            {
+                f->setFlightState(ONAIR);
+            }
         }
 
         if (f->getDateTimeArrival() >= QDateTime::currentDateTime())
@@ -170,12 +166,12 @@ void MainWindow::updateFlightState()
             f->setFlightState(DONE);
         }
 
-        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&
-                f->getDateTimeDeparture().msecsTo(QDateTime::currentDateTime()) <= 10 * 60 * 1000)
-        {
-            f->delay(30 * 60 * 1000);
-            f->setFlightState(DELAYED);
-        }
+//        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&
+//                f->getDateTimeDeparture().msecsTo(QDateTime::currentDateTime()) <= 10 * 60 * 1000)
+//        {
+//            f->delay(30 * 60 * 1000);
+//            f->setFlightState(DELAYED);
+//        }
 
         if (f->isPilotSetted() && f->isHostEnough() && f->isAirplaneSetted() &&
                 f->isArrivalCarrierSetted() && f->isDepartureCarrierSetted() &&
@@ -222,3 +218,25 @@ void MainWindow::updateFlightState()
         }
     }
 }
+
+//void MainWindow::updateFlightModel()
+//{
+//    for (int row = 0; row < Recorder<Flight>::getInstance()->get_dataList().size(); row++)
+//    {
+//        QModelIndex index0 = this->model->index(row, 0);
+//        this->model->setData(index0, Recorder<Flight>::getInstance()->get_dataList()[row]->getAirline()->getName());
+//        QModelIndex index1 = this->model->index(row, 1);
+//        this->model->setData(index1, Recorder<Flight>::getInstance()->get_dataList()[row]->getSerial());
+//        QModelIndex index2 = this->model->index(row, 2);
+//        this->model->setData(index2, Recorder<Flight>::getInstance()->get_dataList()[row]->getSource());
+//        QModelIndex index3 = this->model->index(row, 3);
+//        this->model->setData(index3, Recorder<Flight>::getInstance()->get_dataList()[row]->getDestination());
+//        QModelIndex index4 = this->model->index(row, 4);
+//        this->model->setData(index4, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeDeparture());
+//        QModelIndex index5 = this->model->index(row, 5);
+//        this->model->setData(index5, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeArrival());
+//    }
+//    QModelIndex i1 = this->model->index(0, 0);
+//    QModelIndex i2 = this->model->index(, 0);
+//    this->model->dataChanged();
+//}
