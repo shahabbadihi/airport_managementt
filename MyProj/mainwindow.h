@@ -11,6 +11,7 @@
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
 #include "mymodel.h"
+#include "flighttablemodel.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -80,6 +81,6 @@ private:
 
     QTimer * timer;
 
-    MyModel<Flight> * model;
+    FlightTableModel * model;
 };
 #endif // MAINWINDOW_H

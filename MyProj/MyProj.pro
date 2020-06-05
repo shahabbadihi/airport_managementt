@@ -37,6 +37,7 @@ SOURCES += \
     deletehost.cpp \
     deletepilot.cpp \
     dialog.cpp \
+    flighttablemodel.cpp \
     main.cpp \
     mainwindow.cpp \
     mymodel.cpp
@@ -53,7 +54,6 @@ HEADERS += \
     Pilot.h \
     Price.h \
     Recorder.h \
-    SignalSlot.h \
     SignalSlotRecorder.h \
     Ticket.h \
     _observer.h \
@@ -67,6 +67,7 @@ HEADERS += \
     deletehost.h \
     deletepilot.h \
     dialog.h \
+    flighttablemodel.h \
     mainwindow.h \
     mymodel.h
 

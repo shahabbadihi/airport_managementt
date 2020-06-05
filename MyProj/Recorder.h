@@ -21,9 +21,10 @@
 //class Employee;
 //class Pilot;
 //class Host;
-//class Flight;
+class Flight;
 class Carrier;
 #include "mymodel.h"
+#include "flighttablemodel.h"
 #include "SignalSlotRecorder.h"
 template <class T>
 class Recorder : public SignalSlotRecorder
@@ -50,13 +51,20 @@ public:
     QString getClassName();
     static Recorder<T>* getInstance();
 
-    Recorder<T>();
+    Recorder<T>()
+    {
+        setModelPtr();
+        if (this->model_ptr)
+            connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
+    }
+
+    void setModelPtr() {this->model_ptr = nullptr;}
 
     Carrier* getFirstFree(const QDateTime&, const QString&);
 private:
     QVector<T*> dataList;
     static Recorder<T>* instance;
-    MyModel<T> * model_ptr;
+    QAbstractItemModel * model_ptr;
 
 //signals:
 //    void recordAdded();

@@ -2,33 +2,30 @@
 #define MYMODEL_H
 
 #include <QObject>
-//#include <QAbstractItemModel>
+#include <QAbstractItemModel>
 #include <QTimer>
-#include "SignalSlot.h"
 
 
-template <class T>
-class MyModel : public SignalSlot
+class MyModel : public QAbstractItemModel
 {
-
+    Q_OBJECT
 public:
-    MyModel();
     MyModel(QObject *parent = nullptr);
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
-    bool insertRows(int row, int count, const QModelIndex &parent) override;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+//    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+//    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+//    QModelIndex parent(const QModelIndex &index) const override;
+//    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+//    bool insertRows(int row, int count, const QModelIndex &parent) override;
+//    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    static MyModel* getInstance();
-private:
-    static MyModel* instance;
+//    static MyModel* getInstance();
+protected:
+//    static MyModel* instance;
     QTimer * timer;
 
 private slots:
-    void timerHit();
-    void recordInserted();
+    virtual void timerHit() = 0;
+    virtual void recordInserted() = 0;
 };
 
 #endif // MYMODEL_H

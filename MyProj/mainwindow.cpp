@@ -13,6 +13,7 @@
 #include <QTime>
 #include <QStandardItemModel>
 #include "mymodel.h"
+#include "flighttablemodel.h"
 #include "Recorder.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -33,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->model = MyModel<Flight>::getInstance();
+    this->model = FlightTableModel::getInstance();
 
 
     ui->tableView->setModel(model);

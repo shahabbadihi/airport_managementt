@@ -8,6 +8,7 @@
 #include "Airline.h"
 #include "Airplane.h"
 #include "mymodel.h"
+#include "flighttablemodel.h"
 
 template <class T>
 Recorder<T>* Recorder<T>::instance;
@@ -254,12 +255,12 @@ Recorder<T> *Recorder<T>::getInstance()
     return instance;
 }
 
-template<class T>
-Recorder<T>::Recorder()
-{
-    this->model_ptr = MyModel<T>::getInstance();
-    connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
-}
+//template<class T>
+//Recorder<T>::Recorder()
+//{
+//    this->model_ptr = MyModel::getInstance();
+//    connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
+//}
 
 template<>
 Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
@@ -270,6 +271,22 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
             return c;
     }
     return nullptr;
+}
+
+
+//template<>
+//void Recorder<Flight>::record(Flight *a)
+//{
+//    this->model_ptr = FlightTableModel::getInstance();
+//    connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
+//    this->dataList.push_back(a);
+//    emit recordAdded();
+//}
+
+template<>
+void Recorder<Flight>::setModelPtr()
+{
+    this->model_ptr = FlightTableModel::getInstance();
 }
 
 template class Recorder<Flight>;

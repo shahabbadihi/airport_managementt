@@ -16,7 +16,7 @@ public:
     QString getSearchCode() const
     {
         return this->search_code;
-    };
+    }
 
     void setSearchCode(const QString& s)
     {
