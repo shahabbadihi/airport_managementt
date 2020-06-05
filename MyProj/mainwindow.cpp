@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->model = MyModel::getInstance();
+    this->model = MyModel<Flight>::getInstance();
 
 
     ui->tableView->setModel(model);

@@ -16,6 +16,7 @@ template<class T>
 void Recorder<T>::record(T *a)
 {
     this->dataList.push_back(a);
+    emit recordAdded();
     //Recorder<T>::print_dataList();
 }
 
@@ -256,8 +257,8 @@ Recorder<T> *Recorder<T>::getInstance()
 template<class T>
 Recorder<T>::Recorder()
 {
-    //this->model_ptr = MyModel::getInstance();
-    //connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
+    this->model_ptr = MyModel<T>::getInstance();
+    connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
 }
 
 template<>

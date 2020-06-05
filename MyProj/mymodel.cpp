@@ -3,19 +3,23 @@
 #include "Recorder.h"
 #include "Flight.h"
 #include "Airline.h"
+#include "Passenger.h"
 
 template <class T>
 Recorder<T>* Recorder<T>::instance;
 
-MyModel* MyModel::instance;
+template <class T>
+MyModel<T>* MyModel<T>::instance;
 
-MyModel::MyModel()
+template <class T>
+MyModel<T>::MyModel()
 {
 
 }
 
-MyModel::MyModel(QObject *parent)
-    : QAbstractItemModel(parent),
+template <class T>
+MyModel<T>::MyModel(QObject *parent)
+    : SignalSlot(parent),
       timer(new QTimer(this))
 {
     //timer->setInterval(1000);
@@ -23,27 +27,32 @@ MyModel::MyModel(QObject *parent)
     timer->start(1000);
 }
 
-int MyModel::rowCount(const QModelIndex & /*parent*/) const
+template <class T>
+int MyModel<T>::rowCount(const QModelIndex & /*parent*/) const
 {
     return Recorder<Flight>::getInstance()->get_dataList().size();
 }
 
-int MyModel::columnCount(const QModelIndex& /*parent*/) const
+template <class T>
+int MyModel<T>::columnCount(const QModelIndex& /*parent*/) const
 {
     return 7;
 }
 
-QModelIndex MyModel::parent(const QModelIndex &/*index*/) const
+template <class T>
+QModelIndex MyModel<T>::parent(const QModelIndex &/*index*/) const
 {
     return QModelIndex();
 }
 
-QModelIndex MyModel::index(int row, int column, const QModelIndex &/*parent*/) const
+template <class T>
+QModelIndex MyModel<T>::index(int row, int column, const QModelIndex &/*parent*/) const
 {
     return createIndex(row, column);
 }
 
-QVariant MyModel::data(const QModelIndex &index, int role) const
+template <class T>
+QVariant MyModel<T>::data(const QModelIndex &index, int role) const
 {
 
     if (role == Qt::DisplayRole)
@@ -76,14 +85,16 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-MyModel* MyModel::getInstance()
+template <class T>
+MyModel<T>* MyModel<T>::getInstance()
 {
     if (instance == nullptr)
         instance = new MyModel(nullptr);
     return instance;
 }
 
-void MyModel::timerHit()
+template <class T>
+void MyModel<T>::timerHit()
 {
     QModelIndex left_top = createIndex(0, 0);
     QModelIndex right_down = createIndex(this->rowCount() - 1, this->columnCount() - 1);
@@ -92,7 +103,25 @@ void MyModel::timerHit()
     //this->insertRow()
 }
 
-//void MyModel::recordInserted()
-//{
-//    this->insertRow(0);
-//}
+template <class T>
+void MyModel<T>::recordInserted()
+{
+    this->insertRows(0, 1, QModelIndex());
+}
+
+template <class T>
+bool MyModel<T>::insertRows(int row, int count, const QModelIndex &parent)
+{
+    beginInsertRows(parent,row,row+count-1);
+    endInsertRows();
+    return true;
+}
+
+template class MyModel<Flight>;
+template class MyModel<Host>;
+template class MyModel<Pilot>;
+template class MyModel<Ticket>;
+template class MyModel<Passenger>;
+template class MyModel<Airplane>;
+template class MyModel<Airline>;
+template class MyModel<Carrier>;

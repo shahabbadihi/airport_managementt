@@ -23,10 +23,12 @@
 //class Host;
 //class Flight;
 class Carrier;
-class MyModel;
+#include "mymodel.h"
+#include "SignalSlotRecorder.h"
 template <class T>
-class Recorder// : public QObject
+class Recorder : public SignalSlotRecorder
 {
+    //Q_OBJECT
 public:
     void record(T* a);
 
@@ -54,10 +56,10 @@ public:
 private:
     QVector<T*> dataList;
     static Recorder<T>* instance;
-    //MyModel * model_ptr;
+    MyModel<T> * model_ptr;
 
 //signals:
-    //void recordAdded();
+//    void recordAdded();
 };
 
 

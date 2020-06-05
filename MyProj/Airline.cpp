@@ -193,7 +193,7 @@ Host *Airline::getFirstFreeHost(Flight* f) const
 
 Airplane *Airline::getFirstFreeAirplane(Flight * f) const
 {
-    for (int i = 0; i < this->list_of_hosts.size(); i++)
+    for (int i = 0; i < this->list_of_airplanes.size(); i++)
     {
         Airplane* a = this->list_of_airplanes[i];
         if (a->isFree(f))

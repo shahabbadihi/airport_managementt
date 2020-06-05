@@ -53,6 +53,8 @@ HEADERS += \
     Pilot.h \
     Price.h \
     Recorder.h \
+    SignalSlot.h \
+    SignalSlotRecorder.h \
     Ticket.h \
     _observer.h \
     _subject.h \

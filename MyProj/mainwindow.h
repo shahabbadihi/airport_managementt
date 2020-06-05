@@ -16,6 +16,8 @@
 #include <QTimer>
 #include <QStandardItemModel>
 
+class Flight;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -78,6 +80,6 @@ private:
 
     QTimer * timer;
 
-    MyModel * model;
+    MyModel<Flight> * model;
 };
 #endif // MAINWINDOW_H
