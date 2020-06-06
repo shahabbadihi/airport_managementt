@@ -13,9 +13,9 @@ public:
     MyModel(QObject *parent = nullptr);
 //    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 //    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-//    QModelIndex parent(const QModelIndex &index) const override;
-//    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
-//    bool insertRows(int row, int count, const QModelIndex &parent) override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    bool insertRows(int row, int count, const QModelIndex &parent) override;
 //    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 //    static MyModel* getInstance();
@@ -25,7 +25,7 @@ protected:
 
 private slots:
     virtual void timerHit() = 0;
-    virtual void recordInserted() = 0;
+    virtual void recordInserted();
 };
 
 #endif // MYMODEL_H

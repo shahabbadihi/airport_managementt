@@ -26,16 +26,6 @@ int FlightTableModel::columnCount(const QModelIndex& /*parent*/) const
     return 7;
 }
 
-QModelIndex FlightTableModel::parent(const QModelIndex &/*index*/) const
-{
-    return QModelIndex();
-}
-
-QModelIndex FlightTableModel::index(int row, int column, const QModelIndex &/*parent*/) const
-{
-    return createIndex(row, column);
-}
-
 
 QVariant FlightTableModel::data(const QModelIndex &index, int role) const
 {
@@ -86,14 +76,9 @@ void FlightTableModel::timerHit()
     //this->insertRow()
 }
 
-void FlightTableModel::recordInserted()
-{
-    this->insertRows(0, 1, QModelIndex());
-}
+//void FlightTableModel::recordInserted()
+//{
+//    this->insertRows(0, 1, QModelIndex());
+//}
 
-bool FlightTableModel::insertRows(int row, int count, const QModelIndex &parent)
-{
-    beginInsertRows(parent,row,row+count-1);
-    endInsertRows();
-    return true;
-}
+

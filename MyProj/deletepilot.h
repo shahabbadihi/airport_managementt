@@ -2,6 +2,7 @@
 #define DELETEPILOT_H
 
 #include <QDialog>
+#include "pilotlistmodel.h"
 
 namespace Ui {
 class DeletePilot;
@@ -22,6 +23,8 @@ private slots:
 
 private:
     Ui::DeletePilot *ui;
+
+    PilotListModel * model;
 };
 
 #endif // DELETEPILOT_H
