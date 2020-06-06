@@ -23,7 +23,7 @@
 //class Host;
 class Flight;
 class Carrier;
-#include "mymodel.h"
+//#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "SignalSlotRecorder.h"
 template <class T>

@@ -40,7 +40,6 @@ SOURCES += \
     flighttablemodel.cpp \
     main.cpp \
     mainwindow.cpp \
-    mymodel.cpp \
     pilotlistmodel.cpp
 
 HEADERS += \
@@ -70,7 +69,6 @@ HEADERS += \
     dialog.h \
     flighttablemodel.h \
     mainwindow.h \
-    mymodel.h \
     pilotlistmodel.h
 
 FORMS += \

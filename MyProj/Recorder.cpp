@@ -7,7 +7,7 @@
 #include "Passenger.h"
 #include "Airline.h"
 #include "Airplane.h"
-#include "mymodel.h"
+//#include "mymodel.h"
 #include "flighttablemodel.h"
 
 template <class T>

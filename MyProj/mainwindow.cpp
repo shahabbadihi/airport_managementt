@@ -12,7 +12,7 @@
 #include <QHeaderView>
 #include <QTime>
 #include <QStandardItemModel>
-#include "mymodel.h"
+//#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "Recorder.h"
 #include "Airline.h"

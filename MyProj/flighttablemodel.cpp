@@ -10,7 +10,8 @@ Recorder<T>* Recorder<T>::instance;
 FlightTableModel* FlightTableModel::instance;
 
 FlightTableModel::FlightTableModel(QObject *parent)
-    : MyModel(parent)
+    : QAbstractItemModel(parent),
+      timer(new QTimer)
 {
     connect(this->timer, SIGNAL(timeout()), this, SLOT(timerHit()));
     timer->start(1000);
@@ -24,6 +25,23 @@ int FlightTableModel::rowCount(const QModelIndex & /*parent*/) const
 int FlightTableModel::columnCount(const QModelIndex& /*parent*/) const
 {
     return 7;
+}
+
+QModelIndex FlightTableModel::parent(const QModelIndex &/*index*/) const
+{
+    return QModelIndex();
+}
+
+QModelIndex FlightTableModel::index(int row, int column, const QModelIndex &/*parent*/) const
+{
+    return createIndex(row, column);
+}
+
+bool FlightTableModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+    beginInsertRows(parent,row,row+count-1);
+    endInsertRows();
+    return true;
 }
 
 
@@ -76,9 +94,9 @@ void FlightTableModel::timerHit()
     //this->insertRow()
 }
 
-//void FlightTableModel::recordInserted()
-//{
-//    this->insertRows(0, 1, QModelIndex());
-//}
+void FlightTableModel::recordInserted()
+{
+    this->insertRows(0, 1, QModelIndex());
+}
 
 

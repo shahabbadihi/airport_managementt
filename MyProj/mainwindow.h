@@ -10,7 +10,7 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
-#include "mymodel.h"
+//#include "mymodel.h"
 #include "flighttablemodel.h"
 #include <QMainWindow>
 #include <QTableWidget>
