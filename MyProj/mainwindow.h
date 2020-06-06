@@ -10,6 +10,7 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
+#include "deleteflight.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -56,6 +57,8 @@ private slots:
     void showClock();
     //void print();
 
+    void on_actionFlight_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -67,7 +70,7 @@ private:
     AddAirplaneDialog* addAirplaneDialog;
     AddCarrierDialog* addCarrierDialog;
     DeletePilot* deletePilotDialog;//pilot
-
+    deleteFlight* deleteFlightDialog;
     QTimer * timer;
 
 

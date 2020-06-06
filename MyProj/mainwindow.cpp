@@ -132,3 +132,11 @@ void MainWindow::showClock()
 {
     ui->lblClock->setText(QTime::currentTime().toString());
 }
+
+void MainWindow::on_actionFlight_triggered()
+{
+    this->deleteFlightDialog=new deleteFlight;
+    deleteFlightDialog->setModal(true);
+    deleteFlightDialog->exec();
+    delete deleteFlightDialog;
+}
