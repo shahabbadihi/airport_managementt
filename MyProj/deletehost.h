@@ -2,7 +2,7 @@
 #define DELETEHOST_H
 
 #include <QDialog>
-
+#include "hostlistmodel.h"
 namespace Ui {
 class deleteHost;
 }
@@ -24,6 +24,8 @@ private slots:
 
 private:
     Ui::deleteHost *ui;
+
+    HostListModel * model;
 };
 
 #endif // DELETEHOST_H

@@ -55,7 +55,9 @@ public:
     {
         setModelPtr();
         if (this->model_ptr)
+        {
             connect(this, SIGNAL(recordAdded()), this->model_ptr, SLOT(recordInserted()));
+        }
     }
 
     void setModelPtr() {this->model_ptr = nullptr;}
@@ -68,6 +70,9 @@ private:
 
 //signals:
 //    void recordAdded();
+
+public slots:
+    virtual void recordRemoved(int);
 };
 
 

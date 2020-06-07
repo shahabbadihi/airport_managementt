@@ -12,10 +12,12 @@
 #include "deletepilot.h"
 //#include "mymodel.h"
 #include "flighttablemodel.h"
+#include "pilotitemmodel.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
 #include <QStandardItemModel>
+#include <QDataWidgetMapper>
 
 class Flight;
 
@@ -64,6 +66,8 @@ private slots:
 
     void updateFlightState();
 
+    void updateButtonsPilot(int);
+
     //void updateFlightModel();
     //void print();
 
@@ -81,6 +85,9 @@ private:
 
     QTimer * timer;
 
-    FlightTableModel * model;
+    FlightTableModel * flight_table_model;
+
+    PilotItemModel * pilot_item_model;
+    QDataWidgetMapper * pilot_mapper;
 };
 #endif // MAINWINDOW_H

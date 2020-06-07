@@ -34,15 +34,17 @@ void DeletePilot::on_pushButton_clicked()
 //    if(h){
 //        if(h->getFname()==ui->FnameTxt->text() && h->getLname()==ui->LnameTxt->text()){
 
-//           //Recorder<Pilot>::removeFromFile(h);
+           //Recorder<Pilot>::removeFromFile(h);
 //           Recorder<Pilot>::getInstance()->remove(h);
-//           //
-//           //
-//           QMessageBox msg;
-//           msg.setText("Delete Successfully!");
-//           msg.exec();
-//           qDebug() << "List of pilots after delete:";
-//           Recorder<Pilot>::getInstance()->print_dataList();
+            QModelIndex index = ui->listView->currentIndex();
+            this->model->removeRows(index.row(), 1);
+           //
+           //
+           QMessageBox msg;
+           msg.setText("Delete Successfully!");
+           msg.exec();
+           qDebug() << "List of pilots after delete:";
+           Recorder<Pilot>::getInstance()->print_dataList();
 //        }
-//    }
+    //}
 }

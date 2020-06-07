@@ -133,7 +133,14 @@ bool Flight::isArrivalCarrierSetted()
 
 static bool haveInterference(Flight* f1, Flight* f2)
 {
-
+    if ((f2->getDateTimeDeparture() < f1->getDateTimeArrival() &&
+            f1->getDateTimeDeparture() < f2->getDateTimeArrival()) ||
+            (f1->getDateTimeDeparture() < f2->getDateTimeArrival() &&
+             f2->getDateTimeDeparture() < f1->getDateTimeArrival()))
+    {
+        return true;
+    }
+    return false;
 }
 
 void Flight::delay(qint64 milliseconds)
@@ -159,7 +166,7 @@ state Flight::getFlightState() const
     return flightState;
 }
 
-QString Flight::getFlightStateAsString()
+QString Flight::getFlightStateAsString() const
 {
     switch (this->flightState)
     {
@@ -310,6 +317,14 @@ QString Flight::get_data()
 
     return data_str;
 
+}
+
+QString Flight::getFlightStr() const
+{
+    return this->airline->getName() + " " + this->serial + " " +
+            this->source + " " + this->destination + " " +
+            this->dateTimeDeparture.toString() + " " + this->dateTimeArrival.toString() + " " +
+            this->getFlightStateAsString();
 }
 
 void Flight::setSerial(const QString& s)

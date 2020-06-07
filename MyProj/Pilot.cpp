@@ -4,6 +4,22 @@
 #include <QString>
 #include <Airline.h>
 
+QString Pilot::getDegreeAsString() const
+{
+    switch (this->degree)
+    {
+    case One:
+        return "One";
+        break;
+    case Two:
+        return "Two";
+        break;
+    case Three:
+        return "Three";
+        break;
+    }
+}
+
 Pilot::Pilot(QString& dataStr)
 {
     QStringList strList = dataStr.split('|');

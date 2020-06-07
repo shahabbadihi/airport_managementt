@@ -6,6 +6,26 @@
 template <class T>
 Recorder<T>* Recorder<T>::instance;
 
+long Employee::getNationalCode() const
+{
+    return nationalCode;
+}
+
+QDate Employee::getBirthDate() const
+{
+    return birthDate;
+}
+
+QDate Employee::getEmploymentDate() const
+{
+    return employmentDate;
+}
+
+QVector<Flight *> Employee::getList() const
+{
+    return list;
+}
+
 QString Employee::get_data()
 {
     QString data = QString::number(this->personnelCode) + "|"

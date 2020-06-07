@@ -8,11 +8,10 @@
 #include "addairplanedialog.h"
 #include "addticket.h"
 #include <QString>
-#include <QDesktopWidget>
 #include <QHeaderView>
 #include <QTime>
 #include <QStandardItemModel>
-//#include "mymodel.h"
+#include <QAbstractItemModel>
 #include "flighttablemodel.h"
 #include "Recorder.h"
 #include "Airline.h"
@@ -34,12 +33,29 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->model = FlightTableModel::getInstance();
+    this->flight_table_model = FlightTableModel::getInstance();
 
 
-    ui->tableView->setModel(model);
+    ui->tableView->setModel(flight_table_model);
 
+    this->pilot_mapper = new QDataWidgetMapper(this);
+    this->pilot_item_model = PilotItemModel::getInstance();
+    pilot_mapper->setModel(pilot_item_model);
+    pilot_mapper->addMapping(ui->txtNamePilot, 0);
+    pilot_mapper->addMapping(ui->txtFamilyPilot, 1);
+    pilot_mapper->addMapping(ui->txtNationalCodePilot, 2);
+    pilot_mapper->addMapping(ui->txtPersonnelCodePilot, 3);
+    pilot_mapper->addMapping(ui->txtAirlinePilot, 4);
+    pilot_mapper->addMapping(ui->dtBirthDatePliot, 5);
+    pilot_mapper->addMapping(ui->dtEmploymentDatePilot, 6);
+    pilot_mapper->addMapping(ui->plainTextEdit, 7);
+    pilot_mapper->addMapping(ui->txtDegreePilot, 8);
+    pilot_mapper->toFirst();
 
+    connect(ui->btnNextPilot, SIGNAL(clicked()), this->pilot_mapper, SLOT(toNext()));
+    connect(ui->btnPrePilot, SIGNAL(clicked()), this->pilot_mapper, SLOT(toPrevious()));
+
+    connect(this->pilot_mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtonsPilot(int)));
 
     //this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
@@ -218,6 +234,12 @@ void MainWindow::updateFlightState()
             f->setFlightState(SUSPENDED);
         }
     }
+}
+
+void MainWindow::updateButtonsPilot(int row)
+{
+    ui->btnPrePilot->setEnabled(row > 0);
+    ui->btnNextPilot->setEnabled(row < pilot_item_model->rowCount() - 1);
 }
 
 //void MainWindow::updateFlightModel()

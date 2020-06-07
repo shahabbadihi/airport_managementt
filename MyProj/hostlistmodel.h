@@ -1,15 +1,15 @@
-#ifndef PILOTLISTMODEL_H
-#define PILOTLISTMODEL_H
+#ifndef HOSTLISTMODEL_H
+#define HOSTLISTMODEL_H
 
 //#include "mymodel.h"
 #include <QAbstractListModel>
 #include <QObject>
 
-class PilotListModel : public QAbstractListModel
+class HostListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    PilotListModel(QObject *parent = nullptr);
+    HostListModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 //    QModelIndex parent(const QModelIndex &index) const override;
@@ -18,10 +18,10 @@ public:
 //    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    static PilotListModel* getInstance();
+    static HostListModel* getInstance();
 
 private:
-    static PilotListModel* instance;
+    static HostListModel* instance;
 
 private slots:
 //    void timerHit();
@@ -31,4 +31,4 @@ signals:
 
 };
 
-#endif // PILOTLISTMODEL_H
+#endif // HOSTLISTMODEL_H

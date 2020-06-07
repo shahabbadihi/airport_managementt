@@ -10,6 +10,10 @@ protected:
     SignalSlotRecorder(){}
 signals:
     void recordAdded();
+
+public slots:
+    virtual void recordRemoved(int) = 0;
+
 };
 
 #endif // SIGNALSLOTRECORDER_H

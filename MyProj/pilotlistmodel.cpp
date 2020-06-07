@@ -10,12 +10,20 @@ PilotListModel* PilotListModel::instance;
 PilotListModel::PilotListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Pilot>::getInstance(), SLOT(recordRemoved(int)));
 }
 
 int PilotListModel::rowCount(const QModelIndex &/*parent*/) const
 {
     return Recorder<Pilot>::getInstance()->get_dataList().size();
+}
+
+bool PilotListModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    endRemoveRows();
+    emit rowsAboutToBeRemoved(row);
+    return true;
 }
 
 PilotListModel* PilotListModel::getInstance()

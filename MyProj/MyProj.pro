@@ -38,8 +38,10 @@ SOURCES += \
     deletepilot.cpp \
     dialog.cpp \
     flighttablemodel.cpp \
+    hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
+    pilotitemmodel.cpp \
     pilotlistmodel.cpp
 
 HEADERS += \
@@ -68,7 +70,9 @@ HEADERS += \
     deletepilot.h \
     dialog.h \
     flighttablemodel.h \
+    hostlistmodel.h \
     mainwindow.h \
+    pilotitemmodel.h \
     pilotlistmodel.h
 
 FORMS += \

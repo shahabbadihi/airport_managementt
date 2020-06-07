@@ -55,6 +55,7 @@ public:
     ~Flight() {}
 
     QString get_data();
+    QString getFlightStr() const;
     void setSerial(const QString&);
     void setAirplaneSerial(const QString&);
     void setSource(const QString&);
@@ -115,7 +116,7 @@ public:
     int getCapacity() const;
     void setCapacity(int value);
     state getFlightState() const;
-    QString getFlightStateAsString();
+    QString getFlightStateAsString() const;
     void setFlightState(const state &value);
     void setFlightStateAsString(const QString &value);
 };

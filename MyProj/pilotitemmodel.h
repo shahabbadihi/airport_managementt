@@ -1,34 +1,33 @@
-#ifndef PILOTLISTMODEL_H
-#define PILOTLISTMODEL_H
+#ifndef PILOTTABLEMODEL_H
+#define PILOTTABLEMODEL_H
 
 //#include "mymodel.h"
 #include <QAbstractListModel>
 #include <QObject>
 
-class PilotListModel : public QAbstractListModel
+class PilotItemModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    PilotListModel(QObject *parent = nullptr);
+    PilotItemModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-//    QModelIndex parent(const QModelIndex &index) const override;
-//    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
    // bool insertRows(int row, int count, const QModelIndex &parent) override;
-//    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    static PilotListModel* getInstance();
+    static PilotItemModel *getInstance();
 
 private:
-    static PilotListModel* instance;
+    static PilotItemModel* instance;
 
 private slots:
 //    void timerHit();
     //virtual void recordInserted();
 signals:
     void rowsAboutToBeRemoved(int);
-
 };
 
 #endif // PILOTLISTMODEL_H

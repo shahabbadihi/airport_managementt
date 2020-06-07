@@ -273,6 +273,12 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
     return nullptr;
 }
 
+template<class T>
+void Recorder<T>::recordRemoved(int index)
+{
+    this->remove(this->dataList[index]);
+}
+
 
 //template<>
 //void Recorder<Flight>::record(Flight *a)
