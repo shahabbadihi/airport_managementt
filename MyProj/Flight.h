@@ -48,7 +48,7 @@ private:
 public:
     Flight()  : numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
     Flight(QString&);
-    ~Flight() {}
+    ~Flight() ;
 
     QString get_data();
     void setSerial(const QString&);
@@ -70,9 +70,9 @@ public:
 
     void removeHost(Host*);
     //void attachPassenger(Passenger*);
-
     void removePilot();
     //void attachPassenger(Passenger*);
+    void removeCarrier(Carrier*);
 
     QDateTime getDateTimeArrival();
     QDateTime getDateTimeDeparture();

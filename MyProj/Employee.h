@@ -53,6 +53,8 @@ public:
 
     Airline *getAirline() const;
     void setAirline(Airline *value);
+
+    void removeFlight(Flight*);
 };
 
 #endif // EMPLOYEE_H

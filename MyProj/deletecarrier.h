@@ -15,6 +15,11 @@ public:
     explicit deleteCarrier(QWidget *parent = nullptr);
     ~deleteCarrier();
 
+private slots:
+    void on_btnCancel_clicked();
+
+    void on_btnSubmit_clicked();
+
 private:
     Ui::deleteCarrier *ui;
 };

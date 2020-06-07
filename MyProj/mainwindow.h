@@ -11,6 +11,7 @@
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
 #include "deleteflight.h"
+#include "deletecarrier.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -59,6 +60,8 @@ private slots:
 
     void on_actionFlight_triggered();
 
+    void on_actioncarrier_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -71,6 +74,7 @@ private:
     AddCarrierDialog* addCarrierDialog;
     DeletePilot* deletePilotDialog;//pilot
     deleteFlight* deleteFlightDialog;
+    deleteCarrier* deleteCarrierDialog;
     QTimer * timer;
 
 

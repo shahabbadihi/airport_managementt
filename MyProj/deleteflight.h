@@ -15,6 +15,12 @@ public:
     explicit deleteFlight(QWidget *parent = nullptr);
     ~deleteFlight();
 
+private slots:
+    void on_pushButton_clicked();
+
+private slots:
+    void on_pushButton_2_clicked();
+    
 private:
     Ui::deleteFlight *ui;
 };
