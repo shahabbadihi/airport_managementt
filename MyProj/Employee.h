@@ -65,7 +65,10 @@ public:
 
 
     void removeFlight(Flight*);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
 };
 
 #endif // EMPLOYEE_H

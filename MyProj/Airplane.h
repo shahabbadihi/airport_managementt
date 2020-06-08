@@ -34,6 +34,8 @@ public:
     QString getSerial() const;
     void setSerial(const QString &value);
 
+    void removeFlight(Flight*);
+
     bool isFree(Flight*);
 };
 

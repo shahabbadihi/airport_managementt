@@ -13,6 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+<<<<<<< HEAD
 
   <widget class="QWidget" name="layoutWidget">
 
@@ -97,6 +98,31 @@
     </item>
    </layout>
   </widget>
+=======
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QListView" name="listView"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
  </widget>
  <resources/>
  <connections/>

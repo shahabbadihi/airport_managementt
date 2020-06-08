@@ -16,10 +16,12 @@ public:
     QModelIndex parent(const QModelIndex &index) const override;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     bool insertRows(int row, int count, const QModelIndex &parent) override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 //    QModelIndex parent(const QModelIndex &index) const override;
 //    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 //    bool insertRows(int row, int count, const QModelIndex &parent) override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     static FlightTableModel* getInstance();
 
@@ -31,6 +33,7 @@ private:
 private slots:
     void timerHit();
     void recordInserted();
+    void recordRemovedSlot(int);
     //void recordInserted() override;
 };
 

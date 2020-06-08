@@ -614,16 +614,20 @@ QString Flight::getSerial()
 {
     return this->serial;
 }
-Flight::~Flight(){
+
+Flight::~Flight()
+{
     foreach (Host* h, this->getHostsList())
     {
         h->removeFlight(this);
     }
     this->pilot->removeFlight(this);
-    this->getAirline()->removeFlight(this);
+    this->airline->removeFlight(this);
+    this->airplane->removeFlight(this);
     this->departure_carrier->removeFlight(this);
     this->arrival_carrier->removeFlight(this);
 }
+
 void Flight::removeCarrier(Carrier* c){
     if(c==arrival_carrier){
         arrival_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeArrival(),getDestination());

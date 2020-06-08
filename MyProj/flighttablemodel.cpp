@@ -44,6 +44,14 @@ bool FlightTableModel::insertRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
+bool FlightTableModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    endRemoveRows();
+//    emit rowsAboutToBeRemoved(row);
+    return true;
+}
+
 
 QVariant FlightTableModel::data(const QModelIndex &index, int role) const
 {
@@ -97,6 +105,34 @@ void FlightTableModel::timerHit()
 void FlightTableModel::recordInserted()
 {
     this->insertRows(0, 1, QModelIndex());
+}
+
+QVariant FlightTableModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
+        switch (section) {
+        case 0:
+            return QString("Airline");
+        case 1:
+            return QString("Flight Serial");
+        case 2:
+            return QString("Source");
+        case 3:
+            return QString("Destination");
+        case 4:
+            return QString("DEP");
+        case 5:
+            return QString("ARR");
+        case 6:
+            return QString("Status");
+        }
+    }
+    return QVariant();
+}
+
+void FlightTableModel::recordRemovedSlot(int index)
+{
+    this->removeRows(index, 1);
 }
 
 

@@ -11,6 +11,7 @@
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "pilotitemmodel.h"
@@ -18,6 +19,16 @@
 #include "deleteflight.h"
 #include "deletecarrier.h"
 >>>>>>> delete_flight
+=======
+
+//#include "mymodel.h"
+#include "flighttablemodel.h"
+#include "pilotitemmodel.h"
+
+#include "deleteflight.h"
+#include "deletecarrier.h"
+
+>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -84,13 +95,14 @@ private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
     AddHost* addHostDialog;
-    deleteHost* deleteHostDialog;
+
     AddFlightDialog* addFlightDialog;
     AddTicket* addTicketDialog;
     AddAirlineDialog* addAirlineDialog;
     AddAirplaneDialog* addAirplaneDialog;
     AddCarrierDialog* addCarrierDialog;
     DeletePilot* deletePilotDialog;//pilot
+    deleteHost* deleteHostDialog;
     deleteFlight* deleteFlightDialog;
     deleteCarrier* deleteCarrierDialog;
     QTimer * timer;
