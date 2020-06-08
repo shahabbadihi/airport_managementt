@@ -624,6 +624,7 @@ Flight::~Flight(){
     this->departure_carrier->removeFlight(this);
     this->arrival_carrier->removeFlight(this);
 }
+
 void Flight::removeCarrier(Carrier* c){
     if(c==arrival_carrier){
         arrival_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeArrival(),getDestination());

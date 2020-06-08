@@ -2,6 +2,7 @@
 #define DELETEFLIGHT_H
 
 #include <QDialog>
+#include "flightlistmodel.h"
 
 namespace Ui {
 class deleteFlight;
@@ -23,6 +24,8 @@ private slots:
     
 private:
     Ui::deleteFlight *ui;
+
+    FlightListModel * model;
 };
 
 #endif // DELETEFLIGHT_H
