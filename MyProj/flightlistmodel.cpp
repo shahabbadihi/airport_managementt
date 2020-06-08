@@ -10,12 +10,12 @@ FlightListModel* FlightListModel::instance;
 FlightListModel::FlightListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Pilot>::getInstance(), SLOT(recordRemoved(int)));
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Flight>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int FlightListModel::rowCount(const QModelIndex &/*parent*/) const
 {
-    return Recorder<Pilot>::getInstance()->get_dataList().size();
+    return Recorder<Flight>::getInstance()->get_dataList().size();
 }
 
 bool FlightListModel::removeRows(int row, int count, const QModelIndex &parent)

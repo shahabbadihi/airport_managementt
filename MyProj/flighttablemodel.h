@@ -16,6 +16,7 @@ public:
     QModelIndex parent(const QModelIndex &index) const override;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     bool insertRows(int row, int count, const QModelIndex &parent) override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 //    QModelIndex parent(const QModelIndex &index) const override;
 //    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 //    bool insertRows(int row, int count, const QModelIndex &parent) override;
@@ -31,6 +32,7 @@ private:
 private slots:
     void timerHit();
     void recordInserted();
+    void recordRemovedSlot(int);
     //void recordInserted() override;
 };
 

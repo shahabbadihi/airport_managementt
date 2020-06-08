@@ -90,7 +90,7 @@ QVariant PilotItemModel::data(const QModelIndex &index, int role) const
         break;
     }
     //}
-    //return QVariant();
+    return QVariant();
 }
 
 PilotItemModel *PilotItemModel::getInstance()

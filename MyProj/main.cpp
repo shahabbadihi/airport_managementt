@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     //
 
     //
-    //qDebug() << Recorder<Pilot>::getInstance()->get_dataList()[0]->getList()[0]->get_data();
+    //qDebug() << Recorder<Flight>::getInstance()->get_dataList()[0]->getFlightStr();
     QApplication a(argc, argv);
     MainWindow w;
     w.setWindowTitle("Main");
