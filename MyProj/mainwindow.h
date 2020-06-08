@@ -10,9 +10,14 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
+<<<<<<< HEAD
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "pilotitemmodel.h"
+=======
+#include "deleteflight.h"
+#include "deletecarrier.h"
+>>>>>>> delete_flight
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>
@@ -71,6 +76,10 @@ private slots:
     //void updateFlightModel();
     //void print();
 
+    void on_actionFlight_triggered();
+
+    void on_actioncarrier_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -82,7 +91,8 @@ private:
     AddAirplaneDialog* addAirplaneDialog;
     AddCarrierDialog* addCarrierDialog;
     DeletePilot* deletePilotDialog;//pilot
-
+    deleteFlight* deleteFlightDialog;
+    deleteCarrier* deleteCarrierDialog;
     QTimer * timer;
 
     FlightTableModel * flight_table_model;

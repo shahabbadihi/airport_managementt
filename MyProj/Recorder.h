@@ -43,6 +43,7 @@ public:
     void import();
 
     T * searchByCode(const QString& p);
+
     void remove(T * a);
 
     void updateFile(T * ptr);

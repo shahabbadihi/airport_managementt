@@ -4,6 +4,8 @@
 #include "addhost.h"
 #include "deletehost.h"
 #include "deletepilot.h"
+#include "deleteflight.h"
+#include "deletecarrier.h"
 #include "addflightdialog.h"
 #include "addairplanedialog.h"
 #include "addticket.h"
@@ -165,6 +167,7 @@ void MainWindow::showClock()
     ui->lblClock->setText(QTime::currentTime().toString());
 }
 
+<<<<<<< HEAD
 void MainWindow::updateFlightState()
 {
     foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
@@ -263,3 +266,20 @@ void MainWindow::updateButtonsPilot(int row)
 //    QModelIndex i2 = this->model->index(, 0);
 //    this->model->dataChanged();
 //}
+=======
+void MainWindow::on_actionFlight_triggered()
+{
+    this->deleteFlightDialog=new deleteFlight;
+    deleteFlightDialog->setModal(true);
+    deleteFlightDialog->exec();
+    delete deleteFlightDialog;
+}
+
+void MainWindow::on_actioncarrier_triggered()
+{
+    this->deleteCarrierDialog=new deleteCarrier;
+    deleteCarrierDialog->setModal(true);
+    deleteCarrierDialog->exec();
+    delete deleteCarrierDialog;
+}
+>>>>>>> delete_flight

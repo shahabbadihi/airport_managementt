@@ -53,10 +53,15 @@ public:
 
     Airline *getAirline() const;
     void setAirline(Airline *value);
+<<<<<<< HEAD
     long getNationalCode() const;
     QDate getBirthDate() const;
     QDate getEmploymentDate() const;
     QVector<Flight *> getList() const;
+=======
+
+    void removeFlight(Flight*);
+>>>>>>> delete_flight
 };
 
 #endif // EMPLOYEE_H
