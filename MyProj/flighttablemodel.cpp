@@ -44,6 +44,14 @@ bool FlightTableModel::insertRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
+bool FlightTableModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    endRemoveRows();
+//    emit rowsAboutToBeRemoved(row);
+    return true;
+}
+
 
 QVariant FlightTableModel::data(const QModelIndex &index, int role) const
 {
@@ -120,6 +128,11 @@ QVariant FlightTableModel::headerData(int section, Qt::Orientation orientation, 
         }
     }
     return QVariant();
+}
+
+void FlightTableModel::recordRemovedSlot(int index)
+{
+    this->removeRows(index, 1);
 }
 
 

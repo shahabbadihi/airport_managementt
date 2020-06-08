@@ -201,3 +201,10 @@ int Employee::flightListSize(){
     for(; i < this->list.size(); i++){}
     return i;
 }
+void Employee::removeFlight(Flight* f){
+    if(f){
+    this->list.removeOne(f);
+    }
+    QMessageBox msg;
+    msg.setText(f->getSerial()+"removed from "+this->getFname()+this->getLname()+"flight list");
+}

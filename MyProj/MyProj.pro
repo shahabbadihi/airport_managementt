@@ -34,9 +34,12 @@ SOURCES += \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
+    deletecarrier.cpp \
+    deleteflight.cpp \
     deletehost.cpp \
     deletepilot.cpp \
     dialog.cpp \
+    flightlistmodel.cpp \
     flighttablemodel.cpp \
     hostlistmodel.cpp \
     main.cpp \
@@ -66,9 +69,12 @@ HEADERS += \
     addflightdialog.h \
     addhost.h \
     addticket.h \
+    deletecarrier.h \
+    deleteflight.h \
     deletehost.h \
     deletepilot.h \
     dialog.h \
+    flightlistmodel.h \
     flighttablemodel.h \
     hostlistmodel.h \
     mainwindow.h \
@@ -82,6 +88,8 @@ FORMS += \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \
+    deletecarrier.ui \
+    deleteflight.ui \
     deletehost.ui \
     deletepilot.ui \
     dialog.ui \

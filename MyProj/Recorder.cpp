@@ -7,6 +7,7 @@
 #include "Passenger.h"
 #include "Airline.h"
 #include "Airplane.h"
+#include <QVector>
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 
@@ -171,9 +172,11 @@ T *Recorder<T>::searchByCode(const QString &p){
 template<class T>
 void Recorder<T>::remove(T *a)
 {
+    int index = this->dataList.indexOf(a);
     //this->removeFromFile(a);
     this->dataList.removeOne(a);
     delete a;
+    emit recordRemovedSignal(index);
 }
 
 template<class T>
@@ -274,7 +277,7 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
 }
 
 template<class T>
-void Recorder<T>::recordRemoved(int index)
+void Recorder<T>::recordRemovedSlot(int index)
 {
     this->remove(this->dataList[index]);
 }

@@ -19,7 +19,7 @@ private:
 public:
     Carrier() {}
     Carrier(QString&);
-    ~Carrier() {}
+    ~Carrier() ;
     QString get_data();
 
     void attachFlight(Flight* f);
@@ -34,6 +34,10 @@ public:
     bool isMissionInList(const QString&);
     QString getPlace() const;
     void setPlace(const QString &value);
+
+    void removeFlight(Flight*);
+
+
 };
 
 

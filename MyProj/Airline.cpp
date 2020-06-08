@@ -126,9 +126,9 @@ void Airline::removePilot(Pilot * pilot)
     this->list_of_pilots.removeOne(pilot);
 }
 
-void Airline::removeFlight(Flight *)
+void Airline::removeFlight(Flight *f)
 {
-
+    this->list_of_flights.removeOne(f);
 }
 
 void Airline::removeAirplane(Airplane *)

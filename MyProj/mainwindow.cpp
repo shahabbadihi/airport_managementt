@@ -4,6 +4,8 @@
 #include "addhost.h"
 #include "deletehost.h"
 #include "deletepilot.h"
+#include "deleteflight.h"
+#include "deletecarrier.h"
 #include "addflightdialog.h"
 #include "addairplanedialog.h"
 #include "addticket.h"
@@ -146,6 +148,22 @@ void MainWindow::on_actionAddCarrier_triggered()
     addCarrierDialog->setModal(true);
     addCarrierDialog->exec();
     delete addCarrierDialog;
+}
+
+void MainWindow::on_actionFlight_triggered()
+{
+    this->deleteFlightDialog=new deleteFlight;
+    deleteFlightDialog->setModal(true);
+    deleteFlightDialog->exec();
+    delete deleteFlightDialog;
+}
+
+void MainWindow::on_actioncarrier_triggered()
+{
+    this->deleteCarrierDialog=new deleteCarrier;
+    deleteCarrierDialog->setModal(true);
+    deleteCarrierDialog->exec();
+    delete deleteCarrierDialog;
 }
 
 void MainWindow::updateFiles()

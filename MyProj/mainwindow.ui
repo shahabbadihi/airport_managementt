@@ -215,8 +215,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
+
      <width>755</width>
      <height>21</height>
+
+     <width>731</width>
+     <height>22</height>
+
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -239,6 +244,13 @@
     </property>
     <addaction name="actionDeleteHost"/>
     <addaction name="actionDeletePilot"/>
+    <addaction name="separator"/>
+    <addaction name="actioncarrier"/>
+    <addaction name="actionairplane"/>
+    <addaction name="separator"/>
+    <addaction name="actionTicket"/>
+    <addaction name="actionFlight"/>
+    <addaction name="actionAirline"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDelete"/>
@@ -287,6 +299,31 @@
   <action name="actionDeletePilot">
    <property name="text">
     <string>Pilot</string>
+   </property>
+  </action>
+  <action name="actioncarrier">
+   <property name="text">
+    <string>carrier</string>
+   </property>
+  </action>
+  <action name="actionairplane">
+   <property name="text">
+    <string>airplane</string>
+   </property>
+  </action>
+  <action name="actionTicket">
+   <property name="text">
+    <string>Ticket</string>
+   </property>
+  </action>
+  <action name="actionFlight">
+   <property name="text">
+    <string>Flight</string>
+   </property>
+  </action>
+  <action name="actionAirline">
+   <property name="text">
+    <string>Airline</string>
    </property>
   </action>
  </widget>

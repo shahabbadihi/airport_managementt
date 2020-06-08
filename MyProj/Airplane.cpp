@@ -47,7 +47,12 @@ void Airplane::setSerial(const QString &value)
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
-//    Recorder<Airplane>::getInstance()->updateFile(this);
+    //    Recorder<Airplane>::getInstance()->updateFile(this);
+}
+
+void Airplane::removeFlight(Flight * f)
+{
+    this->list_of_flights.removeOne(f);
 }
 
 bool Airplane::isFree(Flight * f)

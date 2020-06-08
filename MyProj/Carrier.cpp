@@ -134,3 +134,16 @@ void Carrier::attachMission(const QString & m)
         this->list_of_missions.push_back(m);
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
+void Carrier::removeFlight(Flight *f){
+    this->list_of_flights.removeOne(f);
+}
+Carrier::~Carrier(){
+     foreach(Flight* f,this->list_of_flights){
+         f->removeCarrier(this);
+     }
+}
+
+
+
+
+
