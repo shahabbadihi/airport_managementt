@@ -54,7 +54,9 @@ void Employee::set_fname(const QString &name)
 {
     this->fname = name;
 }
-
+QString Employee::getDefaultLocation(){
+    return defaultLocation;
+}
 void Employee::set_fname(const QString &&name)
 {
     this->fname = name;
@@ -74,7 +76,12 @@ void Employee::set_nationalCode(long code)
 {
     this->nationalCode = code;
 }
-
+void Employee::set_defaultLocation(QString & loc){
+    defaultLocation=loc;
+}
+void Employee::set_defaultLocation(QString && loc){
+    defaultLocation=loc;
+}
 void Employee::set_personnelCode(long code)
 {
     this->personnelCode = code;

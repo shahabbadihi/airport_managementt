@@ -13,11 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-<<<<<<< HEAD
+
   <widget class="QWidget" name="layoutWidget">
-=======
-  <widget class="QWidget" name="">
->>>>>>> delete_flight
+
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -71,11 +69,9 @@
     </item>
    </layout>
   </widget>
-<<<<<<< HEAD
-  <widget class="QWidget" name="layoutWidget">
-=======
+
   <widget class="QWidget" name="">
->>>>>>> delete_flight
+
    <property name="geometry">
     <rect>
      <x>50</x>
