@@ -20,6 +20,7 @@ public:
 //    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 //    bool insertRows(int row, int count, const QModelIndex &parent) override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     static FlightTableModel* getInstance();
 
