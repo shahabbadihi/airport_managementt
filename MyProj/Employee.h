@@ -22,7 +22,6 @@ protected:
     QDate employmentDate;
     QVector<Flight*> list;
     Airline* airline;
-    QString defaultLocation;
 public:
     Employee() : airline(nullptr) {}
     Employee(QString& dataStr);
@@ -42,15 +41,12 @@ public:
     void set_birthDate(QDate&& date);
     void set_employmentDate(QDate& date);
     void set_employmentDate(QDate&& date);
-    void set_defaultLocation(QString & loc);
-    void set_defaultLocation(QString && loc);
     void attachFlight(Flight*);
     int flightListSize();
 
     QString getFname();
     QString getLname();
     long getPersonnelCode();
-    QString getDefaultLocation();
 
     bool isFree(Flight*);
     bool isFlightInList(Flight*);
@@ -66,6 +62,8 @@ public:
 
     void removeFlight(Flight*);
 
+    Flight* prevFlight(Flight*);
+    Flight* nextFlight(Flight*);
 };
 
 #endif // EMPLOYEE_H
