@@ -138,21 +138,24 @@ bool Employee::isFree(Flight* f)
     }
     else if(prevFlight(f)==nullptr)
     {
-        if(prevFlight(f)->getDestination()==f->getSource())return true;
-        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
-        else return false;
-    }
-    else if(nextFlight(f)==nullptr)
-    {
         if(nextFlight(f)->getSource()==f->getDestination())return true;
         else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400)return true;
         else return false;
     }
+    else if(nextFlight(f)==nullptr)
+    {
+        if(prevFlight(f)->getDestination()==f->getSource())return true;
+        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
+        else return false;
+    }
+
     if(prevFlight(f)->getDestination()==f->getSource()&&f->getDestination()==nextFlight(f)->getSource()){
         return true;
     }
-    else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400 &&
-            prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)
+    else if((f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>24 * 60 * 60 &&
+            f->getDestination() != nextFlight(f)->getSource()) ||
+            ((prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>24 * 60 * 60) &&
+             f->getSource() == prevFlight(f)->getDestination()))
     {
         return true;
     }
@@ -186,13 +189,20 @@ Flight* Employee::nextFlight(Flight * f){
     }
     for (int i = 0; i < this->list.size(); i++)
     {
-        if(f->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture() &&
-              next->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture()  )
+        if (next)
         {
-            next=list.at(i);
+            if(f->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture() &&
+                  next->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture()  )
+            {
+                next=list.at(i);
+            }
         }
     }
-    if(next->getDateTimeDeparture()<=f->getDateTimeArrival()){return f; }
+
+    if (next)
+    {
+        if(next->getDateTimeDeparture()<=f->getDateTimeArrival()){return f; }
+    }
     return next;
 }
 Flight* Employee::prevFlight(Flight * f){
@@ -206,13 +216,20 @@ Flight* Employee::prevFlight(Flight * f){
     }
     for (int i = 0; i < this->list.size(); i++)
     {
-        if(f->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture() &&
-              prev->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture()  )
+        if (prev)
         {
-            prev=list.at(i);
+            if(f->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture() &&
+                  prev->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture()  )
+            {
+                prev=list.at(i);
+            }
         }
     }
-    if(prev->getDateTimeArrival()>=f->getDateTimeDeparture()){return f; }
+
+    if (prev)
+    {
+        if(prev->getDateTimeArrival()>=f->getDateTimeDeparture()){return f; }
+    }
     return prev;
 }
 //void Employee::setAirline(Airline *value)
