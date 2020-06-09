@@ -1,6 +1,9 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 #include "Pilot.h"
+#include "pd1.h"
+#include "pd2.h"
+#include "pd3.h"
 #include "Recorder.h"
 #include <QMessageBox>
 #include <QVector>
@@ -34,7 +37,19 @@ void Dialog::on_pushButton_2_clicked()
 
 void Dialog::on_pushButton_clicked()
 {
-    Pilot* pilot = new Pilot();
+    Pilot* pilot = nullptr;
+    QRadioButton* radio1 = ui->radio1;
+    QRadioButton* radio2 = ui->radio2;
+    QRadioButton* radio3 = ui->radio3;
+
+    if (radio1->isChecked())
+        pilot = new PD1;
+    else if (radio2->isChecked())
+        pilot = new PD2;
+    else if (radio3->isChecked())
+        pilot = new PD3;
+
+
     pilot->set_personnelCode(ui->txtPersonnelCode->text().toLong());
     pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
     pilot->set_fname(ui->txtFname->text());
@@ -44,16 +59,7 @@ void Dialog::on_pushButton_clicked()
     pilot->set_nationalCode(ui->txtNationalCode->text().toLong());
 
 
-    QRadioButton* radio1 = ui->radio1;
-    QRadioButton* radio2 = ui->radio2;
-    QRadioButton* radio3 = ui->radio3;
 
-    if (radio1->isChecked())
-        pilot->set_degree(radio1->text().toInt());
-    else if (radio2->isChecked())
-        pilot->set_degree(radio2->text().toInt());
-    else if (radio3->isChecked())
-        pilot->set_degree(radio3->text().toInt());
 
     //Recorder<Pilot>::record(pilot);
     //Recorder<Pilot>::addToFile(pilot);

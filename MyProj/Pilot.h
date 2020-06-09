@@ -12,21 +12,24 @@ enum Degree {One, Two, Three};
 class Pilot : public Employee
 {
 private:
-    Degree degree;
+    //Degree degree;
     //QVector<Flight*> list;
 public:
     Pilot() {}
     Pilot(QString& dataStr);
     ~Pilot();
+
+    virtual QString getDegreeAsString() = 0;
+
     void attachFlight(Flight*);
 
 
-    void set_degree(int deg);
+    //void set_degree(int deg);
 
-    QString get_data();
+    //QString get_data();
     void setAirline(Airline *value);
 
-    QString getDegreeAsString() const;
+    //QString getDegreeAsString() const;
 };
 
 #endif // PILOT_H

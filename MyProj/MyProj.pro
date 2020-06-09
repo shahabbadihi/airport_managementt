@@ -44,6 +44,9 @@ SOURCES += \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
+    pd1.cpp \
+    pd2.cpp \
+    pd3.cpp \
     pilotitemmodel.cpp \
     pilotlistmodel.cpp
 
@@ -78,6 +81,9 @@ HEADERS += \
     flighttablemodel.h \
     hostlistmodel.h \
     mainwindow.h \
+    pd1.h \
+    pd2.h \
+    pd3.h \
     pilotitemmodel.h \
     pilotlistmodel.h
 

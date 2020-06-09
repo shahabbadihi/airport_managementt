@@ -3,6 +3,9 @@
 #include "Flight.h"
 #include "Host.h"
 #include "Pilot.h"
+#include "pd1.h"
+#include "pd2.h"
+#include "pd3.h"
 #include "Ticket.h"
 #include "Passenger.h"
 #include "Airline.h"
@@ -291,6 +294,53 @@ void Recorder<T>::recordRemovedSlot(int index)
 //    this->dataList.push_back(a);
 //    emit recordAdded();
 //}
+
+template<>
+void Recorder<Pilot>::import()
+{
+    QDir dataDir(QDir::currentPath() + "/data");
+    if (!dataDir.exists())
+        dataDir.mkpath(QDir::currentPath() + "/data");
+
+
+    QString filename = "";
+    foreach (QFileInfo finfo, dataDir.entryInfoList())
+    {
+        //qDebug() << finfo.fileName();
+        if (finfo.fileName().startsWith(this->getClassName()))
+        {
+            filename = finfo.fileName();
+            break;
+        }
+    }
+
+    QFile file("data/" + filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        //throw QException();
+    }
+    QTextStream in(&file);
+
+    while (!in.atEnd())
+    {
+        QString dataString = in.readLine();
+        QStringList sl = dataString.split('|');
+
+        Pilot* newObj = nullptr;
+        if (sl[4] == "One")
+            newObj = new PD1(dataString);
+        if (sl[4] == "Two")
+            newObj = new PD2(dataString);
+        if (sl[4] == "Three")
+            newObj = new PD3(dataString);
+
+        this->record(newObj);
+    }
+
+    file.close();
+
+    //this->print_dataList();
+}
 
 template<>
 void Recorder<Flight>::setModelPtr()
