@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-<<<<<<< HEAD
+
 
   <widget class="QWidget" name="layoutWidget">
 
@@ -98,7 +98,7 @@
     </item>
    </layout>
   </widget>
-=======
+
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QListView" name="listView"/>

@@ -10,16 +10,6 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#include "mymodel.h"
-#include "flighttablemodel.h"
-#include "pilotitemmodel.h"
-=======
-#include "deleteflight.h"
-#include "deletecarrier.h"
->>>>>>> delete_flight
-=======
 
 //#include "mymodel.h"
 #include "flighttablemodel.h"
@@ -28,7 +18,14 @@
 #include "deleteflight.h"
 #include "deletecarrier.h"
 
->>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
+//#include "mymodel.h"
+#include "flighttablemodel.h"
+#include "pilotitemmodel.h"
+
+#include "deleteflight.h"
+#include "deletecarrier.h"
+
+
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTimer>

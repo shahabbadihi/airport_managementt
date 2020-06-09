@@ -183,10 +183,10 @@ void MainWindow::showClock()
     ui->lblClock->setText(QTime::currentTime().toString());
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
+//<<<<<<< HEAD
+//<<<<<<< HEAD
+//=======
+//>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
 void MainWindow::updateFlightState()
 {
     foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
@@ -285,23 +285,23 @@ void MainWindow::updateButtonsPilot(int row)
 //    QModelIndex i2 = this->model->index(, 0);
 //    this->model->dataChanged();
 //}
-<<<<<<< HEAD
-=======
-void MainWindow::on_actionFlight_triggered()
-{
-    this->deleteFlightDialog=new deleteFlight;
-    deleteFlightDialog->setModal(true);
-    deleteFlightDialog->exec();
-    delete deleteFlightDialog;
-}
+//<<<<<<< HEAD
+//=======
+//void MainWindow::on_actionFlight_triggered()
+//{
+//    this->deleteFlightDialog=new deleteFlight;
+//    deleteFlightDialog->setModal(true);
+//    deleteFlightDialog->exec();
+//    delete deleteFlightDialog;
+//}
 
-void MainWindow::on_actioncarrier_triggered()
-{
-    this->deleteCarrierDialog=new deleteCarrier;
-    deleteCarrierDialog->setModal(true);
-    deleteCarrierDialog->exec();
-    delete deleteCarrierDialog;
-}
->>>>>>> delete_flight
-=======
->>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
+//void MainWindow::on_actioncarrier_triggered()
+//{
+//    this->deleteCarrierDialog=new deleteCarrier;
+//    deleteCarrierDialog->setModal(true);
+//    deleteCarrierDialog->exec();
+//    delete deleteCarrierDialog;
+//}
+//>>>>>>> delete_flight
+//=======
+//>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
