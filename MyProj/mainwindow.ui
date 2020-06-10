@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="usesScrollButtons">
        <bool>true</bool>
@@ -215,23 +215,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<!--<<<<<<< HEAD
-<<<<<<< HEAD-->
      <width>755</width>
-     <height>21</height>
-<!--=======-->
-     <width>731</width>
      <height>22</height>
-<!-->>>>>>> delete_flight
-=======-->
-
-     <width>755</width>
-     <height>21</height>
-
-     <width>731</width>
-     <height>22</height>
-
-<!-->>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef-->
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
