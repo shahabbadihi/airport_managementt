@@ -4,6 +4,10 @@
 #include "Recorder.h"
 #include "Flight.h"
 #include "Passenger.h"
+#include "p2_12.h"
+#include "pu2.h"
+#include "po12.h"
+#include "getpassengerfactory.h"
 #include <QMessageBox>
 
 template <class T>
@@ -36,14 +40,38 @@ void AddTicket::on_btnSubmit_clicked()
             //ticket->setSource(ui->txtSource->text());
             //ticket->setDestination(ui->txtDest->text());
 
-            Passenger* passenger = new Passenger;
+            Passenger* passenger = nullptr;
+
+            int age = ui->dtDate->date().year() - ui->dtBirthDate->date().year();
+            if (ui->dtBirthDate->date() > ui->dtDate->date().addYears(-age))
+                age--;
+
+            if (age < 2)
+            {
+                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
+                                                                             ui->dtDate->date(),
+                                                                             ui->txtNationalCode->text() + "A");
+            }
+            else if (age >= 2 && age <= 12)
+            {
+                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
+                                                                             ui->dtDate->date(),
+                                                                             ui->txtNationalCode->text() + "B");
+            }
+            else if (age > 12)
+            {
+                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
+                                                                             ui->dtDate->date(),
+                                                                             ui->txtNationalCode->text() + "C");
+            }
+
             passenger->setNationalCode(ui->txtNationalCode->text().toLong());
             passenger->setFname(ui->txtFName->text());
             passenger->setLname(ui->txtLName->text());
             passenger->setBirthDate(ui->dtBirthDate->date());
             passenger->setFatherName(ui->txtPassFatherName->text());
 
-            passenger->setTicket(ticket);
+            passenger->attachTicket(ticket);
 
             Recorder<Passenger>::getInstance()->add(passenger);
 

@@ -15,3 +15,9 @@ PO12::~PO12()
 {
 
 }
+
+void PO12::setNationalCode(long n)
+{
+    this->nationalCode = n;
+    this->setSearchCode(QString::number(n) + "C");
+}

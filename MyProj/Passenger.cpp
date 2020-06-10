@@ -2,10 +2,10 @@
 #include "Ticket.h"
 #include <QStringList>
 Passenger::Passenger(QString & data_str)
-    : ticket(nullptr)
 {
     QStringList str_list = data_str.split('|');
-    this->setNationalCode(str_list.at(0).toLong());
+    this->nationalCode = str_list.at(0).left(str_list[0].length() - 1).toLong();
+    this->search_code = str_list.at(0);
     this->setFname(str_list.at(1));
     this->setLname(str_list.at(2));
     this->setFatherName(str_list.at(3));
@@ -17,20 +17,32 @@ Passenger::Passenger(QString & data_str)
     
     //this->setTicketNo(str_list.at(5).toLong());
 
-    this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(str_list[5]));
+    //this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(str_list[5]));
+    QStringList tickets = str_list[5].split('/', Qt::SkipEmptyParts);
+    foreach (QString s, tickets)
+    {
+        this->attachTicket(Recorder<Ticket>::getInstance()->searchByCode(s));
+    }
 }
 
 QString Passenger::get_data()
 {
-    QString data_str = QString::number(this->nationalCode) + "|" +
+    QString data_str = this->getSearchCode() + "|" +
             this->fname + "|" +
             this->lname + "|" +
             this->fatherName + "|" +
             QString::number(this->birthDate.month()) + "/" +
             QString::number(this->birthDate.day()) + "/" +
-            QString::number(this->birthDate.year()) + "|" +
+            QString::number(this->birthDate.year()) + "|";
 
-            (this->ticket ? this->ticket->getSearchCode() : "") + "\n";
+            //(this->ticket ? this->ticket->getSearchCode() : "") + "\n";
+
+    foreach (Ticket* t, this->list_of_tickets)
+    {
+        if (t)
+            data_str += t->getSearchCode() + "/";
+    }
+    data_str += "\n";
     return data_str;
 }
 
@@ -52,13 +64,11 @@ void Passenger::setFatherName(const QString & father_name)
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
-void Passenger::setNationalCode(long n)
-{
-    this->nationalCode = n;
-//    this->search_code = QString::number(n);
-    this->setSearchCode(QString::number(n));
-//    Recorder<Passenger>::getInstance()->updateFile(this);
-}
+//void Passenger::setNationalCode(long n)
+//{
+//    this->nationalCode = n;
+//    this->setSearchCode(QString::number(n));
+//}
 
 void Passenger::setBirthDate(const QDate & date)
 {
@@ -75,7 +85,26 @@ void Passenger::setBirthDate(const QDate && date)
 void Passenger::setBirthDate(int year, int month, int day)
 {
     this->birthDate.setDate(year, month, day);
-//    Recorder<Passenger>::getInstance()->updateFile(this);
+    //    Recorder<Passenger>::getInstance()->updateFile(this);
+}
+
+void Passenger::attachTicket(Ticket * t)
+{
+    if (t && !this->isTicketInList(t))
+    {
+        this->list_of_tickets.push_back(t);
+        t->setPassenger(this);
+    }
+}
+
+bool Passenger::isTicketInList(Ticket * t)
+{
+    foreach (Ticket* ti, this->list_of_tickets)
+    {
+        if (ti == t)
+            return true;
+    }
+    return false;
 }
 
 //void Passenger::setTicketNo(long n)
@@ -84,16 +113,16 @@ void Passenger::setBirthDate(int year, int month, int day)
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 //}
 
-void Passenger::setTicket(Ticket * t)
-{
-    if (t && !this->ticket)
-    {
-        this->ticket = t;
-        t->setPassenger(this);
-    }
+//void Passenger::setTicket(Ticket * t)
+//{
+//    if (t && !this->ticket)
+//    {
+//        this->ticket = t;
+//        t->setPassenger(this);
+//    }
     //this->ticket_no = t->getNo();
 //    Recorder<Passenger>::getInstance()->updateFile(this);
-}
+//}
 
 QString Passenger::getFname()
 {

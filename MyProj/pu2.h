@@ -9,6 +9,7 @@ public:
     PU2(QString& str_data);
     ~PU2();
 
+    void setNationalCode(long) override;
 };
 
 #endif // PU2_H

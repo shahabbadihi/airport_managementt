@@ -16,3 +16,10 @@ PU2::~PU2()
 {
 
 }
+
+void PU2::setNationalCode(long n)
+{
+    this->nationalCode = n;
+    this->setSearchCode(QString::number(n) + "A");
+}
+

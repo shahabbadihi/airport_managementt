@@ -8,9 +8,10 @@
 #include "pd3.h"
 #include "Ticket.h"
 #include "Passenger.h"
-#include "pu2.h"
-#include "po12.h"
-#include "p2_12.h"
+#include "getpassengerfactory.h"
+//#include "pu2.h"
+//#include "po12.h"
+//#include "p2_12.h"
 #include "Airline.h"
 #include "Airplane.h"
 #include <QVector>
@@ -111,6 +112,17 @@ QVector<T *> Recorder<T>::get_dataList()
 }
 
 template<class T>
+bool Recorder<T>::isInList(T *a)
+{
+    foreach (T* t, this->dataList)
+    {
+        if (a == t)
+            return true;
+    }
+    return false;
+}
+
+template<class T>
 void Recorder<T>::print_dataList()
 {
     for (int i = 0; i < this->dataList.size(); i++)
@@ -122,7 +134,8 @@ void Recorder<T>::print_dataList()
 template<class T>
 void Recorder<T>::add(T *a)
 {
-    this->record(a);
+    if (!this->isInList(a))
+        this->record(a);
     //this->addToFile(a);
 }
 
@@ -374,18 +387,11 @@ void Recorder<Passenger>::import()
     while (!in.atEnd())
     {
         QString dataString = in.readLine();
-        QStringList sl = dataString.split('|');
-        QStringList date = sl[4].split('/');
-        QDate dt(date[2].toInt(), date[0].toInt(), date[1].toInt());
+//        QStringList sl = dataString.split('|');
+//        QStringList date = sl[4].split('/');
+//        QDate dt(date[2].toInt(), date[0].toInt(), date[1].toInt());
 
-        Passenger* newObj = nullptr;
-        if (dt.daysTo(QDate::currentDate()) < )
-            newObj = new PU2(dataString);
-        if (sl[4] == "Two")
-            newObj = new P2_12(dataString);
-        if (sl[4] == "Three")
-            newObj = new PO12(dataString);
-
+        Passenger* newObj = GetPassengerFactory::getInstance()->getPassenger(dataString);
         this->record(newObj);
     }
 

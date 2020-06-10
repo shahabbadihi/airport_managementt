@@ -127,7 +127,7 @@ void Ticket::setPassenger(Passenger * p)
     if (p && !this->passenger)
     {
         this->passenger = p;
-        p->setTicket(this);
+        p->attachTicket(this);
     }
 //    this->setPassengerFname(p->getFname());
 //    this->setPassengerLname(p->getLname());

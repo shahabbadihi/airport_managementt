@@ -41,6 +41,7 @@ SOURCES += \
     dialog.cpp \
     flightlistmodel.cpp \
     flighttablemodel.cpp \
+    getpassengerfactory.cpp \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -82,6 +83,7 @@ HEADERS += \
     dialog.h \
     flightlistmodel.h \
     flighttablemodel.h \
+    getpassengerfactory.h \
     hostlistmodel.h \
     mainwindow.h \
     p2_12.h \

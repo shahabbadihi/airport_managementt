@@ -37,6 +37,7 @@ public:
     void removeFromFile(T* a);
 
     QVector<T*> get_dataList();
+    bool isInList(T * a);
 
     void print_dataList();
     void add(T* a);

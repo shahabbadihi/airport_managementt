@@ -8,6 +8,8 @@ public:
     PO12();
     PO12(QString& str_data);
     ~PO12();
+
+    void setNationalCode(long) override;
 };
 
 #endif // PO12_H

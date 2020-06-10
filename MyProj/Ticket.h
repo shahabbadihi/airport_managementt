@@ -63,7 +63,7 @@ public:
 
     QString getSource();
     QString getDestination();
-    QDate getDateFlight();
+    //QDate getDateFlight();
     Flight *getFlight() const;
     long getNo() const;
     //void setAirline(Airline *value);

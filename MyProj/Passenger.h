@@ -15,10 +15,11 @@ protected:
     QString fatherName;
     long nationalCode;
     QDate birthDate;
-    Ticket* ticket;
+    //Ticket* ticket;
+    QVector<Ticket*> list_of_tickets;
     //long ticket_no;
 public:
-    Passenger() : ticket(nullptr) {}
+    Passenger() {}
     Passenger(QString&);
     ~Passenger() {}
 
@@ -27,12 +28,13 @@ public:
     void setLname(const QString&);
     void setFname(const QString&);
     void setFatherName(const QString&);
-    void setNationalCode(long);
+    virtual void setNationalCode(long) = 0;
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);
     //void setTicketNo(long);
-    void setTicket(Ticket*);
+    void attachTicket(Ticket*);
+    bool isTicketInList(Ticket*);
 
     QString getFname();
     QString getLname();
