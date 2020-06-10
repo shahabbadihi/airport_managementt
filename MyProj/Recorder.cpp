@@ -8,6 +8,9 @@
 #include "pd3.h"
 #include "Ticket.h"
 #include "Passenger.h"
+#include "pu2.h"
+#include "po12.h"
+#include "p2_12.h"
 #include "Airline.h"
 #include "Airplane.h"
 #include <QVector>
@@ -341,6 +344,56 @@ void Recorder<Pilot>::import()
 
     //this->print_dataList();
 }
+
+template<>
+void Recorder<Passenger>::import()
+{
+    QDir dataDir(QDir::currentPath() + "/data");
+    if (!dataDir.exists())
+        dataDir.mkpath(QDir::currentPath() + "/data");
+
+
+    QString filename = "";
+    foreach (QFileInfo finfo, dataDir.entryInfoList())
+    {
+        //qDebug() << finfo.fileName();
+        if (finfo.fileName().startsWith(this->getClassName()))
+        {
+            filename = finfo.fileName();
+            break;
+        }
+    }
+
+    QFile file("data/" + filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        //throw QException();
+    }
+    QTextStream in(&file);
+
+    while (!in.atEnd())
+    {
+        QString dataString = in.readLine();
+        QStringList sl = dataString.split('|');
+        QStringList date = sl[4].split('/');
+        QDate dt(date[2].toInt(), date[0].toInt(), date[1].toInt());
+
+        Passenger* newObj = nullptr;
+        if (dt.daysTo(QDate::currentDate()) < )
+            newObj = new PU2(dataString);
+        if (sl[4] == "Two")
+            newObj = new P2_12(dataString);
+        if (sl[4] == "Three")
+            newObj = new PO12(dataString);
+
+        this->record(newObj);
+    }
+
+    file.close();
+
+    //this->print_dataList();
+}
+
 
 template<>
 void Recorder<Flight>::setModelPtr()

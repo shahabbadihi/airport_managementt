@@ -44,11 +44,14 @@ SOURCES += \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
+    p2_12.cpp \
     pd1.cpp \
     pd2.cpp \
     pd3.cpp \
     pilotitemmodel.cpp \
-    pilotlistmodel.cpp
+    pilotlistmodel.cpp \
+    po12.cpp \
+    pu2.cpp
 
 HEADERS += \
     Airline.h \
@@ -81,11 +84,14 @@ HEADERS += \
     flighttablemodel.h \
     hostlistmodel.h \
     mainwindow.h \
+    p2_12.h \
     pd1.h \
     pd2.h \
     pd3.h \
     pilotitemmodel.h \
-    pilotlistmodel.h
+    pilotlistmodel.h \
+    po12.h \
+    pu2.h
 
 FORMS += \
     addairlinedialog.ui \

@@ -9,7 +9,7 @@
 class Ticket;
 class Passenger : public Object
 {
-private:
+protected:
     QString lname;
     QString fname;
     QString fatherName;
@@ -22,7 +22,7 @@ public:
     Passenger(QString&);
     ~Passenger() {}
 
-    QString get_data();
+    QString get_data() override;
 
     void setLname(const QString&);
     void setFname(const QString&);

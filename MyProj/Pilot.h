@@ -7,7 +7,7 @@
 #include "Employee.h"
 #include "Flight.h"
 class Flight;
-enum Degree {One, Two, Three};
+//enum Degree {One, Two, Three};
 
 class Pilot : public Employee
 {
