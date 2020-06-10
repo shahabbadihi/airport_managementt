@@ -78,6 +78,7 @@ public:
     void removePilot();
     //void attachPassenger(Passenger*);
     void removeCarrier(Carrier*);
+    void removeTicket(Ticket*);
 
     QDateTime getDateTimeArrival();
     QDateTime getDateTimeDeparture();
@@ -114,11 +115,13 @@ public:
     static bool haveInterference(Flight* f1, Flight* f2);
 
     int getCapacity() const;
+    int getAttachedTicketsize()const;
     void setCapacity(int value);
     state getFlightState() const;
     QString getFlightStateAsString() const;
     void setFlightState(const state &value);
     void setFlightStateAsString(const QString &value);
+    
 };
 
 #endif // FLIGHT_H

@@ -46,7 +46,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pilotitemmodel.cpp \
-    pilotlistmodel.cpp
+    pilotlistmodel.cpp \
+    ticketlistmodel.cpp
 
 HEADERS += \
     Airline.h \
@@ -81,7 +82,8 @@ HEADERS += \
     hostlistmodel.h \
     mainwindow.h \
     pilotitemmodel.h \
-    pilotlistmodel.h
+    pilotlistmodel.h \
+    ticketlistmodel.h
 
 FORMS += \
     addairlinedialog.ui \

@@ -175,3 +175,9 @@ Flight *Ticket::getFlight() const
 {
     return this->flight;
 }
+QString Ticket::getPassengerName(){
+    return passenger->getFname()+" "+passenger->getLname();
+}
+Ticket::~Ticket(){
+    this->flight->removeTicket(this);
+}

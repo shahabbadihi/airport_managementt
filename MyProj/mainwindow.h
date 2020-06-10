@@ -24,7 +24,7 @@
 
 #include "deleteflight.h"
 #include "deletecarrier.h"
-
+#include "deleteticket.h"
 
 #include <QMainWindow>
 #include <QTableWidget>
@@ -88,6 +88,8 @@ private slots:
 
     void on_actioncarrier_triggered();
 
+    void on_actionTicket_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -102,6 +104,7 @@ private:
     deleteHost* deleteHostDialog;
     deleteFlight* deleteFlightDialog;
     deleteCarrier* deleteCarrierDialog;
+    deleteTicket * deleteTicketDialog;
     QTimer * timer;
 
     FlightTableModel * flight_table_model;

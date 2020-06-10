@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
-=======
->>>>>>> chose_employee
 <ui version="4.0">
  <class>deleteTicket</class>
  <widget class="QDialog" name="deleteTicket">
@@ -16,57 +13,68 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-<<<<<<< HEAD
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>230</y>
-     <width>261</width>
-     <height>61</height>
+     <x>40</x>
+     <y>0</y>
+     <width>321</width>
+     <height>301</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>Delete</string>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Ticket No:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="serachButton">
+          <property name="text">
+           <string>search</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QListView" name="listView"/>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="text">
+         <string>delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="text">
+         <string>cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_11">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Date:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QDateEdit" name="dateEdit"/>
-    </item>
-   </layout>
-  </widget>
-=======
->>>>>>> chose_employee
  </widget>
  <resources/>
  <connections/>
