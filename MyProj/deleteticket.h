@@ -19,6 +19,8 @@ public:
 private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
+    void on_deleteButton_clicked();
+
 private:
     Ui::deleteTicket *ui;
 

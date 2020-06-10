@@ -1,7 +1,7 @@
 #include "deleteticket.h"
 #include "ui_deleteticket.h"
 #include <QSortFilterProxyModel>
-
+#include <QMessageBox>
 deleteTicket::deleteTicket(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::deleteTicket)
@@ -31,4 +31,18 @@ void deleteTicket::on_lineEdit_textChanged(const QString &arg1)
             model, SLOT(updateFilter(QString)));
     model->updateFilter(arg1);
     ui->listView->setModel(model);
+}
+
+void deleteTicket::on_deleteButton_clicked()
+{
+    QModelIndex index = ui->listView->currentIndex();
+    this->model->removeRows(index.row(), 1);
+   //
+   //
+   QMessageBox msg;
+   msg.setText("Delete Successfully!");
+   msg.exec();
+
+//}
+//}
 }
