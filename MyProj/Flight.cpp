@@ -189,6 +189,7 @@ QString Flight::getFlightStateAsString() const
         return "DONE";
         break;
     }
+    return "";
 }
 
 void Flight::setFlightState(const state &value)
@@ -213,7 +214,7 @@ void Flight::setFlightStateAsString(const QString &value)
 }
 
 Flight::Flight(QString & data_str)
-    : flightState(SUSPENDED), numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
+    : flightState(SUSPENDED), numOfPassengers(0), pilot(nullptr), airline(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
 {
     QStringList str_list = data_str.split('|');
     str_list.replaceInStrings("\n", "");

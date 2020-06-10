@@ -206,6 +206,7 @@ Flight* Employee::nextFlight(Flight * f){
     }
     return next;
 }
+
 Flight* Employee::prevFlight(Flight * f){
     if(list.size()==0){return nullptr;}
     Flight* prev = nullptr;

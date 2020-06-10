@@ -50,7 +50,7 @@ private:
     Carrier* arrival_carrier;
     Price ticketsSaleCost;
 public:
-    Flight()  : flightState(SUSPENDED), numOfPassengers(0), airline(nullptr), pilot(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
+    Flight()  : flightState(SUSPENDED), numOfPassengers(0), pilot(nullptr), airline(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
     Flight(QString&);
     ~Flight() ;
 
