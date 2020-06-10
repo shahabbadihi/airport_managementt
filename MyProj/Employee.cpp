@@ -54,9 +54,7 @@ void Employee::set_fname(const QString &name)
 {
     this->fname = name;
 }
-QString Employee::getDefaultLocation(){
-    return defaultLocation;
-}
+
 void Employee::set_fname(const QString &&name)
 {
     this->fname = name;
@@ -75,12 +73,6 @@ void Employee::set_lname(const QString &&family)
 void Employee::set_nationalCode(long code)
 {
     this->nationalCode = code;
-}
-void Employee::set_defaultLocation(QString & loc){
-    defaultLocation=loc;
-}
-void Employee::set_defaultLocation(QString && loc){
-    defaultLocation=loc;
 }
 void Employee::set_personnelCode(long code)
 {
@@ -132,20 +124,41 @@ long Employee::getPersonnelCode()
 
 bool Employee::isFree(Flight* f)
 {
-    for (int i = 0; i < this->list.size(); i++)
+    if(isFlightInList(f))
     {
-        if ( !(
-            (this->list.at(i)->getDateTimeDeparture() > f->getDateTimeArrival() &&
-             this->list.at(i)->getSource() == f->getDestination()) ||
-            (this->list.at(i)->getDateTimeArrival() < f->getDateTimeDeparture() &&
-             this->list.at(i)->getDestination() == f->getSource())
-              )
-           )
-        {
-            return false;
-        }
+        return false;
     }
-    return true;
+    if(prevFlight(f)==f || nextFlight(f)==f)
+    {
+        return false;
+    }
+    if(prevFlight(f)==nullptr&&nextFlight(f)==nullptr)
+    {
+        return true;
+    }
+    else if(nextFlight(f)==nullptr)
+    {
+        if(prevFlight(f)->getDestination()==f->getSource())return true;
+        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
+        else return false;
+    }
+    else if(prevFlight(f)==nullptr)
+    {
+        if(nextFlight(f)->getSource()==f->getDestination())return true;
+        else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400)return true;
+        else return false;
+    }
+    if(prevFlight(f)->getDestination()==f->getSource()&&f->getDestination()==nextFlight(f)->getSource()){
+        return true;
+    }
+    else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400 &&
+            prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool Employee::isFlightInList(Flight * f)
@@ -162,7 +175,46 @@ Airline *Employee::getAirline() const
 {
     return airline;
 }
-
+Flight* Employee::nextFlight(Flight * f){
+    if(list.size()==0){return nullptr;}
+    Flight* next = nullptr;
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if(f->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture()){
+            next=list.at(i);
+        }
+    }
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if(f->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture() &&
+              next->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture()  )
+        {
+            next=list.at(i);
+        }
+    }
+    if(next->getDateTimeDeparture()<=f->getDateTimeArrival()){return f; }
+    return next;
+}
+Flight* Employee::prevFlight(Flight * f){
+    if(list.size()==0){return nullptr;}
+    Flight* prev = nullptr;
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if(f->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture()){
+            prev=list.at(i);
+        }
+    }
+    for (int i = 0; i < this->list.size(); i++)
+    {
+        if(f->getDateTimeDeparture()>this->list.at(i)->getDateTimeDeparture() &&
+              prev->getDateTimeDeparture()<this->list.at(i)->getDateTimeDeparture()  )
+        {
+            prev=list.at(i);
+        }
+    }
+    if(prev->getDateTimeArrival()>=f->getDateTimeDeparture()){return f; }
+    return prev;
+}
 //void Employee::setAirline(Airline *value)
 //{
 //    if (value)

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
+=======
+>>>>>>> chose_employee
 <ui version="4.0">
  <class>deleteTicket</class>
  <widget class="QDialog" name="deleteTicket">
@@ -13,6 +16,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+<<<<<<< HEAD
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
@@ -61,6 +65,8 @@
     </item>
    </layout>
   </widget>
+=======
+>>>>>>> chose_employee
  </widget>
  <resources/>
  <connections/>

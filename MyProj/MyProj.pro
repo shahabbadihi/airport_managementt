@@ -38,6 +38,7 @@ SOURCES += \
     deleteflight.cpp \
     deletehost.cpp \
     deletepilot.cpp \
+    deleteticket.cpp \
     dialog.cpp \
     flightlistmodel.cpp \
     flighttablemodel.cpp \
@@ -73,6 +74,7 @@ HEADERS += \
     deleteflight.h \
     deletehost.h \
     deletepilot.h \
+    deleteticket.h \
     dialog.h \
     flightlistmodel.h \
     flighttablemodel.h \
@@ -92,6 +94,7 @@ FORMS += \
     deleteflight.ui \
     deletehost.ui \
     deletepilot.ui \
+    deleteticket.ui \
     dialog.ui \
     mainwindow.ui
 
