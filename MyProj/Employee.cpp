@@ -178,6 +178,7 @@ Airline *Employee::getAirline() const
 {
     return airline;
 }
+
 Flight* Employee::nextFlight(Flight * f){
     if(list.size()==0){return nullptr;}
     Flight* next = nullptr;

@@ -59,20 +59,111 @@ bool Airplane::isFree(Flight * f)
 {
     if (this->numOfSeats < f->getNumOfPassengers())
         return false;
+
+    if(isFlightInList(f))
+    {
+        return false;
+    }
+    if(prevFlight(f)==f || nextFlight(f)==f)
+    {
+        return false;
+    }
+    if(prevFlight(f)==nullptr&&nextFlight(f)==nullptr)
+    {
+        return true;
+    }
+    else if(prevFlight(f)==nullptr)
+    {
+        if(nextFlight(f)->getSource()==f->getDestination())return true;
+        else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400)return true;
+        else return false;
+    }
+    else if(nextFlight(f)==nullptr)
+    {
+        if(prevFlight(f)->getDestination()==f->getSource())return true;
+        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
+        else return false;
+    }
+
+    if(prevFlight(f)->getDestination()==f->getSource()&&f->getDestination()==nextFlight(f)->getSource()){
+        return true;
+    }
+    else if((f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>24 * 60 * 60 &&
+            f->getDestination() != nextFlight(f)->getSource()) ||
+            ((prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>24 * 60 * 60) &&
+             f->getSource() == prevFlight(f)->getDestination()))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+Flight* Airplane::nextFlight(Flight * f){
+    if(list_of_flights.size()==0){return nullptr;}
+    Flight* next = nullptr;
     for (int i = 0; i < this->list_of_flights.size(); i++)
     {
-        if ( !(
-            (this->list_of_flights.at(i)->getDateTimeDeparture() > f->getDateTimeArrival() &&
-             this->list_of_flights.at(i)->getSource() == f->getDestination()) ||
-            (this->list_of_flights.at(i)->getDateTimeArrival() < f->getDateTimeDeparture() &&
-             this->list_of_flights.at(i)->getDestination() == f->getSource())
-              )
-           )
-        {
-            return false;
+        if(f->getDateTimeDeparture()<this->list_of_flights.at(i)->getDateTimeDeparture()){
+            next=list_of_flights.at(i);
         }
     }
-    return true;
+    for (int i = 0; i < this->list_of_flights.size(); i++)
+    {
+        if (next)
+        {
+            if(f->getDateTimeDeparture()<this->list_of_flights.at(i)->getDateTimeDeparture() &&
+                  next->getDateTimeDeparture()>this->list_of_flights.at(i)->getDateTimeDeparture()  )
+            {
+                next=list_of_flights.at(i);
+            }
+        }
+    }
+
+    if (next)
+    {
+        if(next->getDateTimeDeparture()<=f->getDateTimeArrival()){return f; }
+    }
+    return next;
+}
+
+Flight* Airplane::prevFlight(Flight * f){
+    if(list_of_flights.size()==0){return nullptr;}
+    Flight* prev = nullptr;
+    for (int i = 0; i < this->list_of_flights.size(); i++)
+    {
+        if(f->getDateTimeDeparture()>this->list_of_flights.at(i)->getDateTimeDeparture()){
+            prev=list_of_flights.at(i);
+        }
+    }
+    for (int i = 0; i < this->list_of_flights.size(); i++)
+    {
+        if (prev)
+        {
+            if(f->getDateTimeDeparture()>this->list_of_flights.at(i)->getDateTimeDeparture() &&
+                  prev->getDateTimeDeparture()<this->list_of_flights.at(i)->getDateTimeDeparture()  )
+            {
+                prev=list_of_flights.at(i);
+            }
+        }
+    }
+
+    if (prev)
+    {
+        if(prev->getDateTimeArrival()>=f->getDateTimeDeparture()){return f; }
+    }
+    return prev;
+}
+
+bool Airplane::isFlightInList(Flight * f)
+{
+    foreach (Flight* fl, this->list_of_flights)
+    {
+        if (fl == f)
+            return true;
+    }
+    return false;
 }
 
 Airplane::Airplane(QString & str_data)

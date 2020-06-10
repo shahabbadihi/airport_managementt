@@ -37,6 +37,9 @@ public:
     void removeFlight(Flight*);
 
     bool isFree(Flight*);
+    bool isFlightInList(Flight *f);
+    Flight *nextFlight(Flight *f);
+    Flight *prevFlight(Flight *f);
 };
 
 #endif // AIRPLANE_H
