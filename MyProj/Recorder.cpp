@@ -343,11 +343,11 @@ void Recorder<Pilot>::import()
         QStringList sl = dataString.split('|');
 
         Pilot* newObj = nullptr;
-        if (sl[4] == "One")
+        if (sl[4] == "1")
             newObj = new PD1(dataString);
-        if (sl[4] == "Two")
+        if (sl[4] == "2")
             newObj = new PD2(dataString);
-        if (sl[4] == "Three")
+        if (sl[4] == "3")
             newObj = new PD3(dataString);
 
         this->record(newObj);

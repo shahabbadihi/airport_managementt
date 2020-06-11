@@ -21,7 +21,7 @@ QString PD1::get_data()
 {
     QString data = QString::number(this->personnelCode) + "|" +
                 this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
-                /*+ deg + "|"*/ + "One" + "|" + QString::number(this->nationalCode) + "|"
+                /*+ deg + "|"*/ + "1" + "|" + QString::number(this->nationalCode) + "|"
 
                 + QString::number(this->birthDate.month()) + "/"
                 + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())

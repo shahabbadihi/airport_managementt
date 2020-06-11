@@ -637,6 +637,12 @@ void Flight::removeCarrier(Carrier* c){
         departure_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeDeparture(),getSource());
     }
 }
+int Flight::getAttachedTicketsize()const{
+    return tickets.size();
+}
+void Flight::removeTicket(Ticket* T){
+   tickets.removeOne(T);
+}
 //void Flight::setDate(const QDate & d)
 //{
 //    this->date.setDate(d.year(), d.month(), d.day());

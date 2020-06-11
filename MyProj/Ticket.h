@@ -40,7 +40,7 @@ private:
 public:
     Ticket() : flight(nullptr), passenger(nullptr) {}
     Ticket(QString&);
-    ~Ticket() {}
+    ~Ticket() ;
     QString get_data();
 
 //    void setDestination(const QString&);
@@ -67,6 +67,7 @@ public:
     Flight *getFlight() const;
     long getNo() const;
     //void setAirline(Airline *value);
+    QString getPassengerName();
 };
 
 

@@ -10,7 +10,7 @@ HostListModel* HostListModel::instance;
 HostListModel::HostListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Host>::getInstance(), SLOT(recordRemoved(int)));
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Host>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int HostListModel::rowCount(const QModelIndex &/*parent*/) const
