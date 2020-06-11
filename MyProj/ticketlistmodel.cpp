@@ -8,7 +8,7 @@ TicketListModel* TicketListModel::instance;
 TicketListModel::TicketListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-       connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Ticket>::getInstance(), SLOT(recordRemoved(int)));
+       connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Ticket>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int TicketListModel::rowCount(const QModelIndex &/*parent*/) const
