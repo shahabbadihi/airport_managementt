@@ -10,7 +10,7 @@ deleteTicket::deleteTicket(QWidget *parent) :
     this->model = TicketListModel::getInstance();
     this->proxy = new QSortFilterProxyModel(this);
     proxy->setSourceModel(model);
-    //proxy->setDynamicSortFilter(true);
+    proxy->setDynamicSortFilter(true);
     ui->listView->setModel(proxy);
 
     //ui->listView->setRootIndex(proxy->mapFromSource(model->index(model->rootPath())));

@@ -97,6 +97,14 @@ void Passenger::attachTicket(Ticket * t)
     }
 }
 
+void Passenger::removeTicket(Ticket * t)
+{
+    if (t && this->isTicketInList(t))
+    {
+        this->list_of_tickets.removeOne(t);
+    }
+}
+
 bool Passenger::isTicketInList(Ticket * t)
 {
     foreach (Ticket* ti, this->list_of_tickets)

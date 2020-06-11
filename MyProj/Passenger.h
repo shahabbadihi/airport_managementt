@@ -34,6 +34,7 @@ public:
     void setBirthDate(int year, int month, int day);
     //void setTicketNo(long);
     void attachTicket(Ticket*);
+    void removeTicket(Ticket*);
     bool isTicketInList(Ticket*);
 
     QString getFname();

@@ -24,8 +24,11 @@ Recorder<T>* Recorder<T>::instance;
 template<class T>
 void Recorder<T>::record(T *a)
 {
-    this->dataList.push_back(a);
-    emit recordAdded();
+    if (a && !this->isInList(a))
+    {
+        this->dataList.push_back(a);
+        emit recordAdded();
+    }
     //Recorder<T>::print_dataList();
 }
 
@@ -134,7 +137,7 @@ void Recorder<T>::print_dataList()
 template<class T>
 void Recorder<T>::add(T *a)
 {
-    if (!this->isInList(a))
+    if (a && !this->isInList(a))
         this->record(a);
     //this->addToFile(a);
 }
@@ -296,9 +299,9 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
 }
 
 template<class T>
-void Recorder<T>::recordRemovedSlot(int index)
+void Recorder<T>::recordRemovedSlot(const QString& search_code)
 {
-    this->remove(this->dataList[index]);
+    this->remove(this->searchByCode(search_code));
 }
 
 
