@@ -24,6 +24,7 @@
 #include "Carrier.h"
 #include "Flight.h"
 #include "Ticket.h"
+#include "deleteticket.h"
 
 template <class T>
 Recorder<T>* Recorder<T>::instance;
@@ -305,3 +306,11 @@ void MainWindow::updateButtonsPilot(int row)
 //>>>>>>> delete_flight
 //=======
 //>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
+
+void MainWindow::on_actionTicket_triggered()
+{
+    this->deleteTicketDialog=new deleteTicket;
+    deleteTicketDialog->setModal(true);
+    deleteTicketDialog->exec();
+    delete deleteTicketDialog;
+}

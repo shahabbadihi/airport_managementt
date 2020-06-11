@@ -38,6 +38,7 @@ SOURCES += \
     deleteflight.cpp \
     deletehost.cpp \
     deletepilot.cpp \
+    deleteticket.cpp \
     dialog.cpp \
     flightlistmodel.cpp \
     flighttablemodel.cpp \
@@ -48,7 +49,8 @@ SOURCES += \
     pd2.cpp \
     pd3.cpp \
     pilotitemmodel.cpp \
-    pilotlistmodel.cpp
+    pilotlistmodel.cpp \
+    ticketlistmodel.cpp
 
 HEADERS += \
     Airline.h \
@@ -76,6 +78,7 @@ HEADERS += \
     deleteflight.h \
     deletehost.h \
     deletepilot.h \
+    deleteticket.h \
     dialog.h \
     flightlistmodel.h \
     flighttablemodel.h \
@@ -85,7 +88,8 @@ HEADERS += \
     pd2.h \
     pd3.h \
     pilotitemmodel.h \
-    pilotlistmodel.h
+    pilotlistmodel.h \
+    ticketlistmodel.h
 
 FORMS += \
     addairlinedialog.ui \
@@ -98,6 +102,7 @@ FORMS += \
     deleteflight.ui \
     deletehost.ui \
     deletepilot.ui \
+    deleteticket.ui \
     dialog.ui \
     mainwindow.ui
 
