@@ -55,10 +55,10 @@ MainWindow::MainWindow(QWidget *parent)
     pilot_mapper->addMapping(ui->txtDegreePilot, 8);
     pilot_mapper->toFirst();
 
+    connect(this->pilot_mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtonsPilot(int)));
+
     connect(ui->btnNextPilot, SIGNAL(clicked()), this->pilot_mapper, SLOT(toNext()));
     connect(ui->btnPrePilot, SIGNAL(clicked()), this->pilot_mapper, SLOT(toPrevious()));
-
-    connect(this->pilot_mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtonsPilot(int)));
 
     //this->timer = new QTimer(this);
     connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
@@ -184,78 +184,11 @@ void MainWindow::showClock()
     ui->lblClock->setText(QTime::currentTime().toString());
 }
 
-//<<<<<<< HEAD
-//<<<<<<< HEAD
-//=======
-//>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
 void MainWindow::updateFlightState()
 {
     foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
     {
-        if (f->getDateTimeDeparture() <= QDateTime::currentDateTime() &&
-                QDateTime::currentDateTime() < f->getDateTimeArrival())
-        {
-            if (f->getFlightState() != CANCELED && f->getFlightState() != SUSPENDED)
-            {
-                f->setFlightState(ONAIR);
-            }
-        }
-
-        if (f->getDateTimeArrival() >= QDateTime::currentDateTime())
-        {
-            f->setFlightState(DONE);
-        }
-
-//        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&
-//                f->getDateTimeDeparture().msecsTo(QDateTime::currentDateTime()) <= 10 * 60 * 1000)
-//        {
-//            f->delay(30 * 60 * 1000);
-//            f->setFlightState(DELAYED);
-//        }
-
-        if (f->isPilotSetted() && f->isHostEnough() && f->isAirplaneSetted() &&
-                f->isArrivalCarrierSetted() && f->isDepartureCarrierSetted() &&
-                f->isPassengerEnough())
-        {
-            f->setFlightState(READY);
-        }
-
-        if (!f->isPilotSetted())
-        {
-            f->setFlightState(SUSPENDED);
-            f->setPilot(f->getAirline()->getFirstFreePilot(f));
-        }
-
-        if (!f->isHostEnough())
-        {
-            f->setFlightState(SUSPENDED);
-            f->attachHost(f->getAirline()->getFirstFreeHost(f));
-        }
-
-        if (!f->isAirplaneSetted())
-        {
-            f->setFlightState(SUSPENDED);
-            f->setAirplane(f->getAirline()->getFirstFreeAirplane(f));
-        }
-
-        if (!f->isArrivalCarrierSetted())
-        {
-            f->setFlightState(SUSPENDED);
-            f->setArrival_carrier(Recorder<Carrier>::getInstance()->getFirstFree(f->getDateTimeArrival(),
-                                                                                 f->getDestination()));
-        }
-
-        if (!f->isDepartureCarrierSetted())
-        {
-            f->setFlightState(SUSPENDED);
-            f->setDeparture_carrier(Recorder<Carrier>::getInstance()->getFirstFree(f->getDateTimeDeparture(),
-                                                                                 f->getSource()));
-        }
-
-        if (!f->isPassengerEnough())
-        {
-            f->setFlightState(SUSPENDED);
-        }
+        f->setState();
     }
 }
 
@@ -303,9 +236,6 @@ void MainWindow::updateButtonsPilot(int row)
 //    deleteCarrierDialog->exec();
 //    delete deleteCarrierDialog;
 //}
-//>>>>>>> delete_flight
-//=======
-//>>>>>>> 2eb885eec09563e0fcf079f15360311dab25deef
 
 void MainWindow::on_actionTicket_triggered()
 {

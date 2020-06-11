@@ -46,6 +46,15 @@ QString Employee::get_data()
         else
             data += this->list.at(i)->getSerial() + "/";
     }
+    data += "|";
+    for (int i = 0; i < this->list_of_done_flights.size() && this->list_of_done_flights[i]; i++)
+    {
+        if (i == this->list_of_done_flights.size() - 1)
+            data += this->list_of_done_flights.at(i)->getSerial();
+        else
+            data += this->list_of_done_flights.at(i)->getSerial() + "/";
+    }
+
     data += "\n";
     return data;
 }
@@ -103,8 +112,21 @@ void Employee::set_employmentDate(QDate &&date)
 
 void Employee::attachFlight(Flight* f)
 {
-    if (f)
+    if (f && !this->isFlightInList(f))
         this->list.push_back(f);
+}
+
+void Employee::attachDoneFlight(Flight * f)
+{
+    if (f && !this->isFlightInList(f))
+        this->list_of_done_flights.push_back(f);
+}
+
+void Employee::removeDoneFlight(Flight * f)
+{
+    if(f){
+    this->list_of_done_flights.removeOne(f);
+    }
 }
 
 QString Employee::getFname()

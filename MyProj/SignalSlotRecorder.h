@@ -13,7 +13,7 @@ signals:
     void recordRemovedSignal(int);
 
 public slots:
-    virtual void recordRemovedSlot(const QString&) = 0;
+    virtual void recordRemovedSlot(int) = 0;
 
 };
 

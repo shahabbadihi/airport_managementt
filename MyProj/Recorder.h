@@ -75,7 +75,7 @@ private:
 //    void recordAdded();
 
 public slots:
-    virtual void recordRemovedSlot(const QString&);
+    virtual void recordRemovedSlot(int);
 };
 
 

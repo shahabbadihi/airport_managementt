@@ -23,7 +23,7 @@ public slots:
 public:
    static TicketListModel* getInstance();
 signals:
-    void rowsAboutToBeRemoved(const QString&);
+    void rowsAboutToBeRemoved(int);
 
 private:
     static TicketListModel* instance;

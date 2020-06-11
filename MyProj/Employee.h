@@ -21,6 +21,7 @@ protected:
     QDate birthDate;
     QDate employmentDate;
     QVector<Flight*> list;
+    QVector<Flight*> list_of_done_flights;
     Airline* airline;
 public:
     Employee() : airline(nullptr) {}
@@ -42,6 +43,8 @@ public:
     void set_employmentDate(QDate& date);
     void set_employmentDate(QDate&& date);
     void attachFlight(Flight*);
+    void attachDoneFlight(Flight*);
+
     int flightListSize();
 
     QString getFname();

@@ -213,6 +213,79 @@ void Flight::setFlightStateAsString(const QString &value)
         this->setFlightState(READY);
 }
 
+void Flight::setState()
+{
+    if (this->dateTimeDeparture <= QDateTime::currentDateTime() &&
+            QDateTime::currentDateTime() < this->dateTimeArrival)
+    {
+        if (this->flightState != CANCELED && this->flightState != SUSPENDED)
+        {
+            this->setFlightState(ONAIR);
+        }
+    }
+
+    if (this->dateTimeArrival >= QDateTime::currentDateTime())
+    {
+        this->setFlightState(DONE);
+        this->pilot->attachDoneFlight(this);
+        foreach (Host* h, this->hosts)
+        {
+            h->attachDoneFlight(this);
+        }
+    }
+//        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&
+//                f->getDateTimeDeparture().msecsTo(QDateTime::currentDateTime()) <= 10 * 60 * 1000)
+//        {
+//            f->delay(30 * 60 * 1000);
+//            f->setFlightState(DELAYED);
+//        }
+
+    if (this->isPilotSetted() && this->isHostEnough() && this->isAirplaneSetted() &&
+            this->isArrivalCarrierSetted() && this->isDepartureCarrierSetted() &&
+            this->isPassengerEnough())
+    {
+        this->setFlightState(READY);
+    }
+
+    if (!this->isPilotSetted())
+    {
+        this->setFlightState(SUSPENDED);
+        this->setPilot(this->airline->getFirstFreePilot(this));
+    }
+
+    if (!this->isHostEnough())
+    {
+        this->setFlightState(SUSPENDED);
+        this->attachHost(this->airline->getFirstFreeHost(this));
+    }
+
+    if (!this->isAirplaneSetted())
+    {
+        this->setFlightState(SUSPENDED);
+        this->setAirplane(this->airline->getFirstFreeAirplane(this));
+    }
+
+    if (!this->isArrivalCarrierSetted())
+    {
+        this->setFlightState(SUSPENDED);
+        this->setArrival_carrier(Recorder<Carrier>::getInstance()->getFirstFree(this->getDateTimeArrival(),
+                                                                             this->getDestination()));
+    }
+
+    if (!this->isDepartureCarrierSetted())
+    {
+        this->setFlightState(SUSPENDED);
+        this->setDeparture_carrier(Recorder<Carrier>::getInstance()->getFirstFree(this->getDateTimeDeparture(),
+                                                                             this->getSource()));
+    }
+
+    if (!this->isPassengerEnough())
+    {
+        this->setFlightState(SUSPENDED);
+    }
+
+}
+
 Flight::Flight(QString & data_str)
     : flightState(SUSPENDED), numOfPassengers(0), pilot(nullptr), airline(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr)
 {

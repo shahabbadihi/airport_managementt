@@ -8,7 +8,7 @@ TicketListModel* TicketListModel::instance;
 TicketListModel::TicketListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-       connect(this, SIGNAL(rowsAboutToBeRemoved(const QString&)), Recorder<Ticket>::getInstance(), SLOT(recordRemovedSlot(const QString&)));
+       connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Ticket>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int TicketListModel::rowCount(const QModelIndex &/*parent*/) const
@@ -53,10 +53,10 @@ TicketListModel* TicketListModel::getInstance()
 //}
 bool TicketListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
-    QModelIndex index = createIndex(row, 0);
-    QString search_code = this->data(index).toString().split(" ")[0];
+    //QModelIndex index = createIndex(row, 0);
+    //QString search_code = this->data(index).toString().split(" ")[0];
     beginRemoveRows(parent, row, row + count - 1);
     endRemoveRows();
-    emit rowsAboutToBeRemoved(search_code);
+    emit rowsAboutToBeRemoved(row);
     return true;
 }

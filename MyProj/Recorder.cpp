@@ -299,9 +299,9 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
 }
 
 template<class T>
-void Recorder<T>::recordRemovedSlot(const QString& search_code)
+void Recorder<T>::recordRemovedSlot(int index)
 {
-    this->remove(this->searchByCode(search_code));
+    this->remove(this->dataList[index]);
 }
 
 

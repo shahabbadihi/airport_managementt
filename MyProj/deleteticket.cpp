@@ -46,7 +46,8 @@ deleteTicket::~deleteTicket()
 void deleteTicket::on_deleteButton_clicked()
 {
     QModelIndex index = ui->listView->currentIndex();
-    this->model->removeRows(index.row(), 1);
+    this->proxy->removeRows(index.row(), 1);
+    //this->model->removeRows(index.row(), 1);
    //
    //
    QMessageBox msg;

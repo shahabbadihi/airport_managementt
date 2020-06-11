@@ -28,10 +28,15 @@ Host::Host(QString &dataStr)
     set_employmentDate(empDate);
 
     QStringList str_list_flights = strList.at(7).split('/', Qt::SkipEmptyParts);
+    QStringList str_list_done_flights = strList.at(8).split('/', Qt::SkipEmptyParts);
 
     foreach (QString s, str_list_flights)
     {
         this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
+    }
+    foreach (QString s, str_list_done_flights)
+    {
+        this->attachDoneFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 }
 

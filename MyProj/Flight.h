@@ -121,6 +121,8 @@ public:
     QString getFlightStateAsString() const;
     void setFlightState(const state &value);
     void setFlightStateAsString(const QString &value);
+
+    void setState();
     
 };
 
