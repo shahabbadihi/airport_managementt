@@ -19,9 +19,9 @@ int TicketListModel::rowCount(const QModelIndex &/*parent*/) const
 QVariant TicketListModel::data(const QModelIndex &index, int role) const
 {
 
-    if (role == Qt::DisplayRole &&/*!_fliter.isEmpty() &&*/
+    if (role == Qt::DisplayRole /*&&!_fliter.isEmpty() &&
             QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getNo())
-            .toLower().contains(_fliter.toLower()))
+            .toLower().contains(_fliter.toLower())*/)
     {
         return QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getNo())+ " " +
                 Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getPassengerName();
@@ -34,16 +34,23 @@ QVariant TicketListModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
+
+
+//int TicketListModel::rootPath()
+//{
+//    return 0;
+//}
+
 TicketListModel* TicketListModel::getInstance()
 {
     if (instance == nullptr)
         instance = new TicketListModel(nullptr);
     return instance;
 }
-void TicketListModel::updateFilter(QString filter){
-    this->_fliter = filter;
-    emit layoutChanged();
-}
+//void TicketListModel::updateFilter(QString filter){
+//    this->_fliter = filter;
+//    emit layoutChanged();
+//}
 bool TicketListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     beginRemoveRows(parent, row, row + count - 1);

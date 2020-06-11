@@ -16,16 +16,18 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    //int rootPath();
 public slots:
-   void updateFilter(QString filter);
+   //void updateFilter(QString filter);
 public:
-    static TicketListModel* getInstance();
+   static TicketListModel* getInstance();
 signals:
     void rowsAboutToBeRemoved(int);
 
 private:
     static TicketListModel* instance;
-    QString _fliter;
+    //QString _fliter;
 };
 
 #endif // TICKETLISTMODEL_H
