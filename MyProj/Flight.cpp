@@ -145,10 +145,42 @@ static bool haveInterference(Flight* f1, Flight* f2)
 
 void Flight::delay(qint64 milliseconds)
 {
+    Flight* next_in_pilot_list = this->pilot->nextFlight(this);
+    QVector<Flight*> next_in_host_list;
+    foreach (Host* h, this->hosts)
+    {
+        next_in_host_list.push_back(h->nextFlight(this));
+    }
+    Flight* next_in_airplane_list = this->airplane->nextFlight(this);
+
     this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
     this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
 
+    if (haveInterference(this, next_in_pilot_list))
+    {
+        next_in_pilot_list->delay(milliseconds);
+    }
+    foreach (Flight* f, next_in_host_list)
+    {
+        if (haveInterference(this, f))
+            f->delay(milliseconds);
+    }
+    if (haveInterference(this, next_in_airplane_list))
+    {
+        next_in_airplane_list->delay(milliseconds);
+    }
+}
 
+bool Flight::haveInterference(Flight *f1, Flight *f2)
+{
+    if ((f1->getDateTimeArrival() > f2->getDateTimeDeparture() &&
+            f1->getDateTimeDeparture() < f2->getDateTimeArrival()) ||
+            (f2->getDateTimeArrival() > f1->getDateTimeDeparture() &&
+                        f2->getDateTimeDeparture() < f1->getDateTimeArrival()))
+    {
+        return true;
+    }
+    return false;
 }
 
 int Flight::getCapacity() const
