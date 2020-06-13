@@ -67,6 +67,7 @@ public:
 
     Flight* prevFlight(Flight*);
     Flight* nextFlight(Flight*);
+    void removeDoneFlight(Flight *f);
 };
 
 #endif // EMPLOYEE_H

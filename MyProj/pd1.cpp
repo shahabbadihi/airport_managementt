@@ -36,6 +36,14 @@ QString PD1::get_data()
             else
                 data += this->list.at(i)->getSerial() + "/";
         }
+        data += "|";
+        for (int i = 0; i < this->list_of_done_flights.size() && this->list_of_done_flights[i]; i++)
+        {
+            if (i == this->list_of_done_flights.size() - 1)
+                data += this->list_of_done_flights.at(i)->getSerial();
+            else
+                data += this->list_of_done_flights.at(i)->getSerial() + "/";
+        }
         data += "\n";
         return data;
 }
