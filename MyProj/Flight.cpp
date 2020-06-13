@@ -6,6 +6,7 @@
 #include "Carrier.h"
 #include <QString>
 #include <QStringList>
+#include <QVector2D>
 Airline *Flight::getAirline() const
 {
     return airline;
@@ -131,43 +132,71 @@ bool Flight::isArrivalCarrierSetted()
     return this->arrival_carrier ? true : false;
 }
 
-static bool haveInterference(Flight* f1, Flight* f2)
-{
-    if ((f2->getDateTimeDeparture() < f1->getDateTimeArrival() &&
-            f1->getDateTimeDeparture() < f2->getDateTimeArrival()) ||
-            (f1->getDateTimeDeparture() < f2->getDateTimeArrival() &&
-             f2->getDateTimeDeparture() < f1->getDateTimeArrival()))
-    {
-        return true;
-    }
-    return false;
-}
-
 void Flight::delay(qint64 milliseconds)
 {
-    Flight* next_in_pilot_list = this->pilot->nextFlight(this);
-    QVector<Flight*> next_in_host_list;
-    foreach (Host* h, this->hosts)
+    QVector<Flight*> nexts_in_pilot_list;
+    Flight* temp = this->pilot->nextFlight(this);
+    while (temp)
     {
-        next_in_host_list.push_back(h->nextFlight(this));
+        nexts_in_pilot_list.push_back(temp);
+        temp = this->pilot->nextFlight(temp);
     }
-    Flight* next_in_airplane_list = this->airplane->nextFlight(this);
+
+    QVector<QVector<Flight*>> host_list;
+//    foreach (Host* h, this->hosts)
+//    {
+//        host_list.push_back(h->getList());
+//    }
+    for (int i = 0; i < this->hosts.size(); i++)
+    {
+        //host_list.push_back(this->hosts[i]->getList());
+        QVector<Flight*> nexts_in_host_list;
+        Flight* temp = this->hosts[i]->nextFlight(this);
+        while (temp)
+        {
+            nexts_in_host_list.push_back(temp);
+            temp = this->hosts[i]->nextFlight(temp);
+        }
+
+        host_list.push_back(nexts_in_host_list);
+    }
+
+    QVector<Flight*> nexts_in_airplane_list;
+    Flight* temp2 = this->airplane->nextFlight(this);
+    while (temp2)
+    {
+        nexts_in_airplane_list.push_back(temp2);
+        temp = this->airplane->nextFlight(temp);
+    }
 
     this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
     this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
 
-    if (haveInterference(this, next_in_pilot_list))
-    {
-        next_in_pilot_list->delay(milliseconds);
-    }
-    foreach (Flight* f, next_in_host_list)
+    foreach (Flight* f, nexts_in_pilot_list)
     {
         if (haveInterference(this, f))
+        {
             f->delay(milliseconds);
+        }
     }
-    if (haveInterference(this, next_in_airplane_list))
+
+    foreach (QVector<Flight*> vf, host_list)
     {
-        next_in_airplane_list->delay(milliseconds);
+        foreach (Flight* f, vf)
+        {
+            if (haveInterference(this, f))
+            {
+                f->delay(milliseconds);
+            }
+        }
+    }
+
+    foreach (Flight* f, nexts_in_airplane_list)
+    {
+        if (haveInterference(this, f))
+        {
+            f->delay(milliseconds);
+        }
     }
 }
 
