@@ -5,7 +5,7 @@ Passenger::Passenger(QString & data_str)
 {
     QStringList str_list = data_str.split('|');
     this->nationalCode = str_list.at(0).left(str_list[0].length() - 1).toLong();
-    this->search_code = str_list.at(0);
+    this->setSearchCode(str_list.at(0));
     this->setFname(str_list.at(1));
     this->setLname(str_list.at(2));
     this->setFatherName(str_list.at(3));

@@ -6,25 +6,27 @@
 class Object
 {
 public:
-    virtual QString get_data() = 0;
-    //Object() {}
-    //~Object() {}
-    /*Recorder<Object>& get_recorder()
-    {
-        return *recorder;
-    }*/
     QString getSearchCode() const
     {
         return this->search_code;
     }
+protected:
+    virtual QString get_data() = 0;
+    //Object() {}
+    virtual ~Object() {}
+    /*Recorder<Object>& get_recorder()
+    {
+        return *recorder;
+    }*/
+
 
     void setSearchCode(const QString& s)
     {
-        this->search_code = s;
 
+        this->search_code = s;
     }
 
-protected:
+private:
     //Recorder<Object>* recorder;
     QString search_code;
 };

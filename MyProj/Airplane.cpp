@@ -189,7 +189,7 @@ Airplane::Airplane(QString & str_data)
 
 QString Airplane::get_data()
 {
-    QString str = this->search_code + "|" +
+    QString str = this->getSearchCode() + "|" +
             (this->airline ? this->airline->getSearchCode() : "") + "|" +
             QString::number(this->numOfSeats) + "|";
 
