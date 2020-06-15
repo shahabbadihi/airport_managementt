@@ -1,6 +1,7 @@
 #include "ticketlistmodel.h"
 #include "Recorder.h"
 #include "Ticket.h"
+#include "Flight.h"
 template <class T>
 Recorder<T>* Recorder<T>::instance;
 
@@ -23,8 +24,12 @@ QVariant TicketListModel::data(const QModelIndex &index, int role) const
             QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getNo())
             .toLower().contains(_fliter.toLower())*/)
     {
-        return QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getNo())+ " " +
-                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getPassengerName();
+        return QString::number(index.row())+"| " +
+                QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getNo())+ "| " +
+                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getPassengerName()+" | "+
+                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getSerial()+" | "+
+                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getSource()+" | "+
+                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getDestination()+" | ";
     }
 //    else if (role == Qt::DisplayRole)
 //    {
