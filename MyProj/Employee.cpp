@@ -160,14 +160,14 @@ bool Employee::isFree(Flight* f)
     }
     else if(nextFlight(f)==nullptr)
     {
-        if(nextFlight(f)->getSource()==f->getDestination())return true;
-        else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400)return true;
+        if(prevFlight(f)->getDestination()==f->getSource())return true;
+        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
         else return false;
     }
     else if(prevFlight(f)==nullptr)
     {
-        if(prevFlight(f)->getDestination()==f->getSource())return true;
-        else if(prevFlight(f)->getDateTimeDeparture().secsTo(f->getDateTimeDeparture())>86400)return true;
+        if(nextFlight(f)->getSource()==f->getDestination())return true;
+        else if(f->getDateTimeDeparture().secsTo(nextFlight(f)->getDateTimeDeparture())>86400)return true;
         else return false;
     }
 

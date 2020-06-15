@@ -14,7 +14,7 @@
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "pilotitemmodel.h"
-
+#include "mydelegate.h"
 #include "deleteflight.h"
 #include "deletecarrier.h"
 
@@ -31,6 +31,7 @@
 #include <QTimer>
 #include <QStandardItemModel>
 #include <QDataWidgetMapper>
+#include <QSignalMapper>
 
 class Flight;
 
@@ -81,6 +82,10 @@ private slots:
 
     void updateButtonsPilot(int);
 
+    void addButtonFlightTable(int);
+    void removeButtonFlightTable(int);
+    void showDelayDialog(int);
+
     //void updateFlightModel();
     //void print();
 
@@ -108,6 +113,9 @@ private:
     QTimer * timer;
 
     FlightTableModel * flight_table_model;
+    //MyDelegate * delegate;
+    QVector<QPushButton*> delay_buttons;
+    QSignalMapper * signal_mapper;
 
     PilotItemModel * pilot_item_model;
     QDataWidgetMapper * pilot_mapper;

@@ -135,18 +135,22 @@ bool Flight::isArrivalCarrierSetted()
 void Flight::delay(qint64 milliseconds)
 {
     QVector<Flight*> nexts_in_pilot_list;
-    Flight* temp = this->pilot->nextFlight(this);
-    while (temp)
-    {
-        nexts_in_pilot_list.push_back(temp);
-        temp = this->pilot->nextFlight(temp);
-    }
 
+    if (this->pilot)
+    {
+        Flight* temp = this->pilot->nextFlight(this);
+        while (temp)
+        {
+            nexts_in_pilot_list.push_back(temp);
+            temp = this->pilot->nextFlight(temp);
+        }
+    }
     QVector<QVector<Flight*>> host_list;
 //    foreach (Host* h, this->hosts)
 //    {
 //        host_list.push_back(h->getList());
 //    }
+
     for (int i = 0; i < this->hosts.size(); i++)
     {
         //host_list.push_back(this->hosts[i]->getList());
@@ -162,15 +166,21 @@ void Flight::delay(qint64 milliseconds)
     }
 
     QVector<Flight*> nexts_in_airplane_list;
-    Flight* temp2 = this->airplane->nextFlight(this);
-    while (temp2)
+
+    if (this->airplane)
     {
-        nexts_in_airplane_list.push_back(temp2);
-        temp = this->airplane->nextFlight(temp);
+        Flight* temp2 = this->airplane->nextFlight(this);
+        while (temp2)
+        {
+            nexts_in_airplane_list.push_back(temp2);
+            temp2 = this->airplane->nextFlight(temp2);
+        }
     }
 
     this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
     this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
+
+    this->setFlightState(DELAYED);
 
     foreach (Flight* f, nexts_in_pilot_list)
     {
@@ -285,7 +295,7 @@ void Flight::setState()
         }
     }
 
-    if (this->dateTimeArrival >= QDateTime::currentDateTime())
+    if (this->dateTimeArrival <= QDateTime::currentDateTime())
     {
         this->setFlightState(DONE);
         this->pilot->attachDoneFlight(this);
@@ -756,11 +766,16 @@ Flight::~Flight()
     {
         h->removeFlight(this);
     }
-    this->pilot->removeFlight(this);
-    this->airline->removeFlight(this);
-    this->airplane->removeFlight(this);
-    this->departure_carrier->removeFlight(this);
-    this->arrival_carrier->removeFlight(this);
+    if (this->pilot)
+        this->pilot->removeFlight(this);
+    if (this->airline)
+        this->airline->removeFlight(this);
+    if (this->airplane)
+        this->airplane->removeFlight(this);
+    if (this->departure_carrier)
+        this->departure_carrier->removeFlight(this);
+    if (this->arrival_carrier)
+        this->arrival_carrier->removeFlight(this);
 }
 
 void Flight::removeCarrier(Carrier* c){
