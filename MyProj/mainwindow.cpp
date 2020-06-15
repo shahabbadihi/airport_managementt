@@ -232,11 +232,13 @@ void MainWindow::addButtonFlightTable(int row)
 void MainWindow::removeButtonFlightTable(int row)
 {
     disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+    delete delay_buttons[row];
+
 
     signal_mapper->removeMappings(delay_buttons[row]);
     this->delay_buttons.remove(row);
 
-    delete delay_buttons[row];
+
 }
 
 void MainWindow::showDelayDialog(int row)
