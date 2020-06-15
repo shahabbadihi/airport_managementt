@@ -2,6 +2,8 @@
 #define FLIGHTTABLEMODEL_H
 
 //#include "mymodel.h"
+//class Flight;
+//#include "Recorder.h"
 #include <QAbstractItemModel>
 #include <QObject>
 #include <QTimer>
@@ -30,6 +32,11 @@ private:
 
     QTimer * timer;
 
+    //Recorder<Flight> * recorder;
+
+signals:
+    void recordInsertedSignal(int);
+    void recordRemovedSignal(int);
 private slots:
     void timerHit();
     void recordInserted();

@@ -34,6 +34,7 @@ SOURCES += \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
+    delaydialog.cpp \
     deletecarrier.cpp \
     deleteflight.cpp \
     deletehost.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
+    mydelegate.cpp \
     p2_12.cpp \
     pd1.cpp \
     pd2.cpp \
@@ -78,6 +80,7 @@ HEADERS += \
     addflightdialog.h \
     addhost.h \
     addticket.h \
+    delaydialog.h \
     deletecarrier.h \
     deleteflight.h \
     deletehost.h \
@@ -89,6 +92,7 @@ HEADERS += \
     getpassengerfactory.h \
     hostlistmodel.h \
     mainwindow.h \
+    mydelegate.h \
     p2_12.h \
     pd1.h \
     pd2.h \
@@ -106,6 +110,7 @@ FORMS += \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \
+    delaydialog.ui \
     deletecarrier.ui \
     deleteflight.ui \
     deletehost.ui \

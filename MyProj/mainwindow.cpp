@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "dialog.h"
+#include "delaydialog.h"
 #include "addhost.h"
 #include "deletehost.h"
 #include "deletepilot.h"
@@ -11,6 +12,7 @@
 #include "addticket.h"
 #include <QString>
 #include <QHeaderView>
+#include <QSignalMapper>
 #include <QTime>
 #include <QStandardItemModel>
 #include <QAbstractItemModel>
@@ -37,9 +39,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->flight_table_model = FlightTableModel::getInstance();
-
+    connect(flight_table_model, SIGNAL(recordInsertedSignal(int)), this, SLOT(addButtonFlightTable(int)));
+    connect(flight_table_model, SIGNAL(recordRemovedSignal(int)), this, SLOT(removeButtonFlightTable(int)));
 
     ui->tableView->setModel(flight_table_model);
+    //ui->tableView->setItemDelegateForColumn(7, delegate);
+    //ui->tableView->resizeRowsToContents();
+    ui->tableView->resizeColumnsToContents();
+    ui->tableView->setColumnWidth(0, 80);
+    ui->tableView->setColumnWidth(1, 80);
+    ui->tableView->setColumnWidth(2, 100);
+    ui->tableView->setColumnWidth(3, 100);
+
+    signal_mapper = new QSignalMapper(this);
+    for (int i = 0; i < flight_table_model->rowCount(); i++)
+    {
+        delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
+//        connect(delay_buttons[i], SIGNAL(clicked()), this, SLOT(showDelayDialog()));
+        ui->tableView->setIndexWidget(flight_table_model->index(i, 7), delay_buttons[i]);
+        signal_mapper->setMapping(delay_buttons[i], i);
+
+        connect(delay_buttons[i], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+    }
+    connect(signal_mapper, SIGNAL(mapped(int)), this, SLOT(showDelayDialog(int)));
 
     this->pilot_mapper = new QDataWidgetMapper(this);
     this->pilot_item_model = PilotItemModel::getInstance();
@@ -181,7 +203,7 @@ void MainWindow::updateFiles()
 
 void MainWindow::showClock()
 {
-    ui->lblClock->setText(QTime::currentTime().toString());
+    ui->lblClock->setText(QDateTime::currentDateTime().toString());
 }
 
 void MainWindow::updateFlightState()
@@ -196,6 +218,44 @@ void MainWindow::updateButtonsPilot(int row)
 {
     ui->btnPrePilot->setEnabled(row > 0);
     ui->btnNextPilot->setEnabled(row < pilot_item_model->rowCount() - 1);
+}
+
+void MainWindow::addButtonFlightTable(int row)
+{
+    this->delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
+    ui->tableView->setIndexWidget(this->flight_table_model->index(row, 7), delay_buttons[row]);
+
+    signal_mapper->setMapping(delay_buttons[row], row);
+    connect(delay_buttons[row], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+}
+
+void MainWindow::removeButtonFlightTable(int row)
+{
+    disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+    delete delay_buttons[row];
+
+
+    signal_mapper->removeMappings(delay_buttons[row]);
+    this->delay_buttons.remove(row);
+
+
+}
+
+void MainWindow::showDelayDialog(int row)
+{
+    int res;
+    DelayDialog d(this);
+    d.setWindowTitle("Set Delay");
+    res = d.exec();
+
+    if (res == QDialog::Rejected)
+    {
+        return;
+    }
+    if (res == QDialog::Accepted)
+    {
+        Recorder<Flight>::getInstance()->get_dataList()[row]->delay(d.milli_delay());
+    }
 }
 
 //void MainWindow::updateFlightModel()

@@ -6,6 +6,7 @@
 #include "Carrier.h"
 #include <QString>
 #include <QStringList>
+#include <QVector2D>
 Airline *Flight::getAirline() const
 {
     return airline;
@@ -131,24 +132,94 @@ bool Flight::isArrivalCarrierSetted()
     return this->arrival_carrier ? true : false;
 }
 
-static bool haveInterference(Flight* f1, Flight* f2)
+void Flight::delay(qint64 milliseconds)
 {
-    if ((f2->getDateTimeDeparture() < f1->getDateTimeArrival() &&
+    QVector<Flight*> nexts_in_pilot_list;
+
+    if (this->pilot)
+    {
+        Flight* temp = this->pilot->nextFlight(this);
+        while (temp)
+        {
+            nexts_in_pilot_list.push_back(temp);
+            temp = this->pilot->nextFlight(temp);
+        }
+    }
+    QVector<QVector<Flight*>> host_list;
+//    foreach (Host* h, this->hosts)
+//    {
+//        host_list.push_back(h->getList());
+//    }
+
+    for (int i = 0; i < this->hosts.size(); i++)
+    {
+        //host_list.push_back(this->hosts[i]->getList());
+        QVector<Flight*> nexts_in_host_list;
+        Flight* temp = this->hosts[i]->nextFlight(this);
+        while (temp)
+        {
+            nexts_in_host_list.push_back(temp);
+            temp = this->hosts[i]->nextFlight(temp);
+        }
+
+        host_list.push_back(nexts_in_host_list);
+    }
+
+    QVector<Flight*> nexts_in_airplane_list;
+
+    if (this->airplane)
+    {
+        Flight* temp2 = this->airplane->nextFlight(this);
+        while (temp2)
+        {
+            nexts_in_airplane_list.push_back(temp2);
+            temp2 = this->airplane->nextFlight(temp2);
+        }
+    }
+
+    this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
+    this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
+
+    this->setFlightState(DELAYED);
+
+    foreach (Flight* f, nexts_in_pilot_list)
+    {
+        if (haveInterference(this, f))
+        {
+            f->delay(milliseconds);
+        }
+    }
+
+    foreach (QVector<Flight*> vf, host_list)
+    {
+        foreach (Flight* f, vf)
+        {
+            if (haveInterference(this, f))
+            {
+                f->delay(milliseconds);
+            }
+        }
+    }
+
+    foreach (Flight* f, nexts_in_airplane_list)
+    {
+        if (haveInterference(this, f))
+        {
+            f->delay(milliseconds);
+        }
+    }
+}
+
+bool Flight::haveInterference(Flight *f1, Flight *f2)
+{
+    if ((f1->getDateTimeArrival() > f2->getDateTimeDeparture() &&
             f1->getDateTimeDeparture() < f2->getDateTimeArrival()) ||
-            (f1->getDateTimeDeparture() < f2->getDateTimeArrival() &&
-             f2->getDateTimeDeparture() < f1->getDateTimeArrival()))
+            (f2->getDateTimeArrival() > f1->getDateTimeDeparture() &&
+                        f2->getDateTimeDeparture() < f1->getDateTimeArrival()))
     {
         return true;
     }
     return false;
-}
-
-void Flight::delay(qint64 milliseconds)
-{
-    this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
-    this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
-
-
 }
 
 int Flight::getCapacity() const
@@ -224,7 +295,7 @@ void Flight::setState()
         }
     }
 
-    if (this->dateTimeArrival >= QDateTime::currentDateTime())
+    if (this->dateTimeArrival <= QDateTime::currentDateTime())
     {
         this->setFlightState(DONE);
         this->pilot->attachDoneFlight(this);
@@ -695,11 +766,16 @@ Flight::~Flight()
     {
         h->removeFlight(this);
     }
-    this->pilot->removeFlight(this);
-    this->airline->removeFlight(this);
-    this->airplane->removeFlight(this);
-    this->departure_carrier->removeFlight(this);
-    this->arrival_carrier->removeFlight(this);
+    if (this->pilot)
+        this->pilot->removeFlight(this);
+    if (this->airline)
+        this->airline->removeFlight(this);
+    if (this->airplane)
+        this->airplane->removeFlight(this);
+    if (this->departure_carrier)
+        this->departure_carrier->removeFlight(this);
+    if (this->arrival_carrier)
+        this->arrival_carrier->removeFlight(this);
 }
 
 void Flight::removeCarrier(Carrier* c){
