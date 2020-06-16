@@ -42,6 +42,7 @@ SOURCES += \
     deleteticket.cpp \
     dialog.cpp \
     flightlistmodel.cpp \
+    flightstatusdialog.cpp \
     flighttablemodel.cpp \
     getpassengerfactory.cpp \
     hostlistmodel.cpp \
@@ -88,6 +89,7 @@ HEADERS += \
     deleteticket.h \
     dialog.h \
     flightlistmodel.h \
+    flightstatusdialog.h \
     flighttablemodel.h \
     getpassengerfactory.h \
     hostlistmodel.h \
@@ -117,6 +119,7 @@ FORMS += \
     deletepilot.ui \
     deleteticket.ui \
     dialog.ui \
+    flightstatusdialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

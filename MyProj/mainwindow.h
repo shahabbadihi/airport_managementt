@@ -86,6 +86,8 @@ private slots:
     void removeButtonFlightTable(int);
     void showDelayDialog(int);
 
+    void showStatusDialog(int);
+
     //void updateFlightModel();
     //void print();
 
@@ -115,7 +117,9 @@ private:
     FlightTableModel * flight_table_model;
     //MyDelegate * delegate;
     QVector<QPushButton*> delay_buttons;
-    QSignalMapper * signal_mapper;
+    QVector<QPushButton*> status_buttons;
+    QSignalMapper * signal_mapper_delay;
+    QSignalMapper * signal_mapper_status;
 
     PilotItemModel * pilot_item_model;
     QDataWidgetMapper * pilot_mapper;

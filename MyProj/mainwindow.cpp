@@ -17,6 +17,7 @@
 #include <QStandardItemModel>
 #include <QAbstractItemModel>
 #include "flighttablemodel.h"
+#include "flightstatusdialog.h"
 #include "Recorder.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -51,17 +52,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setColumnWidth(2, 100);
     ui->tableView->setColumnWidth(3, 100);
 
-    signal_mapper = new QSignalMapper(this);
+    signal_mapper_delay = new QSignalMapper(this);
+    signal_mapper_status = new QSignalMapper(this);
     for (int i = 0; i < flight_table_model->rowCount(); i++)
     {
         delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
+        status_buttons.push_back(new QPushButton("Status", ui->tableView));
 //        connect(delay_buttons[i], SIGNAL(clicked()), this, SLOT(showDelayDialog()));
         ui->tableView->setIndexWidget(flight_table_model->index(i, 7), delay_buttons[i]);
-        signal_mapper->setMapping(delay_buttons[i], i);
+        ui->tableView->setIndexWidget(flight_table_model->index(i, 8), status_buttons[i]);
+        signal_mapper_delay->setMapping(delay_buttons[i], i);
+        signal_mapper_status->setMapping(status_buttons[i], i);
 
-        connect(delay_buttons[i], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+        connect(delay_buttons[i], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
+        connect(status_buttons[i], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
     }
-    connect(signal_mapper, SIGNAL(mapped(int)), this, SLOT(showDelayDialog(int)));
+    connect(signal_mapper_delay, SIGNAL(mapped(int)), this, SLOT(showDelayDialog(int)));
+    connect(signal_mapper_status, SIGNAL(mapped(int)), this, SLOT(showStatusDialog(int)));
+
 
     this->pilot_mapper = new QDataWidgetMapper(this);
     this->pilot_item_model = PilotItemModel::getInstance();
@@ -224,21 +232,27 @@ void MainWindow::addButtonFlightTable(int row)
 {
     this->delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
     ui->tableView->setIndexWidget(this->flight_table_model->index(row, 7), delay_buttons[row]);
+    this->status_buttons.push_back(new QPushButton("Status", ui->tableView));
+    ui->tableView->setIndexWidget(this->flight_table_model->index(row, 8), status_buttons[row]);
 
-    signal_mapper->setMapping(delay_buttons[row], row);
-    connect(delay_buttons[row], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+    signal_mapper_delay->setMapping(delay_buttons[row], row);
+    connect(delay_buttons[row], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
+    signal_mapper_status->setMapping(status_buttons[row], row);
+    connect(status_buttons[row], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
 }
 
 void MainWindow::removeButtonFlightTable(int row)
 {
-    disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper, SLOT(map()));
+    disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
+    disconnect(status_buttons[row], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
     delete delay_buttons[row];
+    delete status_buttons[row];
 
 
-    signal_mapper->removeMappings(delay_buttons[row]);
+    signal_mapper_delay->removeMappings(delay_buttons[row]);
+    signal_mapper_status->removeMappings(status_buttons[row]);
     this->delay_buttons.remove(row);
-
-
+    this->status_buttons.remove(row);
 }
 
 void MainWindow::showDelayDialog(int row)
@@ -256,6 +270,13 @@ void MainWindow::showDelayDialog(int row)
     {
         Recorder<Flight>::getInstance()->get_dataList()[row]->delay(d.milli_delay());
     }
+}
+
+void MainWindow::showStatusDialog(int row)
+{
+    FlightStatusDialog d(Recorder<Flight>::getInstance()->get_dataList()[row], this);
+    d.setWindowTitle("Flight Status");
+    d.exec();
 }
 
 //void MainWindow::updateFlightModel()
