@@ -9,19 +9,21 @@
 
 FlightStatusDialog::FlightStatusDialog(Flight* flight, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FlightStatusDialog)
+    ui(new Ui::FlightStatusDialog),
+    flight_ptr(flight)
 {
     ui->setupUi(this);
+    connect(flight, SIGNAL(flightStatusChanged()), this, SLOT(reset()));
 
     ui->lblFlightSerial->setText("Flight " + flight->getSerial());
     ui->lblFromTo->setText("From " + flight->getSource() + " To " + flight->getDestination());
 
-    ui->lblPilotStatus->setText(flight->isPilotSetted() ? "Setted!" : "Not Setted!");
-    ui->lblHostsStatus->setText(flight->isHostEnough() ? "Enough!" : "Not Enough!");
-    ui->lblAirplaneStatus->setText(flight->isAirplaneSetted() ? "Setted!" : "Not Setted!");
-    ui->lblDepartureCarrierStatus->setText(flight->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
-    ui->lblArrivalCarrierStatus->setText(flight->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
-    ui->lblTicketsStatus->setText(flight->isPassengerEnough() ? "Enough!" : "Not Enough!");
+    ui->lblPilotStatus->setText(flight_ptr->isPilotSetted() ? "Setted!" : "Not Setted!");
+    ui->lblHostsStatus->setText(flight_ptr->isHostEnough() ? "Enough!" : "Not Enough!");
+    ui->lblAirplaneStatus->setText(flight_ptr->isAirplaneSetted() ? "Setted!" : "Not Setted!");
+    ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
+    ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
+    ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
 }
 
 FlightStatusDialog::~FlightStatusDialog()
@@ -75,4 +77,14 @@ void FlightStatusDialog::on_btnAddTicket_clicked()
     addTicketDialog->setModal(true);
     addTicketDialog->exec();
     delete addTicketDialog;
+}
+
+void FlightStatusDialog::reset()
+{
+    ui->lblPilotStatus->setText(flight_ptr->isPilotSetted() ? "Setted!" : "Not Setted!");
+    ui->lblHostsStatus->setText(flight_ptr->isHostEnough() ? "Enough!" : "Not Enough!");
+    ui->lblAirplaneStatus->setText(flight_ptr->isAirplaneSetted() ? "Setted!" : "Not Setted!");
+    ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
+    ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
+    ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
 }

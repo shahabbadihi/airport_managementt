@@ -19,6 +19,7 @@ void Flight::setAirline(Airline *value)
         airline = value;
 
         value->attachFlight(this);
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -30,6 +31,7 @@ void Flight::setAirplane(Airplane *value)
         airplane = value;
 
         value->attachFlight(this);
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -57,6 +59,7 @@ void Flight::setDeparture_carrier(Carrier *value)
         departure_carrier = value;
         value->attachFlight(this);
         value->attachMission(this->dateTimeDeparture.toString() + "DEP");
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -73,6 +76,7 @@ void Flight::setArrival_carrier(Carrier *value)
         arrival_carrier = value;
         value->attachFlight(this);
         value->attachMission(this->dateTimeArrival.toString() + "ARR");
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -550,6 +554,7 @@ void Flight::setPilot(Pilot * p)
         this->pilot = p;
 
         p->attachFlight(this);
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -575,6 +580,7 @@ void Flight::attachHost(Host * h)
         this->hosts.push_back(h);
 
         h->attachFlight(this);
+        emit flightStatusChanged();
         //this->setFlightState()
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -590,6 +596,7 @@ void Flight::attachTicket(Ticket * p)
 //        p->setFlight(this);
         this->numOfPassengers++;
         p->setFlight(this);
+        emit flightStatusChanged();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -604,6 +611,8 @@ void Flight::removeHost(Host* h)
 //    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
     this->attachHost(this->getAirline()->getFirstFreeHost(this));
     Recorder<Flight>::getInstance()->updateFile(this);
+
+    emit flightStatusChanged();
 //    foreach (Host* h, this->getHostsList())
 //    {
 //        if (h == nullptr)
@@ -655,6 +664,8 @@ void Flight::removePilot(){
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
     this->setPilot(this->getAirline()->getFirstFreePilot(this));
+
+    emit flightStatusChanged();
     //Recorder<Flight>::getInstance()->updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {
@@ -776,6 +787,10 @@ Flight::~Flight()
         this->departure_carrier->removeFlight(this);
     if (this->arrival_carrier)
         this->arrival_carrier->removeFlight(this);
+    foreach (Ticket* t, this->tickets)
+    {
+        Recorder<Ticket>::getInstance()->remove(t);
+    }
 }
 
 void Flight::removeCarrier(Carrier* c){
@@ -791,6 +806,7 @@ int Flight::getAttachedTicketsize()const{
 }
 void Flight::removeTicket(Ticket* T){
    tickets.removeOne(T);
+   emit flightStatusChanged();
 }
 //void Flight::setDate(const QDate & d)
 //{

@@ -27,6 +27,7 @@ enum state {READY, CANCELED, SUSPENDED, DELAYED, DONE, ONAIR};
 
 class Flight : public Object
 {
+    Q_OBJECT
 private:
     QString serial;
     state flightState;
@@ -123,6 +124,9 @@ public:
     void setFlightStateAsString(const QString &value);
 
     void setState();
+
+signals:
+    void flightStatusChanged();
     
 };
 

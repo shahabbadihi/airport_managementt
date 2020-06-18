@@ -119,8 +119,9 @@ void Ticket::setFlight(Flight * f)
         this->flight = f;
         f->attachTicket(this);
     }
-//    Recorder<Ticket>::getInstance()->updateFile(this);
+    //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
+
 
 void Ticket::setPassenger(Passenger * p)
 {

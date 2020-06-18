@@ -1,10 +1,13 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 #include <QString>
+#include <QObject>
 #include "Recorder.h"
 
-class Object
+class Object : public QObject
 {
+    Q_OBJECT
+
 public:
     QString getSearchCode() const
     {

@@ -29,8 +29,12 @@ private slots:
 
     void on_btnAddTicket_clicked();
 
+    void reset();
+
 private:
     Ui::FlightStatusDialog *ui;
+
+    Flight * flight_ptr;
 };
 
 #endif // FLIGHTSTATUSDIALOG_H
