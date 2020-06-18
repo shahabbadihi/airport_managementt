@@ -3,9 +3,6 @@
 #include "Airline.h"
 #include "Airplane.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 AddAirplaneDialog::AddAirplaneDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddAirplaneDialog)

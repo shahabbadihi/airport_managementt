@@ -10,9 +10,6 @@
 #include "getpassengerfactory.h"
 #include <QMessageBox>
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 AddTicket::AddTicket(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddTicket)

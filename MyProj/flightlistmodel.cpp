@@ -2,9 +2,6 @@
 #include "Recorder.h"
 #include "Flight.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 FlightListModel* FlightListModel::instance;
 
 FlightListModel::FlightListModel(QObject *parent)

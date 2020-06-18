@@ -7,9 +7,6 @@
 #include "Recorder.h"
 #include "Airline.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 AddHost::AddHost(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddHost)

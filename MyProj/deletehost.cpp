@@ -9,8 +9,6 @@
 
 
 #include <QMessageBox>
-template <class T>
-Recorder<T>* Recorder<T>::instance;
 
 deleteHost::deleteHost(QWidget *parent) :
     QDialog(parent),

@@ -4,9 +4,6 @@
 #include "Airline.h"
 #include "Passenger.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 FlightTableModel* FlightTableModel::instance;
 
 FlightTableModel::FlightTableModel(QObject *parent)

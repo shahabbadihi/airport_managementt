@@ -5,9 +5,6 @@
 #include <QVector>
 #include "Recorder.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 DeletePilot::DeletePilot(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DeletePilot)

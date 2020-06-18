@@ -4,9 +4,6 @@
 #include "Recorder.h"
 #include "Airline.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 AddCarrierDialog::AddCarrierDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddCarrierDialog)

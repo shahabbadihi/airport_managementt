@@ -60,7 +60,8 @@ public:
     long getNationalCode() const;
     QDate getBirthDate() const;
     QDate getEmploymentDate() const;
-    QVector<Flight *> getList() const;
+    QVector<Flight *> getFlightList() const;
+    QVector<Flight *> getDoneFlightList() const;
 
 
     void removeFlight(Flight*);

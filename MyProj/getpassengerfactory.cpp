@@ -6,9 +6,6 @@
 #include "p2_12.h"
 #include "po12.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 GetPassengerFactory* GetPassengerFactory::instance;
 
 GetPassengerFactory::GetPassengerFactory()

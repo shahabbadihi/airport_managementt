@@ -35,6 +35,7 @@ SOURCES += \
     addhost.cpp \
     addticket.cpp \
     delaydialog.cpp \
+    delegate.cpp \
     deletecarrier.cpp \
     deleteflight.cpp \
     deletehost.cpp \
@@ -44,17 +45,18 @@ SOURCES += \
     flightlistmodel.cpp \
     flightstatusdialog.cpp \
     flighttablemodel.cpp \
+    flighttablepage.cpp \
     getpassengerfactory.cpp \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
-    mydelegate.cpp \
     p2_12.cpp \
     pd1.cpp \
     pd2.cpp \
     pd3.cpp \
     pilotitemmodel.cpp \
     pilotlistmodel.cpp \
+    pilotspage.cpp \
     po12.cpp \
     pu2.cpp \
     ticketlistmodel.cpp
@@ -82,6 +84,7 @@ HEADERS += \
     addhost.h \
     addticket.h \
     delaydialog.h \
+    delegate.h \
     deletecarrier.h \
     deleteflight.h \
     deletehost.h \
@@ -91,16 +94,17 @@ HEADERS += \
     flightlistmodel.h \
     flightstatusdialog.h \
     flighttablemodel.h \
+    flighttablepage.h \
     getpassengerfactory.h \
     hostlistmodel.h \
     mainwindow.h \
-    mydelegate.h \
     p2_12.h \
     pd1.h \
     pd2.h \
     pd3.h \
     pilotitemmodel.h \
     pilotlistmodel.h \
+    pilotspage.h \
     po12.h \
     pu2.h \
     ticketlistmodel.h
@@ -120,7 +124,9 @@ FORMS += \
     deleteticket.ui \
     dialog.ui \
     flightstatusdialog.ui \
-    mainwindow.ui
+    flighttablepage.ui \
+    mainwindow.ui \
+    pilotspage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

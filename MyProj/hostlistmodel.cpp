@@ -2,9 +2,6 @@
 #include "Recorder.h"
 #include "Host.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 HostListModel* HostListModel::instance;
 
 HostListModel::HostListModel(QObject *parent)

@@ -1,8 +1,6 @@
 #include "ticketlistmodel.h"
 #include "Recorder.h"
 #include "Ticket.h"
-template <class T>
-Recorder<T>* Recorder<T>::instance;
 
 TicketListModel* TicketListModel::instance;
 TicketListModel::TicketListModel(QObject *parent)

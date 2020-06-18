@@ -3,8 +3,6 @@
 #include "Airline.h"
 #include <QString>
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
 
 long Employee::getNationalCode() const
 {
@@ -21,9 +19,14 @@ QDate Employee::getEmploymentDate() const
     return employmentDate;
 }
 
-QVector<Flight *> Employee::getList() const
+QVector<Flight *> Employee::getFlightList() const
 {
     return list;
+}
+
+QVector<Flight *> Employee::getDoneFlightList() const
+{
+    return this->list_of_done_flights;
 }
 
 QString Employee::get_data()

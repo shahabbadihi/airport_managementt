@@ -8,9 +8,6 @@
 #include "Airline.h"
 #include <QMessageBox>
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 AddFlightDialog::AddFlightDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddFlightDialog)

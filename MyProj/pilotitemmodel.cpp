@@ -5,9 +5,6 @@
 #include "Recorder.h"
 #include <QStringListModel>
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 PilotItemModel* PilotItemModel::instance;
 
 PilotItemModel::PilotItemModel(QObject *parent)
@@ -41,14 +38,20 @@ QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &parent
 
 int PilotItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 9;
+    return 10;
 }
 
 QVariant PilotItemModel::data(const QModelIndex &index, int role) const
 {
     Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
     QString s = "";
-    foreach (Flight* f, p->getList())
+    foreach (Flight* f, p->getFlightList())
+    {
+        s += f->getFlightStr() + "\n";
+    }
+
+    QString s2 = "";
+    foreach (Flight* f, p->getDoneFlightList())
     {
         s += f->getFlightStr() + "\n";
     }
@@ -86,11 +89,55 @@ QVariant PilotItemModel::data(const QModelIndex &index, int role) const
         return s;
         break;
     case 8:
+        return s2;
+        break;
+    case 9:
         return p->getDegreeAsString();
         break;
     }
     //}
     return QVariant();
+}
+
+bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
+
+    if (role == Qt::EditRole)
+    {
+        switch (index.column())
+        {
+        case 0:
+            p->set_fname(value.toString());
+            break;
+        case 1:
+            p->set_lname(value.toString());
+            break;
+        case 2:
+            p->set_nationalCode(value.toLongLong());
+            break;
+        case 3:
+            p->set_personnelCode(value.toLongLong());
+            break;
+        case 4:
+            //p->setAirline();
+            break;
+        case 5:
+            p->set_birthDate(value.toDate());
+            break;
+        case 6:
+            p->set_employmentDate(value.toDate());
+            break;
+        case 7:
+            //return s;
+            break;
+        case 8:
+            //p->;
+            break;
+        case 9:
+            break;
+        }
+    }
 }
 
 PilotItemModel *PilotItemModel::getInstance()

@@ -26,6 +26,7 @@ class Carrier;
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 #include "SignalSlotRecorder.h"
+
 template <class T>
 class Recorder : public SignalSlotRecorder
 {
@@ -78,5 +79,7 @@ public slots:
     virtual void recordRemovedSlot(int);
 };
 
+template <class T>
+Recorder<T>* Recorder<T>::instance;
 
 #endif // RECORDER_H

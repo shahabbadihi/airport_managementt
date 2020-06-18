@@ -18,9 +18,6 @@
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 
-template <class T>
-Recorder<T>* Recorder<T>::instance;
-
 template<class T>
 void Recorder<T>::record(T *a)
 {
