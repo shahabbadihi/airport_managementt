@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>245</width>
-    <height>166</height>
+    <height>178</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="lblAirline">
        <property name="text">
-        <string>Airplane:</string>
+        <string>Airline:</string>
        </property>
       </widget>
      </item>
@@ -45,14 +45,28 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="lblNumOfSeats">
+      <widget class="QLabel" name="lblNumOfRows">
        <property name="text">
-        <string>Number Of Seats:</string>
+        <string>Number Of Rows:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spnNumOfSeats"/>
+      <widget class="QSpinBox" name="spnNumOfRows"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="lblNumOfCols">
+       <property name="text">
+        <string>Number Of Columns:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spnNumOfCols"/>
      </item>
     </layout>
    </item>

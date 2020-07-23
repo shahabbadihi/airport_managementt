@@ -25,9 +25,8 @@ SOURCES += \
     Passenger.cpp \
     Pilot.cpp \
     Recorder.cpp \
+    Seat.cpp \
     Ticket.cpp \
-    _observer.cpp \
-    _subject.cpp \
     addairlinedialog.cpp \
     addairplanedialog.cpp \
     addcarrierdialog.cpp \
@@ -59,7 +58,6 @@ SOURCES += \
     pilotspage.cpp \
     po12.cpp \
     pu2.cpp \
-    seat.cpp \
     ticketlistmodel.cpp
 
 HEADERS += \
@@ -74,10 +72,9 @@ HEADERS += \
     Pilot.h \
     Price.h \
     Recorder.h \
+    Seat.h \
     SignalSlotRecorder.h \
     Ticket.h \
-    _observer.h \
-    _subject.h \
     addairlinedialog.h \
     addairplanedialog.h \
     addcarrierdialog.h \
@@ -108,7 +105,6 @@ HEADERS += \
     pilotspage.h \
     po12.h \
     pu2.h \
-    seat.h \
     ticketlistmodel.h
 
 FORMS += \
