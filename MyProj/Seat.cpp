@@ -13,6 +13,10 @@ void Seat::attachPassenger(Passenger* p){
 void Seat::removePassenger(){
     passenger=nullptr;
 }
-Seat::Seat(){
+Seat::Seat():passenger(nullptr){
 
+}
+bool Seat::isFree(){
+    if(passenger==nullptr){return false;}
+    else {return true;}
 }

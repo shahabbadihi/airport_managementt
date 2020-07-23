@@ -47,6 +47,7 @@ void deleteTicket::on_deleteButton_clicked()
 {
     QModelIndex index = ui->listView->currentIndex();
     this->proxy->removeRows(index.row(), 1);
+
     //this->model->removeRows(index.row(), 1);
    //
    //

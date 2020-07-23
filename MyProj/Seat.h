@@ -14,6 +14,7 @@ public:
     void attachPassenger(Passenger*);
     void removePassenger();
     friend class Airplane;
+    bool isFree();
 };
 
 #endif // SEAT_H

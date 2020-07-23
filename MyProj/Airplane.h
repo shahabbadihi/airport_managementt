@@ -23,6 +23,7 @@ private:
     QVector<Flight*> list_of_flights;
     Airline* airline;
     void createSeats(int rows, int cols);
+
 public:
     Airplane()  : airline(nullptr) {}
     Airplane(const QString & serial, Airline * airline, int rows, int cols);
@@ -47,7 +48,8 @@ public:
     bool isFlightInList(Flight *f);
     Flight *nextFlight(Flight *f);
     Flight *prevFlight(Flight *f);
-
+    int getRowCount();
+    int getcolumnCount();
     //void setSeats(int Row,int column);
 };
 

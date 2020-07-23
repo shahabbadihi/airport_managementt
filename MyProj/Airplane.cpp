@@ -191,6 +191,7 @@ Airplane::Airplane(const QString &serial, Airline *airline, int rows, int cols)
     this->num_of_cols = cols;
 
     this->createSeats(rows, cols);
+
 }
 
 Airplane::Airplane(QString & str_data)
@@ -253,3 +254,14 @@ QString Airplane::get_data()
 
     return str;
 }
+int Airplane::getRowCount(){return this->num_of_rows;}
+int Airplane::getcolumnCount(){return this->num_of_cols; }
+
+
+
+
+
+
+
+
+
