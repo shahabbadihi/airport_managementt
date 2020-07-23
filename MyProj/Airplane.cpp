@@ -179,13 +179,16 @@ void Airplane::createSeats(int rows, int cols)
         }
     }
     this->setNumOfSeats(rows * cols);
+
 }
 
 Airplane::Airplane(const QString &serial, Airline *airline, int rows, int cols)
 {
     this->setSerial(serial);
     this->setAirline(airline);
-    this->setSeats(rows, cols);
+    this->num_of_rows = rows;
+    this->num_of_cols = cols;
+    this->createSeats(rows, cols);
 }
 
 Airplane::Airplane(QString & str_data)
@@ -202,7 +205,9 @@ Airplane::Airplane(QString & str_data)
     int rows = str_list[2].toInt();
     int cols = str_list[3].toInt();
 
-    this->setSeats(rows, cols);
+    this->num_of_rows = rows;
+    this->num_of_cols = cols;
+    this->createSeats(rows, cols);
 
     QStringList flights = str_list[4].split('/', Qt::SkipEmptyParts);
 

@@ -31,7 +31,7 @@ QModelIndex PilotItemModel::parent(const QModelIndex &/*index*/) const
     return QModelIndex();
 }
 
-QModelIndex PilotItemModel::index(int row, int column, const QModelIndex /*&parent*/) const
+QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &parent) const
 {
     return createIndex(row, column);
 }
