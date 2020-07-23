@@ -59,6 +59,7 @@ SOURCES += \
     pilotspage.cpp \
     po12.cpp \
     pu2.cpp \
+    seat.cpp \
     ticketlistmodel.cpp
 
 HEADERS += \
@@ -107,6 +108,7 @@ HEADERS += \
     pilotspage.h \
     po12.h \
     pu2.h \
+    seat.h \
     ticketlistmodel.h
 
 FORMS += \
