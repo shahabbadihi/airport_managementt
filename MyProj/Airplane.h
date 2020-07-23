@@ -47,6 +47,8 @@ public:
     bool isFlightInList(Flight *f);
     Flight *nextFlight(Flight *f);
     Flight *prevFlight(Flight *f);
+
+    //void setSeats(int Row,int column);
 };
 
 #endif // AIRPLANE_H

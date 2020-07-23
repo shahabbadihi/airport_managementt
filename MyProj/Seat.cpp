@@ -7,7 +7,12 @@ void Seat::setSeatInfo(int row, int col, Airplane *a)
     this->airplane = a;
 }
 
-Seat::Seat()
-{
+void Seat::attachPassenger(Passenger* p){
+    passenger=p;
+}
+void Seat::removePassenger(){
+    passenger=nullptr;
+}
+Seat::Seat(){
 
 }

@@ -43,7 +43,9 @@ QString Ticket::get_data()
             ;
     return str_data;
 }
-
+void Ticket::setSeat(Seat *s){
+    seat=s;
+}
 //void Ticket::setDestination(const QString & d)
 //{
 //    this->destination = d;

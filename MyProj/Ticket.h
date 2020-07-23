@@ -8,6 +8,7 @@
 #include <QDateTime>
 #include "Price.h"
 #include "Object.h"
+#include "Seat.h"
 class Flight;
 class Airline;
 class Passenger;
@@ -33,7 +34,7 @@ private:
     //long deliverierCode;
     Price price;
     int interestRate;
-
+    Seat * seat;
     long no;
 
 //    void setNo(long value);
@@ -42,7 +43,7 @@ public:
     Ticket(QString&);
     ~Ticket() ;
     QString get_data();
-
+    void setSeat(Seat *);
 //    void setDestination(const QString&);
 //    void setSource(const QString&);
 //    void setPassengerFname(const QString&);
