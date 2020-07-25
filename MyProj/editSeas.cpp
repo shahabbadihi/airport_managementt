@@ -21,17 +21,7 @@ editSeas::editSeas(Flight * flight,QWidget *parent) :
     for (int i=0;i<flight->getAirplane()->getRowCount();i++) {
          ui->seatChart->insertRow(ui->seatChart->rowCount());
     }
-    for (int i=0;i<flight->getAirplane()->getRowCount();i++) {
-        for (int j=0;j<flight->getAirplane()->getcolumnCount();j++){
-            if(flight->getAirplane()->getSeat(i,j)->isFree()){
-
-            }
-            else{
-                ui->seatChart->setItem(i,j,new QTableWidgetItem(flight->getAirplane()->getSeat(i,j)->getTicket()->getPassengerName()));
-            }
-        }
-    }
-
+    update();
 }
 
 editSeas::~editSeas()
@@ -58,4 +48,17 @@ void editSeas::on_seatChart_cellClicked(int row, int column)
     attachTicketDialog->setModal(true);
     attachTicketDialog->exec();
     delete attachTicketDialog;
+    update();
+}
+void editSeas::update(){
+    for (int i=0;i<flight->getAirplane()->getRowCount();i++) {
+        for (int j=0;j<flight->getAirplane()->getcolumnCount();j++){
+            if(flight->getAirplane()->getSeat(i,j)->isFree()){
+
+            }
+            else{
+                ui->seatChart->setItem(i,j,new QTableWidgetItem(flight->getAirplane()->getSeat(i,j)->getTicket()->getPassengerName()));
+            }
+        }
+    }
 }

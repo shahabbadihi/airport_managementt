@@ -21,5 +21,7 @@ void attachTicket::on_okButton_clicked()
 {
     flight->getAirplane()->getSeat(Row,Column)->attachTicket
             ( Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text()));
+
     ui->name->setText(Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text())->getPassengerName());
+    Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text())->setSeat(flight->getAirplane()->getSeat(Row,Column));
 }
