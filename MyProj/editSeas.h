@@ -18,6 +18,10 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_seatChart_cellActivated(int row, int column);
+
+    void on_seatChart_cellClicked(int row, int column);
+
 private:
     Ui::editSeas *ui;
     Flight * flight;
