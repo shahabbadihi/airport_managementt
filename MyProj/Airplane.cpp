@@ -256,7 +256,10 @@ QString Airplane::get_data()
 }
 int Airplane::getRowCount(){return this->num_of_rows;}
 int Airplane::getcolumnCount(){return this->num_of_cols; }
+Seat * Airplane::getSeat(int r,int c){
+    return &seats[r][c];
 
+}
 
 
 

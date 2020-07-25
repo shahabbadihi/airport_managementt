@@ -2,17 +2,19 @@
 #define SEAT_H
 #include "Airplane.h"
 #include "Passenger.h"
+#include "Ticket.h"
 class Seat
 {
     int row;
     int column;
     Airplane * airplane;
     void setSeatInfo(int row, int col, Airplane * a);
-    Passenger * passenger;
+    Ticket * ticket;
 public:
     Seat();
-    void attachPassenger(Passenger*);
-    void removePassenger();
+    void attachTicket(Ticket*);
+    void removeTicket();
+    Ticket *getTicket();
     friend class Airplane;
     bool isFree();
 };

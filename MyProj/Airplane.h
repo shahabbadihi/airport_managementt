@@ -50,6 +50,7 @@ public:
     Flight *prevFlight(Flight *f);
     int getRowCount();
     int getcolumnCount();
+    Seat * getSeat(int r,int c);
     //void setSeats(int Row,int column);
 };
 
