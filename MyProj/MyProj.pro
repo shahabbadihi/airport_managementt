@@ -25,6 +25,7 @@ SOURCES += \
     Passenger.cpp \
     Pilot.cpp \
     Recorder.cpp \
+    ThreadedJob.cpp \
     Ticket.cpp \
     _observer.cpp \
     _subject.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
     Price.h \
     Recorder.h \
     SignalSlotRecorder.h \
+    ThreadedJob.h \
     Ticket.h \
     _observer.h \
     _subject.h \

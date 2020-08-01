@@ -1,18 +1,28 @@
+#include <QThread>
 #include "flighttablemodel.h"
 #include "Recorder.h"
 #include "Flight.h"
 #include "Airline.h"
 #include "Passenger.h"
+#include "ThreadedJob.h"
 
 FlightTableModel* FlightTableModel::instance;
 
 FlightTableModel::FlightTableModel(QObject *parent)
-    : QAbstractItemModel(parent),
-      timer(new QTimer(this))
+    : QAbstractItemModel(parent)
+      //timer(new QTimer(this))
 {
     //this->recorder = Recorder<Flight>::getInstance();
-    connect(this->timer, SIGNAL(timeout()), this, SLOT(timerHit()));
-    timer->start(1000);
+    //connect(this->timer, SIGNAL(timeout()), this, SLOT(timerHit()));
+    //timer->start(1000);
+    QThread * th_update_flight_table = new QThread();
+    ThreadedJob * tj_update_flight_table = new ThreadedJob();
+    tj_update_flight_table->moveToThread(th_update_flight_table);
+
+    connect(th_update_flight_table, SIGNAL(started()), tj_update_flight_table,
+            SLOT(slt_update_flight_table()));
+
+    th_update_flight_table->start();
 }
 
 int FlightTableModel::rowCount(const QModelIndex & /*parent*/) const

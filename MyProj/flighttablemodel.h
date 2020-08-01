@@ -30,15 +30,17 @@ public:
 private:
     static FlightTableModel* instance;
 
-    QTimer * timer;
+    //QTimer * timer;
 
     //Recorder<Flight> * recorder;
 
 signals:
     void recordInsertedSignal(int);
     void recordRemovedSignal(int);
-private slots:
+
+public slots:
     void timerHit();
+private slots:
     void recordInserted();
     void recordRemovedSlot(int);
     //void recordInserted() override;

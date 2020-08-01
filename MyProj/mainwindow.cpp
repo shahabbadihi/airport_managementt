@@ -13,6 +13,7 @@
 #include <QTime>
 #include <QStandardItemModel>
 #include <QAbstractItemModel>
+#include <QThread>
 #include "Recorder.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -25,19 +26,27 @@
 #include "deleteticket.h"
 #include "flighttablepage.h"
 #include "pilotspage.h"
+#include "ThreadedJob.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , timer(new QTimer(this))
     , tab_widget(new QTabWidget(this))
 {
     ui->setupUi(this);
 
     //this->timer = new QTimer(this);
-    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
+    //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
-    timer->start(1000);
+    //timer->start(1000);
+    QThread * th_update_files = new QThread();
+    ThreadedJob * tj_update_files = new ThreadedJob();
+    tj_update_files->moveToThread(th_update_files);
+
+    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
+
+    th_update_files->start();
+
 
     this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
@@ -142,17 +151,17 @@ void MainWindow::on_actioncarrier_triggered()
     delete deleteCarrierDialog;
 }
 
-void MainWindow::updateFiles()
-{
-    Recorder<Airline>::getInstance()->updateFileAll();
-    Recorder<Airplane>::getInstance()->updateFileAll();
-    Recorder<Host>::getInstance()->updateFileAll();
-    Recorder<Pilot>::getInstance()->updateFileAll();
-    Recorder<Flight>::getInstance()->updateFileAll();
-    Recorder<Passenger>::getInstance()->updateFileAll();
-    Recorder<Ticket>::getInstance()->updateFileAll();
-    Recorder<Carrier>::getInstance()->updateFileAll();
-}
+//void MainWindow::updateFiles()
+//{
+//    Recorder<Airline>::getInstance()->updateFileAll();
+//    Recorder<Airplane>::getInstance()->updateFileAll();
+//    Recorder<Host>::getInstance()->updateFileAll();
+//    Recorder<Pilot>::getInstance()->updateFileAll();
+//    Recorder<Flight>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Ticket>::getInstance()->updateFileAll();
+//    Recorder<Carrier>::getInstance()->updateFileAll();
+//}
 
 
 //void MainWindow::updateFlightModel()

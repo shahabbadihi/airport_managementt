@@ -21,7 +21,7 @@ public:
 
 public slots:
     void showClock();
-    void updateFlightState();
+    //void updateFlightState();
     void addButtonFlightTable(int row);
     void removeButtonFlightTable(int row);
     void showDelayDialog(int row);

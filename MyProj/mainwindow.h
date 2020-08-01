@@ -66,7 +66,7 @@ private slots:
 
     void on_actionAddCarrier_triggered();
 
-    void updateFiles();
+    //void updateFiles();
     //void updateFlightModel();
     //void print();
 
@@ -91,7 +91,7 @@ private:
     deleteFlight* deleteFlightDialog;
     deleteCarrier* deleteCarrierDialog;
     deleteTicket * deleteTicketDialog;
-    QTimer * timer;
+    //QTimer * timer;
 
     QTabWidget * tab_widget;
 
