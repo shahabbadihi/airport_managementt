@@ -184,4 +184,5 @@ QString Ticket::getPassengerName(){
 Ticket::~Ticket(){
     this->flight->removeTicket(this);
     this->passenger->removeTicket(this);
+    this->seat->removeTicket();
 }

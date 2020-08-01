@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>622</width>
+    <height>352</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,18 +16,18 @@
   <widget class="QTableWidget" name="seatChart">
    <property name="geometry">
     <rect>
-     <x>35</x>
+     <x>5</x>
      <y>11</y>
-     <width>321</width>
-     <height>231</height>
+     <width>611</width>
+     <height>251</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>224</x>
-     <y>252</y>
+     <x>430</x>
+     <y>310</y>
      <width>131</width>
      <height>31</height>
     </rect>

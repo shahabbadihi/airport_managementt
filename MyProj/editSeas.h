@@ -14,7 +14,7 @@ class editSeas : public QDialog
 public:
     explicit editSeas(Flight * flight,QWidget *parent = nullptr);
     ~editSeas();
-
+    void update();
 private slots:
     void on_pushButton_clicked();
 
@@ -25,6 +25,7 @@ private slots:
 private:
     Ui::editSeas *ui;
     Flight * flight;
+
 };
 
 #endif // EDITSEAS_H
