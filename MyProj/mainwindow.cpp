@@ -33,12 +33,24 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
+    Recorder<Airline>::getInstance()->import();
+    Recorder<Pilot>::getInstance()->import();
+    Recorder<Host>::getInstance()->import();
+    Recorder<Airplane>::getInstance()->import();
+    Recorder<Carrier>::getInstance()->import();
+    Recorder<Flight>::getInstance()->import();
+    Recorder<Ticket>::getInstance()->import();
+    Recorder<Passenger>::getInstance()->import();
+
     ui->setupUi(this);
 
     //this->timer = new QTimer(this);
     //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
     //timer->start(1000);
+
+
+
     QThread * th_update_files = new QThread();
     ThreadedJob * tj_update_files = new ThreadedJob();
     tj_update_files->moveToThread(th_update_files);
