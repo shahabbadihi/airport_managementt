@@ -33,6 +33,14 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 
+    Recorder<Airline>::getInstance()->import();
+    Recorder<Pilot>::getInstance()->import();
+    Recorder<Host>::getInstance()->import();
+    Recorder<Airplane>::getInstance()->import();
+    Recorder<Carrier>::getInstance()->import();
+    Recorder<Flight>::getInstance()->import();
+    Recorder<Ticket>::getInstance()->import();
+    Recorder<Passenger>::getInstance()->import();
 
     w.setWindowTitle("Main");
     w.show();

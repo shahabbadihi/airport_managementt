@@ -33,14 +33,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
-    Recorder<Airline>::getInstance()->import();
-    Recorder<Pilot>::getInstance()->import();
-    Recorder<Host>::getInstance()->import();
-    Recorder<Airplane>::getInstance()->import();
-    Recorder<Carrier>::getInstance()->import();
-    Recorder<Flight>::getInstance()->import();
-    Recorder<Ticket>::getInstance()->import();
-    Recorder<Passenger>::getInstance()->import();
+//    Recorder<Airline>::getInstance()->import();
+//    Recorder<Pilot>::getInstance()->import();
+//    Recorder<Host>::getInstance()->import();
+//    Recorder<Airplane>::getInstance()->import();
+//    Recorder<Carrier>::getInstance()->import();
+//    Recorder<Flight>::getInstance()->import();
+//    Recorder<Ticket>::getInstance()->import();
+//    Recorder<Passenger>::getInstance()->import();
 
     ui->setupUi(this);
 
@@ -51,13 +51,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    QThread * th_update_files = new QThread();
-    ThreadedJob * tj_update_files = new ThreadedJob();
-    tj_update_files->moveToThread(th_update_files);
+//    QThread * th_update_files = new QThread();
+//    ThreadedJob * tj_update_files = new ThreadedJob();
+//    tj_update_files->moveToThread(th_update_files);
 
-    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
+//    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
 
-    th_update_files->start();
+//    th_update_files->start();
 
 
     this->setCentralWidget(tab_widget);

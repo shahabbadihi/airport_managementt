@@ -15,14 +15,14 @@ FlightTableModel::FlightTableModel(QObject *parent)
     //this->recorder = Recorder<Flight>::getInstance();
     //connect(this->timer, SIGNAL(timeout()), this, SLOT(timerHit()));
     //timer->start(1000);
-    QThread * th_update_flight_table = new QThread();
-    ThreadedJob * tj_update_flight_table = new ThreadedJob();
-    tj_update_flight_table->moveToThread(th_update_flight_table);
+//    QThread * th_update_flight_table = new QThread();
+//    ThreadedJob * tj_update_flight_table = new ThreadedJob();
+//    tj_update_flight_table->moveToThread(th_update_flight_table);
 
-    connect(th_update_flight_table, SIGNAL(started()), tj_update_flight_table,
-            SLOT(slt_update_flight_table()));
+//    connect(th_update_flight_table, SIGNAL(started()), tj_update_flight_table,
+//            SLOT(slt_update_flight_table()));
 
-    th_update_flight_table->start();
+//    th_update_flight_table->start();
 }
 
 int FlightTableModel::rowCount(const QModelIndex & /*parent*/) const
