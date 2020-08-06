@@ -39,7 +39,7 @@ private:
 
 //    void setNo(long value);
 public:
-    Ticket() : flight(nullptr), passenger(nullptr) {}
+    Ticket();
     Ticket(QString&);
     ~Ticket() ;
     QString get_data();

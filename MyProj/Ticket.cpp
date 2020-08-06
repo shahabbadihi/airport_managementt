@@ -23,8 +23,16 @@ void Ticket::setNo(long value)
 //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
+Ticket::Ticket()
+     : flight(nullptr), passenger(nullptr),
+       seat(nullptr)
+{
+
+}
+
 Ticket::Ticket(QString & str_data)
-    : flight(nullptr), passenger(nullptr)
+    : flight(nullptr), passenger(nullptr),
+      seat(nullptr)
 {
     QStringList str_list = str_data.split('|');
 
@@ -33,7 +41,11 @@ Ticket::Ticket(QString & str_data)
 
     this->setFlight(Recorder<Flight>::getInstance()->searchByCode(str_list[1]));
     this->setPassenger(Recorder<Passenger>::getInstance()->searchByCode(str_list[2]));
-    this->setSeat(this->getFlight()->getAirplane()->getSeat(str_list[3].toInt(),str_list[4].toInt()));
+
+    if (str_list[3] != "-1")
+        this->setSeat(this->getFlight()->getAirplane()->getSeat(str_list[3].toInt(),str_list[4].toInt()));
+    else
+        this->setSeat(nullptr);
 }
 
 QString Ticket::get_data()
@@ -41,15 +53,18 @@ QString Ticket::get_data()
     QString str_data = QString::number(this->no) + "|" +
             (this->flight ? this->flight->getSerial() : "") + "|" +
             (this->passenger ? this->passenger->getSearchCode() : "") +"|" +
-            QString::number(seat->getRow())+"|" +
-            QString::number(seat->getRow())+
+            (this->seat ? QString::number(seat->getRow()) : "-1") + "|" +
+            (this->seat ? QString::number(seat->getColumn()) : "-1") +
             "|\n"
             ;
     return str_data;
 }
+
 void Ticket::setSeat(Seat *s){
     seat=s;
-    seat->attachTicket(this);
+
+    if (seat)
+        seat->attachTicket(this);
 }
 //void Ticket::setDestination(const QString & d)
 //{
