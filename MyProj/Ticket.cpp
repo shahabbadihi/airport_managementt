@@ -49,6 +49,7 @@ QString Ticket::get_data()
 }
 void Ticket::setSeat(Seat *s){
     seat=s;
+    seat->attachTicket(this);
 }
 //void Ticket::setDestination(const QString & d)
 //{
