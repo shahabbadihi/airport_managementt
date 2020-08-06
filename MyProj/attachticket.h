@@ -18,6 +18,8 @@ public:
 private slots:
     void on_okButton_clicked();
 
+    void on_editButton_clicked();
+
 private:
     Ui::attachTicket *ui;
     Flight *flight;

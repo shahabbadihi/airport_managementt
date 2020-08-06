@@ -240,7 +240,7 @@ QString Airplane::get_data()
     QString str = this->getSearchCode() + "|" +
             (this->airline ? this->airline->getSearchCode() : "") + "|" +
             QString::number(this->num_of_rows) + "|" +
-            QString::number(this->num_of_cols) + "|";
+            QString::number(this->num_of_cols) + "|" ;
 
     for (int i = 0; i < this->list_of_flights.size() && this->list_of_flights[i]; i++)
     {

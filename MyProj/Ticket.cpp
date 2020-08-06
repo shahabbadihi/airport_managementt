@@ -33,13 +33,17 @@ Ticket::Ticket(QString & str_data)
 
     this->setFlight(Recorder<Flight>::getInstance()->searchByCode(str_list[1]));
     this->setPassenger(Recorder<Passenger>::getInstance()->searchByCode(str_list[2]));
+    this->setSeat(this->getFlight()->getAirplane()->getSeat(str_list[3].toInt(),str_list[4].toInt()));
 }
 
 QString Ticket::get_data()
 {
     QString str_data = QString::number(this->no) + "|" +
             (this->flight ? this->flight->getSerial() : "") + "|" +
-            (this->passenger ? this->passenger->getSearchCode() : "") + "|\n"
+            (this->passenger ? this->passenger->getSearchCode() : "") +"|" +
+            QString::number(seat->getRow())+"|" +
+            QString::number(seat->getRow())+
+            "|\n"
             ;
     return str_data;
 }
