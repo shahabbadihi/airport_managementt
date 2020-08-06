@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QFile>
 #include <QThread>
+#include <QFontDatabase>
 #include "stdio.h"
 //#include "TList.h"
 #include "Recorder.h"
@@ -33,6 +34,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 
+    QFontDatabase::addApplicationFont(":/fonts/Raleway-Regular.ttf");
+
+
+
+
+
+    w.setWindowTitle("Main");
+    w.show();
+
     Recorder<Airline>::getInstance()->import();
     Recorder<Pilot>::getInstance()->import();
     Recorder<Host>::getInstance()->import();
@@ -41,9 +51,6 @@ int main(int argc, char *argv[])
     Recorder<Flight>::getInstance()->import();
     Recorder<Ticket>::getInstance()->import();
     Recorder<Passenger>::getInstance()->import();
-
-    w.setWindowTitle("Main");
-    w.show();
 
     return a.exec();
 }

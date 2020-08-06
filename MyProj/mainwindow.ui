@@ -13,6 +13,41 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMenu {
+    background-color: #ABABAB; /* sets background of the menu */
+    border: 1px solid black;
+}
+
+QMenu::item {
+    /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+    background-color: transparent;
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+    background-color: #654321;
+}
+
+QMenuBar {
+    background-color: rgb(255, 255, 0);
+}
+
+QMenuBar::item {
+    spacing: 3px; /* spacing between menu bar items */
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: rgb(255, 170, 0);
+}
+
+QMenuBar::item:pressed {
+    background: rgb(232, 255, 25);
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
@@ -22,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>755</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

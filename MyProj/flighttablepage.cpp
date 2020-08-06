@@ -10,11 +10,11 @@
 
 FlightTablePage::FlightTablePage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FlightTablePage)//,
-    //timer(new QTimer(this))
+    ui(new Ui::FlightTablePage),
+    timer(new QTimer(this))
 {
-//    connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
-//    timer->start(1000);
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(showClock()));
+    timer->start(1000);
 
     ui->setupUi(this);
 
@@ -28,8 +28,11 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
     ui->tableView->resizeColumnsToContents();
     ui->tableView->setColumnWidth(0, 80);
     ui->tableView->setColumnWidth(1, 80);
-    ui->tableView->setColumnWidth(2, 100);
-    ui->tableView->setColumnWidth(3, 100);
+    ui->tableView->setColumnWidth(2, 80);
+    ui->tableView->setColumnWidth(3, 80);
+    ui->tableView->setColumnWidth(4, 120);
+    ui->tableView->setColumnWidth(5, 120);
+    ui->tableView->setColumnWidth(6, 100);
 
     signal_mapper_delay = new QSignalMapper(this);
     signal_mapper_status = new QSignalMapper(this);
@@ -51,14 +54,14 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
 
 
 
-//    QThread * th_update_flight_status = new QThread();
-//    ThreadedJob * tj_update_flight_status = new ThreadedJob();
-//    tj_update_flight_status->moveToThread(th_update_flight_status);
+    QThread * th_update_flight_status = new QThread();
+    ThreadedJob * tj_update_flight_status = new ThreadedJob();
+    tj_update_flight_status->moveToThread(th_update_flight_status);
 
-//    connect(th_update_flight_status, SIGNAL(started()), tj_update_flight_status,
-//            SLOT(slt_start_update_flight_status()));
+    connect(th_update_flight_status, SIGNAL(started()), tj_update_flight_status,
+            SLOT(slt_start_update_flight_status()));
 
-//    th_update_flight_status->start();
+    th_update_flight_status->start();
 
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
 

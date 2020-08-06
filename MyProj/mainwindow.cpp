@@ -33,6 +33,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
+
+
+    ui->setupUi(this);
+
+    //this->timer = new QTimer(this);
+    //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
+//    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
+    //timer->start(1000);
 //    Recorder<Airline>::getInstance()->import();
 //    Recorder<Pilot>::getInstance()->import();
 //    Recorder<Host>::getInstance()->import();
@@ -42,24 +50,11 @@ MainWindow::MainWindow(QWidget *parent)
 //    Recorder<Ticket>::getInstance()->import();
 //    Recorder<Passenger>::getInstance()->import();
 
-    ui->setupUi(this);
-
-    //this->timer = new QTimer(this);
-    //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
-//    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
-    //timer->start(1000);
 
 
 
-//    QThread * th_update_files = new QThread();
-//    ThreadedJob * tj_update_files = new ThreadedJob();
-//    tj_update_files->moveToThread(th_update_files);
 
-//    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
-
-//    th_update_files->start();
-
-
+//    tab_widget->setStyleSheet("background-color : black;");
     this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new PilotsPage(this), "Pilots");
@@ -67,6 +62,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     //ui->tableView.setC
     //ui->tableView->setModel();
+
+    QThread * th_update_files = new QThread();
+    ThreadedJob * tj_update_files = new ThreadedJob();
+    tj_update_files->moveToThread(th_update_files);
+
+    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
+
+    th_update_files->start();
 }
 
 MainWindow::~MainWindow()

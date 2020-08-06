@@ -46,7 +46,7 @@ void ThreadedJob::slt_start_update_flight_status()
 void ThreadedJob::slt_start_update_files()
 {
     this->tm_update_files = new QTimer(this);
-    this->tm_update_files->setInterval(1000);
+    this->tm_update_files->setInterval(10000);
 
     connect(this->tm_update_files, SIGNAL(timeout()), this, SLOT(slt_update_files()));
     this->tm_update_files->start();
