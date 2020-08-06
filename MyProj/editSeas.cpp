@@ -33,7 +33,7 @@ editSeas::~editSeas()
 
 void editSeas::on_pushButton_clicked()
 {
-
+    this->close();
 }
 
 void editSeas::on_seatChart_cellActivated(int row, int column)

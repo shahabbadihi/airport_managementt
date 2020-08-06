@@ -15,6 +15,8 @@ public:
     void attachTicket(Ticket*);
     void removeTicket();
     Ticket *getTicket();
+    int getRow(){return row;}
+    int getColumn(){return column;}
     friend class Airplane;
     bool isFree();
 };
