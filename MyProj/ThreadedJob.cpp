@@ -4,6 +4,8 @@
 #include "Passenger.h"
 #include "flighttablemodel.h"
 
+long long ThreadedJob::counter = 0;
+
 ThreadedJob::ThreadedJob(QObject *parent) : QObject(parent)
 {
 
@@ -19,14 +21,26 @@ void ThreadedJob::slt_update_flight_status()
 
 void ThreadedJob::slt_update_files()
 {
-    Recorder<Airline>::getInstance()->updateFileAll();
-    Recorder<Airplane>::getInstance()->updateFileAll();
-    Recorder<Host>::getInstance()->updateFileAll();
-    Recorder<Pilot>::getInstance()->updateFileAll();
-    Recorder<Flight>::getInstance()->updateFileAll();
-    Recorder<Passenger>::getInstance()->updateFileAll();
-    Recorder<Ticket>::getInstance()->updateFileAll();
-    Recorder<Carrier>::getInstance()->updateFileAll();
+    if (counter % 2 == 0)
+    {
+        foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
+        {
+            f->setState();
+        }
+    }
+    if (counter % 2 == 1)
+    {
+        Recorder<Airline>::getInstance()->updateFileAll();
+        Recorder<Airplane>::getInstance()->updateFileAll();
+        Recorder<Host>::getInstance()->updateFileAll();
+        Recorder<Pilot>::getInstance()->updateFileAll();
+        Recorder<Flight>::getInstance()->updateFileAll();
+        Recorder<Passenger>::getInstance()->updateFileAll();
+        Recorder<Ticket>::getInstance()->updateFileAll();
+        Recorder<Carrier>::getInstance()->updateFileAll();
+    }
+
+    counter++;
 }
 
 void ThreadedJob::slt_update_flight_table()
@@ -37,7 +51,7 @@ void ThreadedJob::slt_update_flight_table()
 void ThreadedJob::slt_start_update_flight_status()
 {
     this->tm_update_flight_status = new QTimer(this);
-    this->tm_update_flight_status->setInterval(1000);
+    this->tm_update_flight_status->setInterval(60000);
 
     connect(this->tm_update_flight_status, SIGNAL(timeout()), this, SLOT(slt_update_flight_status()));
     this->tm_update_flight_status->start();
@@ -46,7 +60,7 @@ void ThreadedJob::slt_start_update_flight_status()
 void ThreadedJob::slt_start_update_files()
 {
     this->tm_update_files = new QTimer(this);
-    this->tm_update_files->setInterval(10000);
+    this->tm_update_files->setInterval(60000);
 
     connect(this->tm_update_files, SIGNAL(timeout()), this, SLOT(slt_update_files()));
     this->tm_update_files->start();

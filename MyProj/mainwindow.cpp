@@ -41,20 +41,20 @@ MainWindow::MainWindow(QWidget *parent)
     //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
     //timer->start(1000);
-//    Recorder<Airline>::getInstance()->import();
-//    Recorder<Pilot>::getInstance()->import();
-//    Recorder<Host>::getInstance()->import();
-//    Recorder<Airplane>::getInstance()->import();
-//    Recorder<Carrier>::getInstance()->import();
-//    Recorder<Flight>::getInstance()->import();
-//    Recorder<Ticket>::getInstance()->import();
-//    Recorder<Passenger>::getInstance()->import();
+    Recorder<Airline>::getInstance()->import();
+    Recorder<Pilot>::getInstance()->import();
+    Recorder<Host>::getInstance()->import();
+    Recorder<Airplane>::getInstance()->import();
+    Recorder<Carrier>::getInstance()->import();
+    Recorder<Flight>::getInstance()->import();
+    Recorder<Ticket>::getInstance()->import();
+    Recorder<Passenger>::getInstance()->import();
 
 
 
 
+    ui->centralwidget->resize(200, 200);
 
-//    tab_widget->setStyleSheet("background-color : black;");
     this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new PilotsPage(this), "Pilots");

@@ -12,6 +12,7 @@ private:
     QTimer * tm_update_flight_status;
     QTimer * tm_update_files;
     QTimer * tm_update_flight_table;
+    static long long counter;
 public:
     explicit ThreadedJob(QObject *parent = nullptr);
 

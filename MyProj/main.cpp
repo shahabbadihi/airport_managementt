@@ -43,14 +43,14 @@ int main(int argc, char *argv[])
     w.setWindowTitle("Main");
     w.show();
 
-    Recorder<Airline>::getInstance()->import();
-    Recorder<Pilot>::getInstance()->import();
-    Recorder<Host>::getInstance()->import();
-    Recorder<Airplane>::getInstance()->import();
-    Recorder<Carrier>::getInstance()->import();
-    Recorder<Flight>::getInstance()->import();
-    Recorder<Ticket>::getInstance()->import();
-    Recorder<Passenger>::getInstance()->import();
+//    Recorder<Airline>::getInstance()->import();
+//    Recorder<Pilot>::getInstance()->import();
+//    Recorder<Host>::getInstance()->import();
+//    Recorder<Airplane>::getInstance()->import();
+//    Recorder<Carrier>::getInstance()->import();
+//    Recorder<Flight>::getInstance()->import();
+//    Recorder<Ticket>::getInstance()->import();
+//    Recorder<Passenger>::getInstance()->import();
 
     return a.exec();
 }
