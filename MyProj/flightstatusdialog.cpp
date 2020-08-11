@@ -6,7 +6,7 @@
 #include "addticket.h"
 #include "addcarrierdialog.h"
 #include "dialog.h"
-
+#include "editSeas.h"
 FlightStatusDialog::FlightStatusDialog(Flight* flight, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FlightStatusDialog),
@@ -24,6 +24,7 @@ FlightStatusDialog::FlightStatusDialog(Flight* flight, QWidget *parent) :
     ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
+    ui->lblCheckStasus->setText(flight_ptr->isCheckInReady() ? "ready!" : "Not ready!");
 }
 
 FlightStatusDialog::~FlightStatusDialog()
@@ -87,4 +88,13 @@ void FlightStatusDialog::reset()
     ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
+    ui->lblCheckStasus->setText(flight_ptr->isCheckInReady() ? "ready!" : "Not ready!");
+}
+
+void FlightStatusDialog::on_btnEditCheck_clicked()
+{
+    editSeas * editSeasDialog = new editSeas(flight_ptr);
+    editSeasDialog->setModal(true);
+    editSeasDialog->exec();
+    delete editSeasDialog;
 }

@@ -41,7 +41,7 @@ int PilotItemModel::columnCount(const QModelIndex &/*parent*/) const
     return 10;
 }
 
-QVariant PilotItemModel::data(const QModelIndex &index, int role) const
+QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
 {
     Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
     QString s = "";

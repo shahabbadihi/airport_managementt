@@ -1,6 +1,7 @@
 #include "Airplane.h"
 #include "Airline.h"
 #include "Flight.h"
+#include "Seat.h"
 #include <QString>
 
 void Airplane::attachFlight(Flight *f)
@@ -166,6 +167,33 @@ bool Airplane::isFlightInList(Flight * f)
     return false;
 }
 
+void Airplane::createSeats(int rows, int cols)
+{
+    this->seats = new Seat* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        this->seats[i] = new Seat[cols];
+        for (int j = 0; j < cols; j++)
+        {
+            this->seats[i][j].setSeatInfo(i, j, this);
+        }
+    }
+    this->setNumOfSeats(rows * cols);
+
+}
+
+Airplane::Airplane(const QString &serial, Airline *airline, int rows, int cols)
+{
+    this->setSerial(serial);
+    this->setAirline(airline);
+
+    this->num_of_rows = rows;
+    this->num_of_cols = cols;
+
+    this->createSeats(rows, cols);
+
+}
+
 Airplane::Airplane(QString & str_data)
     : airline(nullptr)
 {
@@ -177,9 +205,17 @@ Airplane::Airplane(QString & str_data)
     //QStringList product_date = str_list[2].split('/', Qt::SkipEmptyParts);
     //this->setProductDate(product_date[2].toInt(), product_date[0].toInt(), product_date[1].toInt());
 
-    this->setNumOfSeats(str_list[2].toInt());
+    int rows = str_list[2].toInt();
+    int cols = str_list[3].toInt();
 
-    QStringList flights = str_list[3].split('/', Qt::SkipEmptyParts);
+
+
+    this->num_of_rows = rows;
+    this->num_of_cols = cols;
+
+    this->createSeats(rows, cols);
+
+    QStringList flights = str_list[4].split('/', Qt::SkipEmptyParts);
 
     foreach (QString s, flights)
     {
@@ -187,11 +223,24 @@ Airplane::Airplane(QString & str_data)
     }
 }
 
+Airplane::~Airplane()
+{
+    for (int i = 0; i < this->num_of_rows; i++)
+    {
+        delete [] this->seats[i];
+        this->seats[i] = nullptr;
+    }
+
+    delete [] this->seats;
+    this->seats = nullptr;
+}
+
 QString Airplane::get_data()
 {
     QString str = this->getSearchCode() + "|" +
             (this->airline ? this->airline->getSearchCode() : "") + "|" +
-            QString::number(this->numOfSeats) + "|";
+            QString::number(this->num_of_rows) + "|" +
+            QString::number(this->num_of_cols) + "|" ;
 
     for (int i = 0; i < this->list_of_flights.size() && this->list_of_flights[i]; i++)
     {
@@ -205,3 +254,17 @@ QString Airplane::get_data()
 
     return str;
 }
+int Airplane::getRowCount(){return this->num_of_rows;}
+int Airplane::getcolumnCount(){return this->num_of_cols; }
+Seat * Airplane::getSeat(int r,int c){
+    return &seats[r][c];
+
+}
+
+
+
+
+
+
+
+

@@ -44,7 +44,7 @@ public:
     void set_employmentDate(QDate&& date);
     void attachFlight(Flight*);
     void attachDoneFlight(Flight*);
-
+    void removeDoneFlight(Flight * f);
     int flightListSize();
 
     QString getFname();
@@ -68,7 +68,6 @@ public:
 
     Flight* prevFlight(Flight*);
     Flight* nextFlight(Flight*);
-    void removeDoneFlight(Flight *f);
 };
 
 #endif // EMPLOYEE_H

@@ -26,15 +26,15 @@ SOURCES += \
     Pilot.cpp \
     Recorder.cpp \
     ThreadedJob.cpp \
+    Seat.cpp \
     Ticket.cpp \
-    _observer.cpp \
-    _subject.cpp \
     addairlinedialog.cpp \
     addairplanedialog.cpp \
     addcarrierdialog.cpp \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
+    attachticket.cpp \
     delaydialog.cpp \
     delegate.cpp \
     deletecarrier.cpp \
@@ -43,6 +43,7 @@ SOURCES += \
     deletepilot.cpp \
     deleteticket.cpp \
     dialog.cpp \
+    editSeas.cpp \
     flightlistmodel.cpp \
     flightstatusdialog.cpp \
     flighttablemodel.cpp \
@@ -74,17 +75,17 @@ HEADERS += \
     Pilot.h \
     Price.h \
     Recorder.h \
+    Seat.h \
     SignalSlotRecorder.h \
     ThreadedJob.h \
     Ticket.h \
-    _observer.h \
-    _subject.h \
     addairlinedialog.h \
     addairplanedialog.h \
     addcarrierdialog.h \
     addflightdialog.h \
     addhost.h \
     addticket.h \
+    attachticket.h \
     delaydialog.h \
     delegate.h \
     deletecarrier.h \
@@ -93,6 +94,7 @@ HEADERS += \
     deletepilot.h \
     deleteticket.h \
     dialog.h \
+    editSeas.h \
     flightlistmodel.h \
     flightstatusdialog.h \
     flighttablemodel.h \
@@ -118,6 +120,7 @@ FORMS += \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \
+    attachticket.ui \
     delaydialog.ui \
     deletecarrier.ui \
     deleteflight.ui \
@@ -125,6 +128,7 @@ FORMS += \
     deletepilot.ui \
     deleteticket.ui \
     dialog.ui \
+    editSeas.ui \
     flightstatusdialog.ui \
     flighttablepage.ui \
     mainwindow.ui \

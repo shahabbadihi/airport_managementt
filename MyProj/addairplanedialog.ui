@@ -6,8 +6,10 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>467</width>
-    <height>313</height>
+
+    <width>488</width>
+    <height>364</height>
+
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,16 +51,19 @@ QPushButton:hover {
 	
 	background-color: rgb(255, 255, 255, 80);
 	border-radius: 4px;
-}
-</string>
+
+}</string>
+
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>40</y>
-     <width>271</width>
-     <height>221</height>
+
+     <x>50</x>
+     <y>30</y>
+     <width>381</width>
+     <height>301</height>
+
     </rect>
    </property>
    <property name="frameShape">
@@ -73,7 +78,9 @@ QPushButton:hover {
       <item>
        <widget class="QLabel" name="lblAirline">
         <property name="text">
-         <string>Airplane:</string>
+
+         <string>Airline:</string>
+
         </property>
        </widget>
       </item>
@@ -99,14 +106,32 @@ QPushButton:hover {
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="lblNumOfSeats">
+
+       <widget class="QLabel" name="lblNumOfRows">
         <property name="text">
-         <string>Number Of Seats:</string>
+         <string>Number Of Rows:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spnNumOfSeats"/>
+       <widget class="QSpinBox" name="spnNumOfRows"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="lblNumOfCols">
+        <property name="text">
+         <string>Number Of Columns:</string>
+
+        </property>
+       </widget>
+      </item>
+      <item>
+
+       <widget class="QSpinBox" name="spnNumOfCols"/>
+
       </item>
      </layout>
     </item>

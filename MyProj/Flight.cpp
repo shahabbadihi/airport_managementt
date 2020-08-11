@@ -10,6 +10,7 @@
 Airline *Flight::getAirline() const
 {
     return airline;
+
 }
 
 void Flight::setAirline(Airline *value)
@@ -807,6 +808,9 @@ int Flight::getAttachedTicketsize()const{
 void Flight::removeTicket(Ticket* T){
    tickets.removeOne(T);
    emit flightStatusChanged();
+}
+bool Flight::isCheckInReady(){
+    return true;
 }
 //void Flight::setDate(const QDate & d)
 //{

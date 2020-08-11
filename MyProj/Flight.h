@@ -110,7 +110,7 @@ public:
     bool isAirplaneSetted();
     bool isDepartureCarrierSetted();
     bool isArrivalCarrierSetted();
-
+    bool isCheckInReady();
     void delay(qint64 milliseconds);
 
     static bool haveInterference(Flight* f1, Flight* f2);

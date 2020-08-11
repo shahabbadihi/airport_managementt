@@ -31,6 +31,8 @@ private slots:
 
     void reset();
 
+    void on_btnEditCheck_clicked();
+
 private:
     Ui::FlightStatusDialog *ui;
 
