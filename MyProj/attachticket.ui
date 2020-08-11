@@ -13,69 +13,105 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="editButton">
-   <property name="geometry">
-    <rect>
-     <x>254</x>
-     <y>232</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>edit</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
+  <property name="styleSheet">
+   <string notr="true">* {
+	font-size: 10pt;
+}
+
+QDialog {
+	
+	background-color: rgb(0, 0, 0);
+}
+
+QLabel {
+	color: rgb(255, 246, 0);
+}
+
+QLineEdit {
+	color: rgb(255, 246, 0);
+	
+	background-color: rgb(0, 0, 0);
+	border: 1px solid #fff600;
+}
+
+QPushButton {
+	background-color: rgb(0, 0, 0);
+	color: rgb(255, 246, 0);
+	border: 3px solid #fff600;
+	padding: 3px;
+}
+
+QPushButton:hover {
+	background-color: #fff600;
+	color: black;
+}
+
+#frame {
+	
+	background-color: rgb(255, 255, 255, 80);
+	border-radius: 4px;
+}
+</string>
+  </property>
+  <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>40</y>
-     <width>284</width>
-     <height>25</height>
+     <y>50</y>
+     <width>319</width>
+     <height>181</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>enter Ticket No:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="okButton">
-      <property name="text">
-       <string>ok</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>90</y>
-     <width>87</width>
-     <height>16</height>
-    </rect>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Name:</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Enter Ticket No:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="okButton">
+        <property name="text">
+         <string>OK</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QLabel" name="name">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="name">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="editButton">
       <property name="text">
-       <string>TextLabel</string>
+       <string>Edit</string>
       </property>
      </widget>
     </item>
