@@ -15,8 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#PilotsPage {
-	
-
+	background-color: rgb(0, 0, 0);
 }
 
 QLabel {
@@ -30,8 +29,28 @@ QLineEdit, QPlainTextEdit {
 	color: #fff600;
 }
 
+QLineEdit {
+	 background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));
+}
+
 QPushButton {
+	background: rgb(0, 0, 0);
+	color: rgb(255, 246, 0);
+	border: 3px solid #fff600;
+	padding: 4px;
+}
+
+QPushButton:hover {
 	background: rgb(255, 246, 0);
+	color:  rgb(0, 0, 0);
+}
+
+QDateEdit {
+	color:  rgb(255, 246, 0);
+	padding-right: 15px;
+	border-width: 3;
+	height: 30;
+	background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));
 }
 
 * {
@@ -251,13 +270,6 @@ QPushButton {
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="btnNextPilot">
-         <property name="text">
-          <string>Next</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="btnPrePilot">
          <property name="text">
           <string>Previous</string>
@@ -268,6 +280,13 @@ QPushButton {
         <widget class="QPushButton" name="btnSubmit">
          <property name="text">
           <string>Submit Changes</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnNextPilot">
+         <property name="text">
+          <string>Next</string>
          </property>
         </widget>
        </item>

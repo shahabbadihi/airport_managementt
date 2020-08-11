@@ -30,8 +30,8 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
     ui->tableView->setColumnWidth(1, 80);
     ui->tableView->setColumnWidth(2, 80);
     ui->tableView->setColumnWidth(3, 80);
-    ui->tableView->setColumnWidth(4, 120);
-    ui->tableView->setColumnWidth(5, 120);
+    ui->tableView->setColumnWidth(4, 130);
+    ui->tableView->setColumnWidth(5, 130);
     ui->tableView->setColumnWidth(6, 100);
 
     signal_mapper_delay = new QSignalMapper(this);

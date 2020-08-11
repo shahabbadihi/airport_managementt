@@ -53,8 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    ui->centralwidget->resize(200, 200);
 
+    tab_widget->setStyleSheet("background-color : black;");
     this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new PilotsPage(this), "Pilots");

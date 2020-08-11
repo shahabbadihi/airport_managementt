@@ -21,36 +21,37 @@
 }
 
 #FlightTablePage {
-
-}
-
-#tableView {
-	
-	
-	background-color: rgb(255, 246, 0);
+	background-color: rgb(0, 0, 0);
 }
 
 QTableView {
-    selection-background-color: rgb(0, 0, 0);
-	selection-color: rgb(255, 255, 0);
-	border-color: rgb(0, 0, 0);
+
+	color:  rgb(255, 246, 0);
+    
+	border-color:  rgb(255, 246, 0);
 }
+
+QTableView::item {
+	border: 1px solid rgb(255, 246, 0);
+	selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,
+                                stop: 0 #FF92BB, stop: 1 white);
+}
+
 
 QHeaderView::section {
-    background-color: black;
-	color: yellow;
-    border: 2px solid yellow;
+    background-color:  rgb(255, 246, 0);
+	color: black;
+    border: 2px solid black;
 }
-
 QPushButton {
 	
-	background-color: rgb(0, 0, 0);
+	background-color:  rgb(255, 246, 0);
 	
-	color: rgb(255, 255, 0);
+	color: black;
 	border-radius : 3px;
-
 	padding : 2px;
-}</string>
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
