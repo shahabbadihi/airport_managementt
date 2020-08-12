@@ -54,14 +54,14 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
 
 
 
-    QThread * th_update_flight_status = new QThread();
-    ThreadedJob * tj_update_flight_status = new ThreadedJob();
-    tj_update_flight_status->moveToThread(th_update_flight_status);
+    QThread * th_update_flight_table = new QThread();
+    ThreadedJob * tj_update_flight_table = new ThreadedJob();
+    tj_update_flight_table->moveToThread(th_update_flight_table);
 
-    connect(th_update_flight_status, SIGNAL(started()), tj_update_flight_status,
-            SLOT(slt_start_update_flight_status()));
+    connect(th_update_flight_table, SIGNAL(started()), tj_update_flight_table,
+            SLOT(slt_start_update_flight_table()));
 
-    th_update_flight_status->start();
+    th_update_flight_table->start();
 
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
 

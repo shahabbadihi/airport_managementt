@@ -11,15 +11,15 @@ ThreadedJob::ThreadedJob(QObject *parent) : QObject(parent)
 
 }
 
-void ThreadedJob::slt_update_flight_status()
-{
-    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
-    {
-        f->setState();
-    }
-}
+//void ThreadedJob::slt_update_flight_status()
+//{
+//    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
+//    {
+//        f->setState();
+//    }
+//}
 
-void ThreadedJob::slt_update_files()
+void ThreadedJob::slt_update()
 {
     if (counter % 2 == 0)
     {
@@ -48,22 +48,14 @@ void ThreadedJob::slt_update_flight_table()
     FlightTableModel::getInstance()->timerHit();
 }
 
-void ThreadedJob::slt_start_update_flight_status()
+
+void ThreadedJob::slt_start_update()
 {
-    this->tm_update_flight_status = new QTimer(this);
-    this->tm_update_flight_status->setInterval(60000);
+    this->tm_update = new QTimer(this);
+    this->tm_update->setInterval(60000);
 
-    connect(this->tm_update_flight_status, SIGNAL(timeout()), this, SLOT(slt_update_flight_status()));
-    this->tm_update_flight_status->start();
-}
-
-void ThreadedJob::slt_start_update_files()
-{
-    this->tm_update_files = new QTimer(this);
-    this->tm_update_files->setInterval(60000);
-
-    connect(this->tm_update_files, SIGNAL(timeout()), this, SLOT(slt_update_files()));
-    this->tm_update_files->start();
+    connect(this->tm_update, SIGNAL(timeout()), this, SLOT(slt_update()));
+    this->tm_update->start();
 }
 
 void ThreadedJob::slt_start_update_flight_table()

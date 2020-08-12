@@ -65,13 +65,13 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->tableView.setC
     //ui->tableView->setModel();
 
-    QThread * th_update_files = new QThread();
-    ThreadedJob * tj_update_files = new ThreadedJob();
-    tj_update_files->moveToThread(th_update_files);
+    QThread * th_update = new QThread();
+    ThreadedJob * tj_update = new ThreadedJob();
+    tj_update->moveToThread(th_update);
 
-    connect(th_update_files, SIGNAL(started()), tj_update_files, SLOT(slt_start_update_files()));
+    connect(th_update, SIGNAL(started()), tj_update, SLOT(slt_start_update()));
 
-    th_update_files->start();
+    th_update->start();
 }
 
 MainWindow::~MainWindow()
