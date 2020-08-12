@@ -45,6 +45,10 @@ QPushButton:hover {
 	color:  rgb(0, 0, 0);
 }
 
+QPushButton:disabled {
+	background: rgb(134, 141, 157);
+}
+
 QDateEdit {
 	color:  rgb(255, 246, 0);
 	padding-right: 15px;
