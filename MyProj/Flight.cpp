@@ -300,7 +300,7 @@ void Flight::setState()
         }
     }
 
-    if (this->dateTimeArrival <= QDateTime::currentDateTime())
+    else if (this->dateTimeArrival <= QDateTime::currentDateTime())
     {
         this->setFlightState(DONE);
         this->pilot->attachDoneFlight(this);
@@ -316,7 +316,7 @@ void Flight::setState()
 //            f->setFlightState(DELAYED);
 //        }
 
-    if (this->isPilotSetted() && this->isHostEnough() && this->isAirplaneSetted() &&
+    else if (this->isPilotSetted() && this->isHostEnough() && this->isAirplaneSetted() &&
             this->isArrivalCarrierSetted() && this->isDepartureCarrierSetted() &&
             this->isPassengerEnough())
     {
