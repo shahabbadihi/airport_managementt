@@ -22,6 +22,8 @@ SOURCES += \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
+    HostItemModel.cpp \
+    HostsPage.cpp \
     Passenger.cpp \
     Pilot.cpp \
     Recorder.cpp \
@@ -70,6 +72,8 @@ HEADERS += \
     Employee.h \
     Flight.h \
     Host.h \
+    HostItemModel.h \
+    HostsPage.h \
     Object.h \
     Passenger.h \
     Pilot.h \
@@ -114,6 +118,7 @@ HEADERS += \
     ticketlistmodel.h
 
 FORMS += \
+    HostsPage.ui \
     addairlinedialog.ui \
     addairplanedialog.ui \
     addcarrierdialog.ui \

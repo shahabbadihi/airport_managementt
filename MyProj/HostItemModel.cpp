@@ -1,24 +1,22 @@
-#include "pilotitemmodel.h"
-#include "Pilot.h"
-#include "Flight.h"
-#include "Airline.h"
+#include "HostItemModel.h"
 #include "Recorder.h"
-#include <QStringListModel>
+#include "Host.h"
+#include "Airline.h"
 
-PilotItemModel* PilotItemModel::instance;
+HostItemModel* HostItemModel::instance;
 
-PilotItemModel::PilotItemModel(QObject *parent)
+HostItemModel::HostItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
 
 }
 
-int PilotItemModel::rowCount(const QModelIndex &/*parent*/) const
+int HostItemModel::rowCount(const QModelIndex &/*parent*/) const
 {
-    return Recorder<Pilot>::getInstance()->get_dataList().size();
+    return Recorder<Host>::getInstance()->get_dataList().size();
 }
 
-bool PilotItemModel::removeRows(int row, int count, const QModelIndex &parent)
+bool HostItemModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     beginRemoveRows(parent, row, row + count - 1);
     endRemoveRows();
@@ -26,24 +24,24 @@ bool PilotItemModel::removeRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
-QModelIndex PilotItemModel::parent(const QModelIndex &/*index*/) const
+QModelIndex HostItemModel::parent(const QModelIndex &/*index*/) const
 {
     return QModelIndex();
 }
 
-QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex HostItemModel::index(int row, int column, const QModelIndex &parent) const
 {
     return createIndex(row, column);
 }
 
-int PilotItemModel::columnCount(const QModelIndex &/*parent*/) const
+int HostItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 10;
+    return 9;
 }
 
-QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
+QVariant HostItemModel::data(const QModelIndex &index, int /*role*/) const
 {
-    Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
+    Host * p = Recorder<Host>::getInstance()->get_dataList()[index.row()];
     QString s = "";
     foreach (Flight* f, p->getFlightList())
     {
@@ -91,15 +89,12 @@ QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
     case 8:
         return s2;
         break;
-    case 9:
-        return p->getDegreeAsString();
-        break;
     }
     //}
     return QVariant();
 }
 
-bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool HostItemModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
 
@@ -134,15 +129,13 @@ bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, in
         case 8:
             //p->;
             break;
-        case 9:
-            break;
         }
     }
 }
 
-PilotItemModel *PilotItemModel::getInstance()
+HostItemModel *HostItemModel::getInstance()
 {
     if (instance == nullptr)
-        instance = new PilotItemModel(nullptr);
+        instance = new HostItemModel(nullptr);
     return instance;
 }
