@@ -121,7 +121,7 @@ void Employee::attachFlight(Flight* f)
 
 void Employee::attachDoneFlight(Flight * f)
 {
-    if (f && !this->isFlightInList(f))
+    if (f)
         this->list_of_done_flights.push_back(f);
 }
 

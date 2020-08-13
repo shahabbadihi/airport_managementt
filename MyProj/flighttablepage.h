@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QTimer>
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class FlightTablePage;
@@ -32,10 +33,12 @@ private:
     QTimer * timer;
 
     FlightTableModel * flight_table_model;
+
     QVector<QPushButton*> delay_buttons;
     QVector<QPushButton*> status_buttons;
     QSignalMapper * signal_mapper_delay;
     QSignalMapper * signal_mapper_status;
+    QSortFilterProxyModel * proxy;
 };
 
 #endif // FLIGHTTABLEPAGE_H

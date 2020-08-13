@@ -28,7 +28,15 @@ int main(int argc, char *argv[])
     //qDebug() << QDir::currentPath();
     //Recorder<Pilot>::print_dataList();
     //
-
+    Recorder<Airline>::getInstance()->import();
+    Recorder<Flight>::getInstance()->import();
+    Recorder<Pilot>::getInstance()->import();
+    Recorder<Host>::getInstance()->import();
+    Recorder<Airplane>::getInstance()->import();
+    Recorder<Carrier>::getInstance()->import();
+//    Recorder<Flight>::getInstance()->import();
+    Recorder<Ticket>::getInstance()->import();
+    Recorder<Passenger>::getInstance()->import();
     //
     //qDebug() << Recorder<Flight>::getInstance()->get_dataList()[0]->getFlightStr();
     QApplication a(argc, argv);

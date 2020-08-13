@@ -291,6 +291,9 @@ void Flight::setFlightStateAsString(const QString &value)
 
 void Flight::setState()
 {
+    if (this->flightState == DONE)
+        return;
+
     if (this->dateTimeDeparture <= QDateTime::currentDateTime() &&
             QDateTime::currentDateTime() < this->dateTimeArrival)
     {

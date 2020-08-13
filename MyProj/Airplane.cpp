@@ -6,8 +6,12 @@
 
 void Airplane::attachFlight(Flight *f)
 {
-    if (f)
+    if (f && !isFlightInList(f))
+    {
         this->list_of_flights.push_back(f);
+
+        f->setAirplane(this);
+    }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
