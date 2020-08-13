@@ -34,7 +34,6 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->toFirst();
 
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
-
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
     connect(ui->btnPre, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
 }

@@ -21,6 +21,7 @@ SOURCES += \
     AirplaneItemModel.cpp \
     AirplanesPage.cpp \
     Carrier.cpp \
+    DeleteAirplane.cpp \
     Employee.cpp \
     Flight.cpp \
     Host.cpp \
@@ -73,6 +74,7 @@ HEADERS += \
     AirplaneItemModel.h \
     AirplanesPage.h \
     Carrier.h \
+    DeleteAirplane.h \
     Employee.h \
     Flight.h \
     Host.h \
@@ -123,6 +125,7 @@ HEADERS += \
 
 FORMS += \
     AirplanesPage.ui \
+    DeleteAirplane.ui \
     HostsPage.ui \
     addairlinedialog.ui \
     addairplanedialog.ui \

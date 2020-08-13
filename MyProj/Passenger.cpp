@@ -115,6 +115,11 @@ bool Passenger::isTicketInList(Ticket * t)
     return false;
 }
 
+bool Passenger::isTicketListEmpty()
+{
+    return this->list_of_tickets.size() ? false : true;
+}
+
 //void Passenger::setTicketNo(long n)
 //{
 //    this->ticket_no = n;

@@ -77,6 +77,7 @@ public:
     void removeHost(Host*);
     //void attachPassenger(Passenger*);
     void removePilot();
+    void removeAirplane();
     //void attachPassenger(Passenger*);
     void removeCarrier(Carrier*);
     void removeTicket(Ticket*);

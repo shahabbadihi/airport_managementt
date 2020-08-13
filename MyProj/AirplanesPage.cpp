@@ -28,6 +28,7 @@ AirplanesPage::AirplanesPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
+    connect(this->airplane_item_model, SIGNAL(modelReset()), this->mapper, SLOT(toFirst()));
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));

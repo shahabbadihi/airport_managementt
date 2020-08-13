@@ -617,7 +617,7 @@ void Flight::removeHost(Host* h)
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
     this->attachHost(this->getAirline()->getFirstFreeHost(this));
-    Recorder<Flight>::getInstance()->updateFile(this);
+    //Recorder<Flight>::getInstance()->updateFile(this);
 
     emit flightStatusChanged();
 //    foreach (Host* h, this->getHostsList())
@@ -723,6 +723,11 @@ void Flight::removePilot(){
         return;
     }
     //}
+}
+
+void Flight::removeAirplane()
+{
+    this->airplane = nullptr;
 }
 
 //void Flight::attachPassenger(Passenger * p)

@@ -35,7 +35,9 @@ public:
     //void setTicketNo(long);
     void attachTicket(Ticket*);
     void removeTicket(Ticket*);
+
     bool isTicketInList(Ticket*);
+    bool isTicketListEmpty();
 
     QString getFname();
     QString getLname();

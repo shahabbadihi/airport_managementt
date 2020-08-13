@@ -236,7 +236,7 @@ QTabBar::tab:only-one {
   </action>
   <action name="actionairplane">
    <property name="text">
-    <string>airplane</string>
+    <string>Airplane</string>
    </property>
   </action>
   <action name="actionTicket">

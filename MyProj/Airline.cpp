@@ -42,7 +42,27 @@ Airline::Airline(QString & str_data)
 //    foreach (QString s, tickets)
 //    {
 //        this->attachTicket(Recorder<Ticket>::searchByCode(s));
-//    }
+    //    }
+}
+
+Airline::~Airline()
+{
+    foreach (Host * h, this->list_of_hosts)
+    {
+        Recorder<Host>::getInstance()->remove(h);
+    }
+    foreach (Pilot * p, this->list_of_pilots)
+    {
+        Recorder<Pilot>::getInstance()->remove(p);
+    }
+    foreach (Flight * f, this->list_of_flights)
+    {
+        Recorder<Flight>::getInstance()->remove(f);
+    }
+    foreach (Airplane * a, this->list_of_airplanes)
+    {
+        Recorder<Airplane>::getInstance()->remove(a);
+    }
 }
 
 QString Airline::get_data()
@@ -131,9 +151,9 @@ void Airline::removeFlight(Flight *f)
     this->list_of_flights.removeOne(f);
 }
 
-void Airline::removeAirplane(Airplane *)
+void Airline::removeAirplane(Airplane * a)
 {
-
+    this->list_of_airplanes.removeOne(a);
 }
 
 //void Airline::attachTicket(Ticket * t)

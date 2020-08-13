@@ -10,6 +10,7 @@
 #include "addairplanedialog.h"
 #include "addcarrierdialog.h"
 #include "deletepilot.h"
+#include "DeleteAirplane.h"
 
 #include "flighttablemodel.h"
 #include "delegate.h"
@@ -76,6 +77,8 @@ private slots:
 
     void on_actionTicket_triggered();
 
+    void on_actionairplane_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -91,6 +94,8 @@ private:
     deleteFlight* deleteFlightDialog;
     deleteCarrier* deleteCarrierDialog;
     deleteTicket * deleteTicketDialog;
+    DeleteAirplane * deleteAirplaneDialog;
+
     //QTimer * timer;
 
     QTabWidget * tab_widget;

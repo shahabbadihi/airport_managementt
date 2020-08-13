@@ -9,7 +9,7 @@ AirplaneItemModel* AirplaneItemModel::instance;
 AirplaneItemModel::AirplaneItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
-
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int AirplaneItemModel::rowCount(const QModelIndex &/*parent*/) const
@@ -37,10 +37,10 @@ QModelIndex AirplaneItemModel::index(int row, int column, const QModelIndex &par
 
 int AirplaneItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 9;
+    return 5;
 }
 
-QVariant AirplaneItemModel::data(const QModelIndex &index, int /*role*/) const
+QVariant AirplaneItemModel::data(const QModelIndex &index, int role) const
 {
     Airplane * p = Recorder<Airplane>::getInstance()->get_dataList()[index.row()];
     QString s = "";
@@ -59,27 +59,27 @@ QVariant AirplaneItemModel::data(const QModelIndex &index, int /*role*/) const
     //ss.setStringList(s);
 
 
-//    if (role == Qt::DisplayRole)
-//    {
-    switch (index.column())
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
-    case 0:
-        return p->getSerial();
-        break;
-    case 1:
-        return QString::number(p->getRowCount());
-        break;
-    case 2:
-        return QString::number(p->getcolumnCount());
-        break;
-    case 3:
-        return p->getAirline()->getName();
-        break;
-    case 4:
-        return s;
-        break;
+        switch (index.column())
+        {
+        case 0:
+            return p->getSerial();
+            break;
+        case 1:
+            return QString::number(p->getRowCount());
+            break;
+        case 2:
+            return QString::number(p->getcolumnCount());
+            break;
+        case 3:
+            return p->getAirline()->getName();
+            break;
+        case 4:
+            return s;
+            break;
+        }
     }
-    //}
     return QVariant();
 }
 

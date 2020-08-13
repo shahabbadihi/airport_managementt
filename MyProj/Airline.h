@@ -17,7 +17,7 @@ public:
     Airline() {}
     Airline(const QString& name, const QString& code);
     Airline(QString&);
-    ~Airline() {}
+    ~Airline();
 
     QString get_data();
 

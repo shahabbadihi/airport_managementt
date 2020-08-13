@@ -242,6 +242,13 @@ Airplane::~Airplane()
 
     delete [] this->seats;
     this->seats = nullptr;
+
+    this->airline->removeAirplane(this);
+
+    foreach (Flight * f, this->list_of_flights)
+    {
+        f->removeAirplane();
+    }
 }
 
 QString Airplane::get_data()

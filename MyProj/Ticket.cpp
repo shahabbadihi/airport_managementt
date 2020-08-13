@@ -204,5 +204,9 @@ QString Ticket::getPassengerName(){
 Ticket::~Ticket(){
     this->flight->removeTicket(this);
     this->passenger->removeTicket(this);
+
+    if (this->passenger->isTicketListEmpty())
+        Recorder<Passenger>::getInstance()->remove(this->passenger);
+
     this->seat->removeTicket();
 }

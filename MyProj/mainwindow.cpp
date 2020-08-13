@@ -230,3 +230,11 @@ void MainWindow::on_actionTicket_triggered()
     delete deleteTicketDialog;
 }
 
+
+void MainWindow::on_actionairplane_triggered()
+{
+    this->deleteAirplaneDialog=new DeleteAirplane;
+    deleteAirplaneDialog->setModal(true);
+    deleteAirplaneDialog->exec();
+    delete deleteAirplaneDialog;
+}
