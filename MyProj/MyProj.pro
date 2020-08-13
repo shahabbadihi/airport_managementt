@@ -18,6 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Airline.cpp \
     Airplane.cpp \
+    AirplaneItemModel.cpp \
+    AirplanesPage.cpp \
     Carrier.cpp \
     Employee.cpp \
     Flight.cpp \
@@ -68,6 +70,8 @@ SOURCES += \
 HEADERS += \
     Airline.h \
     Airplane.h \
+    AirplaneItemModel.h \
+    AirplanesPage.h \
     Carrier.h \
     Employee.h \
     Flight.h \
@@ -118,6 +122,7 @@ HEADERS += \
     ticketlistmodel.h
 
 FORMS += \
+    AirplanesPage.ui \
     HostsPage.ui \
     addairlinedialog.ui \
     addairplanedialog.ui \

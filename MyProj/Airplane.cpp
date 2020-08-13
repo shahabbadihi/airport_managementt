@@ -171,6 +171,11 @@ bool Airplane::isFlightInList(Flight * f)
     return false;
 }
 
+QVector<Flight *> Airplane::getFlightList() const
+{
+    return list_of_flights;
+}
+
 void Airplane::createSeats(int rows, int cols)
 {
     this->seats = new Seat* [rows];
