@@ -96,7 +96,7 @@ QVariant HostItemModel::data(const QModelIndex &index, int /*role*/) const
 
 bool HostItemModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    Pilot * p = Recorder<Pilot>::getInstance()->get_dataList()[index.row()];
+    Host * p = Recorder<Host>::getInstance()->get_dataList()[index.row()];
 
     if (role == Qt::EditRole)
     {

@@ -31,7 +31,7 @@ public:
     ~Airplane();
 
     QString get_data();
-    int getChairCount() const;
+    //int getChairCount() const;
 
     void attachFlight(Flight* f);
 
@@ -52,6 +52,7 @@ public:
     int getcolumnCount();
     Seat * getSeat(int r,int c);
     //void setSeats(int Row,int column);
+    QVector<Flight *> getFlightList() const;
 };
 
 #endif // AIRPLANE_H
