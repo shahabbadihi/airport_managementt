@@ -305,11 +305,14 @@ void Flight::setState()
 
     else if (this->dateTimeArrival <= QDateTime::currentDateTime())
     {
-        this->setFlightState(DONE);
-        this->pilot->attachDoneFlight(this);
-        foreach (Host* h, this->hosts)
+        if (this->flightState != CANCELED && this->flightState != SUSPENDED)
         {
-            h->attachDoneFlight(this);
+            this->setFlightState(DONE);
+            this->pilot->attachDoneFlight(this);
+            foreach (Host* h, this->hosts)
+            {
+                h->attachDoneFlight(this);
+            }
         }
     }
 //        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&

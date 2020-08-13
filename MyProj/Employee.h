@@ -53,6 +53,7 @@ public:
 
     bool isFree(Flight*);
     bool isFlightInList(Flight*);
+    bool isDoneFlightInList(Flight*);
 
     Airline *getAirline() const;
     void setAirline(Airline *value);

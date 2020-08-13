@@ -121,7 +121,7 @@ void Employee::attachFlight(Flight* f)
 
 void Employee::attachDoneFlight(Flight * f)
 {
-    if (f)
+    if (f && !this->isDoneFlightInList(f))
         this->list_of_done_flights.push_back(f);
 }
 
@@ -192,6 +192,16 @@ bool Employee::isFree(Flight* f)
 bool Employee::isFlightInList(Flight * f)
 {
     foreach (Flight* fl, this->list)
+    {
+        if (fl == f)
+            return true;
+    }
+    return false;
+}
+
+bool Employee::isDoneFlightInList(Flight * f)
+{
+    foreach (Flight* fl, this->list_of_done_flights)
     {
         if (fl == f)
             return true;
