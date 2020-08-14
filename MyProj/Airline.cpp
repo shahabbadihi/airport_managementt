@@ -224,3 +224,9 @@ Flight *Airline::searchFlightByCode(QString & code)
     }
     return nullptr;
 }
+QVector<Pilot*>Airline::getPilotsList(){return list_of_pilots;}
+QVector<Host*>Airline::getHostsList(){return list_of_hosts;}
+QVector<Flight*>Airline::getFlightsList(){return list_of_flights;}
+QVector<Airplane*>Airline::getAirplanesList(){return list_of_airplanes;}
+
+
