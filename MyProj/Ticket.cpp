@@ -3,6 +3,8 @@
 #include "Passenger.h"
 #include "Airline.h"
 #include <QString>
+#include <stdexcept>
+using namespace std;
 
 long Ticket::getNo() const
 {
@@ -17,6 +19,9 @@ long Ticket::getNo() const
 
 void Ticket::setNo(long value)
 {
+    if (value <= 0)
+        throw invalid_argument("Ticket No Must Be Greater Than 0!");
+
     this->no = value;
 //    this->search_code = QString::number(value);
     this->setSearchCode(QString::number(value));

@@ -3,6 +3,8 @@
 #include "Carrier.h"
 #include "Recorder.h"
 #include "Airline.h"
+#include <stdexcept>
+using namespace std;
 
 AddCarrierDialog::AddCarrierDialog(QWidget *parent) :
     QDialog(parent),
@@ -23,17 +25,27 @@ AddCarrierDialog::~AddCarrierDialog()
 
 void AddCarrierDialog::on_btnSubmit_clicked()
 {
-    Carrier* carrier = new Carrier;
-    //Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
-    carrier->setSerial(ui->txtSerial->text());
-    carrier->setPlace(ui->txtPlace->text());
-    //carrier->setAirline(currentAirline);
+    try
+    {
+        Carrier* carrier = new Carrier;
+        //Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
+        carrier->setSerial(ui->txtSerial->text());
+        carrier->setPlace(ui->txtPlace->text());
+        //carrier->setAirline(currentAirline);
 
-    Recorder<Carrier>::getInstance()->add(carrier);
+        Recorder<Carrier>::getInstance()->add(carrier);
 
-    QMessageBox msg;
-    msg.setText("Submit Successfully!");
-    msg.exec();
+        QMessageBox msg;
+        msg.setText("Submit Successfully!");
+        msg.exec();
+    }
+
+    catch (invalid_argument e)
+    {
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.exec();
+    }
 }
 
 void AddCarrierDialog::on_btnCancel_clicked()

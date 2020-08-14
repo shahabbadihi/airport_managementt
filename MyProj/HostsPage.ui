@@ -253,7 +253,7 @@ QDateEdit {
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="btnPrePilot">
+        <widget class="QPushButton" name="btnPre">
          <property name="text">
           <string>Previous</string>
          </property>
@@ -267,7 +267,7 @@ QDateEdit {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnNextPilot">
+        <widget class="QPushButton" name="btnNext">
          <property name="text">
           <string>Next</string>
          </property>

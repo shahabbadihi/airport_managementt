@@ -2,6 +2,8 @@
 #include "ui_addairlinedialog.h"
 #include "Airline.h"
 #include "Recorder.h"
+#include <stdexcept>
+using namespace std;
 
 AddAirlineDialog::AddAirlineDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,14 +19,24 @@ AddAirlineDialog::~AddAirlineDialog()
 
 void AddAirlineDialog::on_btnSubmit_clicked()
 {
-    Airline* airline = new Airline(ui->txtName->text(), ui->txtCode->text());
+    try
+    {
+        Airline* airline = new Airline(ui->txtName->text(), ui->txtCode->text());
 
 
-    Recorder<Airline>::getInstance()->add(airline);
+        Recorder<Airline>::getInstance()->add(airline);
 
-    QMessageBox msg;
-    msg.setText("Submit Successfully!");
-    msg.exec();
+        QMessageBox msg;
+        msg.setText("Submit Successfully!");
+        msg.exec();
+    }
+
+    catch (invalid_argument e)
+    {
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.exec();
+    }
 }
 
 void AddAirlineDialog::on_btnCancel_clicked()

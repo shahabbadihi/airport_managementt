@@ -35,8 +35,8 @@ HostsPage::HostsPage(QWidget *parent) :
 
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
-    connect(ui->btnNextPilot, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
-    connect(ui->btnPrePilot, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
+    connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
+    connect(ui->btnPre, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
 }
 
 HostsPage::~HostsPage()
@@ -53,6 +53,6 @@ void HostsPage::on_btnSubmit_clicked()
 
 void HostsPage::updateButtons(int row)
 {
-    ui->btnPrePilot->setEnabled(row > 0);
-    ui->btnNextPilot->setEnabled(row < host_item_model->rowCount() - 1);
+    ui->btnPre->setEnabled(row > 0);
+    ui->btnNext->setEnabled(row < host_item_model->rowCount() - 1);
 }

@@ -2,7 +2,8 @@
 #include "Flight.h"
 #include "Airline.h"
 #include <QString>
-
+#include <stdexcept>
+using namespace std;
 
 long Employee::getNationalCode() const
 {
@@ -64,30 +65,50 @@ QString Employee::get_data()
 
 void Employee::set_fname(const QString &name)
 {
+    if (name == "")
+        throw invalid_argument("First Name Is Empty!");
     this->fname = name;
 }
 
 void Employee::set_fname(const QString &&name)
 {
+    if (name == "")
+        throw invalid_argument("First Name Is Empty!");
     this->fname = name;
 }
 
 void Employee::set_lname(const QString &family)
 {
+    if (family == "")
+        throw invalid_argument("Last Name Is Empty!");
     this->lname = family;
 }
 
 void Employee::set_lname(const QString &&family)
 {
+    if (family == "")
+        throw invalid_argument("Last Name Is Empty!");
     this->lname = family;
 }
 
 void Employee::set_nationalCode(long code)
 {
+    int count = 0;
+    while (code)
+    {
+        count++;
+        code /= 10;
+    }
+    if (count != 10)
+        throw invalid_argument("National Code Must Have 10 Digits!");
+
     this->nationalCode = code;
 }
 void Employee::set_personnelCode(long code)
 {
+    if (code <= 0)
+        throw invalid_argument("Invalid Value For Personnel Code!");
+
     this->personnelCode = code;
 //    this->search_code = QString::number(code);
     this->setSearchCode(QString::number(code));
@@ -95,21 +116,33 @@ void Employee::set_personnelCode(long code)
 
 void Employee::set_birthDate(QDate &date)
 {
+    if (date > QDate::currentDate())
+        throw invalid_argument("Invalid BirthDate!");
+
     this->birthDate.setDate(date.year(), date.month(), date.day());
 }
 
 void Employee::set_birthDate(QDate &&date)
 {
+    if (date > QDate::currentDate())
+        throw invalid_argument("Invalid BirthDate!");
+
     this->birthDate.setDate(date.year(), date.month(), date.day());
 }
 
 void Employee::set_employmentDate(QDate &date)
 {
+    if (date < this->birthDate)
+        throw invalid_argument("Invalid Employment Date!\nMust Be After The BirthDay!!!");
+
     this->employmentDate.setDate(date.year(), date.month(), date.day());
 }
 
 void Employee::set_employmentDate(QDate &&date)
 {
+    if (date < this->birthDate)
+        throw invalid_argument("Invalid Employment Date!\nMust Be After The BirthDay!!!");
+
     this->employmentDate.setDate(date.year(), date.month(), date.day());
 }
 
