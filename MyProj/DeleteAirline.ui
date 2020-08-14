@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DeleteAirplane</class>
- <widget class="QDialog" name="DeleteAirplane">
+ <class>DeleteAirline</class>
+ <widget class="QDialog" name="DeleteAirline">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -74,7 +74,7 @@ QComboBox::drop-down {
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>90</y>
      <width>281</width>
      <height>121</height>
@@ -92,7 +92,7 @@ QComboBox::drop-down {
       <item>
        <widget class="QLabel" name="lbl">
         <property name="text">
-         <string>Select Airplane:</string>
+         <string>Select Airline:</string>
         </property>
        </widget>
       </item>

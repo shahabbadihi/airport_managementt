@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>img/mainwindow_background.jpg</file>
+        <file>img/arrow-down.png</file>
     </qresource>
 </RCC>
