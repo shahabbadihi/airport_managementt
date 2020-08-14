@@ -39,6 +39,8 @@ SOURCES += \
     addflightdialog.cpp \
     addhost.cpp \
     addticket.cpp \
+    airlineitemmodel.cpp \
+    airlinespage.cpp \
     attachticket.cpp \
     delaydialog.cpp \
     delegate.cpp \
@@ -95,6 +97,8 @@ HEADERS += \
     addflightdialog.h \
     addhost.h \
     addticket.h \
+    airlineitemmodel.h \
+    airlinespage.h \
     attachticket.h \
     delaydialog.h \
     delegate.h \
@@ -133,6 +137,7 @@ FORMS += \
     addflightdialog.ui \
     addhost.ui \
     addticket.ui \
+    airlinespage.ui \
     attachticket.ui \
     delaydialog.ui \
     deletecarrier.ui \
