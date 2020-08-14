@@ -1,6 +1,9 @@
 #include "Passenger.h"
 #include "Ticket.h"
 #include <QStringList>
+#include <stdexcept>
+using namespace std;
+
 Passenger::Passenger(QString & data_str)
 {
     QStringList str_list = data_str.split('|');
@@ -48,18 +51,27 @@ QString Passenger::get_data()
 
 void Passenger::setLname(const QString & lname)
 {
+    if (lname == "")
+        throw invalid_argument("Last Name Is Empty!");
+
     this->lname = lname;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setFname(const QString & fname)
 {
+    if (fname == "")
+        throw invalid_argument("First Name Is Empty!");
+
     this->fname = fname;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setFatherName(const QString & father_name)
 {
+    if (father_name == "")
+        throw invalid_argument("Father Name Is Empty!");
+
     this->fatherName = father_name;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
@@ -72,19 +84,27 @@ void Passenger::setFatherName(const QString & father_name)
 
 void Passenger::setBirthDate(const QDate & date)
 {
+    if (date > QDate::currentDate())
+        throw invalid_argument("Invalid BirthDate!");
+
     this->birthDate.setDate(date.year(), date.month(), date.day());
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(const QDate && date)
 {
+    if (date > QDate::currentDate())
+        throw invalid_argument("Invalid BirthDate!");
+
     this->birthDate.setDate(date.year(), date.month(), date.day());
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(int year, int month, int day)
 {
-    this->birthDate.setDate(year, month, day);
+    QDate date(year, month, day);
+    this->setBirthDate(date);
+//    this->birthDate.setDate(year, month, day);
     //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 

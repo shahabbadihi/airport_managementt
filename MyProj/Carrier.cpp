@@ -2,6 +2,8 @@
 #include "Flight.h"
 #include "Airline.h"
 #include <QString>
+#include <stdexcept>
+using namespace std;
 
 QString Carrier::getSerial() const
 {
@@ -10,6 +12,8 @@ QString Carrier::getSerial() const
 
 void Carrier::setSerial(const QString &value)
 {
+    if (value == "")
+        throw invalid_argument("Serial Is Empty");
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
@@ -70,6 +74,8 @@ QString Carrier::getPlace() const
 
 void Carrier::setPlace(const QString &value)
 {
+    if (value == "")
+        throw invalid_argument("Place Is Empty!");
     place = value;
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }

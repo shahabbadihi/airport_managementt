@@ -5,6 +5,8 @@
 #include "Flight.h"
 //#include "Ticket.h"
 #include "Recorder.h"
+#include <stdexcept>
+using namespace std;
 
 Airline::Airline(const QString &name, const QString &code)
 {
@@ -168,12 +170,16 @@ void Airline::removeAirplane(Airplane * a)
 
 void Airline::setName(const QString &value)
 {
+    if (value == "")
+        throw invalid_argument("Name Is Empty!");
     name = value;
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::setCode(const QString &value)
 {
+    if (value == "")
+        throw invalid_argument("Code Is Empty!");
     this->code = value;
     this->setSearchCode(value);
 //    Recorder<Airline>::getInstance()->updateFile(this);

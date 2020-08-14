@@ -3,6 +3,8 @@
 #include "Flight.h"
 #include "Seat.h"
 #include <QString>
+#include <stdexcept>
+using namespace std;
 
 void Airplane::attachFlight(Flight *f)
 {
@@ -38,6 +40,8 @@ int Airplane::getNumOfSeats() const
 
 void Airplane::setNumOfSeats(int value)
 {
+    if (value <= 0)
+        throw invalid_argument("Invalid Value For Num Of Seats");
     numOfSeats = value;
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
@@ -49,6 +53,8 @@ QString Airplane::getSerial() const
 
 void Airplane::setSerial(const QString &value)
 {
+    if (value == "")
+        throw invalid_argument("Serial Is Empty!");
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);

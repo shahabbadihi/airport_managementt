@@ -4,9 +4,12 @@
 #include "Airline.h"
 #include "Airplane.h"
 #include "Carrier.h"
+#include "OutOfDateException.h"
 #include <QString>
 #include <QStringList>
-#include <QVector2D>
+#include <stdexcept>
+using namespace std;
+
 Airline *Flight::getAirline() const
 {
     return airline;
@@ -234,6 +237,9 @@ int Flight::getCapacity() const
 
 void Flight::setCapacity(int value)
 {
+    if (value <= 0)
+        throw invalid_argument("Capacity Must Be Greater Than 0!");
+
     capacity = value;
 }
 
@@ -485,6 +491,9 @@ QString Flight::getFlightStr() const
 
 void Flight::setSerial(const QString& s)
 {
+    if (s == "")
+        throw invalid_argument("Serial Is Empty!");
+
     this->serial = s;
 //    this->search_code = s;
     this->setSearchCode(s);
@@ -498,18 +507,27 @@ void Flight::setSerial(const QString& s)
 
 void Flight::setSource(const QString & s)
 {
+    if (s == "")
+        throw invalid_argument("Source Is Empty!");
+
     this->source = s;
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDestination(const QString & s)
 {
+    if (s == "")
+        throw invalid_argument("Destination Is Empty!");
+
     this->destination = s;
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(const QDateTime &d)
 {
+    if (d <= this->dateTimeDeparture)
+        throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
+
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -517,6 +535,9 @@ void Flight::setDateTimeArrival(const QDateTime &d)
 
 void Flight::setDateTimeArrival(const QDateTime && d)
 {
+    if (d <= this->dateTimeDeparture)
+        throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
+
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -526,13 +547,19 @@ void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minu
 {
     QDate date(year, month, day);
     QTime time(hour, minute, second);
-    this->dateTimeArrival.setDate(date);
-    this->dateTimeArrival.setTime(time);
+    QDateTime datetime(date, time);
+    this->setDateTimeArrival(datetime);
+//    this->dateTimeArrival.setDate(date);
+//    this->dateTimeArrival.setTime(time);
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(const QDateTime & d)
 {
+    if (d < QDateTime::currentDateTime())
+        throw invalid_argument("DateTime Of This Flight Has Passed!\n"
+                                 "Can Not Add This Flight!!");
+
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -540,6 +567,10 @@ void Flight::setDateTimeDeparture(const QDateTime & d)
 
 void Flight::setDateTimeDeparture(const QDateTime && d)
 {
+    if (d < QDateTime::currentDateTime())
+        throw invalid_argument("DateTime Of This Flight Has Passed!\n"
+                                 "Can Not Add This Flight!!");
+
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -549,8 +580,10 @@ void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int mi
 {
     QDate date(year, month, day);
     QTime time(hour, minute, second);
-    this->dateTimeDeparture.setDate(date);
-    this->dateTimeDeparture.setTime(time);
+    QDateTime datetime(date, time);
+    this->setDateTimeDeparture(datetime);
+//    this->dateTimeDeparture.setDate(date);
+//    this->dateTimeDeparture.setTime(time);
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -568,12 +601,18 @@ void Flight::setPilot(Pilot * p)
 
 void Flight::setNumOfHosts(int n)
 {
+    if (n <= 0)
+        throw invalid_argument("Num Of Hosts Must Be Greater Than 0!");
+
     this->numOfHosts = n;
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setNumOfPassengers(int n)
 {
+    if (n <= 0)
+        throw invalid_argument("Num Of Passengers Must Be Greater Than 0!");
+
     this->numOfPassengers = n;
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -611,13 +650,14 @@ void Flight::attachTicket(Ticket * p)
 void Flight::removeHost(Host* h)
 {
 
-    try
-    {
+//    try
+//    {
     this->hosts.removeOne(h);
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
     this->attachHost(this->getAirline()->getFirstFreeHost(this));
-    //Recorder<Flight>::getInstance()->updateFile(this);
+
+//    Recorder<Flight>::getInstance()->updateFile(this);
 
     emit flightStatusChanged();
 //    foreach (Host* h, this->getHostsList())
@@ -644,25 +684,24 @@ void Flight::removeHost(Host* h)
 //            return;
 //        }
     //}
-    QMessageBox msg;
-    QString str3 = "The Flight's new Hosts Are:\n";
-    foreach (Host* h, this->getHostsList())
-    {
-        str3 += h->getFname() + " " + h->getLname() + "\n";
-    }
-    msg.setText(str3);
-    msg.exec();
-    }
-    catch (QException e)
-    {
-        Recorder<Flight>::getInstance()->updateFile(this);
-        QMessageBox msg;
-        msg.setText("Not Enough Hosts!");
-        msg.exec();
-//        delete this;
-//        //this = nullptr;
-        return;
-    }
+//    QMessageBox msg;
+//    QString str3 = "The Flight's new Hosts Are:\n";
+//    foreach (Host* h, this->getHostsList())
+//    {
+//        str3 += h->getFname() + " " + h->getLname() + "\n";
+//    }
+//    msg.setText(str3);
+//    msg.exec();
+//    }
+//    catch (QException e)
+//    {
+////        Recorder<Flight>::getInstance()->updateFile(this);
+//        QMessageBox msg;
+//        msg.setText("Not Enough Hosts!");
+//        msg.exec();
+////        //this = nullptr;
+//        return;
+//    }
 }
 void Flight::removePilot(){
     //try
@@ -698,30 +737,30 @@ void Flight::removePilot(){
 //            return;
 //        }
     //}
-    if (this->pilot)
-    {
-        QMessageBox msg;
-        QString str3 = "The Flight's new Pilot Is:\n" + this->pilot->getFname() + " " + this->pilot->getLname();
-    //    foreach (Host* h, this->getHostsList())
-    //    {
-    //        str3 += h->getFname() + " " + h->getLname() + "\n";
-    //    }
-        msg.setText(str3);
-        msg.exec();
-    }
+//    if (this->pilot)
+//    {
+//        QMessageBox msg;
+//        QString str3 = "The Flight's new Pilot Is:\n" + this->pilot->getFname() + " " + this->pilot->getLname();
+//    //    foreach (Host* h, this->getHostsList())
+//    //    {
+//    //        str3 += h->getFname() + " " + h->getLname() + "\n";
+//    //    }
+//        msg.setText(str3);
+//        msg.exec();
+//    }
     //}
     //catch (QException e)
     //{
-    else
-    {
-        //Recorder<Flight>::updateFile(this);
-        QMessageBox msg;
-        msg.setText("No Free Pilot Here!");
-        msg.exec();
-//        delete this;
-//        //this = nullptr;
-        return;
-    }
+//    else
+//    {
+//        //Recorder<Flight>::updateFile(this);
+//        QMessageBox msg;
+//        msg.setText("No Free Pilot Here!");
+//        msg.exec();
+////        delete this;
+////        //this = nullptr;
+//        return;
+//    }
     //}
 }
 

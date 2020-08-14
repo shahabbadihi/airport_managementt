@@ -2,6 +2,8 @@
 #include "ui_addairplanedialog.h"
 #include "Airline.h"
 #include "Airplane.h"
+#include <stdexcept>
+using namespace std;
 
 AddAirplaneDialog::AddAirplaneDialog(QWidget *parent) :
     QDialog(parent),
@@ -27,15 +29,25 @@ void AddAirplaneDialog::on_btnSubmit_clicked()
 //    airplane->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
 
 //    airplane->setNumOfSeats(ui->spnNumOfSeats->value());
-    Airplane * airplane = new Airplane(ui->txtSerial->text(),
-                                       Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()],
-            ui->spnNumOfRows->value(), ui->spnNumOfCols->value());
+    try
+    {
+        Airplane * airplane = new Airplane(ui->txtSerial->text(),
+                                           Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()],
+                ui->spnNumOfRows->value(), ui->spnNumOfCols->value());
 
-    Recorder<Airplane>::getInstance()->add(airplane);
+        Recorder<Airplane>::getInstance()->add(airplane);
 
-    QMessageBox msg;
-    msg.setText("Submit Successfully!");
-    msg.exec();
+        QMessageBox msg;
+        msg.setText("Submit Successfully!");
+        msg.exec();
+    }
+
+    catch (invalid_argument e)
+    {
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.exec();
+    }
 }
 
 void AddAirplaneDialog::on_btnCancel_clicked()

@@ -27,6 +27,7 @@ SOURCES += \
     Host.cpp \
     HostItemModel.cpp \
     HostsPage.cpp \
+    OutOfDateException.cpp \
     Passenger.cpp \
     Pilot.cpp \
     Recorder.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     HostItemModel.h \
     HostsPage.h \
     Object.h \
+    OutOfDateException.h \
     Passenger.h \
     Pilot.h \
     Price.h \

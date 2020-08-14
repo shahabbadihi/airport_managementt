@@ -161,7 +161,8 @@ void Recorder<T>::import()
     QFile file("data/" + filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        //throw QException();
+        qDebug() << "File error";
+        throw QException();
     }
     QTextStream in(&file);
 

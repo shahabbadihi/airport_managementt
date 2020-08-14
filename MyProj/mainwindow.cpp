@@ -35,8 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
-
-
     ui->setupUi(this);
 
     //this->timer = new QTimer(this);
