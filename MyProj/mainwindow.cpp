@@ -30,6 +30,7 @@
 #include "AirplanesPage.h"
 #include "ThreadedJob.h"
 #include "airlinespage.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -247,6 +248,16 @@ void MainWindow::on_actionairplane_triggered()
     deleteAirplaneDialog->exec();
     delete deleteAirplaneDialog;
 }
+
+
+void MainWindow::on_actionAirline_triggered()
+{
+    this->deleteAirlineDialog=new DeleteAirline;
+    deleteAirlineDialog->setModal(true);
+    deleteAirlineDialog->exec();
+    delete deleteAirlineDialog;
+}
+
 
 void MainWindow::connectNewFlightToStatusBar()
 {

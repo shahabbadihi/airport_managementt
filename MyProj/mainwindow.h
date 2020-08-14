@@ -22,6 +22,7 @@
 #include "deleteflight.h"
 #include "deletecarrier.h"
 #include "deleteticket.h"
+#include "DeleteAirline.h"
 
 #include <QMainWindow>
 #include <QTimer>
@@ -81,6 +82,8 @@ private slots:
 
     void connectNewFlightToStatusBar();
 
+    void on_actionAirline_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -97,6 +100,7 @@ private:
     deleteCarrier* deleteCarrierDialog;
     deleteTicket * deleteTicketDialog;
     DeleteAirplane * deleteAirplaneDialog;
+    DeleteAirline * deleteAirlineDialog;
 
     //QTimer * timer;
 
