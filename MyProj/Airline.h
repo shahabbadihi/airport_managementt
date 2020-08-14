@@ -46,6 +46,10 @@ public:
 
     Flight* searchFlightByCode(QString&);
 
+    QVector<Pilot*>getPilotsList();
+    QVector<Host*>getHostsList();
+    QVector<Flight*>getFlightsList();
+    QVector<Airplane*>getAirplanesList();
 private:
 
     QString name;

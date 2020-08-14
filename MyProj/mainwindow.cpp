@@ -29,7 +29,7 @@
 #include "HostsPage.h"
 #include "AirplanesPage.h"
 #include "ThreadedJob.h"
-
+#include "airlinespage.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -68,7 +68,11 @@ MainWindow::MainWindow(QWidget *parent)
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new PilotsPage(this), "Pilots");
     tab_widget->addTab(new HostsPage(this), "Hosts");
+<<<<<<< HEAD
     tab_widget->addTab(new AirplanesPage(this), "Airplanes");
+=======
+    tab_widget->addTab(new AirlinesPage(this), "Airlines");
+>>>>>>> f6536c41373f26ab8472eb6ba5abefb00273ce43
     //connect(this->model, SIGNAL(dataChanged()), ui->tableView, SLOT(refresh()));
 
     //ui->tableView.setC
