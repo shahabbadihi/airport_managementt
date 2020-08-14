@@ -34,7 +34,7 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     mapper->toFirst();
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButton(int)));
 
-    connect(ui->prvBtn,SIGNAL(clicked()),mapper,SLOT(toPrevios()));
+    connect(ui->prvBtn,SIGNAL(clicked()),mapper,SLOT(toPrevious()));
     connect(ui->nextBtn,SIGNAL(clicked()),mapper,SLOT(toNext()));
 
 }

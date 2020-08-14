@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "airlineitemmodel.h"
+
 namespace Ui {
 class DeleteAirline;
 }
@@ -22,6 +24,8 @@ private slots:
 
 private:
     Ui::DeleteAirline *ui;
+
+    AirlineItemModel * model;
 };
 
 #endif // DELETEAIRLINE_H

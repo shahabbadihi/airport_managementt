@@ -16,9 +16,10 @@ class AirlinesPage : public QWidget
 public:
     explicit AirlinesPage(QWidget *parent = nullptr);
     ~AirlinesPage();
-    void  updateButton(int);
+
 private slots:
     void on_subBtn_clicked();
+    void updateButton(int);
 
 private:
     Ui::AirlinesPage *ui;
