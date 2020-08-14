@@ -37,6 +37,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+    foreach (Flight * f, Recorder<Flight>::getInstance()->get_dataList())
+    {
+        connect(f, SIGNAL(flightStatusMsgSignal(const QString&))
+                , ui->statusbar, SLOT(showMessage(const QString&)));
+    }
+
+    connect(Recorder<Flight>::getInstance(), SIGNAL(recordAdded()),
+            this, SLOT(connectNewFlightToStatusBar()));
     //this->timer = new QTimer(this);
     //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
 //    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
@@ -235,4 +244,11 @@ void MainWindow::on_actionairplane_triggered()
     deleteAirplaneDialog->setModal(true);
     deleteAirplaneDialog->exec();
     delete deleteAirplaneDialog;
+}
+
+void MainWindow::connectNewFlightToStatusBar()
+{
+    connect(Recorder<Flight>::getInstance()->get_dataList().last(),
+            SIGNAL(flightStatusMsgSignal(const QString&))
+            , ui->statusbar, SLOT(showMessage(const QString&)));
 }

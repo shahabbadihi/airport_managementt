@@ -16,8 +16,8 @@ class Employee : public Object
 protected:
     QString fname;
     QString lname;
-    long nationalCode;
-    long personnelCode;
+    qlonglong nationalCode;
+    qlonglong personnelCode;
     QDate birthDate;
     QDate employmentDate;
     QVector<Flight*> list;
@@ -36,8 +36,8 @@ public:
 
     void set_lname(const QString& family);
     void set_lname(const QString&& family);
-    void set_nationalCode(long code);
-    void set_personnelCode(long code);
+    void set_nationalCode(qlonglong code);
+    void set_personnelCode(qlonglong code);
     void set_birthDate(QDate& date);
     void set_birthDate(QDate&& date);
     void set_employmentDate(QDate& date);
@@ -49,7 +49,7 @@ public:
 
     QString getFname();
     QString getLname();
-    long getPersonnelCode();
+    qlonglong getPersonnelCode();
 
     bool isFree(Flight*);
     bool isFlightInList(Flight*);
@@ -58,7 +58,7 @@ public:
     Airline *getAirline() const;
     void setAirline(Airline *value);
 
-    long getNationalCode() const;
+    qlonglong getNationalCode() const;
     QDate getBirthDate() const;
     QDate getEmploymentDate() const;
     QVector<Flight *> getFlightList() const;

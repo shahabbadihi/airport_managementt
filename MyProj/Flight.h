@@ -51,7 +51,7 @@ private:
     Carrier* arrival_carrier;
     Price ticketsSaleCost;
 public:
-    Flight()  : flightState(SUSPENDED), numOfPassengers(0), pilot(nullptr), airline(nullptr), airplane(nullptr), departure_carrier(nullptr), arrival_carrier(nullptr) {}
+    Flight();
     Flight(QString&);
     ~Flight() ;
 
@@ -128,7 +128,7 @@ public:
 
 signals:
     void flightStatusChanged();
-    
+    void flightStatusMsgSignal(const QString&);
 };
 
 #endif // FLIGHT_H

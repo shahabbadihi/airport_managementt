@@ -172,7 +172,7 @@ QString Passenger::getFatherName()
     return this->fatherName;
 }
 
-long Passenger::getNationalCode()
+qlonglong Passenger::getNationalCode()
 {
     return this->nationalCode;
 }

@@ -7,12 +7,12 @@ Host::Host(QString &dataStr)
     QStringList strList = dataStr.split('|');
     strList.replaceInStrings("\n", "");
 
-    set_personnelCode(strList.at(0).toLong());
+    set_personnelCode(strList.at(0).toLongLong());
     setAirline(Recorder<Airline>::getInstance()->searchByCode(strList[1]));
     set_fname(strList.at(2));
     set_lname(strList.at(3));
     //set_degree(strList.at(2).toInt());
-    set_nationalCode(strList.at(4).toLong());
+    set_nationalCode(strList.at(4).toLongLong());
 
 
     QStringList strListBirthDate = strList.at(5).split('/', Qt::SkipEmptyParts);

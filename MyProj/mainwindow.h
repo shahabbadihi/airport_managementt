@@ -79,6 +79,8 @@ private slots:
 
     void on_actionairplane_triggered();
 
+    void connectNewFlightToStatusBar();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;

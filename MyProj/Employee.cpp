@@ -5,7 +5,7 @@
 #include <stdexcept>
 using namespace std;
 
-long Employee::getNationalCode() const
+qlonglong Employee::getNationalCode() const
 {
     return nationalCode;
 }
@@ -36,7 +36,6 @@ QString Employee::get_data()
             + (this->airline ? this->airline->getCode() : "") + "|"
             + this->fname + "|" + this->lname + "|"
             + QString::number(this->nationalCode) + "|"
-
             + QString::number(this->birthDate.month()) + "/"
             + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
             + "|" + QString::number(this->employmentDate.month()) + "/"
@@ -91,20 +90,21 @@ void Employee::set_lname(const QString &&family)
     this->lname = family;
 }
 
-void Employee::set_nationalCode(long code)
+void Employee::set_nationalCode(qlonglong code)
 {
+    qlonglong c = code;
     int count = 0;
-    while (code)
+    while (c)
     {
         count++;
-        code /= 10;
+        c /= 10;
     }
     if (count != 10)
         throw invalid_argument("National Code Must Have 10 Digits!");
 
     this->nationalCode = code;
 }
-void Employee::set_personnelCode(long code)
+void Employee::set_personnelCode(qlonglong code)
 {
     if (code <= 0)
         throw invalid_argument("Invalid Value For Personnel Code!");
@@ -175,7 +175,7 @@ QString Employee::getLname()
     return this->lname;
 }
 
-long Employee::getPersonnelCode()
+qlonglong Employee::getPersonnelCode()
 {
     return this->personnelCode;
 }

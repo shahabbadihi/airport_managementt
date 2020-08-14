@@ -13,7 +13,7 @@ protected:
     QString lname;
     QString fname;
     QString fatherName;
-    long nationalCode;
+    qlonglong nationalCode;
     QDate birthDate;
     //Ticket* ticket;
     QVector<Ticket*> list_of_tickets;
@@ -28,7 +28,7 @@ public:
     void setLname(const QString&);
     void setFname(const QString&);
     void setFatherName(const QString&);
-    virtual void setNationalCode(long) = 0;
+    virtual void setNationalCode(qlonglong) = 0;
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);
@@ -42,7 +42,7 @@ public:
     QString getFname();
     QString getLname();
     QString getFatherName();
-    long getNationalCode();
+    qlonglong getNationalCode();
     QDate getBirthDate();
 };
 

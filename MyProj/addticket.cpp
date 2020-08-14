@@ -101,6 +101,15 @@ void AddTicket::on_btnSubmit_clicked()
             msg.setText("Submit Successfully!\nThe Flight Serial Is: " + ticket->getFlight()->getSerial()
                         + "\nDeparture Time: " + ticket->getFlight()->getDateTimeDeparture().time().toString());
             msg.exec();
+
+            if (ticket->getFlight()->isPassengerEnough())
+            {
+                QString s3 = "Flight ";
+                QString s4 = " Now Has Enough Tickets!";
+                QMessageBox msg;
+                msg.setText(s3 + ticket->getFlight()->getSerial() + s4);
+                msg.exec();
+            }
         }
     }
     catch (invalid_argument e)

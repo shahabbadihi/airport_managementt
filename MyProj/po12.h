@@ -9,7 +9,7 @@ public:
     PO12(QString& str_data);
     ~PO12();
 
-    void setNationalCode(long) override;
+    void setNationalCode(qlonglong) override;
 };
 
 #endif // PO12_H

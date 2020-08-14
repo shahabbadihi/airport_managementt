@@ -38,8 +38,13 @@ void AddFlightDialog::on_btnSubmit_clicked()
 
         flight->setSource(ui->txtSource->text());
         flight->setDestination(ui->txtDest->text());
-        flight->setDateTimeArrival(ui->dttmArrival->dateTime());
+
+        if (ui->dttmDeparture->dateTime() < QDateTime::currentDateTime())
+            throw invalid_argument("DateTime Of This Flight Has Passed!\n"
+                                     "Can Not Add This Flight!!");
+
         flight->setDateTimeDeparture(ui->dttmDeparture->dateTime());
+        flight->setDateTimeArrival(ui->dttmArrival->dateTime());
         flight->setNumOfHosts(ui->spnHosts->value());
         flight->setCapacity(ui->spnPassengers->value());
 
