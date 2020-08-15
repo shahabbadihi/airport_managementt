@@ -1,5 +1,7 @@
 #include "pilotspage.h"
 #include "ui_pilotspage.h"
+#include <QThread>
+#include "ThreadedJob.h"
 
 PilotsPage::PilotsPage(QWidget *parent) :
     QWidget(parent),
@@ -35,6 +37,19 @@ PilotsPage::PilotsPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
+//    QThread * th_update = new QThread();
+//    ThreadedJob * tj_update = new ThreadedJob();
+//    tj_update->moveToThread(th_update);
+
+//    connect(th_update, SIGNAL(started()), tj_update, SLOT(slt_start_update_pilot_model()));
+
+//    th_update->start();
+
+    connect(this->pilot_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
+            this, SLOT(setCurrentIndex(int)));
+    connect(this->pilot_item_model, SIGNAL(setIndexWhenRecordAdded()),
+            this, SLOT(updateButtonsWhenRecordAdded()));
+
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNextPilot, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
@@ -57,4 +72,22 @@ void PilotsPage::updateButtons(int row)
 {
     ui->btnPrePilot->setEnabled(row > 0);
     ui->btnNextPilot->setEnabled(row < pilot_item_model->rowCount() - 1);
+}
+
+void PilotsPage::setCurrentIndex(int row)
+{
+    if (row == 0)
+    {
+        this->mapper->revert();
+    }
+    else
+    {
+        this->mapper->setCurrentIndex(row - 1);
+    }
+}
+
+void PilotsPage::updateButtonsWhenRecordAdded()
+{
+    this->mapper->toLast();
+    this->updateButtons(this->pilot_item_model->rowCount() - 1);
 }

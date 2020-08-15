@@ -24,6 +24,7 @@ public:
     void attachHost(Host*);
     void attachPilot(Pilot*);
     void attachFlight(Flight*);
+    void attachDoneFlight(Flight*);
     void attachAirplane(Airplane*);
     void removeHost(Host*);
     void removePilot(Pilot*);
@@ -31,6 +32,10 @@ public:
     void removeAirplane(Airplane*);
     //void attachTicket(Ticket*);
     //void attachCarrier(Carrier*);
+
+    bool isFlightInList(Flight*);
+    bool isDoneFlightInList(Flight*);
+
     void setName(const QString &value);
 
     void setCode(const QString &value);
@@ -50,6 +55,8 @@ public:
     QVector<Host*>getHostsList();
     QVector<Flight*>getFlightsList();
     QVector<Airplane*>getAirplanesList();
+    QVector<Flight *> getListOfDoneFlights() const;
+
 private:
 
     QString name;
@@ -58,6 +65,7 @@ private:
     QVector<Pilot*> list_of_pilots;
     //QVector<Employee*> list_of_emps;
     QVector<Flight*> list_of_flights;
+    QVector<Flight*> list_of_done_flights;
     QVector<Airplane*> list_of_airplanes;
     //QVector<Ticket*> list_of_tickets;
     //QVector<Carrier*> list_of_carriers;

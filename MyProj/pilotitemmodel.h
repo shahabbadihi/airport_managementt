@@ -24,11 +24,14 @@ public:
 private:
     static PilotItemModel* instance;
 
+public slots:
+
 private slots:
-//    void timerHit();
-    //virtual void recordInserted();
+    void rowRemovedSlot(int);
+    void rowAddedSlot();
 signals:
     void rowsAboutToBeRemoved(int);
+    void setIndexWhenRecordAdded();
 };
 
 #endif // PILOTLISTMODEL_H

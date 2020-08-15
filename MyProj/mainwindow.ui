@@ -239,7 +239,7 @@ QStatusBar {
   </action>
   <action name="actioncarrier">
    <property name="text">
-    <string>carrier</string>
+    <string>Carrier</string>
    </property>
   </action>
   <action name="actionairplane">

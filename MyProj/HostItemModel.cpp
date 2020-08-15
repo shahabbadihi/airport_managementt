@@ -9,6 +9,11 @@ HostItemModel::HostItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
 
+    connect(Recorder<Host>::getInstance(), SIGNAL(recordRemovedSignal(int)),
+            this, SLOT(rowRemovedSlot(int)));
+
+    connect(Recorder<Host>::getInstance(), SIGNAL(recordAdded()),
+            this, SLOT(rowAddedSlot()));
 }
 
 int HostItemModel::rowCount(const QModelIndex &/*parent*/) const
@@ -29,7 +34,7 @@ QModelIndex HostItemModel::parent(const QModelIndex &/*index*/) const
     return QModelIndex();
 }
 
-QModelIndex HostItemModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex HostItemModel::index(int row, int column, const QModelIndex &/*parent*/) const
 {
     return createIndex(row, column);
 }
@@ -131,6 +136,7 @@ bool HostItemModel::setData(const QModelIndex &index, const QVariant &value, int
             break;
         }
     }
+    return true;
 }
 
 HostItemModel *HostItemModel::getInstance()
@@ -138,4 +144,14 @@ HostItemModel *HostItemModel::getInstance()
     if (instance == nullptr)
         instance = new HostItemModel(nullptr);
     return instance;
+}
+
+void HostItemModel::rowRemovedSlot(int r)
+{
+    this->removeRows(r, 1);
+}
+
+void HostItemModel::rowAddedSlot()
+{
+    emit setIndexWhenRecordAdded();
 }

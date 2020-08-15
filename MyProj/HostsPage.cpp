@@ -33,6 +33,11 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
+    connect(this->host_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
+            this, SLOT(setCurrentIndex(int)));
+    connect(this->host_item_model, SIGNAL(setIndexWhenRecordAdded()),
+            this, SLOT(updateButtonsWhenRecordAdded()));
+
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
@@ -56,3 +61,22 @@ void HostsPage::updateButtons(int row)
     ui->btnPre->setEnabled(row > 0);
     ui->btnNext->setEnabled(row < host_item_model->rowCount() - 1);
 }
+
+void HostsPage::setCurrentIndex(int row)
+{
+    if (row == 0)
+    {
+        this->mapper->revert();
+    }
+    else
+    {
+        this->mapper->setCurrentIndex(row - 1);
+    }
+}
+
+void HostsPage::updateButtonsWhenRecordAdded()
+{
+    this->mapper->toLast();
+    this->updateButtons(this->host_item_model->rowCount() - 1);
+}
+

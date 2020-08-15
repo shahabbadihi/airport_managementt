@@ -29,6 +29,13 @@ public:
 
 private:
     static AirlineItemModel* instance;
+
+private slots:
+    void rowRemovedSlot(int);
+    void rowAddedSlot();
+signals:
+    void rowsAboutToBeRemoved(int);
+    void setIndexWhenRecordAdded();
 };
 
 #endif // AIRLINEITEMMODEL_H

@@ -9,10 +9,18 @@ AirlineItemModel* AirlineItemModel::instance;
 AirlineItemModel::AirlineItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airline>::getInstance(), SLOT(recordRemovedSlot(int)));
+
+    connect(Recorder<Airline>::getInstance(), SIGNAL(recordRemovedSignal(int)),
+            this, SLOT(rowRemovedSlot(int)));
+
+    connect(Recorder<Airline>::getInstance(), SIGNAL(recordAdded()),
+            this, SLOT(rowAddedSlot()));
 }
 
 
-QModelIndex AirlineItemModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex AirlineItemModel::index(int row, int column, const QModelIndex &/*parent*/) const
 {
     return createIndex(row, column);
 
@@ -24,12 +32,12 @@ QModelIndex AirlineItemModel::parent(const QModelIndex &/*index*/) const
 
 }
 
-int AirlineItemModel::rowCount(const QModelIndex &parent) const
+int AirlineItemModel::rowCount(const QModelIndex &/*parent*/) const
 {
        return Recorder<Airline>::getInstance()->get_dataList().size();
 }
 
-int AirlineItemModel::columnCount(const QModelIndex &parent) const
+int AirlineItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
     return 7;
 }
@@ -51,40 +59,51 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
     QString s3="",s7="";
     foreach (Flight* f, a->getFlightsList())
     {
-        if(f->getFlightStateAsString()=="DONE")
-            {s7 += f->getFlightStr() + "\n\n";}
-        else
-            { s3 += f->getFlightStr() + "\n\n";}
+//        if(f->getFlightStateAsString()=="DONE")
+//            {s7 += f->getFlightStr() + "\n\n";}
+//        else
+        s3 += f->getFlightStr() + "\n\n";
     }
+
+    foreach (Flight* f, a->getListOfDoneFlights())
+    {
+        s7 += f->getFlightStr() + "\n\n";
+    }
+
     QString s4="";
     foreach (Airplane* A, a->getAirplanesList())
     {
         s4 += A->getSearchCode() + "\n";
     }
-    switch (index.column()) {
-    case(1):
-        return a->getName()+" Airline";
-        break;
-    case(2):
-        return a->getCode();
-        break;
-    case(3):
-        return s;
-        break;
 
-    case(4):
-        return s2;
-        break;
-    case(5):
-        return s3;
-        break;
-    case(6):
-        return s4;
-        break;
-    case(7):
-        return s7;
-        break;
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
+    {
+        switch (index.column()) {
+        case(1):
+            return a->getName()+" Airline";
+            break;
+        case(2):
+            return a->getCode();
+            break;
+        case(3):
+            return s;
+            break;
+
+        case(4):
+            return s2;
+            break;
+        case(5):
+            return s3;
+            break;
+        case(6):
+            return s4;
+            break;
+        case(7):
+            return s7;
+            break;
+        }
     }
+    return QVariant();
 }
 
 bool AirlineItemModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -97,15 +116,21 @@ bool AirlineItemModel::setData(const QModelIndex &index, const QVariant &value, 
             a->setCode(value.toString());
         }
     }
+    return true;
 }
 
 
 
 bool AirlineItemModel::removeRows(int row, int count, const QModelIndex &parent)
 {
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airline>::getInstance(), SLOT(recordRemovedSlot(int)));
+
     beginRemoveRows(parent, row, row + count - 1);
     // FIXME: Implement me!
     endRemoveRows();
+    emit rowsAboutToBeRemoved(row);
+    return true;
 }
 
 
@@ -114,4 +139,18 @@ AirlineItemModel *AirlineItemModel::getInstance()
     if (instance == nullptr)
         instance = new AirlineItemModel(nullptr);
     return instance;
+}
+
+
+void AirlineItemModel::rowRemovedSlot(int r)
+{
+    disconnect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
+
+    emit rowsAboutToBeRemoved(r);
+}
+
+void AirlineItemModel::rowAddedSlot()
+{
+    emit setIndexWhenRecordAdded();
 }

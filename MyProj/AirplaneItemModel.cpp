@@ -9,7 +9,14 @@ AirplaneItemModel* AirplaneItemModel::instance;
 AirplaneItemModel::AirplaneItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
-    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
+
+    connect(Recorder<Airplane>::getInstance(), SIGNAL(recordRemovedSignal(int)),
+            this, SLOT(rowRemovedSlot(int)));
+
+    connect(Recorder<Airplane>::getInstance(), SIGNAL(recordAdded()),
+            this, SLOT(rowAddedSlot()));
 }
 
 int AirplaneItemModel::rowCount(const QModelIndex &/*parent*/) const
@@ -19,6 +26,9 @@ int AirplaneItemModel::rowCount(const QModelIndex &/*parent*/) const
 
 bool AirplaneItemModel::removeRows(int row, int count, const QModelIndex &parent)
 {
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
+
     beginRemoveRows(parent, row, row + count - 1);
     endRemoveRows();
     emit rowsAboutToBeRemoved(row);
@@ -30,7 +40,7 @@ QModelIndex AirplaneItemModel::parent(const QModelIndex &/*index*/) const
     return QModelIndex();
 }
 
-QModelIndex AirplaneItemModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex AirplaneItemModel::index(int row, int column, const QModelIndex &/*parent*/) const
 {
     return createIndex(row, column);
 }
@@ -104,6 +114,7 @@ bool AirplaneItemModel::setData(const QModelIndex &index, const QVariant &value,
             break;
         }
     }
+    return true;
 }
 
 AirplaneItemModel *AirplaneItemModel::getInstance()
@@ -111,4 +122,17 @@ AirplaneItemModel *AirplaneItemModel::getInstance()
     if (instance == nullptr)
         instance = new AirplaneItemModel(nullptr);
     return instance;
+}
+
+void AirplaneItemModel::rowRemovedSlot(int r)
+{
+    disconnect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
+
+    emit rowsAboutToBeRemoved(r);
+}
+
+void AirplaneItemModel::rowAddedSlot()
+{
+    emit setIndexWhenRecordAdded();
 }

@@ -32,6 +32,12 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     mapper->setItemDelegate(delegate);
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
+
+    connect(this->airline_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
+            this, SLOT(setCurrentIndex(int)));
+    connect(this->airline_item_model, SIGNAL(setIndexWhenRecordAdded()),
+            this, SLOT(updateButtonsWhenRecordAdded()));
+
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButton(int)));
 
     connect(ui->prvBtn,SIGNAL(clicked()),mapper,SLOT(toPrevious()));
@@ -54,3 +60,22 @@ void AirlinesPage::on_subBtn_clicked()
     this->mapper->submit();
 
 }
+
+void AirlinesPage::setCurrentIndex(int row)
+{
+    if (row == 0)
+    {
+        this->mapper->revert();
+    }
+    else
+    {
+        this->mapper->setCurrentIndex(row - 1);
+    }
+}
+
+void AirlinesPage::updateButtonsWhenRecordAdded()
+{
+    this->mapper->toLast();
+    this->updateButton(this->airline_item_model->rowCount() - 1);
+}
+

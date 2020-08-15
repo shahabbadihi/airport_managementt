@@ -7,7 +7,8 @@ PilotListModel* PilotListModel::instance;
 PilotListModel::PilotListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    connect(this, SIGNAL(rowsAboutToBeRemoved(int)), Recorder<Pilot>::getInstance(), SLOT(recordRemovedSlot(int)));
+    connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
+            Recorder<Pilot>::getInstance(), SLOT(recordRemovedSlot(int)));
 }
 
 int PilotListModel::rowCount(const QModelIndex &/*parent*/) const

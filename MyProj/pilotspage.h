@@ -21,6 +21,8 @@ public:
 private slots:
     void on_btnSubmit_clicked();
     void updateButtons(int row);
+    void setCurrentIndex(int row);
+    void updateButtonsWhenRecordAdded();
 private:
     Ui::PilotsPage *ui;
 

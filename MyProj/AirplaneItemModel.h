@@ -24,9 +24,11 @@ private:
     static AirplaneItemModel* instance;
 
 private slots:
-
+    void rowRemovedSlot(int);
+    void rowAddedSlot();
 signals:
     void rowsAboutToBeRemoved(int);
+    void setIndexWhenRecordAdded();
 };
 
 #endif // AIRPLANEITEMMODEL_H

@@ -10,7 +10,11 @@ PilotItemModel* PilotItemModel::instance;
 PilotItemModel::PilotItemModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
+    connect(Recorder<Pilot>::getInstance(), SIGNAL(recordRemovedSignal(int)),
+            this, SLOT(rowRemovedSlot(int)));
 
+    connect(Recorder<Pilot>::getInstance(), SIGNAL(recordAdded()),
+            this, SLOT(rowAddedSlot()));
 }
 
 int PilotItemModel::rowCount(const QModelIndex &/*parent*/) const
@@ -31,7 +35,7 @@ QModelIndex PilotItemModel::parent(const QModelIndex &/*index*/) const
     return QModelIndex();
 }
 
-QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &/*parent*/) const
 {
     return createIndex(row, column);
 }
@@ -138,6 +142,7 @@ bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, in
             break;
         }
     }
+    return true;
 }
 
 PilotItemModel *PilotItemModel::getInstance()
@@ -146,3 +151,19 @@ PilotItemModel *PilotItemModel::getInstance()
         instance = new PilotItemModel(nullptr);
     return instance;
 }
+
+void PilotItemModel::rowRemovedSlot(int r)
+{
+    this->removeRows(r, 1);
+}
+
+void PilotItemModel::rowAddedSlot()
+{
+    emit setIndexWhenRecordAdded();
+}
+
+//void PilotItemModel::timerHit()
+//{
+//    beginResetModel();
+//    endResetModel();
+//}

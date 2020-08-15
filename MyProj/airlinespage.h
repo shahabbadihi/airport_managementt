@@ -21,6 +21,8 @@ private slots:
     void on_subBtn_clicked();
     void updateButton(int);
 
+    void setCurrentIndex(int row);
+    void updateButtonsWhenRecordAdded();
 private:
     Ui::AirlinesPage *ui;
     QString searchcode;
