@@ -1,10 +1,6 @@
 #ifndef RECORDER_H
 #define RECORDER_H
 
-//#include "TList.h"
-//#include "Employee.h"
-//#include "Pilot.h"
-//#include "Host.h"
 #include <QFile>
 #include <QDir>
 #include <QString>
@@ -16,14 +12,10 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QObject>
-//#include "Carrier.h"
-//#include <string>
-//class Employee;
-//class Pilot;
-//class Host;
+
 class Flight;
 class Carrier;
-//#include "mymodel.h"
+
 #include "flighttablemodel.h"
 #include "SignalSlotRecorder.h"
 
@@ -32,10 +24,8 @@ class Recorder : public SignalSlotRecorder
 {
     //Q_OBJECT
 public:
-    void record(T* a);
-
-    void addToFile(T* a);
-    void removeFromFile(T* a);
+//    void addToFile(T* a);
+//    void removeFromFile(T* a);
 
     QVector<T*> get_dataList();
     bool isInList(T * a);
@@ -45,10 +35,11 @@ public:
     void import();
 
     T * searchByCode(const QString& p);
+    bool isSearchCodeExist(const QString& str);
 
     void remove(T * a);
 
-    void updateFile(T * ptr);
+//    void updateFile(T * ptr);
     void updateFileAll();
 
     QString getClassName();
@@ -71,6 +62,8 @@ private:
     QVector<T*> dataList;
     static Recorder<T>* instance;
     QAbstractItemModel * model_ptr;
+
+    void record(T* a);
 
 //signals:
 //    void recordAdded();

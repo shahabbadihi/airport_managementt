@@ -15,6 +15,8 @@
 #include "Airline.h"
 #include "Airplane.h"
 #include <QVector>
+#include <stdexcept>
+using namespace std;
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 
@@ -29,81 +31,81 @@ void Recorder<T>::record(T *a)
     //Recorder<T>::print_dataList();
 }
 
-template<class T>
-void Recorder<T>::addToFile(T *a)
-{
-    QDir d(QDir::currentPath() + "/data");
-    if (!d.exists())
-        d.mkpath(QDir::currentPath() + "/data");
+//template<class T>
+//void Recorder<T>::addToFile(T *a)
+//{
+//    QDir d(QDir::currentPath() + "/data");
+//    if (!d.exists())
+//        d.mkpath(QDir::currentPath() + "/data");
 
 
-    QFile file("data/" + this->getClassName() + ".txt");
-    if (!file.open(QIODevice::Append | QIODevice::Text))
-        throw QException();
+//    QFile file("data/" + this->getClassName() + ".txt");
+//    if (!file.open(QIODevice::Append | QIODevice::Text))
+//        throw QException();
 
-    //file.open(QFile::Append);
+//    //file.open(QFile::Append);
 
-    QTextStream out(&file);
-    out << a->get_data();
-    //out << "askcn";
+//    QTextStream out(&file);
+//    out << a->get_data();
+//    //out << "askcn";
 
-    file.flush();
-    file.close();
-}
+//    file.flush();
+//    file.close();
+//}
 
-template<class T>
-void Recorder<T>::removeFromFile(T *a)
-{
-    QDir d(QDir::currentPath() + "/data");
-    try {
+//template<class T>
+//void Recorder<T>::removeFromFile(T *a)
+//{
+//    QDir d(QDir::currentPath() + "/data");
+//    try {
 
-        QFile file("data/" + this->getClassName() + ".txt");
-        if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-            throw QException();
+//        QFile file("data/" + this->getClassName() + ".txt");
+//        if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+//            throw QException();
 
-        QTextStream txt(&file);
-        int flag = 0, num_of_line = 0, lines_count = 0;
+//        QTextStream txt(&file);
+//        int flag = 0, num_of_line = 0, lines_count = 0;
 
-        while (!txt.atEnd())
-        {
-            txt.readLine();
-            lines_count++;
-        }
+//        while (!txt.atEnd())
+//        {
+//            txt.readLine();
+//            lines_count++;
+//        }
 
-        txt.seek(0);
+//        txt.seek(0);
 
-        while (!txt.atEnd())
-        {
-            QString data_str = txt.readLine();
-            if (data_str + "\n" == a->get_data())
-            {
-                flag = 1;
-                break;
-            }
-            num_of_line++;
-        }
-        if (flag == 1)
-        {
-            file.resize(0);
-            QTextStream out(&file);
-            for (int i = 0; i < lines_count; i++)
-            {
-                if (i == num_of_line)
-                    continue;
-                out << this->get_dataList().at(i)->get_data();
-            }
-        }
-        file.flush();
-        file.close();
+//        while (!txt.atEnd())
+//        {
+//            QString data_str = txt.readLine();
+//            if (data_str + "\n" == a->get_data())
+//            {
+//                flag = 1;
+//                break;
+//            }
+//            num_of_line++;
+//        }
+//        if (flag == 1)
+//        {
+//            file.resize(0);
+//            QTextStream out(&file);
+//            for (int i = 0; i < lines_count; i++)
+//            {
+//                if (i == num_of_line)
+//                    continue;
+//                out << this->get_dataList().at(i)->get_data();
+//            }
+//        }
+//        file.flush();
+//        file.close();
 
 
-    } catch (QException) {
-        QMessageBox msg;
-        msg.setText("File Not Found!");
-        msg.exec();
-    }
+//    } catch (QException) {
+//        QMessageBox msg;
+//        msg.setText("File Not Found!");
+//        msg.exec();
+//    }
 
-}
+//}
 
 template<class T>
 QVector<T *> Recorder<T>::get_dataList()
@@ -134,6 +136,14 @@ void Recorder<T>::print_dataList()
 template<class T>
 void Recorder<T>::add(T *a)
 {
+    QString str = a->getSearchCode();
+
+    if (this->isSearchCodeExist(str))
+    {
+        QString str2 = this->getClassName() + " With Code " + str + " Already Exist!";
+        throw invalid_argument(str2.toStdString());
+    }
+
     if (a && !this->isInList(a))
         this->record(a);
     //this->addToFile(a);
@@ -170,7 +180,7 @@ void Recorder<T>::import()
     {
         QString dataString = in.readLine();
         T* newObj = new T(dataString);
-        this->record(newObj);
+        this->add(newObj);
     }
 
     file.close();
@@ -190,6 +200,46 @@ T *Recorder<T>::searchByCode(const QString &p){
 }
 
 template<class T>
+bool Recorder<T>::isSearchCodeExist(const QString & search_code)
+{
+    foreach (T* t, this->dataList)
+    {
+        if (t->getSearchCode() == search_code)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+template<>
+bool Recorder<Pilot>::isSearchCodeExist(const QString & search_code)
+{
+    foreach (Employee* e, Recorder<Employee>::getInstance()->get_dataList())
+    {
+        if (e->getSearchCode() == search_code)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+template<>
+bool Recorder<Host>::isSearchCodeExist(const QString & search_code)
+{
+    foreach (Employee* e, Recorder<Employee>::getInstance()->get_dataList())
+    {
+        if (e->getSearchCode() == search_code)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+template<class T>
 void Recorder<T>::remove(T *a)
 {
     int index = this->dataList.indexOf(a);
@@ -199,36 +249,36 @@ void Recorder<T>::remove(T *a)
     emit recordRemovedSignal(index);
 }
 
-template<class T>
-void Recorder<T>::updateFile(T *ptr)
-{
-    QFile file("data/" + this->getClassName() + ".txt");
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-        throw QException();
+//template<class T>
+//void Recorder<T>::updateFile(T *ptr)
+//{
+//    QFile file("data/" + this->getClassName() + ".txt");
+//    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+//        throw QException();
 
-    QString str = file.readAll();
-    QStringList str_list = str.split('\n');
+//    QString str = file.readAll();
+//    QStringList str_list = str.split('\n');
 
-    for (int i = 0; i < str_list.size(); i++)
-    {
-        if (str_list[i].indexOf(ptr->getSearchCode()) != -1)
-        {
-            str_list[i] = ptr->get_data();
-            break;
-        }
-    }
+//    for (int i = 0; i < str_list.size(); i++)
+//    {
+//        if (str_list[i].indexOf(ptr->getSearchCode()) != -1)
+//        {
+//            str_list[i] = ptr->get_data();
+//            break;
+//        }
+//    }
 
-    str_list.replaceInStrings("\n", "");
-    QString str2 = str_list.join('\n');
-    file.resize(0);
+//    str_list.replaceInStrings("\n", "");
+//    QString str2 = str_list.join('\n');
+//    file.resize(0);
 
 
-    QTextStream out(&file);
-    out << str2;
+//    QTextStream out(&file);
+//    out << str2;
 
-    file.flush();
-    file.close();
-}
+//    file.flush();
+//    file.close();
+//}
 
 template<class T>
 void Recorder<T>::updateFileAll()
@@ -296,6 +346,43 @@ Carrier* Recorder<Carrier>::getFirstFree(const QDateTime& t, const QString& s)
     return nullptr;
 }
 
+
+template<>
+void Recorder<Host>::add(Host * h)
+{
+    QString str = h->getSearchCode();
+
+    if (this->isSearchCodeExist(str))
+    {
+        QString str2 = "Employee With Code " + str + " Already Exist!";
+        throw invalid_argument(str2.toStdString());
+    }
+    if (h && !this->isInList(h))
+    {
+        this->record(h);
+        Recorder<Employee>::getInstance()->add(h);
+    }
+}
+
+template<>
+void Recorder<Pilot>::add(Pilot * p)
+{
+    QString str = p->getSearchCode();
+
+    if (this->isSearchCodeExist(str))
+    {
+        QString str2 = "Employee With Code " + str + " Already Exist!";
+        throw invalid_argument(str2.toStdString());
+    }
+
+    if (p && !this->isInList(p))
+    {
+        this->record(p);
+        Recorder<Employee>::getInstance()->add(p);
+    }
+}
+
+
 template<class T>
 void Recorder<T>::recordRemovedSlot(int index)
 {
@@ -351,7 +438,7 @@ void Recorder<Pilot>::import()
         if (sl[4] == "3")
             newObj = new PD3(dataString);
 
-        this->record(newObj);
+        this->add(newObj);
     }
 
     file.close();
@@ -393,7 +480,7 @@ void Recorder<Passenger>::import()
 //        QDate dt(date[2].toInt(), date[0].toInt(), date[1].toInt());
 
         Passenger* newObj = GetPassengerFactory::getInstance()->getPassenger(dataString);
-        this->record(newObj);
+        this->add(newObj);
     }
 
     file.close();
