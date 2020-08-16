@@ -36,6 +36,15 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
+//    Recorder<Flight>::getInstance()->import();
+//    Recorder<Airline>::getInstance()->import();
+//    Recorder<Pilot>::getInstance()->import();
+//    Recorder<Host>::getInstance()->import();
+//    Recorder<Airplane>::getInstance()->import();
+//    Recorder<Carrier>::getInstance()->import();
+//    Recorder<Ticket>::getInstance()->import();
+//    Recorder<Passenger>::getInstance()->import();
+
     ui->setupUi(this);
 
 

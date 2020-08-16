@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     //
     //qDebug() << Recorder<Flight>::getInstance()->get_dataList()[0]->getFlightStr();
 
+
     qDebug() << "Bye";
     QApplication a(argc, argv);
     qDebug() << "Hi";
