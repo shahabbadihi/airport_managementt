@@ -7,7 +7,7 @@
 #include "ThreadedJob.h"
 #include <QDialog>
 #include <QThread>
-
+#include "detailspage.h"
 FlightTablePage::FlightTablePage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FlightTablePage),
@@ -42,21 +42,31 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
 
     signal_mapper_delay = new QSignalMapper(this);
     signal_mapper_status = new QSignalMapper(this);
+    signal_mapper_details = new QSignalMapper(this);
+
     for (int i = 0; i < flight_table_model->rowCount(); i++)
     {
         delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
         status_buttons.push_back(new QPushButton("Status", ui->tableView));
+        details_buttons.push_back(new QPushButton("Details", ui->tableView));
+
 //        connect(delay_buttons[i], SIGNAL(clicked()), this, SLOT(showDelayDialog()));
         ui->tableView->setIndexWidget(proxy->index(i, 7), delay_buttons[i]);
         ui->tableView->setIndexWidget(proxy->index(i, 8), status_buttons[i]);
+        ui->tableView->setIndexWidget(proxy->index(i, 9), details_buttons[i]);
+
         signal_mapper_delay->setMapping(delay_buttons[i], i);
         signal_mapper_status->setMapping(status_buttons[i], i);
+        signal_mapper_details->setMapping(details_buttons[i], i);
 
         connect(delay_buttons[i], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
         connect(status_buttons[i], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
+        connect(details_buttons[i], SIGNAL(clicked()), signal_mapper_details, SLOT(map()));
+
     }
     connect(signal_mapper_delay, SIGNAL(mapped(int)), this, SLOT(showDelayDialog(int)));
     connect(signal_mapper_status, SIGNAL(mapped(int)), this, SLOT(showStatusDialog(int)));
+    connect(signal_mapper_details, SIGNAL(mapped(int)), this, SLOT(showDetailsDialog(int)));
 
 
     ui->tableView->setSortingEnabled(true);
@@ -116,12 +126,19 @@ void FlightTablePage::addButtonFlightTable(int row)
 
     this->delay_buttons.push_back(new QPushButton("Delay", ui->tableView));
     this->status_buttons.push_back(new QPushButton("Status", ui->tableView));
+    this->details_buttons.push_back(new QPushButton("Details", ui->tableView));
+
     ui->tableView->setIndexWidget(this->proxy->index(row, 7), delay_buttons[row]);
     ui->tableView->setIndexWidget(this->proxy->index(row, 8), status_buttons[row]);
+    ui->tableView->setIndexWidget(this->proxy->index(row, 9), details_buttons[row]);
+
     signal_mapper_delay->setMapping(delay_buttons[row], row);
     signal_mapper_status->setMapping(status_buttons[row], row);
+    signal_mapper_details->setMapping(details_buttons[row], row);
+
     connect(delay_buttons[row], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
     connect(status_buttons[row], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
+    connect(details_buttons[row], SIGNAL(clicked()), signal_mapper_details, SLOT(map()));
 
     this->proxy->setSortRole(Qt::DisplayRole);
 
@@ -133,14 +150,20 @@ void FlightTablePage::removeButtonFlightTable(int row)
 {
     disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
     disconnect(status_buttons[row], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
+    disconnect(details_buttons[row], SIGNAL(clicked()), signal_mapper_details, SLOT(map()));
+
     delete delay_buttons[row];
     delete status_buttons[row];
-
+    delete details_buttons[row];
 
     signal_mapper_delay->removeMappings(delay_buttons[row]);
     signal_mapper_status->removeMappings(status_buttons[row]);
+    signal_mapper_details->removeMappings(details_buttons[row]);
+
     this->delay_buttons.remove(row);
     this->status_buttons.remove(row);
+    this->details_buttons.remove(row);
+
 }
 
 void FlightTablePage::showDelayDialog(int row)
@@ -164,5 +187,11 @@ void FlightTablePage::showStatusDialog(int row)
 {
     FlightStatusDialog d(Recorder<Flight>::getInstance()->get_dataList()[row], this);
     d.setWindowTitle("Flight Status");
+    d.exec();
+}
+void FlightTablePage::showDetailsDialog(int row)
+{
+    DetailsPage d(Recorder<Flight>::getInstance()->get_dataList()[row], this);
+    d.setWindowTitle("Flight Details");
     d.exec();
 }

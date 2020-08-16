@@ -50,6 +50,7 @@ SOURCES += \
     deletehost.cpp \
     deletepilot.cpp \
     deleteticket.cpp \
+    detailspage.cpp \
     dialog.cpp \
     editSeas.cpp \
     flightlistmodel.cpp \
@@ -69,7 +70,8 @@ SOURCES += \
     pilotspage.cpp \
     po12.cpp \
     pu2.cpp \
-    ticketlistmodel.cpp
+    ticketlistmodel.cpp \
+    ticketpage.cpp
 
 HEADERS += \
     Airline.h \
@@ -109,6 +111,7 @@ HEADERS += \
     deletehost.h \
     deletepilot.h \
     deleteticket.h \
+    detailspage.h \
     dialog.h \
     editSeas.h \
     flightlistmodel.h \
@@ -127,7 +130,8 @@ HEADERS += \
     pilotspage.h \
     po12.h \
     pu2.h \
-    ticketlistmodel.h
+    ticketlistmodel.h \
+    ticketpage.h
 
 FORMS += \
     AirplanesPage.ui \
@@ -148,12 +152,14 @@ FORMS += \
     deletehost.ui \
     deletepilot.ui \
     deleteticket.ui \
+    detailspage.ui \
     dialog.ui \
     editSeas.ui \
     flightstatusdialog.ui \
     flighttablepage.ui \
     mainwindow.ui \
-    pilotspage.ui
+    pilotspage.ui \
+    ticketpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

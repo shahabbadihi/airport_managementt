@@ -57,6 +57,7 @@ public:
 //    void setDateTimeArrival(const QDateTime&&);
     void setFlight(Flight*);
     void setPassenger(Passenger*);
+    Passenger *getPassenger();
 //    void setPassengerBirthDate(const QDate&);
 //    void setPassengerBirthDate(const QDate&&);
 //    void setPassengerFatherName(const QString&);
@@ -69,6 +70,7 @@ public:
     long getNo() const;
     //void setAirline(Airline *value);
     QString getPassengerName();
+    Price  getPrice();
 };
 
 
