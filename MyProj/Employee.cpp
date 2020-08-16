@@ -15,6 +15,13 @@ QDate Employee::getBirthDate() const
     return birthDate;
 }
 
+double Employee::wage(double i = (Flight::income())) const
+{
+    float percent;
+    return percent * i;
+
+}
+
 QDate Employee::getEmploymentDate() const
 {
     return employmentDate;

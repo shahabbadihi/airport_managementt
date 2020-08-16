@@ -1,5 +1,6 @@
 #include "Flight.h"
 #include "Host.h"
+#include "addticket.h"
 #include "Ticket.h"
 #include "Airline.h"
 #include "Airplane.h"
@@ -892,6 +893,11 @@ void Flight::removeTicket(Ticket* T){
 }
 bool Flight::isCheckInReady(){
     return true;
+}
+
+double Flight::income(double a = addticket.price_of_ticket)
+{
+    return this->numOfPassengers * a;
 }
 //void Flight::setDate(const QDate & d)
 //{

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
+    <width>625</width>
     <height>382</height>
    </rect>
   </property>
@@ -223,6 +223,16 @@ QDateEdit {
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>wage:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="wage_of_host"/>
         </item>
        </layout>
       </item>

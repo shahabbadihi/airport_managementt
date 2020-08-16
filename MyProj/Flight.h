@@ -125,7 +125,7 @@ public:
     void setFlightStateAsString(const QString &value);
 
     void setState();
-
+    double income(double);
 signals:
     void flightStatusChanged();
     void flightStatusMsgSignal(const QString&);
