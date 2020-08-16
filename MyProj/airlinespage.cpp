@@ -14,19 +14,19 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     airline_item_model=AirlineItemModel::getInstance();
 
     mapper->setModel(airline_item_model);
-    mapper->addMapping(ui->airlineNameLe,1);
+    mapper->addMapping(ui->airlineNameLe,0);
     ui->airlineNameLe->setReadOnly(true);
-    mapper->addMapping(ui->CodeLe,2);
+    mapper->addMapping(ui->CodeLe,1);
    // ui->CodeLe->setReadOnly(true);
-    mapper->addMapping(ui->pilotPte,3);
+    mapper->addMapping(ui->pilotPte,2);
     ui->pilotPte->setReadOnly(true);
-    mapper->addMapping(ui->HostPte,4);
+    mapper->addMapping(ui->HostPte,3);
     ui->HostPte->setReadOnly(true);
-    mapper->addMapping(ui->FlightPte,5);
+    mapper->addMapping(ui->FlightPte,4);
     ui->FlightPte->setReadOnly(true);
-    mapper->addMapping(ui->AirplanePte,6);
+    mapper->addMapping(ui->AirplanePte,5);
     ui->AirplanePte->setReadOnly(true);
-    mapper->addMapping(ui->DnFlightPte,7);
+    mapper->addMapping(ui->DnFlightPte,6);
     ui->DnFlightPte->setReadOnly(true);
     delegate = new Delegate(this);
     mapper->setItemDelegate(delegate);

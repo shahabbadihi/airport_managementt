@@ -79,26 +79,26 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
         switch (index.column()) {
-        case(1):
+        case(0):
             return a->getName()+" Airline";
             break;
-        case(2):
+        case(1):
             return a->getCode();
             break;
-        case(3):
+        case(2):
             return s;
             break;
 
-        case(4):
+        case(3):
             return s2;
             break;
-        case(5):
+        case(4):
             return s3;
             break;
-        case(6):
+        case(5):
             return s4;
             break;
-        case(7):
+        case(6):
             return s7;
             break;
         }
@@ -112,7 +112,7 @@ bool AirlineItemModel::setData(const QModelIndex &index, const QVariant &value, 
 
     if (role == Qt::EditRole)
     {
-        if(index.column()==2){
+        if(index.column()==1){
             a->setCode(value.toString());
         }
     }

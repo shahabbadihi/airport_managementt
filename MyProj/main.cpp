@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 //    qDebug() << "Hello";
 //    try{
         Recorder<Flight>::getInstance()->import();
-        Recorder<Airline>::getInstance()->import();    
+        Recorder<Airline>::getInstance()->import();
         Recorder<Pilot>::getInstance()->import();
         Recorder<Host>::getInstance()->import();
         Recorder<Airplane>::getInstance()->import();
@@ -45,11 +45,11 @@ int main(int argc, char *argv[])
     //
     //qDebug() << Recorder<Flight>::getInstance()->get_dataList()[0]->getFlightStr();
 
-//    qDebug() << "Bye";
+    qDebug() << "Bye";
     QApplication a(argc, argv);
-//    qDebug() << "Hi";
+    qDebug() << "Hi";
     MainWindow w;
-//    qDebug() << "Fi";
+    qDebug() << "Fi";
 
     //QFontDatabase::addApplicationFont(":/fonts/Raleway-Regular.ttf");
 

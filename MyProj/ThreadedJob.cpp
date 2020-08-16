@@ -5,7 +5,6 @@
 #include "flighttablemodel.h"
 #include "PilotItemModel.h"
 
-long long ThreadedJob::counter = 0;
 
 ThreadedJob::ThreadedJob(QObject *parent) : QObject(parent)
 {
@@ -57,6 +56,8 @@ void ThreadedJob::slt_update_flight_table()
 
 void ThreadedJob::slt_start_update()
 {
+    this->counter = 0;
+
     this->tm_update = new QTimer(this);
     this->tm_update->setInterval(60000);
 
