@@ -69,3 +69,10 @@ void Host::setAirline(Airline *value)
     }
 //    Recorder<Host>::getInstance()->updateFile(this);
 }
+
+double Host::wage(double i = (Flight::income())) const
+{
+    float percent = 0.05;
+    return percent * i;
+
+}

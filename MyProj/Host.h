@@ -10,6 +10,10 @@ class Host : public Employee
 {
 private:
 
+protected:
+    virtual double wage(double);
+
+
 public:
     Host() {}
     Host(QString& dataStr);

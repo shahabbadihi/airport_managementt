@@ -14,6 +14,10 @@ class Pilot : public Employee
 private:
     //Degree degree;
     //QVector<Flight*> list;
+protected:
+    virtual double wage(double);
+
+
 public:
     Pilot() {}
     Pilot(QString& dataStr);

@@ -2,6 +2,11 @@
 #include "ui_pilotspage.h"
 #include <QThread>
 #include "ThreadedJob.h"
+#include "Recorder.h"
+#include "pilotitemmodel.h"
+#include "Employee.h"
+#include "Pilot.h"
+#include <QString>
 
 PilotsPage::PilotsPage(QWidget *parent) :
     QWidget(parent),
@@ -90,4 +95,13 @@ void PilotsPage::updateButtonsWhenRecordAdded()
 {
     this->mapper->toLast();
     this->updateButtons(this->pilot_item_model->rowCount() - 1);
+}
+
+void PilotsPage::viewWage()
+{
+    Employee* em_ptr = Recorder<pilot_item_model>::getInstance()->get_dataList();
+    double wa = em_ptr->wage();
+    Qstring wage = Qstring::number(wa);
+    ui->wage_of_pilot->setText(wage);
+
 }

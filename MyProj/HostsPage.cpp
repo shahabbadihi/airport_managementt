@@ -1,5 +1,10 @@
 #include "HostsPage.h"
 #include "ui_HostsPage.h"
+#include "Recorder.h"
+#include "HostItemModel.h"
+#include "Employee.h"
+#include "Host.h"
+#include <QString>
 
 HostsPage::HostsPage(QWidget *parent) :
     QWidget(parent),
@@ -80,3 +85,11 @@ void HostsPage::updateButtonsWhenRecordAdded()
     this->updateButtons(this->host_item_model->rowCount() - 1);
 }
 
+void HostsPage::viewWage()
+{
+    Employee * em_ptr = Recorder<host_item_model>::getInstance()->get_dataList();
+    double wa = em_ptr->wage();
+    Qstring wage = Qstring::number(wa);
+    ui->wage_of_host->setText(wage);
+
+}

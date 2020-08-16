@@ -5,7 +5,7 @@
 #include <QDataWidgetMapper>
 #include "delegate.h"
 #include "pilotitemmodel.h"
-
+#include "Recorder.h"
 namespace Ui {
 class PilotsPage;
 }
@@ -17,7 +17,7 @@ class PilotsPage : public QWidget
 public:
     explicit PilotsPage(QWidget *parent = nullptr);
     ~PilotsPage();
-
+    void viewWage();
 private slots:
     void on_btnSubmit_clicked();
     void updateButtons(int row);
