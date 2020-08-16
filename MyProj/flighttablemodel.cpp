@@ -32,7 +32,7 @@ int FlightTableModel::rowCount(const QModelIndex & /*parent*/) const
 
 int FlightTableModel::columnCount(const QModelIndex& /*parent*/) const
 {
-    return 9;
+    return 10;
 }
 
 QModelIndex FlightTableModel::parent(const QModelIndex &/*index*/) const

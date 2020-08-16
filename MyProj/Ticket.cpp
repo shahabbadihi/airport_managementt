@@ -215,3 +215,10 @@ Ticket::~Ticket(){
 
     this->seat->removeTicket();
 }
+Price Ticket::getPrice(){
+    return price;
+}
+Passenger * Ticket::getPassenger(){
+
+    return passenger;
+}
