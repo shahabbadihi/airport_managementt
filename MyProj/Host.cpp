@@ -70,9 +70,14 @@ void Host::setAirline(Airline *value)
 //    Recorder<Host>::getInstance()->updateFile(this);
 }
 
-double Host::wage(double i = (Flight::income())) const
+double Host::wage() const
 {
+    double kol;
     float percent = 0.05;
-    return percent * i;
+    foreach(Flight * f, this->getDoneFlightList())
+    {
+        kol += f->income();
+    }
+    return kol * percent;
 
 }

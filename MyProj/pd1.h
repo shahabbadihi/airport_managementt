@@ -8,7 +8,7 @@ public:
     PD1();
     PD1(QString& data_str);
     ~PD1();
-
+    virtual double wage();
     QString get_data() override;
     QString getDegreeAsString() override;
 };

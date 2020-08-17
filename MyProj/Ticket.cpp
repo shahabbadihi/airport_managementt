@@ -4,6 +4,7 @@
 #include "Airline.h"
 #include <QString>
 #include <stdexcept>
+#include <QDateTime>
 using namespace std;
 
 long Ticket::getNo() const
@@ -215,10 +216,15 @@ Ticket::~Ticket(){
 
     this->seat->removeTicket();
 }
-Price Ticket::getPrice(){
+double Ticket::getPrice(){
     return price;
 }
 Passenger * Ticket::getPassenger(){
 
     return passenger;
+}
+
+void Ticket::setPrice(double p)
+{
+    this->price = p;
 }

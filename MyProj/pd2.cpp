@@ -48,6 +48,17 @@ QString PD2::get_data()
         return data;
 }
 
+double pd2::wage()
+{
+    double kol;
+    float percent = 0.2;
+    foreach(Flight * f, this->getDoneFlightList())
+    {
+        kol += f->income();
+    }
+    return kol * percent;
+}
+
 QString PD2::getDegreeAsString()
 {
     return "Two";

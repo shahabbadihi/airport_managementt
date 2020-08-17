@@ -22,7 +22,7 @@ protected:
     QDate employmentDate;
     QVector<Flight*> list;
     QVector<Flight*> list_of_done_flights;
-    virtual double wage(double);
+    virtual double wage() = 0;
     Airline* airline;
 public:
     Employee() : airline(nullptr) {}
