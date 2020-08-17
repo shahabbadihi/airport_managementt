@@ -44,6 +44,7 @@ public:
     ~Ticket() ;
     QString get_data();
     void setSeat(Seat *);
+    void setPrice(double);
 //    void setDestination(const QString&);
 //    void setSource(const QString&);
 //    void setPassengerFname(const QString&);
@@ -70,7 +71,7 @@ public:
     long getNo() const;
     //void setAirline(Airline *value);
     QString getPassengerName();
-    Price  getPrice();
+    double  getPrice();
 };
 
 

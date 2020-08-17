@@ -87,7 +87,7 @@ void HostsPage::updateButtonsWhenRecordAdded()
 
 void HostsPage::viewWage()
 {
-    Employee * em_ptr = Recorder<host_item_model>::getInstance()->get_dataList();
+    Employee * em_ptr = Recorder<Host>::getInstance()->get_dataList();
     double wa = em_ptr->wage();
     Qstring wage = Qstring::number(wa);
     ui->wage_of_host->setText(wage);

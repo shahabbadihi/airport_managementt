@@ -15,7 +15,7 @@ private:
     //Degree degree;
     //QVector<Flight*> list;
 protected:
-    virtual double wage(double);
+    virtual double wage() = 0;
 
 
 public:

@@ -11,7 +11,7 @@ class Host : public Employee
 private:
 
 protected:
-    virtual double wage(double);
+    virtual double wage();
 
 
 public:

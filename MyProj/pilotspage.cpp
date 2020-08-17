@@ -99,8 +99,8 @@ void PilotsPage::updateButtonsWhenRecordAdded()
 
 void PilotsPage::viewWage()
 {
-    Employee* em_ptr = Recorder<pilot_item_model>::getInstance()->get_dataList();
-    double wa = em_ptr->wage();
+    Pilot * pi_ptr = Recorder<Pilot>::getInstance()->get_dataList();
+    double wa = pi_ptr->wage();
     Qstring wage = Qstring::number(wa);
     ui->wage_of_pilot->setText(wage);
 

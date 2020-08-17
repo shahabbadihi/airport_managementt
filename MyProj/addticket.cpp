@@ -122,7 +122,8 @@ void AddTicket::on_btnSubmit_clicked()
     QDateTime departure = ticket->getFlight()->getDateTimeDeparture().time();
     QDateTime destination = ticket->getFlight()->getDateTimeDestination().time();
     double seconds = departure.secsTo(destination);
-    price_of_ticket = (seconds * 5) / 72;
+    ticket->setPrice((seconds * 5) / 72);
+
 }
 
 void AddTicket::on_btnCancel_clicked()

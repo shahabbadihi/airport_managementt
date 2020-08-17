@@ -895,9 +895,14 @@ bool Flight::isCheckInReady(){
     return true;
 }
 
-double Flight::income(double a = addticket.price_of_ticket)
+double Flight::income()
 {
-    return this->numOfPassengers * a;
+    double in = 0;
+    foreach(Ticket * t, this->tickets)
+    {
+        in += t->getPrice();
+    }
+    return in;
 }
 //void Flight::setDate(const QDate & d)
 //{
