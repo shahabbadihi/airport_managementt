@@ -82,15 +82,15 @@ Passenger *GetPassengerFactory::getPassenger(QString &str_data)
     {
         if (age < 2)
         {
-            return new Passenger(str_data);
+            return new PU2(str_data);
         }
         if (age >= 2 && age <= 12)
         {
-            return new Passenger(str_data);
+            return new P2_12(str_data);
         }
         if (age > 12)
         {
-            return new Passenger(str_data);
+            return new PO12(str_data);
         }
     }
     return Recorder<Passenger>::getInstance()->searchByCode(str_list[0]);

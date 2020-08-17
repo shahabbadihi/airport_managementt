@@ -100,7 +100,8 @@ void AddTicket::on_btnSubmit_clicked()
         {
             QMessageBox msg;
             msg.setText("Submit Successfully!\nThe Flight Serial Is: " + ticket->getFlight()->getSerial()
-                        + "\nDeparture Time: " + ticket->getFlight()->getDateTimeDeparture().time().toString());
+                        + "\nDeparture Time: " + ticket->getFlight()->getDateTimeDeparture().time().toString()
+                        + "\n\nTicket Price Is " + QString::number(ticket->getPrice()));
             msg.exec();
 
             if (ticket->getFlight()->isPassengerEnough())
