@@ -37,6 +37,9 @@ PilotsPage::PilotsPage(QWidget *parent) :
     mapper->addMapping(ui->txtDegreePilot, 9);
     ui->txtDegreePilot->setReadOnly(true);
 
+    mapper->addMapping(ui->wage_of_pilot, 10);
+    ui->wage_of_pilot->setReadOnly(true);
+
     delegate = new Delegate(this);
     mapper->setItemDelegate(delegate);
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
@@ -95,13 +98,4 @@ void PilotsPage::updateButtonsWhenRecordAdded()
 {
     this->mapper->toLast();
     this->updateButtons(this->pilot_item_model->rowCount() - 1);
-}
-
-void PilotsPage::viewWage()
-{
-    Pilot * pi_ptr = Recorder<Pilot>::getInstance()->get_dataList();
-    double wa = pi_ptr->wage();
-    Qstring wage = Qstring::number(wa);
-    ui->wage_of_pilot->setText(wage);
-
 }

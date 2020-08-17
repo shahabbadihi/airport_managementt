@@ -80,6 +80,13 @@ void AddTicket::on_btnSubmit_clicked()
                 ticket->setPassenger(passenger);
                 //ticket->setDateFlight(ui->dtDate->date());
                 ticket->setFlight(f);
+
+                QDateTime departure = ticket->getFlight()->getDateTimeDeparture();
+                QDateTime destination = ticket->getFlight()->getDateTimeArrival();
+                double seconds = departure.secsTo(destination);
+                double price = (seconds * 5) / 72;
+                qDebug() << price;
+                ticket->setPrice(price);
                 //ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
                 //ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
 
@@ -119,10 +126,7 @@ void AddTicket::on_btnSubmit_clicked()
         msg.setText(e.what());
         msg.exec();
     }
-    QDateTime departure = ticket->getFlight()->getDateTimeDeparture().time();
-    QDateTime destination = ticket->getFlight()->getDateTimeDestination().time();
-    double seconds = departure.secsTo(destination);
-    ticket->setPrice((seconds * 5) / 72);
+
 
 }
 

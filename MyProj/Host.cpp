@@ -72,7 +72,7 @@ void Host::setAirline(Airline *value)
 
 double Host::wage() const
 {
-    double kol;
+    double kol = 0;
     float percent = 0.05;
     foreach(Flight * f, this->getDoneFlightList())
     {

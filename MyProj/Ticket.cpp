@@ -31,6 +31,7 @@ void Ticket::setNo(long value)
 
 Ticket::Ticket()
      : flight(nullptr), passenger(nullptr),
+       price(0),
        seat(nullptr)
 {
 
@@ -38,6 +39,7 @@ Ticket::Ticket()
 
 Ticket::Ticket(QString & str_data)
     : flight(nullptr), passenger(nullptr),
+      price(0),
       seat(nullptr)
 {
     QStringList str_list = str_data.split('|');
@@ -52,6 +54,8 @@ Ticket::Ticket(QString & str_data)
         this->setSeat(this->getFlight()->getAirplane()->getSeat(str_list[3].toInt(),str_list[4].toInt()));
     else
         this->setSeat(nullptr);
+
+    this->setPrice(str_list[5].toDouble());
 }
 
 QString Ticket::get_data()
@@ -61,7 +65,8 @@ QString Ticket::get_data()
             (this->passenger ? this->passenger->getSearchCode() : "") +"|" +
             (this->seat ? QString::number(seat->getRow()) : "-1") + "|" +
             (this->seat ? QString::number(seat->getColumn()) : "-1") +
-            "|\n"
+            "|" + (this->price ? QString::number(this->price) : "")
+            + "|\n"
             ;
     return str_data;
 }

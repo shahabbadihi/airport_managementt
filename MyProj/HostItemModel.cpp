@@ -41,7 +41,7 @@ QModelIndex HostItemModel::index(int row, int column, const QModelIndex &/*paren
 
 int HostItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 9;
+    return 10;
 }
 
 QVariant HostItemModel::data(const QModelIndex &index, int /*role*/) const
@@ -59,6 +59,7 @@ QVariant HostItemModel::data(const QModelIndex &index, int /*role*/) const
         s2 += f->getFlightStr() + "\n";
     }
 
+    QString s3 = QString::number(p->wage());
     //QStringListModel ss;
     //ss.setStringList(s);
 
@@ -93,6 +94,9 @@ QVariant HostItemModel::data(const QModelIndex &index, int /*role*/) const
         break;
     case 8:
         return s2;
+        break;
+    case 9:
+        return s3;
         break;
     }
     //}

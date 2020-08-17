@@ -32,7 +32,7 @@ private:
     //long airplaneSerial;
     //long pilotPersonnelCode;
     //long deliverierCode;
-    Price price;
+    double price;
     int interestRate;
     Seat * seat;
     long no;

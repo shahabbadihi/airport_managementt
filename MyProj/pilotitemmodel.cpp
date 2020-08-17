@@ -42,7 +42,7 @@ QModelIndex PilotItemModel::index(int row, int column, const QModelIndex &/*pare
 
 int PilotItemModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 10;
+    return 11;
 }
 
 QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
@@ -59,6 +59,8 @@ QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
     {
         s2 += f->getFlightStr() + "\n";
     }
+
+    QString s3 = QString::number(p->wage());
 
     //QStringListModel ss;
     //ss.setStringList(s);
@@ -97,6 +99,9 @@ QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
         break;
     case 9:
         return p->getDegreeAsString();
+        break;
+    case 10:
+        return s3;
         break;
     }
     //}

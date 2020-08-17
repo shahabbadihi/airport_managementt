@@ -48,9 +48,9 @@ QString PD3::get_data()
         return data;
 }
 
-double pd3::wage()
+double PD3::wage() const
 {
-    double kol;
+    double kol = 0;
     float percent = 0.1;
     foreach(Flight * f, this->getDoneFlightList())
     {

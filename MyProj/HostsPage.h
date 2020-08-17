@@ -18,7 +18,6 @@ class HostsPage : public QWidget
 public:
     explicit HostsPage(QWidget *parent = nullptr);
     ~HostsPage();
-    void viewWage();
 private slots:
     void on_btnSubmit_clicked();
     void updateButtons(int row);

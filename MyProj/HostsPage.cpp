@@ -22,15 +22,21 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->addMapping(ui->txtFamily, 1);
     mapper->addMapping(ui->txtNationalCode, 2);
     mapper->addMapping(ui->txtPersonnelCode, 3);
+
     mapper->addMapping(ui->txtAirline, 4);
     ui->txtAirline->setReadOnly(true);
+
     mapper->addMapping(ui->dtBirthDate, 5);
     mapper->addMapping(ui->dtEmploymentDate, 6);
+
     mapper->addMapping(ui->plainFlights, 7);
     ui->plainFlights->setReadOnly(true);
 
     mapper->addMapping(ui->plainDoneFlights, 8);
     ui->plainDoneFlights->setReadOnly(true);
+
+    mapper->addMapping(ui->wage_of_host, 9);
+    ui->wage_of_host->setReadOnly(true);
 
 
     delegate = new Delegate(this);
@@ -83,13 +89,4 @@ void HostsPage::updateButtonsWhenRecordAdded()
 {
     this->mapper->toLast();
     this->updateButtons(this->host_item_model->rowCount() - 1);
-}
-
-void HostsPage::viewWage()
-{
-    Employee * em_ptr = Recorder<Host>::getInstance()->get_dataList();
-    double wa = em_ptr->wage();
-    Qstring wage = Qstring::number(wa);
-    ui->wage_of_host->setText(wage);
-
 }

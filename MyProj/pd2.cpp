@@ -48,9 +48,9 @@ QString PD2::get_data()
         return data;
 }
 
-double pd2::wage()
+double PD2::wage() const
 {
-    double kol;
+    double kol = 0;
     float percent = 0.2;
     foreach(Flight * f, this->getDoneFlightList())
     {
