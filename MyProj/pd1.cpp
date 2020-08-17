@@ -56,6 +56,17 @@ QString PD1::get_data()
         return data;
 }
 
+double PD1::wage() const
+{
+    double kol = 0;
+    float percent = 0.3;
+    foreach(Flight * f, this->getDoneFlightList())
+    {
+        kol += f->income();
+    }
+    return kol * percent;
+}
+
 QString PD1::getDegreeAsString()
 {
     return "One";

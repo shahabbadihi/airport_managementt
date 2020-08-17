@@ -129,6 +129,13 @@ void Pilot::setAirline(Airline *value)
 //    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 
+//double Pilot::wage(double i = (Flight::income())) const
+//{
+//    float percent = 0.3;
+//    return percent * i;
+
+//}
+
 //void Pilot::set_degree(int deg)
 //{
 //    if (deg == 1)

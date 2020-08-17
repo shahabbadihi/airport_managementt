@@ -32,7 +32,7 @@ private:
     //long airplaneSerial;
     //long pilotPersonnelCode;
     //long deliverierCode;
-    Price price;
+    double price;
     int interestRate;
     Seat * seat;
     long no;
@@ -44,10 +44,11 @@ public:
     Ticket(long no, const QDate& birth, const QDate& dep_date,
            qlonglong national_code,
            const QString& fname, const QString& lname,
-           const QString& father_name, Flight * f = nullptr);
+           const QString& father_name, double price, Flight * f = nullptr);
     ~Ticket() ;
     QString get_data();
     void setSeat(Seat *);
+    void setPrice(double);
 //    void setDestination(const QString&);
 //    void setSource(const QString&);
 //    void setPassengerFname(const QString&);
@@ -74,7 +75,7 @@ public:
     long getNo() const;
     //void setAirline(Airline *value);
     QString getPassengerName();
-    Price  getPrice();
+    double  getPrice();
 };
 
 

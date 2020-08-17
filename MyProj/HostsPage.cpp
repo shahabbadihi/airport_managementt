@@ -1,5 +1,10 @@
 #include "HostsPage.h"
 #include "ui_HostsPage.h"
+#include "Recorder.h"
+#include "HostItemModel.h"
+#include "Employee.h"
+#include "Host.h"
+#include <QString>
 
 HostsPage::HostsPage(QWidget *parent) :
     QWidget(parent),
@@ -17,15 +22,21 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->addMapping(ui->txtFamily, 1);
     mapper->addMapping(ui->txtNationalCode, 2);
     mapper->addMapping(ui->txtPersonnelCode, 3);
+
     mapper->addMapping(ui->txtAirline, 4);
     ui->txtAirline->setReadOnly(true);
+
     mapper->addMapping(ui->dtBirthDate, 5);
     mapper->addMapping(ui->dtEmploymentDate, 6);
+
     mapper->addMapping(ui->plainFlights, 7);
     ui->plainFlights->setReadOnly(true);
 
     mapper->addMapping(ui->plainDoneFlights, 8);
     ui->plainDoneFlights->setReadOnly(true);
+
+    mapper->addMapping(ui->wage_of_host, 9);
+    ui->wage_of_host->setReadOnly(true);
 
 
     delegate = new Delegate(this);
@@ -79,4 +90,3 @@ void HostsPage::updateButtonsWhenRecordAdded()
     this->mapper->toLast();
     this->updateButtons(this->host_item_model->rowCount() - 1);
 }
-

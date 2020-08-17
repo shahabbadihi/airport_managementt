@@ -5,6 +5,7 @@
 #include "GetPassengerFactory.h"
 #include <QString>
 #include <stdexcept>
+#include <QDateTime>
 using namespace std;
 
 long Ticket::getNo() const
@@ -31,6 +32,7 @@ void Ticket::setNo(long value)
 
 Ticket::Ticket()
      : flight(nullptr), passenger(nullptr),
+       price(0),
        seat(nullptr)
 {
 
@@ -38,6 +40,7 @@ Ticket::Ticket()
 
 Ticket::Ticket(QString & str_data)
     : flight(nullptr), passenger(nullptr),
+      price(0),
       seat(nullptr)
 {
     QStringList str_list = str_data.split('|');
@@ -52,13 +55,15 @@ Ticket::Ticket(QString & str_data)
         this->setSeat(this->getFlight()->getAirplane()->getSeat(str_list[3].toInt(),str_list[4].toInt()));
     else
         this->setSeat(nullptr);
+
+    this->setPrice(str_list[5].toDouble());
 }
 
 Ticket::Ticket(long no, const QDate &birth,
                const QDate& dep_date, qlonglong national_code,
                const QString &fname,
                const QString &lname,
-               const QString &father_name, Flight * f)
+               const QString &father_name, double base_price, Flight * f)
     : flight(nullptr), passenger(nullptr),
       seat(nullptr)
 {
@@ -70,6 +75,7 @@ Ticket::Ticket(long no, const QDate &birth,
                                                                         lname,
                                                                         father_name));
     Recorder<Passenger>::getInstance()->add(this->passenger);
+    this->setPrice(this->passenger->getPrice(base_price));
     this->setFlight(f);
 }
 
@@ -80,7 +86,8 @@ QString Ticket::get_data()
             (this->passenger ? this->passenger->getSearchCode() : "") +"|" +
             (this->seat ? QString::number(seat->getRow()) : "-1") + "|" +
             (this->seat ? QString::number(seat->getColumn()) : "-1") +
-            "|\n"
+            "|" + (this->price ? QString::number(this->price) : "")
+            + "|\n"
             ;
     return str_data;
 }
@@ -241,4 +248,9 @@ double Ticket::getPrice(){
 Passenger * Ticket::getPassenger(){
 
     return passenger;
+}
+
+void Ticket::setPrice(double p)
+{
+    this->price = p;
 }

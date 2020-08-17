@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
-    <height>373</height>
+    <width>625</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -244,6 +244,16 @@ QDateEdit {
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>wage:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="wage_of_pilot"/>
         </item>
        </layout>
       </item>

@@ -2,6 +2,11 @@
 #include "ui_pilotspage.h"
 #include <QThread>
 #include "ThreadedJob.h"
+#include "Recorder.h"
+#include "pilotitemmodel.h"
+#include "Employee.h"
+#include "Pilot.h"
+#include <QString>
 
 PilotsPage::PilotsPage(QWidget *parent) :
     QWidget(parent),
@@ -31,6 +36,9 @@ PilotsPage::PilotsPage(QWidget *parent) :
 
     mapper->addMapping(ui->txtDegreePilot, 9);
     ui->txtDegreePilot->setReadOnly(true);
+
+    mapper->addMapping(ui->wage_of_pilot, 10);
+    ui->wage_of_pilot->setReadOnly(true);
 
     delegate = new Delegate(this);
     mapper->setItemDelegate(delegate);

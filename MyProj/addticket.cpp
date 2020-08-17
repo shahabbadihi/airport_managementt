@@ -10,6 +10,7 @@
 #include "GetPassengerFactory.h"
 #include <QMessageBox>
 #include <stdexcept>
+#include <QDateTime>
 using namespace std;
 
 AddTicket::AddTicket(QWidget *parent) :
@@ -50,9 +51,15 @@ void AddTicket::on_btnSubmit_clicked()
                 QDate b_date = ui->dtBirthDate->date();
                 QString father_name = ui->txtPassFatherName->text();
 
+                QDateTime departure = f->getDateTimeDeparture();
+                QDateTime destination = f->getDateTimeArrival();
+                double seconds = departure.secsTo(destination);
+                double price = (seconds * 5) / 72;
+                qDebug() << price;
+
                 ticket = new Ticket(no, b_date, ui->dtDate->date(),
                                     national_code, fname, lname,
-                                    father_name, f);
+                                    father_name, price, f);
 //                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
 //                                                                                 ui->dtDate->date(),
 //                                                                             national_code, fname, lname,
@@ -72,7 +79,7 @@ void AddTicket::on_btnSubmit_clicked()
 
 //                ticket->setPassenger(passenger);
                 //ticket->setDateFlight(ui->dtDate->date());
-//                ticket->setFlight(f);
+
                 //ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
                 //ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
 
@@ -112,6 +119,7 @@ void AddTicket::on_btnSubmit_clicked()
         msg.setText(e.what());
         msg.exec();
     }
+
 
 }
 

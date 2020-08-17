@@ -14,7 +14,7 @@ class AddTicket : public QDialog
 public:
     explicit AddTicket(QWidget *parent = nullptr);
     ~AddTicket();
-
+    
 private slots:
     void on_btnSubmit_clicked();
 

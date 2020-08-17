@@ -33,6 +33,8 @@ public:
 
     QString get_data();
 
+    virtual double wage() const = 0;
+
 
     void set_fname(const QString& name);
     void set_fname(const QString&& name);

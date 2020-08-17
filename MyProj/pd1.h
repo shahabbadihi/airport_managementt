@@ -11,7 +11,7 @@ public:
         const QString& lname, const QDate& birth_date, const QDate& emp_date,
         qlonglong national_code);
     ~PD1();
-
+    virtual double wage() const override;
     QString get_data() override;
     QString getDegreeAsString() override;
 };

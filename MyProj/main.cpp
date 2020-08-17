@@ -43,7 +43,15 @@ int main(int argc, char *argv[])
 //    }
 
     //
-    //qDebug() << Recorder<Flight>::getInstance()->get_dataList()[0]->getFlightStr();
+//    QDate d(2020, 6, 18);
+//    QTime t(13, 0);
+//    QDate d2(2020, 6, 18);
+//    QTime t2(14, 0);
+//    QDateTime departure(d, t);
+//    QDateTime destination(d2, t2);
+//    qint64 seconds = departure.secsTo(destination);
+//    double price = (seconds * 5) / 72;
+//    qDebug() << QString::number(price);
 
 
     qDebug() << "Bye";

@@ -5,7 +5,7 @@
 #include <QDataWidgetMapper>
 #include "delegate.h"
 #include "HostItemModel.h"
-
+#include "Recorder.h"
 
 namespace Ui {
 class HostsPage;
@@ -18,7 +18,6 @@ class HostsPage : public QWidget
 public:
     explicit HostsPage(QWidget *parent = nullptr);
     ~HostsPage();
-
 private slots:
     void on_btnSubmit_clicked();
     void updateButtons(int row);

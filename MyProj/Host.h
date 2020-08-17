@@ -19,6 +19,7 @@ public:
     ~Host();
 
     //QString get_data();
+    virtual double wage() const override;
 
     void attachFlight(Flight *f);
     void setAirline(Airline *value);

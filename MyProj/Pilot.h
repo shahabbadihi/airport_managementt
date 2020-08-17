@@ -14,6 +14,7 @@ class Pilot : public Employee
 private:
     //Degree degree;
     //QVector<Flight*> list;
+
 public:
     Pilot() {}
     Pilot(QString& dataStr);
@@ -23,6 +24,8 @@ public:
     ~Pilot();
 
     virtual QString getDegreeAsString() = 0;
+
+    virtual double wage() const = 0;
 
     void attachFlight(Flight*);
 

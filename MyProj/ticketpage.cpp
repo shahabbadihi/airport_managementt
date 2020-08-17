@@ -31,7 +31,7 @@ void TicketPage::update(){
     ui->AirlineLe->setText(ticket->getFlight()->getAirline()->getName());
     ui->DateTimeLe->setText(ticket->getFlight()->getDateTimeDeparture().toString());
     ui->DateTimeLe_2->setText(ticket->getFlight()->getDateTimeArrival().toString());
-    ui->PriceLe->setText(ticket->getPrice().toString());
+    ui->PriceLe->setText(QString::number(ticket->getPrice()));
     ui->FatherNameLe->setText(ticket->getPassenger()->getFatherName());
     ui->dateEdit->setDate(ticket->getPassenger()->getBirthDate());
     ui->NationalCodeLe->setText(QString::number(ticket->getPassenger()->getNationalCode()));
