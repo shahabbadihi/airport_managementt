@@ -213,7 +213,7 @@ Ticket::~Ticket(){
     if (this->passenger->isTicketListEmpty())
         Recorder<Passenger>::getInstance()->remove(this->passenger);
 
-    this->seat->removeTicket();
+    this->seat->removeTicket(this);
 }
 Price Ticket::getPrice(){
     return price;
