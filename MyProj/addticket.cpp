@@ -7,7 +7,7 @@
 #include "p2_12.h"
 #include "pu2.h"
 #include "po12.h"
-#include "getpassengerfactory.h"
+#include "GetPassengerFactory.h"
 #include <QMessageBox>
 #include <stdexcept>
 using namespace std;

@@ -21,10 +21,8 @@ protected:
 public:
     Passenger() {}
     Passenger(QString&);
-    Passenger(const QString &fname, const QDate &birth,
-              const QDate& dep_date,
-              qlonglong national_code,
-              const QString &lname,
+    Passenger(const QString &fname,
+              const QString &lname, const QDate &birth,
               const QString &father_name);
     ~Passenger() {}
 
@@ -33,7 +31,8 @@ public:
     void setLname(const QString&);
     void setFname(const QString&);
     void setFatherName(const QString&);
-    void setNationalCode(qlonglong);
+    virtual void setNationalCode(qlonglong) = 0;
+    virtual double getPrice(double base) = 0;
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);

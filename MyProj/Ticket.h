@@ -6,7 +6,7 @@
 #include <QString>
 #include <QDate>
 #include <QDateTime>
-#include "Price.h"
+//#include "Price.h"
 #include "Object.h"
 #include "Seat.h"
 class Flight;

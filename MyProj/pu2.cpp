@@ -22,6 +22,11 @@ PU2::PU2(qlonglong national_code, const QString &fname,
     this->setNationalCode(national_code);
 }
 
+double PU2::getPrice(double base)
+{
+    return base * 1;
+}
+
 PU2::~PU2()
 {
 

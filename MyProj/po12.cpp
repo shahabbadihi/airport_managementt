@@ -42,3 +42,8 @@ void PO12::setNationalCode(qlonglong n)
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "C");
 }
+
+double PO12::getPrice(double base)
+{
+    return base * 2;
+}

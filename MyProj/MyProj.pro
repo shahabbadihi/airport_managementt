@@ -63,6 +63,10 @@ SOURCES += \
     pd1.cpp \
     pd2.cpp \
     pd3.cpp \
+    pu2.cpp \
+    p2_12.cpp \
+    po12.cpp \
+    GetPassengerFactory.cpp \
     pilotitemmodel.cpp \
     pilotlistmodel.cpp \
     pilotspage.cpp \
@@ -118,6 +122,10 @@ HEADERS += \
     pd1.h \
     pd2.h \
     pd3.h \
+    PO12.h \
+    PU12 \
+    P2_12.h \
+    GetPassengerFactory.h \
     pilotitemmodel.h \
     pilotlistmodel.h \
     pilotspage.h \

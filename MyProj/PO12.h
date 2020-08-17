@@ -13,5 +13,6 @@ public:
     ~PO12();
 
     void setNationalCode(qlonglong) override;
+    double getPrice(double base) override;
 };
 #endif // PO12_H

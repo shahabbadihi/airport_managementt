@@ -28,28 +28,10 @@ Passenger::Passenger(QString & data_str)
     }
 }
 
-Passenger::Passenger(const QString &fname, const QDate &birth, const QDate &dep_date,
-                     qlonglong national_code,
-                     const QString &lname,
+Passenger::Passenger(const QString &fname, const QString &lname,
+                     const QDate &birth,
                      const QString &father_name)
 {
-    this->setNationalCode(national_code);
-
-    int age = dep_date.year() - birth.year();
-    if (birth > dep_date.addYears(-age))
-        age--;
-    if (age < 2)
-    {
-        this->setSearchCode(QString::number(nationalCode) + "A");
-    }
-    else if (age >= 2 && age <= 12)
-    {
-        this->setSearchCode(QString::number(nationalCode) + "B");
-    }
-    else if (age > 12)
-    {
-        this->setSearchCode(QString::number(nationalCode) + "C");
-    }
     this->setFname(fname);
     this->setLname(lname);
     this->setBirthDate(birth);

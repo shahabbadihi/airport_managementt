@@ -2,6 +2,7 @@
 #include "Flight.h"
 #include "Passenger.h"
 #include "Airline.h"
+#include "GetPassengerFactory.h"
 #include <QString>
 #include <stdexcept>
 using namespace std;
@@ -62,8 +63,12 @@ Ticket::Ticket(long no, const QDate &birth,
       seat(nullptr)
 {
     this->setNo(no);
-    this->setPassenger(new Passenger(fname, birth, dep_date, national_code, lname,
-                                     father_name));
+    this->setPassenger(GetPassengerFactory::getInstance()->getPassenger(birth,
+                                                                        dep_date,
+                                                                        national_code,
+                                                                        fname,
+                                                                        lname,
+                                                                        father_name));
     Recorder<Passenger>::getInstance()->add(this->passenger);
     this->setFlight(f);
 }
@@ -230,7 +235,7 @@ Ticket::~Ticket(){
 
     this->seat->removeTicket();
 }
-Price Ticket::getPrice(){
+double Ticket::getPrice(){
     return price;
 }
 Passenger * Ticket::getPassenger(){

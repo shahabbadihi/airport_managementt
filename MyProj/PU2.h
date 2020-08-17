@@ -15,6 +15,7 @@ public:
     ~PU2();
 
     void setNationalCode(qlonglong) override;
+    double getPrice(double base) override;
 };
 
 #endif // PU2_H

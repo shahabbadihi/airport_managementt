@@ -12,7 +12,7 @@
 class Pilot;
 //#include "Passenger.h"
 //class Passenger;
-#include "Price.h"
+//#include "Price.h"
 //class Price;
 //#include "Host.h"
 #include "Object.h"
@@ -49,7 +49,7 @@ private:
     Airplane* airplane;
     Carrier* departure_carrier;
     Carrier* arrival_carrier;
-    Price ticketsSaleCost;
+//    Price ticketsSaleCost;
 public:
     Flight();
     Flight(QString&);

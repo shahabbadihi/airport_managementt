@@ -1,7 +1,10 @@
-#include "getpassengerfactory.h"
+#include "GetPassengerFactory.h"
 #include "Recorder.h"
 #include "Ticket.h"
 #include "Flight.h"
+#include "PU2.h"
+#include "P2_12.h"
+#include "PO12.h"
 
 GetPassengerFactory* GetPassengerFactory::instance;
 
@@ -31,7 +34,7 @@ Passenger *GetPassengerFactory::getPassenger(const QDate &birth, const QDate &de
         QString search_code = QString::number(national_code) + "A";
         if (!Recorder<Passenger>::getInstance()->searchByCode(search_code))
         {
-            return new Passenger(national_code, fname, lname, birth, father_name);
+            return new PU2(national_code, fname, lname, birth, father_name);
         }
         else
             return Recorder<Passenger>::getInstance()->searchByCode(search_code);
@@ -41,7 +44,7 @@ Passenger *GetPassengerFactory::getPassenger(const QDate &birth, const QDate &de
         QString search_code = QString::number(national_code) + "B";
         if (!Recorder<Passenger>::getInstance()->searchByCode(search_code))
         {
-            return new Passenger(national_code, fname, lname, birth, father_name);
+            return new P2_12(national_code, fname, lname, birth, father_name);
         }
         else
             return Recorder<Passenger>::getInstance()->searchByCode(search_code);
@@ -51,7 +54,7 @@ Passenger *GetPassengerFactory::getPassenger(const QDate &birth, const QDate &de
         QString search_code = QString::number(national_code) + "C";
         if (!Recorder<Passenger>::getInstance()->searchByCode(search_code))
         {
-            return new Passenger(national_code, fname, lname, birth, father_name);
+            return new PO12(national_code, fname, lname, birth, father_name);
         }
         else
             return Recorder<Passenger>::getInstance()->searchByCode(search_code);
