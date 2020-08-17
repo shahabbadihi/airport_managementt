@@ -13,6 +13,15 @@ PO12::PO12(QString &str_data)
 
 }
 
+PO12::PO12(qlonglong national_code, const QString &fname,
+         const QString &lname, const QDate &birth,
+         const QString &father_name)
+    : Passenger(fname, lname, birth, father_name)
+{
+    this->setNationalCode(national_code);
+}
+
+
 PO12::~PO12()
 {
 

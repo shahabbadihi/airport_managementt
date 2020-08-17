@@ -46,21 +46,31 @@ void Dialog::on_pushButton_clicked()
         QRadioButton* radio2 = ui->radio2;
         QRadioButton* radio3 = ui->radio3;
 
+        qlonglong p_code = ui->txtPersonnelCode->text().toLongLong();
+        Airline * airline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
+        QString fname = ui->txtFname->text();
+        QString lname = ui->txtLname->text();
+        QDate b_date = ui->dtBirthDate->date();
+        QDate e_date = ui->dtEmploymentDate->date();
+        qlonglong n_code = ui->txtNationalCode->text().toLongLong();
+
         if (radio1->isChecked())
-            pilot = new PD1;
+            pilot = new PD1(p_code, airline, fname, lname, b_date,
+                            e_date, n_code);
         else if (radio2->isChecked())
-            pilot = new PD2;
+            pilot = new PD2(p_code, airline, fname, lname, b_date,
+                            e_date, n_code);
         else if (radio3->isChecked())
-            pilot = new PD3;
+            pilot = new PD3(p_code, airline, fname, lname, b_date,
+                            e_date, n_code);
 
-
-        pilot->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
-        pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
-        pilot->set_fname(ui->txtFname->text());
-        pilot->set_lname(ui->txtLname->text());
-        pilot->set_birthDate(ui->dtBirthDate->date());
-        pilot->set_employmentDate(ui->dtEmploymentDate->date());
-        pilot->set_nationalCode(ui->txtNationalCode->text().toLongLong());
+//        pilot->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
+//        pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
+//        pilot->set_fname(ui->txtFname->text());
+//        pilot->set_lname(ui->txtLname->text());
+//        pilot->set_birthDate(ui->dtBirthDate->date());
+//        pilot->set_employmentDate(ui->dtEmploymentDate->date());
+//        pilot->set_nationalCode(ui->txtNationalCode->text().toLongLong());
 
 
 

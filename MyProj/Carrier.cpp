@@ -102,6 +102,12 @@ Carrier::Carrier(QString & str_data)
     }
 }
 
+Carrier::Carrier(const QString &serial, const QString &place)
+{
+    this->setSerial(serial);
+    this->setPlace(place);
+}
+
 QString Carrier::get_data()
 {
     QString str = /*this->airline->getSearchCode() + "|" +*/

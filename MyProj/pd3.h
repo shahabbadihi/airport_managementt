@@ -7,6 +7,9 @@ class PD3 : public Pilot
 public:
     PD3();
     PD3(QString& data_str);
+    PD3(qlonglong personnel_code, Airline *a, const QString &fname,
+             const QString &lname, const QDate &birth_date,
+             const QDate &emp_date, qlonglong national_code);
     ~PD3();
 
     QString get_data() override;

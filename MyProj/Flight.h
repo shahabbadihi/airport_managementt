@@ -53,6 +53,10 @@ private:
 public:
     Flight();
     Flight(QString&);
+    Flight(const QString& serial, Airline * a,
+           const QString& source, const QString& dest,
+           const QDateTime& dp_datetime, const QDateTime& ar_datetime,
+           int num_hosts, int capacity);
     ~Flight() ;
 
     QString get_data();

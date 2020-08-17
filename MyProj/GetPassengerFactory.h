@@ -9,7 +9,10 @@ public:
 
     static GetPassengerFactory* getInstance();
 
-    Passenger* getPassenger(const QDate& dt1, const QDate& dt2, const QString& search_code);
+    Passenger* getPassenger(const QDate& birth, const QDate& dep_date,
+                            qlonglong national_code,
+                            const QString& fname, const QString& lname,
+                            const QString& father_name);
     Passenger* getPassenger(QString& str_data);
 private:
     static GetPassengerFactory* instance;

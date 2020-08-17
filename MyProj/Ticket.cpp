@@ -53,6 +53,21 @@ Ticket::Ticket(QString & str_data)
         this->setSeat(nullptr);
 }
 
+Ticket::Ticket(long no, const QDate &birth,
+               const QDate& dep_date, qlonglong national_code,
+               const QString &fname,
+               const QString &lname,
+               const QString &father_name, Flight * f)
+    : flight(nullptr), passenger(nullptr),
+      seat(nullptr)
+{
+    this->setNo(no);
+    this->setPassenger(new Passenger(fname, birth, dep_date, national_code, lname,
+                                     father_name));
+    Recorder<Passenger>::getInstance()->add(this->passenger);
+    this->setFlight(f);
+}
+
 QString Ticket::get_data()
 {
     QString str_data = QString::number(this->no) + "|" +

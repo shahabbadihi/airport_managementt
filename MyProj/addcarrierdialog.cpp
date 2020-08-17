@@ -27,10 +27,11 @@ void AddCarrierDialog::on_btnSubmit_clicked()
 {
     try
     {
-        Carrier* carrier = new Carrier;
+        //Carrier* carrier = new Carrier;
+        Carrier* carrier = new Carrier(ui->txtSerial->text(), ui->txtPlace->text());
         //Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
-        carrier->setSerial(ui->txtSerial->text());
-        carrier->setPlace(ui->txtPlace->text());
+        //carrier->setSerial(ui->txtSerial->text());
+        //carrier->setPlace(ui->txtPlace->text());
         //carrier->setAirline(currentAirline);
 
         Recorder<Carrier>::getInstance()->add(carrier);

@@ -25,7 +25,10 @@ protected:
     Airline* airline;
 public:
     Employee() : airline(nullptr) {}
-    Employee(QString& dataStr);
+//    Employee(QString& dataStr);
+    Employee(qlonglong personnel_code, Airline *a, const QString &fname,
+             const QString &lname, const QDate &birth_date,
+             const QDate &emp_date, qlonglong national_code);
     ~Employee(){}
 
     QString get_data();
@@ -38,10 +41,10 @@ public:
     void set_lname(const QString&& family);
     void set_nationalCode(qlonglong code);
     void set_personnelCode(qlonglong code);
-    void set_birthDate(QDate& date);
-    void set_birthDate(QDate&& date);
-    void set_employmentDate(QDate& date);
-    void set_employmentDate(QDate&& date);
+    void set_birthDate(const QDate& date);
+    void set_birthDate(const QDate&& date);
+    void set_employmentDate(const QDate& date);
+    void set_employmentDate(const QDate&& date);
     void attachFlight(Flight*);
     void attachDoneFlight(Flight*);
     void removeDoneFlight(Flight * f);

@@ -28,6 +28,34 @@ Passenger::Passenger(QString & data_str)
     }
 }
 
+Passenger::Passenger(const QString &fname, const QDate &birth, const QDate &dep_date,
+                     qlonglong national_code,
+                     const QString &lname,
+                     const QString &father_name)
+{
+    this->setNationalCode(national_code);
+
+    int age = dep_date.year() - birth.year();
+    if (birth > dep_date.addYears(-age))
+        age--;
+    if (age < 2)
+    {
+        this->setSearchCode(QString::number(nationalCode) + "A");
+    }
+    else if (age >= 2 && age <= 12)
+    {
+        this->setSearchCode(QString::number(nationalCode) + "B");
+    }
+    else if (age > 12)
+    {
+        this->setSearchCode(QString::number(nationalCode) + "C");
+    }
+    this->setFname(fname);
+    this->setLname(lname);
+    this->setBirthDate(birth);
+    this->setFatherName(father_name);
+}
+
 QString Passenger::get_data()
 {
     QString data_str = this->getSearchCode() + "|" +
@@ -73,7 +101,12 @@ void Passenger::setFatherName(const QString & father_name)
         throw invalid_argument("Father Name Is Empty!");
 
     this->fatherName = father_name;
-//    Recorder<Passenger>::getInstance()->updateFile(this);
+    //    Recorder<Passenger>::getInstance()->updateFile(this);
+}
+
+void Passenger::setNationalCode(qlonglong n)
+{
+    this->nationalCode = n;
 }
 
 //void Passenger::setNationalCode(long n)

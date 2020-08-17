@@ -30,6 +30,19 @@ QVector<Flight *> Employee::getDoneFlightList() const
     return this->list_of_done_flights;
 }
 
+Employee::Employee(qlonglong personnel_code, Airline *a, const QString &fname,
+                   const QString &lname, const QDate &birth_date,
+                   const QDate &emp_date, qlonglong national_code)
+{
+    this->set_personnelCode(personnel_code);
+    this->setAirline(a);
+    this->set_fname(fname);
+    this->set_lname(lname);
+    this->set_birthDate(birth_date);
+    this->set_employmentDate(emp_date);
+    this->set_nationalCode(national_code);
+}
+
 QString Employee::get_data()
 {
     QString data = QString::number(this->personnelCode) + "|"
@@ -114,7 +127,7 @@ void Employee::set_personnelCode(qlonglong code)
     this->setSearchCode(QString::number(code));
 }
 
-void Employee::set_birthDate(QDate &date)
+void Employee::set_birthDate(const QDate &date)
 {
     if (date > QDate::currentDate())
         throw invalid_argument("Invalid BirthDate!");
@@ -122,7 +135,7 @@ void Employee::set_birthDate(QDate &date)
     this->birthDate.setDate(date.year(), date.month(), date.day());
 }
 
-void Employee::set_birthDate(QDate &&date)
+void Employee::set_birthDate(const QDate &&date)
 {
     if (date > QDate::currentDate())
         throw invalid_argument("Invalid BirthDate!");
@@ -130,7 +143,7 @@ void Employee::set_birthDate(QDate &&date)
     this->birthDate.setDate(date.year(), date.month(), date.day());
 }
 
-void Employee::set_employmentDate(QDate &date)
+void Employee::set_employmentDate(const QDate &date)
 {
     if (date < this->birthDate)
         throw invalid_argument("Invalid Employment Date!\nMust Be After The BirthDay!!!");
@@ -138,7 +151,7 @@ void Employee::set_employmentDate(QDate &date)
     this->employmentDate.setDate(date.year(), date.month(), date.day());
 }
 
-void Employee::set_employmentDate(QDate &&date)
+void Employee::set_employmentDate(const QDate &&date)
 {
     if (date < this->birthDate)
         throw invalid_argument("Invalid Employment Date!\nMust Be After The BirthDay!!!");
@@ -245,6 +258,14 @@ bool Employee::isDoneFlightInList(Flight * f)
 Airline *Employee::getAirline() const
 {
     return airline;
+}
+
+void Employee::setAirline(Airline *value)
+{
+    if (value && !this->airline)
+    {
+        airline = value;
+    }
 }
 
 Flight* Employee::nextFlight(Flight * f){

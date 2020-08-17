@@ -13,6 +13,9 @@ private:
 public:
     Host() {}
     Host(QString& dataStr);
+    Host(qlonglong personnel_code, Airline *a, const QString &fname,
+         const QString &lname, const QDate &birth_date,
+         const QDate &emp_date, qlonglong national_code);
     ~Host();
 
     //QString get_data();

@@ -21,6 +21,11 @@ protected:
 public:
     Passenger() {}
     Passenger(QString&);
+    Passenger(const QString &fname, const QDate &birth,
+              const QDate& dep_date,
+              qlonglong national_code,
+              const QString &lname,
+              const QString &father_name);
     ~Passenger() {}
 
     QString get_data() override;
@@ -28,7 +33,7 @@ public:
     void setLname(const QString&);
     void setFname(const QString&);
     void setFatherName(const QString&);
-    virtual void setNationalCode(qlonglong) = 0;
+    void setNationalCode(qlonglong);
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);

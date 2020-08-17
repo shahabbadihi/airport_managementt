@@ -57,19 +57,15 @@ SOURCES += \
     flightstatusdialog.cpp \
     flighttablemodel.cpp \
     flighttablepage.cpp \
-    getpassengerfactory.cpp \
     hostlistmodel.cpp \
     main.cpp \
     mainwindow.cpp \
-    p2_12.cpp \
     pd1.cpp \
     pd2.cpp \
     pd3.cpp \
     pilotitemmodel.cpp \
     pilotlistmodel.cpp \
     pilotspage.cpp \
-    po12.cpp \
-    pu2.cpp \
     ticketlistmodel.cpp \
     ticketpage.cpp
 
@@ -89,7 +85,6 @@ HEADERS += \
     Object.h \
     Passenger.h \
     Pilot.h \
-    Price.h \
     Recorder.h \
     Seat.h \
     SignalSlotRecorder.h \
@@ -118,18 +113,14 @@ HEADERS += \
     flightstatusdialog.h \
     flighttablemodel.h \
     flighttablepage.h \
-    getpassengerfactory.h \
     hostlistmodel.h \
     mainwindow.h \
-    p2_12.h \
     pd1.h \
     pd2.h \
     pd3.h \
     pilotitemmodel.h \
     pilotlistmodel.h \
     pilotspage.h \
-    po12.h \
-    pu2.h \
     ticketlistmodel.h \
     ticketpage.h
 

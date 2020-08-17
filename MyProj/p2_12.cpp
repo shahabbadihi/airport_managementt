@@ -13,6 +13,14 @@ P2_12::P2_12(QString &str_data)
 
 }
 
+P2_12::P2_12(qlonglong national_code, const QString &fname,
+         const QString &lname, const QDate &birth,
+         const QString &father_name)
+    : Passenger(fname, lname, birth, father_name)
+{
+    this->setNationalCode(national_code);
+}
+
 P2_12::~P2_12()
 {
 

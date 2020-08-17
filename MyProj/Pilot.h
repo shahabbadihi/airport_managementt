@@ -17,6 +17,9 @@ private:
 public:
     Pilot() {}
     Pilot(QString& dataStr);
+    Pilot(qlonglong personnel_code, Airline *a, const QString &fname,
+           const QString &lname, const QDate &birth_date,
+           const QDate &emp_date, qlonglong national_code);
     ~Pilot();
 
     virtual QString getDegreeAsString() = 0;

@@ -31,22 +31,33 @@ void AddFlightDialog::on_btnSubmit_clicked()
 {
     try
     {
-        Flight* flight = new Flight();
-        flight->setSerial(ui->txtFlightSerial->text());
+        QString serial = ui->txtFlightSerial->text();
+        QString source = ui->txtSource->text();
+        QString dest = ui->txtDest->text();
+        QDateTime dep = ui->dttmDeparture->dateTime();
+        QDateTime arr = ui->dttmArrival->dateTime();
+        int num_hosts = ui->spnHosts->value();
+        int capacity = ui->spnPassengers->value();
         Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
-        flight->setAirline(currentAirline);
-
-        flight->setSource(ui->txtSource->text());
-        flight->setDestination(ui->txtDest->text());
-
-        if (ui->dttmDeparture->dateTime() < QDateTime::currentDateTime())
+        if (dep < QDateTime::currentDateTime())
             throw invalid_argument("DateTime Of This Flight Has Passed!\n"
                                      "Can Not Add This Flight!!");
 
-        flight->setDateTimeDeparture(ui->dttmDeparture->dateTime());
-        flight->setDateTimeArrival(ui->dttmArrival->dateTime());
-        flight->setNumOfHosts(ui->spnHosts->value());
-        flight->setCapacity(ui->spnPassengers->value());
+        Flight* flight = new Flight(serial, currentAirline, source,
+                                    dest, dep, arr, num_hosts, capacity);
+//        flight->setSerial(ui->txtFlightSerial->text());
+
+//        flight->setAirline(currentAirline);
+
+//        flight->setSource(ui->txtSource->text());
+//        flight->setDestination(ui->txtDest->text());
+
+
+
+//        flight->setDateTimeDeparture(ui->dttmDeparture->dateTime());
+//        flight->setDateTimeArrival(ui->dttmArrival->dateTime());
+//        flight->setNumOfHosts(ui->spnHosts->value());
+//        flight->setCapacity(ui->spnPassengers->value());
 
         //flight->setPilot(currentAirline->getFirstFreePilot(flight));
 

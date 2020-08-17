@@ -41,6 +41,10 @@ private:
 public:
     Ticket();
     Ticket(QString&);
+    Ticket(long no, const QDate& birth, const QDate& dep_date,
+           qlonglong national_code,
+           const QString& fname, const QString& lname,
+           const QString& father_name, Flight * f = nullptr);
     ~Ticket() ;
     QString get_data();
     void setSeat(Seat *);

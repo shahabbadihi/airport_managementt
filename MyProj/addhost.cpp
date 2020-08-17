@@ -35,14 +35,23 @@ void AddHost::on_pushButton_clicked()
 {
     try
     {
-        Host* host = new Host();
-        host->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
-        host->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
-        host->set_fname(ui->txtFname->text());
-        host->set_lname(ui->txtLname->text());
-        host->set_birthDate(ui->dtBirthDate->date());
-        host->set_employmentDate(ui->dtEmploymentDate->date());
-        host->set_nationalCode(ui->txtNationalCode->text().toLongLong());
+        qlonglong p_code = ui->txtPersonnelCode->text().toLongLong();
+        Airline * airline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
+        QString fname = ui->txtFname->text();
+        QString lname = ui->txtLname->text();
+        QDate b_date = ui->dtBirthDate->date();
+        QDate e_date = ui->dtEmploymentDate->date();
+        qlonglong n_code = ui->txtNationalCode->text().toLongLong();
+
+        Host* host = new Host(p_code, airline, fname, lname, b_date,
+                              e_date, n_code);
+//        host->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
+//        host->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
+//        host->set_fname(ui->txtFname->text());
+//        host->set_lname(ui->txtLname->text());
+//        host->set_birthDate(ui->dtBirthDate->date());
+//        host->set_employmentDate(ui->dtEmploymentDate->date());
+//        host->set_nationalCode(ui->txtNationalCode->text().toLongLong());
 
 
         //Recorder<Host>::record(host);

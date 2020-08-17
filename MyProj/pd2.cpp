@@ -12,6 +12,14 @@ PD2::PD2(QString &data_str)
 
 }
 
+PD2::PD2(qlonglong personnel_code, Airline *a, const QString &fname,
+         const QString &lname, const QDate &birth_date,
+         const QDate &emp_date, qlonglong national_code)
+    : Pilot(personnel_code, a, fname, lname, birth_date, emp_date, national_code)
+{
+
+}
+
 PD2::~PD2()
 {
 

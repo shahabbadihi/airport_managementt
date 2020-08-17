@@ -455,6 +455,21 @@ Flight::Flight(QString & data_str)
     this->setFlightStateAsString(str_list[16]);
 }
 
+Flight::Flight(const QString &serial, Airline *a,
+               const QString &source, const QString &dest,
+               const QDateTime &dp_datetime, const QDateTime &ar_datetime,
+               int num_hosts, int capacity)
+{
+    this->setSerial(serial);
+    this->setAirline(a);
+    this->setSource(source);
+    this->setDestination(dest);
+    this->setDateTimeDeparture(dp_datetime);
+    this->setDateTimeArrival(ar_datetime);
+    this->setNumOfHosts(num_hosts);
+    this->setCapacity(capacity);
+}
+
 QString Flight::get_data()
 {
     QString data_str = this->serial + "|";

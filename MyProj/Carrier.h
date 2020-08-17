@@ -19,6 +19,7 @@ private:
 public:
     Carrier() {}
     Carrier(QString&);
+    Carrier(const QString& serial, const QString& place);
     ~Carrier() ;
     QString get_data();
 
