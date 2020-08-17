@@ -280,6 +280,8 @@ QString Flight::getFlightStateAsString() const
 
 void Flight::setFlightState(const state &value)
 {
+    if (value == DONE)
+        emit flightDoneSignal(true);
     flightState = value;
 }
 
@@ -317,12 +319,13 @@ void Flight::setState()
     {
         if (this->flightState != CANCELED && this->flightState != SUSPENDED)
         {
-            this->setFlightState(DONE);
             this->pilot->attachDoneFlight(this);
             foreach (Host* h, this->hosts)
             {
                 h->attachDoneFlight(this);
             }
+
+            this->setFlightState(DONE);
         }
     }
 //        if ((f->getFlightState() == SUSPENDED || f->getFlightState() == DELAYED) &&

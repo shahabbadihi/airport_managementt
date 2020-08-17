@@ -59,6 +59,15 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
         ui->tableView->setIndexWidget(proxy->index(i, 8), status_buttons[i]);
         ui->tableView->setIndexWidget(proxy->index(i, 9), details_buttons[i]);
 
+        if (Recorder<Flight>::getInstance()->get_dataList()[i]->getFlightState()
+                == DONE)
+        {
+            delay_buttons[i]->setDisabled(true);
+            status_buttons[i]->setDisabled(true);
+        }
+//        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+//                SIGNAL(flightDoneSignal(bool)), delay_buttons[i], SLOT(setDisabled(bool)));
+
         signal_mapper_delay->setMapping(delay_buttons[i], i);
         signal_mapper_status->setMapping(status_buttons[i], i);
         signal_mapper_details->setMapping(details_buttons[i], i);
@@ -136,6 +145,11 @@ void FlightTablePage::addButtonFlightTable(int row)
     ui->tableView->setIndexWidget(this->proxy->index(row, 8), status_buttons[row]);
     ui->tableView->setIndexWidget(this->proxy->index(row, 9), details_buttons[row]);
 
+    connect(Recorder<Flight>::getInstance()->get_dataList()[row],
+            SIGNAL(flightDoneSignal(bool)), delay_buttons[row], SLOT(setDisabled(bool)));
+    connect(Recorder<Flight>::getInstance()->get_dataList()[row],
+            SIGNAL(flightDoneSignal(bool)), status_buttons[row], SLOT(setDisabled(bool)));
+
     signal_mapper_delay->setMapping(delay_buttons[row], row);
     signal_mapper_status->setMapping(status_buttons[row], row);
     signal_mapper_details->setMapping(details_buttons[row], row);
@@ -155,6 +169,10 @@ void FlightTablePage::removeButtonFlightTable(int row)
     disconnect(delay_buttons[row], SIGNAL(clicked()), signal_mapper_delay, SLOT(map()));
     disconnect(status_buttons[row], SIGNAL(clicked()), signal_mapper_status, SLOT(map()));
     disconnect(details_buttons[row], SIGNAL(clicked()), signal_mapper_details, SLOT(map()));
+    disconnect(Recorder<Flight>::getInstance()->get_dataList()[row],
+            SIGNAL(flightDoneSignal(bool)), delay_buttons[row], SLOT(setDisabled(bool)));
+    disconnect(Recorder<Flight>::getInstance()->get_dataList()[row],
+            SIGNAL(flightDoneSignal(bool)), status_buttons[row], SLOT(setDisabled(bool)));
 
     delete delay_buttons[row];
     delete status_buttons[row];
