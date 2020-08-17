@@ -171,8 +171,7 @@ void Recorder<T>::import()
     QFile file("data/" + filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        qDebug() << "File error";
-        throw QException();
+        file.open(QIODevice::WriteOnly);
     }
     QTextStream in(&file);
 
@@ -421,7 +420,7 @@ void Recorder<Pilot>::import()
     QFile file("data/" + filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        //throw QException();
+        file.open(QIODevice::WriteOnly);
     }
     QTextStream in(&file);
 
@@ -468,7 +467,7 @@ void Recorder<Passenger>::import()
     QFile file("data/" + filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        //throw QException();
+        file.open(QIODevice::WriteOnly);
     }
     QTextStream in(&file);
 
