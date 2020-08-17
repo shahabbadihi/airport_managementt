@@ -48,23 +48,30 @@ void AddTicket::on_btnSubmit_clicked()
                 if (ui->dtBirthDate->date() > ui->dtDate->date().addYears(-age))
                     age--;
 
+                QDateTime departure = ticket->getFlight()->getDateTimeDeparture();
+                QDateTime destination = ticket->getFlight()->getDateTimeArrival();
+                double seconds = departure.secsTo(destination);
+                double price = (seconds * 5) / 72;
                 if (age < 2)
                 {
                     passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
                                                                                  ui->dtDate->date(),
                                                                                  ui->txtNationalCode->text() + "A");
+                    price *= 1;
                 }
                 else if (age >= 2 && age <= 12)
                 {
                     passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
                                                                                  ui->dtDate->date(),
                                                                                  ui->txtNationalCode->text() + "B");
+                    price *= 1.5;
                 }
                 else if (age > 12)
                 {
                     passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
                                                                                  ui->dtDate->date(),
                                                                                  ui->txtNationalCode->text() + "C");
+                    price *= 2;
                 }
 
                 passenger->setNationalCode(ui->txtNationalCode->text().toLong());
@@ -81,10 +88,6 @@ void AddTicket::on_btnSubmit_clicked()
                 //ticket->setDateFlight(ui->dtDate->date());
                 ticket->setFlight(f);
 
-                QDateTime departure = ticket->getFlight()->getDateTimeDeparture();
-                QDateTime destination = ticket->getFlight()->getDateTimeArrival();
-                double seconds = departure.secsTo(destination);
-                double price = (seconds * 5) / 72;
                 qDebug() << price;
                 ticket->setPrice(price);
                 //ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
