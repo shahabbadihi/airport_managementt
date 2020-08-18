@@ -2,6 +2,7 @@
 #include "ui_ticketpage.h"
 #include "Flight.h"
 #include "Airline.h"
+#include "addticket.h"
 TicketPage::TicketPage(Ticket * t,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TicketPage)
@@ -62,4 +63,10 @@ void TicketPage::on_pushButton_clicked()
     ticket->getPassenger()->setFatherName(ui->FatherNameLe->text());
     update();
     this->close();
+}
+
+void TicketPage::on_pushButton_2_clicked()
+{
+    AddTicket *a=new AddTicket(ticket->getPassenger());
+    a->exec();
 }
