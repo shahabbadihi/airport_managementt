@@ -164,29 +164,29 @@ QStatusBar {
     <property name="title">
      <string>Add</string>
     </property>
+    <addaction name="actionAddAirline"/>
+    <addaction name="separator"/>
     <addaction name="actionAddPilot"/>
     <addaction name="actionAdd_Host"/>
-    <addaction name="separator"/>
-    <addaction name="actionAddCarrier"/>
     <addaction name="actionAddAirplane"/>
+    <addaction name="actionAddFlight"/>
     <addaction name="separator"/>
     <addaction name="actionAddTicket"/>
-    <addaction name="actionAddFlight"/>
-    <addaction name="actionAddAirline"/>
+    <addaction name="actionAddCarrier"/>
    </widget>
    <widget class="QMenu" name="menuDelete">
     <property name="title">
      <string>Delete</string>
     </property>
-    <addaction name="actionDeleteHost"/>
-    <addaction name="actionDeletePilot"/>
+    <addaction name="actionAirline"/>
     <addaction name="separator"/>
-    <addaction name="actioncarrier"/>
+    <addaction name="actionDeletePilot"/>
+    <addaction name="actionDeleteHost"/>
     <addaction name="actionairplane"/>
+    <addaction name="actionFlight"/>
     <addaction name="separator"/>
     <addaction name="actionTicket"/>
-    <addaction name="actionFlight"/>
-    <addaction name="actionAirline"/>
+    <addaction name="actioncarrier"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDelete"/>

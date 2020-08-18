@@ -306,6 +306,22 @@ void Flight::setState()
 {
     if (this->flightState == DONE)
         return;
+    if (this->flightState == SUSPENDED
+            && QDateTime::currentDateTime().secsTo(this->dateTimeDeparture)
+            < 15 * 60)
+    {
+        this->pilot->removeFlight(this);
+        this->airline->removeFlight(this);
+        this->airplane->removeFlight(this);
+        foreach (Host * h, this->hosts)
+        {
+            h->removeFlight(this);
+        }
+        this->arrival_carrier->removeFlight(this);
+        this->departure_carrier->removeFlight(this);
+
+        this->setFlightState(CANCELED);
+    }
 
     if (this->dateTimeDeparture <= QDateTime::currentDateTime() &&
             QDateTime::currentDateTime() < this->dateTimeArrival)
@@ -365,22 +381,22 @@ void Flight::setState()
 
     if (!this->isAirplaneSetted())
     {
-        this->setFlightState(SUSPENDED);
         this->setAirplane(this->airline->getFirstFreeAirplane(this));
+        this->setFlightState(SUSPENDED);
     }
 
     if (!this->isArrivalCarrierSetted())
     {
-        this->setFlightState(SUSPENDED);
         this->setArrival_carrier(Recorder<Carrier>::getInstance()->getFirstFree(this->getDateTimeArrival(),
                                                                              this->getDestination()));
+        this->setFlightState(SUSPENDED);
     }
 
     if (!this->isDepartureCarrierSetted())
     {
-        this->setFlightState(SUSPENDED);
         this->setDeparture_carrier(Recorder<Carrier>::getInstance()->getFirstFree(this->getDateTimeDeparture(),
                                                                              this->getSource()));
+        this->setFlightState(SUSPENDED);
     }
 
     if (!this->isPassengerEnough())
