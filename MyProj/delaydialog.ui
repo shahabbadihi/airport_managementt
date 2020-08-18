@@ -59,7 +59,11 @@ QPushButton:hover {
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spnHour"/>
+        <widget class="QSpinBox" name="spnHour">
+         <property name="maximum">
+          <number>1</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -73,7 +77,11 @@ QPushButton:hover {
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spnMinute"/>
+        <widget class="QSpinBox" name="spnMinute">
+         <property name="maximum">
+          <number>59</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
