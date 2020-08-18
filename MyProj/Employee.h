@@ -13,7 +13,7 @@ class Flight;
 class Airline;
 class Employee : public Object
 {
-protected:
+private:
     QString fname;
     QString lname;
     qlonglong nationalCode;
@@ -36,41 +36,42 @@ public:
     virtual double wage() const = 0;
 
 
-    void set_fname(const QString& name);
-    void set_fname(const QString&& name);
 
-    void set_lname(const QString& family);
-    void set_lname(const QString&& family);
-    void set_nationalCode(qlonglong code);
-    void set_personnelCode(qlonglong code);
+
+protected:
+
     void set_birthDate(const QDate& date);
     void set_birthDate(const QDate&& date);
     void set_employmentDate(const QDate& date);
     void set_employmentDate(const QDate&& date);
     void attachFlight(Flight*);
+    void removeFlight(Flight*);
     void attachDoneFlight(Flight*);
     void removeDoneFlight(Flight * f);
     int flightListSize() const;
 
-    QString getFname() const;
-    QString getLname() const;
-    qlonglong getPersonnelCode() const;
 
+    void setAirline(Airline *value);
+
+public:
     bool isFree(Flight*) const;
     bool isFlightInList(Flight*) const;
     bool isDoneFlightInList(Flight*) const;
-
     Airline *getAirline() const;
-    void setAirline(Airline *value);
-
+    qlonglong getPersonnelCode() const;
     qlonglong getNationalCode() const;
+    QString getFname() const;
+    QString getLname() const;
     QDate getBirthDate() const;
     QDate getEmploymentDate() const;
     QVector<Flight *> getFlightList() const;
     QVector<Flight *> getDoneFlightList() const;
-
-
-    void removeFlight(Flight*);
+    void set_fname(const QString& name);
+    void set_fname(const QString&& name);
+    void set_lname(const QString& family);
+    void set_lname(const QString&& family);
+    void set_nationalCode(qlonglong code);
+    void set_personnelCode(qlonglong code);
 
     Flight* prevFlight(Flight*) const;
     Flight* nextFlight(Flight*) const;

@@ -22,6 +22,7 @@ class Airline;
 class Airplane;
 class Carrier;
 class Employee;
+class Passenger;
 
 enum state {READY, CANCELED, SUSPENDED, DELAYED, DONE, ONAIR};
 
@@ -116,6 +117,12 @@ public:
     bool isDepartureCarrierSetted() const;
     bool isArrivalCarrierSetted() const;
     bool isCheckInReady() const;
+
+    bool isSuitable(Passenger * p, const QString& source,
+                    const QString& dest,
+                    const QDate& dep_date
+                    ) const;
+
     void delay(qint64 milliseconds);
 
     static bool haveInterference(Flight* f1, Flight* f2);
@@ -130,6 +137,7 @@ public:
 
     void setState();
     double income() const;
+    bool isPassengerExist(Passenger *p) const;
 signals:
     void flightStatusChanged();
     void flightDoneSignal(bool);

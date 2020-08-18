@@ -19,6 +19,7 @@ AddTicket::AddTicket(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+
 AddTicket::AddTicket(Passenger *p,QWidget *parent ):
     QDialog(parent),
     ui(new Ui::AddTicket)
@@ -43,72 +44,43 @@ AddTicket::~AddTicket()
 
 void AddTicket::on_btnSubmit_clicked()
 {
+    long no = ui->txtNo->text().toLong();
+    qlonglong national_code = ui->txtNationalCode->text().toLongLong();
+    QString fname = ui->txtFName->text();
+    QString lname = ui->txtLName->text();
+    QDate b_date = ui->dtBirthDate->date();
+    QString father_name = ui->txtPassFatherName->text();
+
     Ticket* ticket = nullptr;
+
     try
     {
+        ticket = new Ticket(no, b_date, ui->dtDate->date(), national_code,
+                                    fname, lname, father_name);
+
+        Recorder<Ticket>::getInstance()->add(ticket);
+
         foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
         {
-            if (f->getSource() == ui->txtSource->text() &&
-                    f->getDestination() == ui->txtDest->text() &&
-                    f->getDateTimeDeparture().date() == ui->dtDate->date() &&
-                    f->getNumOfPassengers() < f->getCapacity())
+            if (f->isSuitable(ticket->getPassenger(), ui->txtSource->text(),
+                              ui->txtDest->text(), ui->dtDate->date()))
             {
-//                ticket = new Ticket();
-//                ticket->setNo(ui->txtNo->text().toLong());
-                //ticket->setSource(ui->txtSource->text());
-                //ticket->setDestination(ui->txtDest->text());
-
-//                Passenger* passenger = nullptr;
-
-                long no = ui->txtNo->text().toLong();
-                qlonglong national_code = ui->txtNationalCode->text().toLongLong();
-                QString fname = ui->txtFName->text();
-                QString lname = ui->txtLName->text();
-                QDate b_date = ui->dtBirthDate->date();
-                QString father_name = ui->txtPassFatherName->text();
-
                 QDateTime departure = f->getDateTimeDeparture();
                 QDateTime destination = f->getDateTimeArrival();
                 double seconds = departure.secsTo(destination);
                 double price = (seconds * 5) / 72;
                 qDebug() << price;
-
-                ticket = new Ticket(no, b_date, ui->dtDate->date(),
-                                    national_code, fname, lname,
-                                    father_name, price);
-//                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
-//                                                                                 ui->dtDate->date(),
-//                                                                             national_code, fname, lname,
-//                                                                             b_date, father_name
-//                                                                                 );
-
-
-//                passenger->setNationalCode(ui->txtNationalCode->text().toLong());
-//                passenger->setFname(ui->txtFName->text());
-//                passenger->setLname(ui->txtLName->text());
-//                passenger->setBirthDate(ui->dtBirthDate->date());
-//                passenger->setFatherName(ui->txtPassFatherName->text());
-
-//                passenger->attachTicket(ticket);
-
-//                Recorder<Passenger>::getInstance()->add(passenger);
-
-//                ticket->setPassenger(passenger);
-                //ticket->setDateFlight(ui->dtDate->date());
-
-                //ticket->setTimeFlight(ticket->getFlight()->getDateTimeDeparture().time());
-                //ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
-
-                Recorder<Ticket>::getInstance()->add(ticket);
-
                 ticket->setFlight(f);
+                ticket->setPrice(price);
 
                 break;
             }
         }
 
-        if (!ticket)
+
+        if (!ticket->getFlight())
         {
+            Recorder<Ticket>::getInstance()->remove(ticket);
             QMessageBox msg;
             msg.setText("There Is No Flight For This Date");
             msg.exec();
@@ -116,6 +88,7 @@ void AddTicket::on_btnSubmit_clicked()
         }
         else
         {
+
             QMessageBox msg;
             msg.setText("Submit Successfully!\nThe Flight Serial Is: " + ticket->getFlight()->getSerial()
                         + "\nDeparture Time: " + ticket->getFlight()->getDateTimeDeparture().time().toString()

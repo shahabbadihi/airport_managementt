@@ -27,30 +27,30 @@ PD3::~PD3()
 
 QString PD3::get_data()
 {
-    QString data = QString::number(this->personnelCode) + "|" +
-                this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
-                /*+ deg + "|"*/ + "3" + "|" + QString::number(this->nationalCode) + "|"
+    QString data = QString::number(this->getPersonnelCode()) + "|" +
+                this->getAirline()->getCode() + "|" + this->getFname() + "|" + this->getLname() + "|"
+                /*+ deg + "|"*/ + "3"+ "|" + QString::number(this->getNationalCode()) + "|"
 
-                + QString::number(this->birthDate.month()) + "/"
-                + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
-                + "|" + QString::number(this->employmentDate.month()) + "/"
-                + QString::number(this->employmentDate.day()) +
-                "/" + QString::number(this->employmentDate.year()) + "|";
+                + QString::number(this->getBirthDate().month()) + "/"
+                + QString::number(this->getBirthDate().day()) + "/" + QString::number(this->getBirthDate().year())
+                + "|" + QString::number(getEmploymentDate().month()) + "/"
+                + QString::number(this->getEmploymentDate().day()) +
+                "/" + QString::number(this->getEmploymentDate().year()) + "|";
 
-        for (int i = 0; i < this->list.size() && this->list[i]; i++)
+        for (int i = 0; i < this->getFlightList().size() && this->getFlightList()[i]; i++)
         {
-            if (i == this->list.size() - 1)
-                data += this->list.at(i)->getSerial();
+            if (i == this->getFlightList().size() - 1)
+                data += this->getFlightList().at(i)->getSerial();
             else
-                data += this->list.at(i)->getSerial() + "/";
+                data += this->getFlightList().at(i)->getSerial() + "/";
         }
         data += "|";
-        for (int i = 0; i < this->list_of_done_flights.size() && this->list_of_done_flights[i]; i++)
+        for (int i = 0; i < this->getDoneFlightList().size() && this->getDoneFlightList()[i]; i++)
         {
-            if (i == this->list_of_done_flights.size() - 1)
-                data += this->list_of_done_flights.at(i)->getSerial();
+            if (i == this->getDoneFlightList().size() - 1)
+                data += this->getDoneFlightList().at(i)->getSerial();
             else
-                data += this->list_of_done_flights.at(i)->getSerial() + "/";
+                data += this->getDoneFlightList().at(i)->getSerial() + "/";
         }
         data += "\n";
         return data;

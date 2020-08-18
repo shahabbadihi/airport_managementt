@@ -27,7 +27,9 @@ PilotsPage::PilotsPage(QWidget *parent) :
     mapper->addMapping(ui->txtAirlinePilot, 4);
     ui->txtAirlinePilot->setReadOnly(true);
     mapper->addMapping(ui->dtBirthDatePliot, 5);
+    ui->dtBirthDatePliot->setReadOnly(true);
     mapper->addMapping(ui->dtEmploymentDatePilot, 6);
+    ui->dtEmploymentDatePilot->setReadOnly(true);
     mapper->addMapping(ui->plainFlights, 7);
     ui->plainFlights->setReadOnly(true);
 

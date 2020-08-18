@@ -132,10 +132,10 @@ bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, in
             //p->setAirline();
             break;
         case 5:
-            p->set_birthDate(value.toDate());
+//            p->set_birthDate(value.toDate());
             break;
         case 6:
-            p->set_employmentDate(value.toDate());
+//            p->set_employmentDate(value.toDate());
             break;
         case 7:
             //return s;

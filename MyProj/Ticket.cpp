@@ -65,7 +65,7 @@ Ticket::Ticket(long no, const QDate &birth,
                const QDate& dep_date, qlonglong national_code,
                const QString &fname,
                const QString &lname,
-               const QString &father_name, double base_price, Flight * f)
+               const QString &father_name)
     : flight(nullptr), passenger(nullptr),
       seat(nullptr)
 {
@@ -77,8 +77,6 @@ Ticket::Ticket(long no, const QDate &birth,
                                                                         lname,
                                                                         father_name));
     Recorder<Passenger>::getInstance()->record(this->passenger);
-    this->setPrice(this->passenger->getPrice(base_price));
-    this->setFlight(f);
 }
 
 QString Ticket::get_data()
@@ -170,6 +168,10 @@ void Ticket::setSeat(Seat *s){
 
 void Ticket::setFlight(Flight * f)
 {
+    if (f->isPassengerExist(this->passenger))
+    {
+        return;
+    }
     if (f && !this->flight)
     {
         this->flight = f;

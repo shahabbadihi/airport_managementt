@@ -56,13 +56,13 @@ Host::Host(qlonglong personnel_code, Airline *a,
 
 Host::~Host()
 {
-    for (int i = 0; i < this->flightListSize() && this->list[i]; i++)
+    for (int i = 0; i < this->flightListSize() && this->getFlightList()[i]; i++)
     {
-       this->list[i]->removeHost(this);
+       this->getFlightList()[i]->removeHost(this);
     }
 
-    if (airline)
-        this->airline->removeHost(this);
+    if (getAirline())
+        this->getAirline()->removeHost(this);
 
     Recorder<Host>::getInstance()->updateFileAll();
 }
@@ -71,7 +71,7 @@ void Host::attachFlight(Flight * f)
 {
     if (f && !this->isFlightInList(f))
     {
-        this->list.push_back(f);
+        Employee::attachFlight(f);
         f->attachHost(this);
 
         Recorder<Host>::getInstance()->updateFileAll();
@@ -82,7 +82,7 @@ void Host::attachFlight(Flight * f)
 void Host::removeFlight(Flight *f)
 {
     if(f && isFlightInList(f)){
-        this->list.removeOne(f);
+        this->getFlightList().removeOne(f);
         Recorder<Host>::getInstance()->updateFileAll();
         QMessageBox msg;
         msg.setText(f->getSerial()+" removed from host "+this->getFname()+ " " +this->getLname()+ "flight list");
@@ -93,7 +93,7 @@ void Host::attachDoneFlight(Flight * f)
 {
     if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
     {
-        this->list_of_done_flights.push_back(f);
+        this->getDoneFlightList().push_back(f);
         Recorder<Host>::getInstance()->updateFileAll();
     }
 }
@@ -101,16 +101,16 @@ void Host::attachDoneFlight(Flight * f)
 void Host::removeDoneFlight(Flight *f)
 {
     if(f && isDoneFlightInList(f) && isFlightInList(f)){
-        this->list_of_done_flights.removeOne(f);
+        Employee::removeDoneFlight(f);
         Recorder<Host>::getInstance()->updateFileAll();
     }
 }
 
 void Host::setAirline(Airline *value)
 {
-    if (value && !this->airline)
+    if (value && !this->getAirline())
     {
-        airline = value;
+        Employee::setAirline(value);
 
         value->attachHost(this);
 

@@ -29,7 +29,7 @@ public:
     Ticket(long no, const QDate& birth, const QDate& dep_date,
            qlonglong national_code,
            const QString& fname, const QString& lname,
-           const QString& father_name, double price, Flight * f = nullptr);
+           const QString& father_name);
     ~Ticket() ;
     QString get_data();
     void setSeat(Seat *);

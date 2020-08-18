@@ -27,7 +27,9 @@ HostsPage::HostsPage(QWidget *parent) :
     ui->txtAirline->setReadOnly(true);
 
     mapper->addMapping(ui->dtBirthDate, 5);
+    ui->dtBirthDate->setReadOnly(true);
     mapper->addMapping(ui->dtEmploymentDate, 6);
+    ui->dtEmploymentDate->setReadOnly(true);
 
     mapper->addMapping(ui->plainFlights, 7);
     ui->plainFlights->setReadOnly(true);

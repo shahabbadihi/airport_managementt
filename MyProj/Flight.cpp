@@ -994,6 +994,34 @@ bool Flight::isCheckInReady()const{
         return false;
     }
 }
+
+bool Flight::isSuitable(Passenger *p, const QString &source,
+                        const QString &dest, const QDate &dep_date
+                        ) const
+{
+    if (this->getSource() == source &&
+                        this->getDestination() == dest &&
+                        this->getDateTimeDeparture().date() == dep_date &&
+                        this->getNumOfPassengers() < this->getCapacity() &&
+                        !this->isPassengerExist(p)
+            )
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Flight::isPassengerExist(Passenger * p) const
+{
+    foreach (Ticket * t, this->tickets)
+    {
+        if (p == t->getPassenger())
+        {
+            return true;
+        }
+    }
+    return false;
+}
 double Flight::income() const
 {
     double in = 0;
