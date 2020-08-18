@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    tab_widget->setStyleSheet("background-color : black;");
+    tab_widget->setStyleSheet("background-color : black;");   
     this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new AirlinesPage(this), "Airlines");

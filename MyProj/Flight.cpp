@@ -490,7 +490,9 @@ Flight::Flight(const QString &serial, Airline *a,
                const QString &source, const QString &dest,
                const QDateTime &dp_datetime, const QDateTime &ar_datetime,
                int num_hosts, int capacity)
-    : airline(nullptr)
+    : flightState(SUSPENDED), numOfPassengers(0), pilot(nullptr),
+      airline(nullptr), airplane(nullptr), departure_carrier(nullptr),
+      arrival_carrier(nullptr)
 {
     this->setSerial(serial);
     this->setAirline(a);
