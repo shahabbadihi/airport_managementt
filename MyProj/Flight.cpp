@@ -928,7 +928,12 @@ void Flight::removeTicket(Ticket* T){
    emit flightStatusChanged();
 }
 bool Flight::isCheckInReady(){
-    return true;
+    if(dateTimeDeparture.secsTo(dateTimeArrival.currentDateTime())<=2*60*60){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 double Flight::income()
