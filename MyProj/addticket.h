@@ -2,7 +2,7 @@
 #define ADDTICKET_H
 
 #include <QDialog>
-
+#include "Passenger.h"
 namespace Ui {
 class AddTicket;
 }
@@ -12,7 +12,8 @@ class AddTicket : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddTicket(QWidget *parent = nullptr);
+    AddTicket(QWidget *parent = nullptr);
+    AddTicket(Passenger *p,QWidget *parent = nullptr);
     ~AddTicket();
     
 private slots:

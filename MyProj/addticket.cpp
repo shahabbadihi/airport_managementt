@@ -19,6 +19,22 @@ AddTicket::AddTicket(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+AddTicket::AddTicket(Passenger *p,QWidget *parent ):
+    QDialog(parent),
+    ui(new Ui::AddTicket)
+{
+    ui->setupUi(this);
+    ui->txtFName->setText(p->getFname());
+    ui->txtFName->setReadOnly(true);
+    ui->txtLName->setText(p->getLname());
+    ui->txtLName->setReadOnly(true);
+    ui->txtNationalCode->setText(QString::number(p->getNationalCode()));
+    ui->txtNationalCode->setReadOnly(true);
+    ui->txtPassFatherName->setText(p->getFatherName());
+    ui->txtPassFatherName->setReadOnly(true);
+    ui->dtBirthDate->setDate(p->getBirthDate());
+    ui->dtBirthDate->setReadOnly(true);
+}
 
 AddTicket::~AddTicket()
 {
