@@ -55,11 +55,11 @@ void editSeas::on_seatChart_cellClicked(int row, int column)
 void editSeas::update(){
     for (int i=0;i<flight->getAirplane()->getRowCount();i++) {
         for (int j=0;j<flight->getAirplane()->getcolumnCount();j++){
-            if(flight->getAirplane()->getSeat(i,j)->isFree()){
+            if(flight->getAirplane()->getSeat(i,j)->isFree(flight)){
 
             }
             else{
-                ui->seatChart->setItem(i,j,new QTableWidgetItem(flight->getAirplane()->getSeat(i,j)->getTicket()->getPassengerName()));
+                ui->seatChart->setItem(i,j,new QTableWidgetItem(flight->getAirplane()->getSeat(i,j)->getTicket(flight)->getPassengerName()));
             }
         }
     }

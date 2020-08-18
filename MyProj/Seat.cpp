@@ -8,18 +8,27 @@ void Seat::setSeatInfo(int row, int col, Airplane *a)
 }
 
 void Seat::attachTicket(Ticket* t){
-    ticket=t;
+    ticket.push_back(t);
 }
-void Seat::removeTicket(){
-    ticket=nullptr;
+void Seat::removeTicket(Ticket *t){
+    ticket.removeOne(t);
 }
-Seat::Seat():ticket(nullptr){
+Seat::Seat(){
 
 }
-bool Seat::isFree(){
-    if(ticket==nullptr){return true;}
-    else {return false;}
+bool Seat::isFree(Flight*f){
+    foreach(Ticket *t,this->ticket){
+        if(t->getFlight()==f){
+            return false;
+        }
+    }
+    return true;
 }
-Ticket *Seat::getTicket(){
-    return ticket;
+Ticket *Seat::getTicket(Flight*f){
+    foreach(Ticket *t,this->ticket){
+        if(t->getFlight()==f){
+            return t;
+        }
+    }
+    return nullptr;
 }
