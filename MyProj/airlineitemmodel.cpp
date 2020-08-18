@@ -56,7 +56,7 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
     {
         s2 += h->getFname() +" "+h->getLname()+" "+h->getSearchCode()+ "\n";
     }
-    QString s3="",s7="";
+    QString s3="";
     foreach (Flight* f, a->getFlightsList())
     {
 //        if(f->getFlightStateAsString()=="DONE")
@@ -65,10 +65,10 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
         s3 += f->getFlightStr() + "\n\n";
     }
 
-    foreach (Flight* f, a->getListOfDoneFlights())
-    {
-        s7 += f->getFlightStr() + "\n\n";
-    }
+//    foreach (Flight* f, a->getListOfDoneFlights())
+//    {
+//        s7 += f->getFlightStr() + "\n\n";
+//    }
 
     QString s4="";
     foreach (Airplane* A, a->getAirplanesList())
@@ -97,9 +97,6 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
             break;
         case(5):
             return s4;
-            break;
-        case(6):
-            return s7;
             break;
         }
     }

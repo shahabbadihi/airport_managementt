@@ -40,11 +40,11 @@ Airline::Airline(QString & str_data)
         this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 
-    QStringList done_flights = str_list[5].split('/', Qt::SkipEmptyParts);
-    foreach (QString s, done_flights)
-    {
-        this->attachDoneFlight(Recorder<Flight>::getInstance()->searchByCode(s));
-    }
+//    QStringList done_flights = str_list[5].split('/', Qt::SkipEmptyParts);
+//    foreach (QString s, done_flights)
+//    {
+//        this->attachDoneFlight(Recorder<Flight>::getInstance()->searchByCode(s));
+//    }
 //    QStringList tickets = str_list[5].split('/', Qt::SkipEmptyParts);
 //    foreach (QString s, tickets)
 //    {
@@ -102,13 +102,13 @@ QString Airline::get_data()
             str += this->list_of_flights[i]->getSearchCode() + "/";
     }
     str += "|";
-    for (int i = 0; i < this->list_of_done_flights.size(); i++)
-    {
-        if (i == this->list_of_done_flights.size() - 1)
-            str += this->list_of_done_flights[i]->getSearchCode();
-        else
-            str += this->list_of_done_flights[i]->getSearchCode() + "/";
-    }
+//    for (int i = 0; i < this->list_of_done_flights.size(); i++)
+//    {
+//        if (i == this->list_of_done_flights.size() - 1)
+//            str += this->list_of_done_flights[i]->getSearchCode();
+//        else
+//            str += this->list_of_done_flights[i]->getSearchCode() + "/";
+//    }
     str += "\n";
     return str;
 }
@@ -150,14 +150,14 @@ void Airline::attachFlight(Flight * t)
     //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
-void Airline::attachDoneFlight(Flight * t)
-{
-    if (t && !isDoneFlightInList(t))
-    {
-        this->list_of_done_flights.push_back(t);
-        Recorder<Airline>::getInstance()->updateFileAll();
-    }
-}
+//void Airline::attachDoneFlight(Flight * t)
+//{
+//    if (t && !isDoneFlightInList(t))
+//    {
+//        this->list_of_done_flights.push_back(t);
+//        Recorder<Airline>::getInstance()->updateFileAll();
+//    }
+//}
 
 void Airline::attachAirplane(Airplane * t)
 {
@@ -203,15 +203,15 @@ bool Airline::isFlightInList(Flight * f) const
     return false;
 }
 
-bool Airline::isDoneFlightInList(Flight * f) const
-{
-    foreach (Flight* fl, this->list_of_done_flights)
-    {
-        if (fl == f)
-            return true;
-    }
-    return false;
-}
+//bool Airline::isDoneFlightInList(Flight * f) const
+//{
+//    foreach (Flight* fl, this->list_of_done_flights)
+//    {
+//        if (fl == f)
+//            return true;
+//    }
+//    return false;
+//}
 
 //void Airline::attachTicket(Ticket * t)
 //{
@@ -312,9 +312,9 @@ QVector<Host*>Airline::getHostsList() const{return list_of_hosts;}
 QVector<Flight*>Airline::getFlightsList() const{return list_of_flights;}
 QVector<Airplane*>Airline::getAirplanesList() const{return list_of_airplanes;}
 
-QVector<Flight *> Airline::getListOfDoneFlights() const
-{
-    return list_of_done_flights;
-}
+//QVector<Flight *> Airline::getListOfDoneFlights() const
+//{
+//    return list_of_done_flights;
+//}
 
 

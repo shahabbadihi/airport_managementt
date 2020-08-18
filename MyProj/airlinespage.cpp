@@ -26,8 +26,8 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     ui->FlightPte->setReadOnly(true);
     mapper->addMapping(ui->AirplanePte,5);
     ui->AirplanePte->setReadOnly(true);
-    mapper->addMapping(ui->DnFlightPte,6);
-    ui->DnFlightPte->setReadOnly(true);
+//    mapper->addMapping(ui->DnFlightPte,6);
+//    ui->DnFlightPte->setReadOnly(true);
     delegate = new Delegate(this);
     mapper->setItemDelegate(delegate);
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
