@@ -260,11 +260,13 @@ Airplane::~Airplane()
     delete [] this->seats;
     this->seats = nullptr;
 
-    this->airline->removeAirplane(this);
+    if (airline)
+        this->airline->removeAirplane(this);
 
     foreach (Flight * f, this->list_of_flights)
     {
-        f->removeAirplane();
+        if (f)
+            f->removeAirplane();
     }
 
     Recorder<Airplane>::getInstance()->updateFileAll();

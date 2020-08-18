@@ -76,7 +76,7 @@ Ticket::Ticket(long no, const QDate &birth,
                                                                         fname,
                                                                         lname,
                                                                         father_name));
-    Recorder<Passenger>::getInstance()->add(this->passenger);
+    Recorder<Passenger>::getInstance()->record(this->passenger);
     this->setPrice(this->passenger->getPrice(base_price));
     this->setFlight(f);
 }
@@ -236,13 +236,17 @@ QString Ticket::getPassengerName() const{
     return passenger->getFname()+" "+passenger->getLname();
 }
 Ticket::~Ticket(){
-    this->flight->removeTicket(this);
-    this->passenger->removeTicket(this);
+
+    if (flight)
+        this->flight->removeTicket(this);
+    if (passenger)
+        this->passenger->removeTicket(this);
 
     if (this->passenger->isTicketListEmpty())
         Recorder<Passenger>::getInstance()->remove(this->passenger);
 
-    this->seat->removeTicket(this);
+    if (seat)
+        this->seat->removeTicket(this);
 
     Recorder<Ticket>::getInstance()->updateFileAll();
 }

@@ -986,7 +986,8 @@ void Flight::removeTicket(Ticket* T){
    emit flightStatusChanged();
 }
 bool Flight::isCheckInReady()const{
-    if(QDateTime::currentDateTime().secsTo(dateTimeDeparture)<=2*60*60){
+    if(QDateTime::currentDateTime().secsTo(dateTimeDeparture)<=2*60*60 &&
+            isAirplaneSetted()){
         return true;
     }
     else{

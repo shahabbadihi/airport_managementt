@@ -30,12 +30,12 @@ int main(int argc, char *argv[])
     //
 //    qDebug() << "Hello";
 //    try{
+        Recorder<Carrier>::getInstance()->import();
         Recorder<Flight>::getInstance()->import();
         Recorder<Airline>::getInstance()->import();
         Recorder<Pilot>::getInstance()->import();
         Recorder<Host>::getInstance()->import();
         Recorder<Airplane>::getInstance()->import();
-        Recorder<Carrier>::getInstance()->import();
         Recorder<Ticket>::getInstance()->import();
         Recorder<Passenger>::getInstance()->import();
 //    } catch (...) {

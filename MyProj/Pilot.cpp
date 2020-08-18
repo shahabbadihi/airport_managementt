@@ -106,11 +106,13 @@ void Pilot::removeDoneFlight(Flight *f)
     }
 }
 Pilot::~Pilot(){
-    for (int i = 0; i < this->flightListSize(); i++)
+    for (int i = 0; i < this->flightListSize() && this->list[i]; i++)
     {
        this->list[i]->removePilot();
     }
-    this->airline->removePilot(this);
+
+    if (airline)
+        this->airline->removePilot(this);
 
     Recorder<Pilot>::getInstance()->updateFileAll();
 }

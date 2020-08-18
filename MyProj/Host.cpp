@@ -56,11 +56,13 @@ Host::Host(qlonglong personnel_code, Airline *a,
 
 Host::~Host()
 {
-    for (int i = 0; i < this->flightListSize(); i++)
+    for (int i = 0; i < this->flightListSize() && this->list[i]; i++)
     {
        this->list[i]->removeHost(this);
     }
-    this->airline->removeHost(this);
+
+    if (airline)
+        this->airline->removeHost(this);
 
     Recorder<Host>::getInstance()->updateFileAll();
 }

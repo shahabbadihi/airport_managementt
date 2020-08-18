@@ -27,6 +27,8 @@ public:
 //    void addToFile(T* a);
 //    void removeFromFile(T* a);
 
+    friend class Ticket;
+
     QVector<T*> get_dataList();
     bool isInList(T * a);
 

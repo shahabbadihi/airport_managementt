@@ -163,7 +163,8 @@ void Carrier::removeFlight(Flight *f){
 }
 Carrier::~Carrier(){
      foreach(Flight* f,this->list_of_flights){
-         f->removeCarrier(this);
+         if (f)
+            f->removeCarrier(this);
      }
 
      Recorder<Carrier>::getInstance()->updateFileAll();
