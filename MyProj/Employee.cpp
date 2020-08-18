@@ -44,6 +44,7 @@ QVector<Flight *> Employee::getDoneFlightList() const
 Employee::Employee(qlonglong personnel_code, Airline *a, const QString &fname,
                    const QString &lname, const QDate &birth_date,
                    const QDate &emp_date, qlonglong national_code)
+    : airline(nullptr)
 {
     this->set_personnelCode(personnel_code);
     this->setAirline(a);
