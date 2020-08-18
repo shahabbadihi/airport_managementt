@@ -59,7 +59,7 @@ void AddTicket::on_btnSubmit_clicked()
 
                 ticket = new Ticket(no, b_date, ui->dtDate->date(),
                                     national_code, fname, lname,
-                                    father_name, price, f);
+                                    father_name, price);
 //                passenger = GetPassengerFactory::getInstance()->getPassenger(ui->dtBirthDate->date(),
 //                                                                                 ui->dtDate->date(),
 //                                                                             national_code, fname, lname,
@@ -84,6 +84,8 @@ void AddTicket::on_btnSubmit_clicked()
                 //ticket->setDateTimeArrival(ticket->getFlight()->getDateTimeArrival());
 
                 Recorder<Ticket>::getInstance()->add(ticket);
+
+                ticket->setFlight(f);
 
                 break;
             }
@@ -116,6 +118,8 @@ void AddTicket::on_btnSubmit_clicked()
     }
     catch (invalid_argument e)
     {
+        delete ticket;
+        ticket = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

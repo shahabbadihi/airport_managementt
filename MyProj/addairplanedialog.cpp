@@ -29,9 +29,10 @@ void AddAirplaneDialog::on_btnSubmit_clicked()
 //    airplane->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
 
 //    airplane->setNumOfSeats(ui->spnNumOfSeats->value());
+    Airplane * airplane = nullptr;
     try
     {
-        Airplane * airplane = new Airplane(ui->txtSerial->text(),
+        airplane = new Airplane(ui->txtSerial->text(),
                                            Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()],
                 ui->spnNumOfRows->value(), ui->spnNumOfCols->value());
 
@@ -44,6 +45,8 @@ void AddAirplaneDialog::on_btnSubmit_clicked()
 
     catch (invalid_argument e)
     {
+        delete airplane;
+        airplane = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

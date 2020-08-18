@@ -39,9 +39,9 @@ void Dialog::on_pushButton_2_clicked()
 
 void Dialog::on_pushButton_clicked()
 {
+    Pilot* pilot = nullptr;
     try
     {
-        Pilot* pilot = nullptr;
         QRadioButton* radio1 = ui->radio1;
         QRadioButton* radio2 = ui->radio2;
         QRadioButton* radio3 = ui->radio3;
@@ -90,6 +90,8 @@ void Dialog::on_pushButton_clicked()
 
     catch (invalid_argument e)
     {
+        delete pilot;
+        pilot = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

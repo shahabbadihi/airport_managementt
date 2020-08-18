@@ -29,6 +29,7 @@ AddFlightDialog::~AddFlightDialog()
 
 void AddFlightDialog::on_btnSubmit_clicked()
 {
+    Flight* flight = nullptr;
     try
     {
         QString serial = ui->txtFlightSerial->text();
@@ -43,7 +44,7 @@ void AddFlightDialog::on_btnSubmit_clicked()
             throw invalid_argument("DateTime Of This Flight Has Passed!\n"
                                      "Can Not Add This Flight!!");
 
-        Flight* flight = new Flight(serial, currentAirline, source,
+        flight = new Flight(serial, currentAirline, source,
                                     dest, dep, arr, num_hosts, capacity);
 //        flight->setSerial(ui->txtFlightSerial->text());
 
@@ -138,6 +139,8 @@ void AddFlightDialog::on_btnSubmit_clicked()
 
     catch (invalid_argument e)
     {
+        delete flight;
+        flight = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

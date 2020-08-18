@@ -25,10 +25,11 @@ AddCarrierDialog::~AddCarrierDialog()
 
 void AddCarrierDialog::on_btnSubmit_clicked()
 {
+    Carrier* carrier = nullptr;
     try
     {
         //Carrier* carrier = new Carrier;
-        Carrier* carrier = new Carrier(ui->txtSerial->text(), ui->txtPlace->text());
+        carrier = new Carrier(ui->txtSerial->text(), ui->txtPlace->text());
         //Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
         //carrier->setSerial(ui->txtSerial->text());
         //carrier->setPlace(ui->txtPlace->text());
@@ -43,6 +44,8 @@ void AddCarrierDialog::on_btnSubmit_clicked()
 
     catch (invalid_argument e)
     {
+        delete carrier;
+        carrier = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

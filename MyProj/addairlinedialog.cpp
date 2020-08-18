@@ -19,9 +19,10 @@ AddAirlineDialog::~AddAirlineDialog()
 
 void AddAirlineDialog::on_btnSubmit_clicked()
 {
+    Airline* airline = nullptr;
     try
     {
-        Airline* airline = new Airline(ui->txtName->text(), ui->txtCode->text());
+        airline = new Airline(ui->txtName->text(), ui->txtCode->text());
 
 
         Recorder<Airline>::getInstance()->add(airline);
@@ -33,6 +34,8 @@ void AddAirlineDialog::on_btnSubmit_clicked()
 
     catch (invalid_argument e)
     {
+        delete airline;
+        airline = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();
