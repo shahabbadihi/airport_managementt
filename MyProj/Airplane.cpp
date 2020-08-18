@@ -208,6 +208,7 @@ void Airplane::createSeats(int rows, int cols)
 }
 
 Airplane::Airplane(const QString &serial, Airline *airline, int rows, int cols)
+    : airline(nullptr)
 {
     this->setSerial(serial);
     this->setAirline(airline);
