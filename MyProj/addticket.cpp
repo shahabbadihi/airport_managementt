@@ -26,9 +26,9 @@ AddTicket::~AddTicket()
 
 void AddTicket::on_btnSubmit_clicked()
 {
+    Ticket* ticket = nullptr;
     try
     {
-        Ticket* ticket = nullptr;
         foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
         {
             if (f->getSource() == ui->txtSource->text() &&

@@ -19,10 +19,10 @@ Seat::Seat(){
 bool Seat::isFree(Flight*f){
     foreach(Ticket *t,this->ticket){
         if(t->getFlight()==f){
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 Ticket *Seat::getTicket(Flight*f){
     foreach(Ticket *t,this->ticket){
