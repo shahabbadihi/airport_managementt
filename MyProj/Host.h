@@ -23,6 +23,10 @@ public:
 
     void attachFlight(Flight *f);
     void setAirline(Airline *value);
+    void removeFlight(Flight *f);
+
+    void attachDoneFlight(Flight*);
+    void removeDoneFlight(Flight * f);
 };
 
 #endif // HOST_H

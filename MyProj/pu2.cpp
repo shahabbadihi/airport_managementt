@@ -46,5 +46,7 @@ void PU2::setNationalCode(qlonglong n)
 
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "A");
+
+    Recorder<Passenger>::getInstance()->updateFileAll();
 }
 

@@ -41,6 +41,8 @@ void PO12::setNationalCode(qlonglong n)
 
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "C");
+
+    Recorder<Passenger>::getInstance()->updateFileAll();
 }
 
 double PO12::getPrice(double base)

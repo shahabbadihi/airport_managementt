@@ -50,15 +50,15 @@ public:
     void attachFlight(Flight*);
     void attachDoneFlight(Flight*);
     void removeDoneFlight(Flight * f);
-    int flightListSize();
+    int flightListSize() const;
 
-    QString getFname();
-    QString getLname();
-    qlonglong getPersonnelCode();
+    QString getFname() const;
+    QString getLname() const;
+    qlonglong getPersonnelCode() const;
 
-    bool isFree(Flight*);
-    bool isFlightInList(Flight*);
-    bool isDoneFlightInList(Flight*);
+    bool isFree(Flight*) const;
+    bool isFlightInList(Flight*) const;
+    bool isDoneFlightInList(Flight*) const;
 
     Airline *getAirline() const;
     void setAirline(Airline *value);
@@ -72,8 +72,8 @@ public:
 
     void removeFlight(Flight*);
 
-    Flight* prevFlight(Flight*);
-    Flight* nextFlight(Flight*);
+    Flight* prevFlight(Flight*) const;
+    Flight* nextFlight(Flight*) const;
 };
 
 #endif // EMPLOYEE_H

@@ -65,6 +65,7 @@ HostsPage::~HostsPage()
 void HostsPage::on_btnSubmit_clicked()
 {
     this->mapper->submit();
+    Recorder<Host>::getInstance()->updateFileAll();
 }
 
 void HostsPage::updateButtons(int row)

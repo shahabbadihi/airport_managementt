@@ -86,15 +86,15 @@ public:
     void removeCarrier(Carrier*);
     void removeTicket(Ticket*);
 
-    QDateTime getDateTimeArrival();
-    QDateTime getDateTimeDeparture();
-    QString getSource();
-    QString getDestination();
-    int getNumOfHosts();
-    int getNumOfPassengers();
+    QDateTime getDateTimeArrival() const;
+    QDateTime getDateTimeDeparture() const;
+    QString getSource() const;
+    QString getDestination() const;
+    int getNumOfHosts() const;
+    int getNumOfPassengers() const;
     Pilot *getPilot() const;
-    QVector<Host *> getHostsList();
-    QString getSerial();
+    QVector<Host *> getHostsList() const;
+    QString getSerial() const;
     Airline *getAirline() const;
     void setAirline(Airline *value);
     void setAirplane(Airplane *value);
@@ -106,16 +106,16 @@ public:
     void setArrival_carrier(Carrier *value);
     Airplane *getAirplane() const;
 
-    bool isHostInList(Host*);
-    bool isTicketInList(Ticket*);
+    bool isHostInList(Host*) const;
+    bool isTicketInList(Ticket*) const;
 
-    bool isPilotSetted();
-    bool isHostEnough();
-    bool isPassengerEnough();
-    bool isAirplaneSetted();
-    bool isDepartureCarrierSetted();
-    bool isArrivalCarrierSetted();
-    bool isCheckInReady();
+    bool isPilotSetted() const;
+    bool isHostEnough() const;
+    bool isPassengerEnough() const;
+    bool isAirplaneSetted() const;
+    bool isDepartureCarrierSetted() const;
+    bool isArrivalCarrierSetted() const;
+    bool isCheckInReady() const;
     void delay(qint64 milliseconds);
 
     static bool haveInterference(Flight* f1, Flight* f2);
@@ -129,7 +129,7 @@ public:
     void setFlightStateAsString(const QString &value);
 
     void setState();
-    double income();
+    double income() const;
 signals:
     void flightStatusChanged();
     void flightDoneSignal(bool);

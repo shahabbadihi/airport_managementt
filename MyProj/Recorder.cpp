@@ -145,7 +145,10 @@ void Recorder<T>::add(T *a)
     }
 
     if (a && !this->isInList(a))
+    {
         this->record(a);
+        Recorder<T>::getInstance()->updateFileAll();
+    }
     //this->addToFile(a);
 }
 
@@ -246,6 +249,8 @@ void Recorder<T>::remove(T *a)
     this->dataList.removeOne(a);
     delete a;
     emit recordRemovedSignal(index);
+
+    Recorder<T>::getInstance()->updateFileAll();
 }
 
 //template<class T>
@@ -360,6 +365,7 @@ void Recorder<Host>::add(Host * h)
     {
         this->record(h);
         Recorder<Employee>::getInstance()->add(h);
+        Recorder<Host>::getInstance()->updateFileAll();
     }
 }
 
@@ -378,6 +384,7 @@ void Recorder<Pilot>::add(Pilot * p)
     {
         this->record(p);
         Recorder<Employee>::getInstance()->add(p);
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
 }
 

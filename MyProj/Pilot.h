@@ -29,6 +29,11 @@ public:
 
     void attachFlight(Flight*);
 
+    void removeFlight(Flight* f);
+
+    void attachDoneFlight(Flight*);
+    void removeDoneFlight(Flight * f);
+
 
     //void set_degree(int deg);
 

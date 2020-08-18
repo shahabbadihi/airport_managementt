@@ -44,13 +44,13 @@ public:
 
     void removeFlight(Flight*);
 
-    bool isFree(Flight*);
-    bool isFlightInList(Flight *f);
-    Flight *nextFlight(Flight *f);
-    Flight *prevFlight(Flight *f);
-    int getRowCount();
-    int getcolumnCount();
-    Seat * getSeat(int r,int c);
+    bool isFree(Flight*) const;
+    bool isFlightInList(Flight *f) const;
+    Flight *nextFlight(Flight *f) const;
+    Flight *prevFlight(Flight *f) const;
+    int getRowCount() const;
+    int getcolumnCount() const;
+    Seat * getSeat(int r,int c) const;
     //void setSeats(int Row,int column);
     QVector<Flight *> getFlightList() const;
 };

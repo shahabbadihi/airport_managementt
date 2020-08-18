@@ -30,9 +30,9 @@ public:
     //Airline *getAirline() const;
     //void setAirline(Airline *value);
 
-    bool isFree(const QDateTime&, const QString&);
-    bool isFlightInList(Flight*);
-    bool isMissionInList(const QString&);
+    bool isFree(const QDateTime&, const QString&) const;
+    bool isFlightInList(Flight*) const;
+    bool isMissionInList(const QString&) const;
     QString getPlace() const;
     void setPlace(const QString &value);
 

@@ -74,7 +74,7 @@ public:
     Flight *getFlight() const;
     long getNo() const;
     //void setAirline(Airline *value);
-    QString getPassengerName();
+    QString getPassengerName() const;
     double  getPrice();
 };
 

@@ -24,6 +24,8 @@ void Flight::setAirline(Airline *value)
 
         value->attachFlight(this);
         emit flightStatusChanged();
+
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -41,6 +43,8 @@ void Flight::setAirplane(Airplane *value)
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->airplane->getSerial() + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -64,6 +68,8 @@ void Flight::setDeparture_carrier(Carrier *value)
         QString s2 = "Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->departure_carrier->getSerial() + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -86,6 +92,8 @@ void Flight::setArrival_carrier(Carrier *value)
         QString s2 = "Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->arrival_carrier->getSerial() + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -95,7 +103,7 @@ Airplane *Flight::getAirplane() const
     return airplane;
 }
 
-bool Flight::isHostInList(Host* h)
+bool Flight::isHostInList(Host* h) const
 {
     foreach (Host* ho, this->hosts)
     {
@@ -105,7 +113,7 @@ bool Flight::isHostInList(Host* h)
     return false;
 }
 
-bool Flight::isTicketInList(Ticket * t)
+bool Flight::isTicketInList(Ticket * t) const
 {
     foreach (Ticket* ti, this->tickets)
     {
@@ -115,32 +123,32 @@ bool Flight::isTicketInList(Ticket * t)
     return false;
 }
 
-bool Flight::isPilotSetted()
+bool Flight::isPilotSetted() const
 {
     return this->pilot ? true : false;
 }
 
-bool Flight::isHostEnough()
+bool Flight::isHostEnough() const
 {
     return this->numOfHosts == this->hosts.size() ? true : false;
 }
 
-bool Flight::isPassengerEnough()
+bool Flight::isPassengerEnough() const
 {
     return this->numOfPassengers >= this->capacity * 0.7 ? true : false;
 }
 
-bool Flight::isAirplaneSetted()
+bool Flight::isAirplaneSetted() const
 {
     return this->airplane ? true : false;
 }
 
-bool Flight::isDepartureCarrierSetted()
+bool Flight::isDepartureCarrierSetted() const
 {
     return this->departure_carrier ? true : false;
 }
 
-bool Flight::isArrivalCarrierSetted()
+bool Flight::isArrivalCarrierSetted() const
 {
     return this->arrival_carrier ? true : false;
 }
@@ -246,6 +254,8 @@ void Flight::setCapacity(int value)
         throw invalid_argument("Capacity Must Be Greater Than 0!");
 
     capacity = value;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 }
 
 state Flight::getFlightState() const
@@ -286,6 +296,8 @@ void Flight::setFlightState(const state &value)
     if (value == CANCELED)
         emit flightCanceledSignal(true);
     flightState = value;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 }
 
 void Flight::setFlightStateAsString(const QString &value)
@@ -556,6 +568,8 @@ void Flight::setSerial(const QString& s)
     this->serial = s;
 //    this->search_code = s;
     this->setSearchCode(s);
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -570,6 +584,8 @@ void Flight::setSource(const QString & s)
         throw invalid_argument("Source Is Empty!");
 
     this->source = s;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -579,6 +595,8 @@ void Flight::setDestination(const QString & s)
         throw invalid_argument("Destination Is Empty!");
 
     this->destination = s;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -589,6 +607,8 @@ void Flight::setDateTimeArrival(const QDateTime &d)
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -599,6 +619,8 @@ void Flight::setDateTimeArrival(const QDateTime && d)
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -608,6 +630,7 @@ void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minu
     QTime time(hour, minute, second);
     QDateTime datetime(date, time);
     this->setDateTimeArrival(datetime);
+
 //    this->dateTimeArrival.setDate(date);
 //    this->dateTimeArrival.setTime(time);
 //    Recorder<Flight>::getInstance()->updateFile(this);
@@ -617,6 +640,8 @@ void Flight::setDateTimeDeparture(const QDateTime & d)
 {
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -624,6 +649,8 @@ void Flight::setDateTimeDeparture(const QDateTime && d)
 {
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
+
+    Recorder<Flight>::getInstance()->updateFileAll();
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -651,6 +678,9 @@ void Flight::setPilot(Pilot * p)
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(this->getPilot()->getPersonnelCode()) + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
+
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -661,6 +691,9 @@ void Flight::setNumOfHosts(int n)
         throw invalid_argument("Num Of Hosts Must Be Greater Than 0!");
 
     this->numOfHosts = n;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -670,6 +703,9 @@ void Flight::setNumOfPassengers(int n)
         throw invalid_argument("Num Of Passengers Must Be Greater Than 0!");
 
     this->numOfPassengers = n;
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
@@ -688,6 +724,8 @@ void Flight::attachHost(Host * h)
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(h->getPersonnelCode()) + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
 
         //this->setFlightState()
     }
@@ -710,6 +748,9 @@ void Flight::attachTicket(Ticket * p)
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(p->getNo()) + s2 +
                                    this->getSerial());
+
+        Recorder<Flight>::getInstance()->updateFileAll();
+
     }
 //    Recorder<Flight>::getInstance()->updateFile(this);
 }
@@ -722,11 +763,14 @@ void Flight::removeHost(Host* h)
     this->hosts.removeOne(h);
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
-    this->attachHost(this->getAirline()->getFirstFreeHost(this));
+//    this->attachHost(this->getAirline()->getFirstFreeHost(this));
 
 //    Recorder<Flight>::getInstance()->updateFile(this);
 
     emit flightStatusChanged();
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
 //    foreach (Host* h, this->getHostsList())
 //    {
 //        if (h == nullptr)
@@ -776,9 +820,12 @@ void Flight::removePilot(){
     this->pilot = nullptr;
     //this->attachHost(Recorder<Host>::getFirstFree(this));
 //    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
-    this->setPilot(this->getAirline()->getFirstFreePilot(this));
+//    this->setPilot(this->getAirline()->getFirstFreePilot(this));
 
     emit flightStatusChanged();
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
     //Recorder<Flight>::getInstance()->updateFile(this);
 //    foreach (Host* h, this->getHostsList())
 //    {
@@ -835,6 +882,9 @@ void Flight::removeAirplane()
 {
     this->airplane = nullptr;
     emit flightStatusChanged();
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
 }
 
 //void Flight::attachPassenger(Passenger * p)
@@ -845,32 +895,32 @@ void Flight::removeAirplane()
 //    this->numOfPassengers--;
 //}
 
-QDateTime Flight::getDateTimeArrival()
+QDateTime Flight::getDateTimeArrival() const
 {
     return this->dateTimeArrival;
 }
 
-QDateTime Flight::getDateTimeDeparture()
+QDateTime Flight::getDateTimeDeparture() const
 {
     return this->dateTimeDeparture;
 }
 
-QString Flight::getSource()
+QString Flight::getSource() const
 {
     return this->source;
 }
 
-QString Flight::getDestination()
+QString Flight::getDestination() const
 {
     return this->destination;
 }
 
-int Flight::getNumOfHosts()
+int Flight::getNumOfHosts() const
 {
     return this->numOfHosts;
 }
 
-int Flight::getNumOfPassengers()
+int Flight::getNumOfPassengers() const
 {
     return this->numOfPassengers;
 }
@@ -880,12 +930,12 @@ Pilot *Flight::getPilot() const
     return this->pilot;
 }
 
-QVector<Host *> Flight::getHostsList()
+QVector<Host *> Flight::getHostsList() const
 {
     return this->hosts;
 }
 
-QString Flight::getSerial()
+QString Flight::getSerial() const
 {
     return this->serial;
 }
@@ -910,14 +960,19 @@ Flight::~Flight()
     {
         Recorder<Ticket>::getInstance()->remove(t);
     }
+
+    Recorder<Flight>::getInstance()->updateFileAll();
+
 }
 
 void Flight::removeCarrier(Carrier* c){
     if(c==arrival_carrier){
         arrival_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeArrival(),getDestination());
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
     if(c==departure_carrier){
         departure_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeDeparture(),getSource());
+        Recorder<Flight>::getInstance()->updateFileAll();
     }
 }
 int Flight::getAttachedTicketsize()const{
@@ -927,11 +982,11 @@ void Flight::removeTicket(Ticket* T){
    tickets.removeOne(T);
    emit flightStatusChanged();
 }
-bool Flight::isCheckInReady(){
+bool Flight::isCheckInReady() const{
     return true;
 }
 
-double Flight::income()
+double Flight::income() const
 {
     double in = 0;
     foreach(Ticket * t, this->tickets)

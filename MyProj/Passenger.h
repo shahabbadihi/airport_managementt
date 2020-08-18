@@ -40,14 +40,14 @@ public:
     void attachTicket(Ticket*);
     void removeTicket(Ticket*);
 
-    bool isTicketInList(Ticket*);
-    bool isTicketListEmpty();
+    bool isTicketInList(Ticket*) const;
+    bool isTicketListEmpty() const;
 
-    QString getFname();
-    QString getLname();
-    QString getFatherName();
-    qlonglong getNationalCode();
-    QDate getBirthDate();
+    QString getFname() const;
+    QString getLname() const;
+    QString getFatherName() const;
+    qlonglong getNationalCode() const;
+    QDate getBirthDate() const;
 };
 
 #endif // PASSENGER_H
