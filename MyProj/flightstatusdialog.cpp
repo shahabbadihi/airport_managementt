@@ -27,6 +27,7 @@ FlightStatusDialog::FlightStatusDialog(Flight* flight, QWidget *parent) :
     ui->lblCheckStasus->setText(flight_ptr->isCheckInReady() ? "ready!" : "Not ready!");
 
     ui->btnEditCheck->setDisabled(!flight_ptr->isCheckInReady());
+
 }
 
 FlightStatusDialog::~FlightStatusDialog()
