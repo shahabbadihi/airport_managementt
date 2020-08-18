@@ -117,6 +117,7 @@ public:
     bool isDepartureCarrierSetted() const;
     bool isArrivalCarrierSetted() const;
     bool isCheckInReady() const;
+    bool isCheckInCompleted();
 
     bool isSuitable(Passenger * p, const QString& source,
                     const QString& dest,

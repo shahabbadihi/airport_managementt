@@ -8,6 +8,7 @@
 #include <QString>
 #include <QStringList>
 #include <stdexcept>
+#include "Recorder.h"
 using namespace std;
 
 Airline *Flight::getAirline() const
@@ -1030,6 +1031,18 @@ double Flight::income() const
         in += t->getPrice();
     }
     return in;
+}
+bool Flight::isCheckInCompleted(){
+    int freeSeats=0;
+    for(int i=0;i<airplane->getRowCount();i++){
+        for(int j=0;j<airplane->getcolumnCount();j++){
+           if( this->airplane->getSeat(i,j)->isFree(this)){
+               freeSeats++;
+           }
+        }
+    }
+    if(freeSeats==0){return true;}
+    else{return false;}
 }
 //void Flight::setDate(const QDate & d)
 //{
