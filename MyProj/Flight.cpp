@@ -283,6 +283,8 @@ void Flight::setFlightState(const state &value)
 {
     if (value == DONE)
         emit flightDoneSignal(true);
+    if (value == CANCELED)
+        emit flightCanceledSignal(true);
     flightState = value;
 }
 

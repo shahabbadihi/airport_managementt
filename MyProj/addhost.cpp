@@ -33,6 +33,7 @@ void AddHost::on_pushButton_2_clicked()
 
 void AddHost::on_pushButton_clicked()
 {
+    Host * host = nullptr;
     try
     {
         qlonglong p_code = ui->txtPersonnelCode->text().toLongLong();
@@ -43,7 +44,7 @@ void AddHost::on_pushButton_clicked()
         QDate e_date = ui->dtEmploymentDate->date();
         qlonglong n_code = ui->txtNationalCode->text().toLongLong();
 
-        Host* host = new Host(p_code, airline, fname, lname, b_date,
+        host = new Host(p_code, airline, fname, lname, b_date,
                               e_date, n_code);
 //        host->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
 //        host->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
@@ -68,6 +69,8 @@ void AddHost::on_pushButton_clicked()
 
     catch (invalid_argument e)
     {
+        delete host;
+        host = nullptr;
         QMessageBox msg;
         msg.setText(e.what());
         msg.exec();

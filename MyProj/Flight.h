@@ -133,6 +133,7 @@ public:
 signals:
     void flightStatusChanged();
     void flightDoneSignal(bool);
+    void flightCanceledSignal(bool);
     void flightStatusMsgSignal(const QString&);
 };
 
