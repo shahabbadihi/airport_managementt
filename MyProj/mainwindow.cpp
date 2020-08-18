@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     foreach (Flight * f, Recorder<Flight>::getInstance()->get_dataList())
     {
         connect(f, SIGNAL(flightStatusMsgSignal(const QString&))
-                , ui->statusbar, SLOT(showMessage(const QString&)), Qt::QueuedConnection);
+                , ui->statusbar, SLOT(showMessage(const QString&)));
     }
 
     connect(Recorder<Flight>::getInstance(), SIGNAL(recordAdded()),
@@ -272,5 +272,5 @@ void MainWindow::connectNewFlightToStatusBar()
 {
     connect(Recorder<Flight>::getInstance()->get_dataList().last(),
             SIGNAL(flightStatusMsgSignal(const QString&))
-            , ui->statusbar, SLOT(showMessage(const QString&)), Qt::QueuedConnection);
+            , ui->statusbar, SLOT(showMessage(const QString&)));
 }
