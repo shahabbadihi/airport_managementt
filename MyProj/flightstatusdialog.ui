@@ -6,10 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-
     <width>574</width>
     <height>377</height>
-
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,18 +41,18 @@ QFrame {
 #line {
 	background-color: black;
 
+}
+QPushButton:disabled {
+	background: rgb(134, 141, 157);
 }</string>
-
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>90</x>
-
      <y>20</y>
      <width>381</width>
      <height>321</height>
-
     </rect>
    </property>
    <property name="frameShape">
@@ -63,9 +61,7 @@ QFrame {
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-
    <layout class="QVBoxLayout" name="verticalLayout_3">
-
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
@@ -241,7 +237,6 @@ QFrame {
       </item>
      </layout>
     </item>
-
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -279,7 +274,6 @@ QFrame {
       </item>
      </layout>
     </item>
-
    </layout>
   </widget>
  </widget>

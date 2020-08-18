@@ -89,6 +89,8 @@ void FlightStatusDialog::reset()
     ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
     ui->lblCheckStasus->setText(flight_ptr->isCheckInReady() ? "ready!" : "Not ready!");
+
+    ui->btnEditCheck->setDisabled(flight_ptr->isCheckInReady());
 }
 
 void FlightStatusDialog::on_btnEditCheck_clicked()

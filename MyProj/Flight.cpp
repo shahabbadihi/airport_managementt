@@ -986,7 +986,7 @@ void Flight::removeTicket(Ticket* T){
    emit flightStatusChanged();
 }
 bool Flight::isCheckInReady()const{
-    if(dateTimeDeparture.secsTo(dateTimeArrival.currentDateTime())<=2*60*60){
+    if(dateTimeArrival.currentDateTime().secsTo(dateTimeDeparture)<=2*60*60){
         return true;
     }
     else{

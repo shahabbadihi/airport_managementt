@@ -14,7 +14,7 @@ TicketPage::TicketPage(Ticket * t,QWidget *parent) :
     proxy->setSourceModel(model);
     proxy->setDynamicSortFilter(true);
     ui->listView->setModel(proxy);
-    proxy->setFilterFixedString(QString::number(ticket->getNo()));
+    proxy->setFilterFixedString(QString::number(ticket->getPassenger()->getNationalCode()));
 }
 
 TicketPage::~TicketPage()

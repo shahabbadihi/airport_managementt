@@ -27,7 +27,8 @@ QVariant TicketListModel::data(const QModelIndex &index, int role) const
                 Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getPassengerName()+" | "+
                 Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getSerial()+" | "+
                 Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getSource()+" | "+
-                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getDestination()+" | ";
+                Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getFlight()->getDestination()+" | "+
+                QString::number(Recorder<Ticket>::getInstance()->get_dataList()[index.row()]->getPassenger()->getNationalCode())+" | ";
     }
 //    else if (role == Qt::DisplayRole)
 //    {
