@@ -41,8 +41,8 @@ void PU2::setNationalCode(qlonglong n)
         count++;
         c /= 10;
     }
-    if (count != 10)
-        throw invalid_argument("National Code Must Have 10 Digits!");
+    if (count != 8)
+        throw invalid_argument("National Code Must Have 8 Digits!");
 
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "A");
