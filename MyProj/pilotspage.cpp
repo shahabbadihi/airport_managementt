@@ -74,6 +74,7 @@ PilotsPage::~PilotsPage()
 void PilotsPage::on_btnSubmit_clicked()
 {
     this->mapper->submit();
+    Recorder<Pilot>::getInstance()->updateFileAll();
 }
 
 void PilotsPage::updateButtons(int row)

@@ -174,38 +174,42 @@ void Employee::set_employmentDate(const QDate &&date)
 void Employee::attachFlight(Flight* f)
 {
     if (f && !this->isFlightInList(f))
+    {
         this->list.push_back(f);
+    }
 }
 
 void Employee::attachDoneFlight(Flight * f)
 {
-    if (f && !this->isDoneFlightInList(f))
+    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
+    {
         this->list_of_done_flights.push_back(f);
+    }
 }
 
 void Employee::removeDoneFlight(Flight * f)
 {
-    if(f){
+    if(f && isDoneFlightInList(f) && isFlightInList(f)){
     this->list_of_done_flights.removeOne(f);
     }
 }
 
-QString Employee::getFname()
+QString Employee::getFname() const
 {
     return this->fname;
 }
 
-QString Employee::getLname()
+QString Employee::getLname() const
 {
     return this->lname;
 }
 
-qlonglong Employee::getPersonnelCode()
+qlonglong Employee::getPersonnelCode() const
 {
     return this->personnelCode;
 }
 
-bool Employee::isFree(Flight* f)
+bool Employee::isFree(Flight* f) const
 {
     if(isFlightInList(f))
     {
@@ -247,7 +251,7 @@ bool Employee::isFree(Flight* f)
     }
 }
 
-bool Employee::isFlightInList(Flight * f)
+bool Employee::isFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list)
     {
@@ -257,7 +261,7 @@ bool Employee::isFlightInList(Flight * f)
     return false;
 }
 
-bool Employee::isDoneFlightInList(Flight * f)
+bool Employee::isDoneFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list_of_done_flights)
     {
@@ -280,7 +284,7 @@ void Employee::setAirline(Airline *value)
     }
 }
 
-Flight* Employee::nextFlight(Flight * f){
+Flight* Employee::nextFlight(Flight * f) const{
     if(list.size()==0){return nullptr;}
     Flight* next = nullptr;
     for (int i = 0; i < this->list.size(); i++)
@@ -308,7 +312,7 @@ Flight* Employee::nextFlight(Flight * f){
     return next;
 }
 
-Flight* Employee::prevFlight(Flight * f){
+Flight* Employee::prevFlight(Flight * f) const{
     if(list.size()==0){return nullptr;}
     Flight* prev = nullptr;
     for (int i = 0; i < this->list.size(); i++)
@@ -375,15 +379,13 @@ Flight* Employee::prevFlight(Flight * f){
 //        this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
 //    }
 //}
-int Employee::flightListSize(){
+int Employee::flightListSize() const{
     int i =0;
     for(; i < this->list.size(); i++){}
     return i;
 }
 void Employee::removeFlight(Flight* f){
     if(f){
-    this->list.removeOne(f);
+        this->list.removeOne(f);
     }
-    QMessageBox msg;
-    msg.setText(f->getSerial()+"removed from "+this->getFname()+this->getLname()+"flight list");
 }

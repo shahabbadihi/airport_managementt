@@ -71,6 +71,8 @@ Airline::~Airline()
     {
         Recorder<Airplane>::getInstance()->remove(a);
     }
+
+    Recorder<Airline>::getInstance()->updateFileAll();
 }
 
 QString Airline::get_data()
@@ -119,14 +121,20 @@ QString Airline::get_data()
 void Airline::attachHost(Host * t)
 {
     if (t)
+    {
         this->list_of_hosts.push_back(t);
+        Recorder<Airline>::getInstance()->updateFileAll();
+    }
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::attachPilot(Pilot * t)
 {
     if (t)
+    {
         this->list_of_pilots.push_back(t);
+        Recorder<Airline>::getInstance()->updateFileAll();
+    }
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
@@ -136,6 +144,8 @@ void Airline::attachFlight(Flight * t)
     {
         this->list_of_flights.push_back(t);
         t->setAirline(this);
+
+        Recorder<Airline>::getInstance()->updateFileAll();
     }
     //    Recorder<Airline>::getInstance()->updateFile(this);
 }
@@ -143,37 +153,47 @@ void Airline::attachFlight(Flight * t)
 void Airline::attachDoneFlight(Flight * t)
 {
     if (t && !isDoneFlightInList(t))
+    {
         this->list_of_done_flights.push_back(t);
+        Recorder<Airline>::getInstance()->updateFileAll();
+    }
 }
 
 void Airline::attachAirplane(Airplane * t)
 {
     if (t)
+    {
         this->list_of_airplanes.push_back(t);
+        Recorder<Airline>::getInstance()->updateFileAll();
+    }
     //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
 void Airline::removeHost(Host * host)
 {
     this->list_of_hosts.removeOne(host);
+    Recorder<Airline>::getInstance()->updateFileAll();
 }
 
 void Airline::removePilot(Pilot * pilot)
 {
     this->list_of_pilots.removeOne(pilot);
+    Recorder<Airline>::getInstance()->updateFileAll();
 }
 
 void Airline::removeFlight(Flight *f)
 {
     this->list_of_flights.removeOne(f);
+    Recorder<Airline>::getInstance()->updateFileAll();
 }
 
 void Airline::removeAirplane(Airplane * a)
 {
     this->list_of_airplanes.removeOne(a);
+    Recorder<Airline>::getInstance()->updateFileAll();
 }
 
-bool Airline::isFlightInList(Flight * f)
+bool Airline::isFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list_of_flights)
     {
@@ -183,7 +203,7 @@ bool Airline::isFlightInList(Flight * f)
     return false;
 }
 
-bool Airline::isDoneFlightInList(Flight * f)
+bool Airline::isDoneFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list_of_done_flights)
     {
@@ -208,6 +228,7 @@ void Airline::setName(const QString &value)
     if (value == "")
         throw invalid_argument("Name Is Empty!");
     name = value;
+    Recorder<Airline>::getInstance()->updateFileAll();
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
@@ -217,6 +238,7 @@ void Airline::setCode(const QString &value)
         throw invalid_argument("Code Is Empty!");
     this->code = value;
     this->setSearchCode(value);
+    Recorder<Airline>::getInstance()->updateFileAll();
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
@@ -274,7 +296,7 @@ Airplane *Airline::getFirstFreeAirplane(Flight * f) const
 //    return nullptr;
 //}
 
-Flight *Airline::searchFlightByCode(QString & code)
+Flight *Airline::searchFlightByCode(QString & code) const
 {
     foreach (Flight* f, this->list_of_flights)
     {
@@ -285,10 +307,10 @@ Flight *Airline::searchFlightByCode(QString & code)
     }
     return nullptr;
 }
-QVector<Pilot*>Airline::getPilotsList(){return list_of_pilots;}
-QVector<Host*>Airline::getHostsList(){return list_of_hosts;}
-QVector<Flight*>Airline::getFlightsList(){return list_of_flights;}
-QVector<Airplane*>Airline::getAirplanesList(){return list_of_airplanes;}
+QVector<Pilot*>Airline::getPilotsList() const{return list_of_pilots;}
+QVector<Host*>Airline::getHostsList() const{return list_of_hosts;}
+QVector<Flight*>Airline::getFlightsList() const{return list_of_flights;}
+QVector<Airplane*>Airline::getAirplanesList() const{return list_of_airplanes;}
 
 QVector<Flight *> Airline::getListOfDoneFlights() const
 {

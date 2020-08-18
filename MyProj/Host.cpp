@@ -61,6 +61,8 @@ Host::~Host()
        this->list[i]->removeHost(this);
     }
     this->airline->removeHost(this);
+
+    Recorder<Host>::getInstance()->updateFileAll();
 }
 
 void Host::attachFlight(Flight * f)
@@ -69,8 +71,37 @@ void Host::attachFlight(Flight * f)
     {
         this->list.push_back(f);
         f->attachHost(this);
+
+        Recorder<Host>::getInstance()->updateFileAll();
     }
 //    Recorder<Host>::getInstance()->updateFile(this);
+}
+
+void Host::removeFlight(Flight *f)
+{
+    if(f && isFlightInList(f)){
+        this->list.removeOne(f);
+        Recorder<Host>::getInstance()->updateFileAll();
+        QMessageBox msg;
+        msg.setText(f->getSerial()+" removed from host "+this->getFname()+ " " +this->getLname()+ "flight list");
+    }
+}
+
+void Host::attachDoneFlight(Flight * f)
+{
+    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
+    {
+        this->list_of_done_flights.push_back(f);
+        Recorder<Host>::getInstance()->updateFileAll();
+    }
+}
+
+void Host::removeDoneFlight(Flight *f)
+{
+    if(f && isDoneFlightInList(f) && isFlightInList(f)){
+        this->list_of_done_flights.removeOne(f);
+        Recorder<Host>::getInstance()->updateFileAll();
+    }
 }
 
 void Host::setAirline(Airline *value)
@@ -80,6 +111,8 @@ void Host::setAirline(Airline *value)
         airline = value;
 
         value->attachHost(this);
+
+        Recorder<Host>::getInstance()->updateFileAll();
     }
 //    Recorder<Host>::getInstance()->updateFile(this);
 }

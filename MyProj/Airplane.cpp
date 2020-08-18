@@ -13,6 +13,8 @@ void Airplane::attachFlight(Flight *f)
         this->list_of_flights.push_back(f);
 
         f->setAirplane(this);
+
+        Recorder<Airplane>::getInstance()->updateFileAll();
     }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
@@ -29,6 +31,8 @@ void Airplane::setAirline(Airline *value)
         this->airline = value;
 
         value->attachAirplane(this);
+
+        Recorder<Airplane>::getInstance()->updateFileAll();
     }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
@@ -43,6 +47,8 @@ void Airplane::setNumOfSeats(int value)
     if (value <= 0)
         throw invalid_argument("Invalid Value For Num Of Seats");
     numOfSeats = value;
+
+    Recorder<Airplane>::getInstance()->updateFileAll();
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
@@ -58,15 +64,19 @@ void Airplane::setSerial(const QString &value)
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
+
+    Recorder<Airplane>::getInstance()->updateFileAll();
     //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
 void Airplane::removeFlight(Flight * f)
 {
     this->list_of_flights.removeOne(f);
+
+    Recorder<Airplane>::getInstance()->updateFileAll();
 }
 
-bool Airplane::isFree(Flight * f)
+bool Airplane::isFree(Flight * f) const
 {
     if (this->numOfSeats < f->getNumOfPassengers())
         return false;
@@ -111,7 +121,7 @@ bool Airplane::isFree(Flight * f)
     }
 }
 
-Flight* Airplane::nextFlight(Flight * f){
+Flight* Airplane::nextFlight(Flight * f) const{
     if(list_of_flights.size()==0){return nullptr;}
     Flight* next = nullptr;
     for (int i = 0; i < this->list_of_flights.size(); i++)
@@ -139,7 +149,7 @@ Flight* Airplane::nextFlight(Flight * f){
     return next;
 }
 
-Flight* Airplane::prevFlight(Flight * f){
+Flight* Airplane::prevFlight(Flight * f) const{
     if(list_of_flights.size()==0){return nullptr;}
     Flight* prev = nullptr;
     for (int i = 0; i < this->list_of_flights.size(); i++)
@@ -167,7 +177,7 @@ Flight* Airplane::prevFlight(Flight * f){
     return prev;
 }
 
-bool Airplane::isFlightInList(Flight * f)
+bool Airplane::isFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list_of_flights)
     {
@@ -198,6 +208,7 @@ void Airplane::createSeats(int rows, int cols)
 }
 
 Airplane::Airplane(const QString &serial, Airline *airline, int rows, int cols)
+    : airline(nullptr)
 {
     this->setSerial(serial);
     this->setAirline(airline);
@@ -255,6 +266,8 @@ Airplane::~Airplane()
     {
         f->removeAirplane();
     }
+
+    Recorder<Airplane>::getInstance()->updateFileAll();
 }
 
 QString Airplane::get_data()
@@ -276,9 +289,9 @@ QString Airplane::get_data()
 
     return str;
 }
-int Airplane::getRowCount(){return this->num_of_rows;}
-int Airplane::getcolumnCount(){return this->num_of_cols; }
-Seat * Airplane::getSeat(int r,int c){
+int Airplane::getRowCount() const{return this->num_of_rows;}
+int Airplane::getcolumnCount() const{return this->num_of_cols; }
+Seat * Airplane::getSeat(int r,int c) const{
     return &seats[r][c];
 
 }

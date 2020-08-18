@@ -72,8 +72,38 @@ void Pilot::attachFlight(Flight * f)
     {
         this->list.push_back(f);
         f->setPilot(this);
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
-//    Recorder<Pilot>::getInstance()->updateFile(this);
+    //    Recorder<Pilot>::getInstance()->updateFile(this);
+}
+
+void Pilot::removeFlight(Flight *f)
+{
+    if(f && isFlightInList(f)){
+        this->list.removeOne(f);
+        f->removePilot();
+        Recorder<Pilot>::getInstance()->updateFileAll();
+        QMessageBox msg;
+        msg.setText(f->getSerial()+" removed from pilot "+this->getFname()+ " " +this->getLname()+ "flight list");
+    }
+}
+
+void Pilot::attachDoneFlight(Flight * f)
+{
+    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
+    {
+        this->list_of_done_flights.push_back(f);
+
+        Recorder<Pilot>::getInstance()->updateFileAll();
+    }
+}
+
+void Pilot::removeDoneFlight(Flight *f)
+{
+    if(f && isDoneFlightInList(f) && isFlightInList(f)){
+        this->list_of_done_flights.removeOne(f);
+        Recorder<Pilot>::getInstance()->updateFileAll();
+    }
 }
 Pilot::~Pilot(){
     for (int i = 0; i < this->flightListSize(); i++)
@@ -81,6 +111,8 @@ Pilot::~Pilot(){
        this->list[i]->removePilot();
     }
     this->airline->removePilot(this);
+
+    Recorder<Pilot>::getInstance()->updateFileAll();
 }
 //QString Pilot::get_data()
 //{
@@ -125,6 +157,7 @@ void Pilot::setAirline(Airline *value)
         airline = value;
 
         value->attachPilot(this);
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
 //    Recorder<Pilot>::getInstance()->updateFile(this);
 }

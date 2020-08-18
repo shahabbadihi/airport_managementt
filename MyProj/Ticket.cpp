@@ -27,6 +27,8 @@ void Ticket::setNo(long value)
     this->no = value;
 //    this->search_code = QString::number(value);
     this->setSearchCode(QString::number(value));
+
+    Recorder<Ticket>::getInstance()->updateFileAll();
 //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
@@ -172,6 +174,7 @@ void Ticket::setFlight(Flight * f)
     {
         this->flight = f;
         f->attachTicket(this);
+        Recorder<Ticket>::getInstance()->updateFileAll();
     }
     //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
@@ -183,14 +186,13 @@ void Ticket::setPassenger(Passenger * p)
     {
         this->passenger = p;
         p->attachTicket(this);
+        Recorder<Ticket>::getInstance()->updateFileAll();
     }
 //    this->setPassengerFname(p->getFname());
 //    this->setPassengerLname(p->getLname());
 //    this->setPassengerNationalCode(p->getNationalCode());
 //    this->setPassengerFatherName(p->getFatherName());
 //    this->setPassengerBirthDate(p->getBirthDate());
-
-//    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
 //void Ticket::setPassengerBirthDate(const QDate & date)
@@ -230,7 +232,7 @@ Flight *Ticket::getFlight() const
 {
     return this->flight;
 }
-QString Ticket::getPassengerName(){
+QString Ticket::getPassengerName() const{
     return passenger->getFname()+" "+passenger->getLname();
 }
 Ticket::~Ticket(){
@@ -241,6 +243,8 @@ Ticket::~Ticket(){
         Recorder<Passenger>::getInstance()->remove(this->passenger);
 
     this->seat->removeTicket(this);
+
+    Recorder<Ticket>::getInstance()->updateFileAll();
 }
 double Ticket::getPrice(){
     return price;

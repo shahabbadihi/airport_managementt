@@ -17,10 +17,12 @@ void Carrier::setSerial(const QString &value)
     serial = value;
 //    this->search_code = value;
     this->setSearchCode(value);
+
+    Recorder<Carrier>::getInstance()->updateFileAll();
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
-bool Carrier::isFree(const QDateTime & t, const QString & s)
+bool Carrier::isFree(const QDateTime & t, const QString & s) const
 {
     if (s != this->place)
         return false;
@@ -37,7 +39,7 @@ bool Carrier::isFree(const QDateTime & t, const QString & s)
     return true;
 }
 
-bool Carrier::isFlightInList(Flight * f)
+bool Carrier::isFlightInList(Flight * f) const
 {
     foreach (Flight* fl, this->list_of_flights)
     {
@@ -47,7 +49,7 @@ bool Carrier::isFlightInList(Flight * f)
     return false;
 }
 
-bool Carrier::isMissionInList(const QString & str)
+bool Carrier::isMissionInList(const QString & str) const
 {
     foreach (QString s, this->list_of_missions)
     {
@@ -77,6 +79,8 @@ void Carrier::setPlace(const QString &value)
     if (value == "")
         throw invalid_argument("Place Is Empty!");
     place = value;
+
+    Recorder<Carrier>::getInstance()->updateFileAll();
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
@@ -133,9 +137,11 @@ QString Carrier::get_data()
 
 void Carrier::attachFlight(Flight* f)
 {
-    if (f)
+    if (f && !isFlightInList(f))
     {
         this->list_of_flights.push_back(f);
+
+        Recorder<Carrier>::getInstance()->updateFileAll();
     }
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
@@ -143,16 +149,24 @@ void Carrier::attachFlight(Flight* f)
 void Carrier::attachMission(const QString & m)
 {
     if (!this->isMissionInList(m))
+    {
         this->list_of_missions.push_back(m);
+
+        Recorder<Carrier>::getInstance()->updateFileAll();
+    }
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 void Carrier::removeFlight(Flight *f){
     this->list_of_flights.removeOne(f);
+
+    Recorder<Carrier>::getInstance()->updateFileAll();
 }
 Carrier::~Carrier(){
      foreach(Flight* f,this->list_of_flights){
          f->removeCarrier(this);
      }
+
+     Recorder<Carrier>::getInstance()->updateFileAll();
 }
 
 

@@ -21,26 +21,26 @@ ThreadedJob::ThreadedJob(QObject *parent) : QObject(parent)
 
 void ThreadedJob::slt_update()
 {
-    if (counter % 2 == 0)
+    //if (counter % 2 == 0)
+    //{
+    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
     {
-        foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
-        {
-            f->setState();
-        }
+        f->setState();
     }
-    if (counter % 2 == 1)
-    {
-        Recorder<Airline>::getInstance()->updateFileAll();
-        Recorder<Airplane>::getInstance()->updateFileAll();
-        Recorder<Host>::getInstance()->updateFileAll();
-        Recorder<Pilot>::getInstance()->updateFileAll();
-        Recorder<Flight>::getInstance()->updateFileAll();
-        Recorder<Passenger>::getInstance()->updateFileAll();
-        Recorder<Ticket>::getInstance()->updateFileAll();
-        Recorder<Carrier>::getInstance()->updateFileAll();
-    }
+    //}
+//    if (counter % 2 == 1)
+//    {
+//        Recorder<Airline>::getInstance()->updateFileAll();
+//        Recorder<Airplane>::getInstance()->updateFileAll();
+//        Recorder<Host>::getInstance()->updateFileAll();
+//        Recorder<Pilot>::getInstance()->updateFileAll();
+//        Recorder<Flight>::getInstance()->updateFileAll();
+//        Recorder<Passenger>::getInstance()->updateFileAll();
+//        Recorder<Ticket>::getInstance()->updateFileAll();
+//        Recorder<Carrier>::getInstance()->updateFileAll();
+//    }
 
-    counter++;
+//    counter++;
 }
 
 void ThreadedJob::slt_update_flight_table()
@@ -56,7 +56,7 @@ void ThreadedJob::slt_update_flight_table()
 
 void ThreadedJob::slt_start_update()
 {
-    this->counter = 0;
+//    this->counter = 0;
 
     this->tm_update = new QTimer(this);
     this->tm_update->setInterval(60000);

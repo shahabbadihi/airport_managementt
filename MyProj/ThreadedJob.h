@@ -12,7 +12,7 @@ private:
     QTimer * tm_update_flight_table;
     QTimer * tm_update;
 //    QTimer * tm_update_pilot_model;
-    long long counter;
+//    long long counter;
 public:
     explicit ThreadedJob(QObject *parent = nullptr);
 

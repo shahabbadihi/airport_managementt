@@ -33,8 +33,8 @@ public:
     //void attachTicket(Ticket*);
     //void attachCarrier(Carrier*);
 
-    bool isFlightInList(Flight*);
-    bool isDoneFlightInList(Flight*);
+    bool isFlightInList(Flight*) const;
+    bool isDoneFlightInList(Flight*) const;
 
     void setName(const QString &value);
 
@@ -49,12 +49,12 @@ public:
     Airplane* getFirstFreeAirplane(Flight*) const;
     //Employee* getFirstFreeEmp(Flight*) const;
 
-    Flight* searchFlightByCode(QString&);
+    Flight* searchFlightByCode(QString&) const;
 
-    QVector<Pilot*>getPilotsList();
-    QVector<Host*>getHostsList();
-    QVector<Flight*>getFlightsList();
-    QVector<Airplane*>getAirplanesList();
+    QVector<Pilot*>getPilotsList() const;
+    QVector<Host*>getHostsList() const;
+    QVector<Flight*>getFlightsList() const;
+    QVector<Airplane*>getAirplanesList() const;
     QVector<Flight *> getListOfDoneFlights() const;
 
 private:
