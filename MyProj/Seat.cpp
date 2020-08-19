@@ -8,16 +8,16 @@ void Seat::setSeatInfo(int row, int col, Airplane *a)
 }
 
 void Seat::attachTicket(Ticket* t){
-    tickets.push_back(t);
+    ticket.push_back(t);
 }
 void Seat::removeTicket(Ticket *t){
-    tickets.removeOne(t);
+    ticket.removeOne(t);
 }
 Seat::Seat(){
 
 }
 bool Seat::isFree(Flight*f){
-    foreach(Ticket *t,this->tickets){
+    foreach(Ticket *t,this->ticket){
         if(t->getFlight()==f){
             return false;
         }
@@ -25,7 +25,7 @@ bool Seat::isFree(Flight*f){
     return true;
 }
 Ticket *Seat::getTicket(Flight*f){
-    foreach(Ticket *t,this->tickets){
+    foreach(Ticket *t,this->ticket){
         if(t->getFlight()==f){
             return t;
         }

@@ -2,9 +2,7 @@
 #include "Employee.h"
 #include "Flight.h"
 #include <QString>
-#include "Airline.h"
-
-extern bool ISDATACHANGED;
+#include <Airline.h>
 
 //QString Pilot::getDegreeAsString() const
 //{
@@ -74,8 +72,7 @@ void Pilot::attachFlight(Flight * f)
     {
         Employee::attachFlight(f);
         f->setPilot(this);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
     //    Recorder<Pilot>::getInstance()->updateFile(this);
 }
@@ -85,8 +82,7 @@ void Pilot::removeFlight(Flight *f)
     if(f && isFlightInList(f)){
         Employee::removeFlight(f);
         f->removePilot();
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+        Recorder<Pilot>::getInstance()->updateFileAll();
         QMessageBox msg;
         msg.setText(f->getSerial()+" removed from pilot "+this->getFname()+ " " +this->getLname()+ "flight list");
     }
@@ -98,8 +94,7 @@ void Pilot::attachDoneFlight(Flight * f)
     {
         Employee::attachDoneFlight(f);
 
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
 }
 
@@ -107,8 +102,7 @@ void Pilot::removeDoneFlight(Flight *f)
 {
     if(f && isDoneFlightInList(f) && isFlightInList(f)){
         Employee::removeDoneFlight(f);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
 }
 Pilot::~Pilot(){
@@ -120,8 +114,7 @@ Pilot::~Pilot(){
     if (getAirline())
         this->getAirline()->removePilot(this);
 
-//    Recorder<Pilot>::getInstance()->updateFileAll();
-    ISDATACHANGED = true;
+    Recorder<Pilot>::getInstance()->updateFileAll();
 }
 //QString Pilot::get_data()
 //{
@@ -166,8 +159,7 @@ void Pilot::setAirline(Airline *value)
         Employee::setAirline(value);
 
         value->attachPilot(this);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+        Recorder<Pilot>::getInstance()->updateFileAll();
     }
 //    Recorder<Pilot>::getInstance()->updateFile(this);
 }

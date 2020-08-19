@@ -2,8 +2,6 @@
 #include <stdexcept>
 using namespace std;
 
-extern bool ISDATACHANGED;
-
 P2_12::P2_12()
 {
 
@@ -48,6 +46,5 @@ void P2_12::setNationalCode(qlonglong n)
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "B");
 
-//    Recorder<Passenger>::getInstance()->updateFileAll();
-    ISDATACHANGED = true;
+    Recorder<Passenger>::getInstance()->updateFileAll();
 }

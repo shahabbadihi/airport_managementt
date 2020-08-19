@@ -58,7 +58,7 @@ void AirlinesPage::updateButton(int row)
 void AirlinesPage::on_subBtn_clicked()
 {
     this->mapper->submit();
-    Recorder<Airline>::getInstance()->updateFileAll();
+
 }
 
 void AirlinesPage::setCurrentIndex(int row)

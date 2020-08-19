@@ -84,8 +84,6 @@ private slots:
 
     void on_actionAirline_triggered();
 
-    bool update_files_slot();
-
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;
@@ -107,11 +105,6 @@ private:
     //QTimer * timer;
 
     QTabWidget * tab_widget;
-
-    bool maybeSave();
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
 
 };
 #endif // MAINWINDOW_H

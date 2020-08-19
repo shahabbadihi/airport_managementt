@@ -13,7 +13,6 @@
 #include <QTime>
 #include <QStandardItemModel>
 #include <QAbstractItemModel>
-#include <QCloseEvent>
 #include <QThread>
 #include "Recorder.h"
 #include "Airline.h"
@@ -31,8 +30,6 @@
 #include "AirplanesPage.h"
 #include "ThreadedJob.h"
 #include "airlinespage.h"
-
-bool ISDATACHANGED = false;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -77,14 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     tab_widget->setStyleSheet("background-color : black;");   
-//    this->setCentralWidget(tab_widget);
-    ui->verticalLayout->addWidget(tab_widget);
-    QPushButton * save_button = new QPushButton("Save", this);
-
-    save_button->setStyleSheet("background-color:  rgb(255, 246, 0);color: black;border-radius : 3px;padding : 2px;");
-    connect(save_button, SIGNAL(clicked()), this, SLOT(update_files_slot()));
-
-    ui->verticalLayout->addWidget(save_button);
+    this->setCentralWidget(tab_widget);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new AirlinesPage(this), "Airlines");
     tab_widget->addTab(new PilotsPage(this), "Pilots");
@@ -277,63 +267,6 @@ void MainWindow::on_actionAirline_triggered()
     delete deleteAirlineDialog;
 }
 
-bool MainWindow::update_files_slot()
-{
-    if (ISDATACHANGED == false)
-    {
-        QMessageBox msg;
-        msg.setText("Data Have Not Modified!");
-        msg.exec();
-
-        return true;
-    }
-
-    Recorder<Airline>::getInstance()->updateFileAll();
-    Recorder<Airplane>::getInstance()->updateFileAll();
-    Recorder<Host>::getInstance()->updateFileAll();
-    Recorder<Pilot>::getInstance()->updateFileAll();
-    Recorder<Flight>::getInstance()->updateFileAll();
-    Recorder<Passenger>::getInstance()->updateFileAll();
-    Recorder<Ticket>::getInstance()->updateFileAll();
-    Recorder<Carrier>::getInstance()->updateFileAll();
-
-    ISDATACHANGED = false;
-
-    QMessageBox msg;
-    msg.setText("Changes Have Been Saved!");
-    msg.exec();
-
-    return true;
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    if (maybeSave()) {
-        event->accept();
-    } else {
-        event->ignore();
-    }
-}
-
-bool MainWindow::maybeSave()
-{
-    if (!ISDATACHANGED)
-        return true;
-    const QMessageBox::StandardButton ret
-        = QMessageBox::warning(this, tr("Save Changes"),
-                               tr("Data has been modified.\n"
-                                  "Do you want to save your changes?"),
-                               QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-    switch (ret) {
-    case QMessageBox::Save:
-        return update_files_slot();
-    case QMessageBox::Cancel:
-        return false;
-    default:
-        break;
-    }
-    return true;
-}
 
 void MainWindow::connectNewFlightToStatusBar()
 {

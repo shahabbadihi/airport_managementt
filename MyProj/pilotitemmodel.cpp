@@ -126,7 +126,7 @@ bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, in
             p->set_nationalCode(value.toLongLong());
             break;
         case 3:
-//            p->set_personnelCode(value.toLongLong());
+            p->set_personnelCode(value.toLongLong());
             break;
         case 4:
             //p->setAirline();

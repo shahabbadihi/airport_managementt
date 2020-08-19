@@ -22,7 +22,6 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->addMapping(ui->txtFamily, 1);
     mapper->addMapping(ui->txtNationalCode, 2);
     mapper->addMapping(ui->txtPersonnelCode, 3);
-    ui->txtPersonnelCode->setReadOnly(true);
 
     mapper->addMapping(ui->txtAirline, 4);
     ui->txtAirline->setReadOnly(true);
