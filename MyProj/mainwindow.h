@@ -86,6 +86,12 @@ private slots:
 
     bool update_files_slot();
 
+    void on_actionSave_triggered();
+
+    void on_actionSave_Exit_triggered();
+
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
     Dialog* addPilotDialog;

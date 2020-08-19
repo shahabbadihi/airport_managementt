@@ -149,11 +149,7 @@ QStatusBar {
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout"/>
-    </item>
-   </layout>
+   <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -192,6 +188,15 @@ QStatusBar {
     <addaction name="actionTicket"/>
     <addaction name="actioncarrier"/>
    </widget>
+   <widget class="QMenu" name="menuFile_2">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_Exit"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile_2"/>
    <addaction name="menuFile"/>
    <addaction name="menuDelete"/>
   </widget>
@@ -264,6 +269,21 @@ QStatusBar {
   <action name="actionAirline">
    <property name="text">
     <string>Airline</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSave_Exit">
+   <property name="text">
+    <string>Save &amp;&amp; Exit</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>

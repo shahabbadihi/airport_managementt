@@ -77,14 +77,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     tab_widget->setStyleSheet("background-color : black;");   
-//    this->setCentralWidget(tab_widget);
-    ui->verticalLayout->addWidget(tab_widget);
-    QPushButton * save_button = new QPushButton("Save", this);
+    this->setCentralWidget(tab_widget);
+//    ui->verticalLayout->addWidget(tab_widget);
+//    QPushButton * save_button = new QPushButton("Save", this);
 
-    save_button->setStyleSheet("background-color:  rgb(255, 246, 0);color: black;border-radius : 3px;padding : 2px;");
-    connect(save_button, SIGNAL(clicked()), this, SLOT(update_files_slot()));
+//    save_button->setStyleSheet("background-color:  rgb(255, 246, 0);color: black;border-radius : 3px;padding : 2px;");
+//    connect(save_button, SIGNAL(clicked()), this, SLOT(update_files_slot()));
 
-    ui->verticalLayout->addWidget(save_button);
+//    ui->verticalLayout->addWidget(save_button);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new AirlinesPage(this), "Airlines");
     tab_widget->addTab(new PilotsPage(this), "Pilots");
@@ -340,4 +340,20 @@ void MainWindow::connectNewFlightToStatusBar()
     connect(Recorder<Flight>::getInstance()->get_dataList().last(),
             SIGNAL(flightStatusMsgSignal(const QString&))
             , ui->statusbar, SLOT(showMessage(const QString&)));
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    this->update_files_slot();
+}
+
+void MainWindow::on_actionSave_Exit_triggered()
+{
+    this->update_files_slot();
+    QMainWindow::close();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    this->close();
 }
