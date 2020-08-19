@@ -3,6 +3,8 @@
 #include <stdexcept>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 PU2::PU2()
 {
 
@@ -47,6 +49,7 @@ void PU2::setNationalCode(qlonglong n)
     this->nationalCode = n;
     this->setSearchCode(QString::number(n) + "A");
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 

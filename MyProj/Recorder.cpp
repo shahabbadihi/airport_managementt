@@ -20,6 +20,8 @@ using namespace std;
 //#include "mymodel.h"
 #include "flighttablemodel.h"
 
+extern bool ISDATACHANGED;
+
 template<class T>
 void Recorder<T>::record(T *a)
 {
@@ -147,7 +149,8 @@ void Recorder<T>::add(T *a)
     if (a && !this->isInList(a))
     {
         this->record(a);
-        Recorder<T>::getInstance()->updateFileAll();
+//        Recorder<T>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
     //this->addToFile(a);
 }
@@ -250,7 +253,8 @@ void Recorder<T>::remove(T *a)
     delete a;
     emit recordRemovedSignal(index);
 
-    Recorder<T>::getInstance()->updateFileAll();
+//    Recorder<T>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 //template<class T>
@@ -365,7 +369,8 @@ void Recorder<Host>::add(Host * h)
     {
         this->record(h);
         Recorder<Employee>::getInstance()->add(h);
-        Recorder<Host>::getInstance()->updateFileAll();
+//        Recorder<Host>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 }
 
@@ -384,7 +389,8 @@ void Recorder<Pilot>::add(Pilot * p)
     {
         this->record(p);
         Recorder<Employee>::getInstance()->add(p);
-        Recorder<Pilot>::getInstance()->updateFileAll();
+//        Recorder<Pilot>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 }
 

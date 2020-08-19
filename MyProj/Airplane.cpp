@@ -6,6 +6,8 @@
 #include <stdexcept>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 void Airplane::attachFlight(Flight *f)
 {
     if (f && !isFlightInList(f))
@@ -14,7 +16,8 @@ void Airplane::attachFlight(Flight *f)
 
         f->setAirplane(this);
 
-        Recorder<Airplane>::getInstance()->updateFileAll();
+//        Recorder<Airplane>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
@@ -32,7 +35,8 @@ void Airplane::setAirline(Airline *value)
 
         value->attachAirplane(this);
 
-        Recorder<Airplane>::getInstance()->updateFileAll();
+//        Recorder<Airplane>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
@@ -48,7 +52,8 @@ void Airplane::setNumOfSeats(int value)
         throw invalid_argument("Invalid Value For Num Of Seats");
     numOfSeats = value;
 
-    Recorder<Airplane>::getInstance()->updateFileAll();
+//    Recorder<Airplane>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
@@ -65,7 +70,8 @@ void Airplane::setSerial(const QString &value)
 //    this->search_code = value;
     this->setSearchCode(value);
 
-    Recorder<Airplane>::getInstance()->updateFileAll();
+//    Recorder<Airplane>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
     //    Recorder<Airplane>::getInstance()->updateFile(this);
 }
 
@@ -73,7 +79,8 @@ void Airplane::removeFlight(Flight * f)
 {
     this->list_of_flights.removeOne(f);
 
-    Recorder<Airplane>::getInstance()->updateFileAll();
+//    Recorder<Airplane>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 bool Airplane::isFree(Flight * f) const
@@ -269,7 +276,8 @@ Airplane::~Airplane()
             f->removeAirplane();
     }
 
-    Recorder<Airplane>::getInstance()->updateFileAll();
+//    Recorder<Airplane>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 QString Airplane::get_data()

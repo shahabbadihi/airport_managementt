@@ -11,7 +11,7 @@ class Seat
     int column;
     Airplane * airplane;
     void setSeatInfo(int row, int col, Airplane * a);
-    QVector<Ticket*> ticket;
+    QVector<Ticket*> tickets;
 public:
     Seat();
     void attachTicket(Ticket*);

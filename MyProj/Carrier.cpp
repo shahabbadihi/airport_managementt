@@ -5,6 +5,8 @@
 #include <stdexcept>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 QString Carrier::getSerial() const
 {
     return serial;
@@ -18,7 +20,8 @@ void Carrier::setSerial(const QString &value)
 //    this->search_code = value;
     this->setSearchCode(value);
 
-    Recorder<Carrier>::getInstance()->updateFileAll();
+//    Recorder<Carrier>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
@@ -80,7 +83,8 @@ void Carrier::setPlace(const QString &value)
         throw invalid_argument("Place Is Empty!");
     place = value;
 
-    Recorder<Carrier>::getInstance()->updateFileAll();
+//    Recorder<Carrier>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
@@ -141,7 +145,8 @@ void Carrier::attachFlight(Flight* f)
     {
         this->list_of_flights.push_back(f);
 
-        Recorder<Carrier>::getInstance()->updateFileAll();
+//        Recorder<Carrier>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
@@ -152,14 +157,16 @@ void Carrier::attachMission(const QString & m)
     {
         this->list_of_missions.push_back(m);
 
-        Recorder<Carrier>::getInstance()->updateFileAll();
+//        Recorder<Carrier>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 void Carrier::removeFlight(Flight *f){
     this->list_of_flights.removeOne(f);
 
-    Recorder<Carrier>::getInstance()->updateFileAll();
+//    Recorder<Carrier>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 Carrier::~Carrier(){
      foreach(Flight* f,this->list_of_flights){
@@ -167,7 +174,8 @@ Carrier::~Carrier(){
             f->removeCarrier(this);
      }
 
-     Recorder<Carrier>::getInstance()->updateFileAll();
+//     Recorder<Carrier>::getInstance()->updateFileAll();
+     ISDATACHANGED = true;
 }
 
 

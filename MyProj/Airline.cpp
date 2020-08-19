@@ -8,6 +8,8 @@
 #include <stdexcept>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 Airline::Airline(const QString &name, const QString &code)
 {
     this->setCode(code);
@@ -72,7 +74,7 @@ Airline::~Airline()
         Recorder<Airplane>::getInstance()->remove(a);
     }
 
-    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 QString Airline::get_data()
@@ -123,7 +125,7 @@ void Airline::attachHost(Host * t)
     if (t)
     {
         this->list_of_hosts.push_back(t);
-        Recorder<Airline>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
@@ -133,7 +135,7 @@ void Airline::attachPilot(Pilot * t)
     if (t)
     {
         this->list_of_pilots.push_back(t);
-        Recorder<Airline>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
@@ -145,7 +147,7 @@ void Airline::attachFlight(Flight * t)
         this->list_of_flights.push_back(t);
         t->setAirline(this);
 
-        Recorder<Airline>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
     //    Recorder<Airline>::getInstance()->updateFile(this);
 }
@@ -164,7 +166,7 @@ void Airline::attachAirplane(Airplane * t)
     if (t)
     {
         this->list_of_airplanes.push_back(t);
-        Recorder<Airline>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
     //    Recorder<Airline>::getInstance()->updateFile(this);
 }
@@ -172,25 +174,27 @@ void Airline::attachAirplane(Airplane * t)
 void Airline::removeHost(Host * host)
 {
     this->list_of_hosts.removeOne(host);
-    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 void Airline::removePilot(Pilot * pilot)
 {
     this->list_of_pilots.removeOne(pilot);
-    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 void Airline::removeFlight(Flight *f)
 {
     this->list_of_flights.removeOne(f);
-    Recorder<Airline>::getInstance()->updateFileAll();
+//    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 void Airline::removeAirplane(Airplane * a)
 {
     this->list_of_airplanes.removeOne(a);
-    Recorder<Airline>::getInstance()->updateFileAll();
+//    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 bool Airline::isFlightInList(Flight * f) const
@@ -228,7 +232,8 @@ void Airline::setName(const QString &value)
     if (value == "")
         throw invalid_argument("Name Is Empty!");
     name = value;
-    Recorder<Airline>::getInstance()->updateFileAll();
+//    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 
@@ -238,7 +243,8 @@ void Airline::setCode(const QString &value)
         throw invalid_argument("Code Is Empty!");
     this->code = value;
     this->setSearchCode(value);
-    Recorder<Airline>::getInstance()->updateFileAll();
+//    Recorder<Airline>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Airline>::getInstance()->updateFile(this);
 }
 

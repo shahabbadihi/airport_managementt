@@ -4,6 +4,8 @@
 #include <stdexcept>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 Passenger::Passenger(QString & data_str)
 {
     QStringList str_list = data_str.split('|');
@@ -65,7 +67,8 @@ void Passenger::setLname(const QString & lname)
         throw invalid_argument("Last Name Is Empty!");
 
     this->lname = lname;
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 
 void Passenger::setFname(const QString & fname)
@@ -75,7 +78,8 @@ void Passenger::setFname(const QString & fname)
 
     this->fname = fname;
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
@@ -86,7 +90,8 @@ void Passenger::setFatherName(const QString & father_name)
 
     this->fatherName = father_name;
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
     //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
@@ -108,7 +113,8 @@ void Passenger::setBirthDate(const QDate & date)
 
     this->birthDate.setDate(date.year(), date.month(), date.day());
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
@@ -119,7 +125,8 @@ void Passenger::setBirthDate(const QDate && date)
 
     this->birthDate.setDate(date.year(), date.month(), date.day());
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
@@ -128,7 +135,7 @@ void Passenger::setBirthDate(int year, int month, int day)
     QDate date(year, month, day);
     this->setBirthDate(date);
 
-    Recorder<Passenger>::getInstance()->updateFileAll();
+//    Recorder<Passenger>::getInstance()->updateFileAll();
 //    this->birthDate.setDate(year, month, day);
     //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
@@ -140,7 +147,8 @@ void Passenger::attachTicket(Ticket * t)
         this->list_of_tickets.push_back(t);
         t->setPassenger(this);
 
-        Recorder<Passenger>::getInstance()->updateFileAll();
+//        Recorder<Passenger>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 }
 
@@ -149,7 +157,8 @@ void Passenger::removeTicket(Ticket * t)
     if (t && this->isTicketInList(t))
     {
         this->list_of_tickets.removeOne(t);
-        Recorder<Passenger>::getInstance()->updateFileAll();
+//        Recorder<Passenger>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 }
 
