@@ -59,8 +59,11 @@ void editSeas::update(){
 
             }
             else{
-                ui->seatChart->setItem(i,j,new QTableWidgetItem(flight->getAirplane()->getSeat(i,j)->getTicket(flight)->getPassengerName()));
+                ui->seatChart->setItem(i,j,new QTableWidgetItem(QString::number(flight->getAirplane()->
+                                                                getSeat(i,j)->getTicket(flight)->getNo())));
             }
         }
     }
+
+    emit flight->flightStatusChanged();
 }

@@ -1,5 +1,7 @@
 #include "AirplanesPage.h"
 #include "ui_AirplanesPage.h"
+#include "Recorder.h"
+#include "Airplane.h"
 
 AirplanesPage::AirplanesPage(QWidget *parent) :
     QWidget(parent),
@@ -49,6 +51,7 @@ AirplanesPage::~AirplanesPage()
 void AirplanesPage::on_btnSubmit_clicked()
 {
     this->mapper->submit();
+    Recorder<Airplane>::getInstance()->updateFileAll();
 }
 
 void AirplanesPage::updateButtons(int row)

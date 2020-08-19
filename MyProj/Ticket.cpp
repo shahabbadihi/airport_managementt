@@ -8,6 +8,8 @@
 #include <QDateTime>
 using namespace std;
 
+extern bool ISDATACHANGED;
+
 long Ticket::getNo() const
 {
     return this->no;
@@ -28,7 +30,8 @@ void Ticket::setNo(long value)
 //    this->search_code = QString::number(value);
     this->setSearchCode(QString::number(value));
 
-    Recorder<Ticket>::getInstance()->updateFileAll();
+//    Recorder<Ticket>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
 
@@ -176,7 +179,8 @@ void Ticket::setFlight(Flight * f)
     {
         this->flight = f;
         f->attachTicket(this);
-        Recorder<Ticket>::getInstance()->updateFileAll();
+//        Recorder<Ticket>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
     //    Recorder<Ticket>::getInstance()->updateFile(this);
 }
@@ -188,7 +192,8 @@ void Ticket::setPassenger(Passenger * p)
     {
         this->passenger = p;
         p->attachTicket(this);
-        Recorder<Ticket>::getInstance()->updateFileAll();
+//        Recorder<Ticket>::getInstance()->updateFileAll();
+        ISDATACHANGED = true;
     }
 //    this->setPassengerFname(p->getFname());
 //    this->setPassengerLname(p->getLname());
@@ -250,7 +255,8 @@ Ticket::~Ticket(){
     if (seat)
         this->seat->removeTicket(this);
 
-    Recorder<Ticket>::getInstance()->updateFileAll();
+//    Recorder<Ticket>::getInstance()->updateFileAll();
+    ISDATACHANGED = true;
 }
 double Ticket::getPrice(){
     return price;

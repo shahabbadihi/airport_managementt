@@ -211,6 +211,10 @@ qlonglong Employee::getPersonnelCode() const
 
 bool Employee::isFree(Flight* f) const
 {
+    if (this->employmentDate >= f->getDateTimeDeparture().date())
+    {
+        return false;
+    }
     if(isFlightInList(f))
     {
         return false;
