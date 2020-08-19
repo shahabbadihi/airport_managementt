@@ -66,7 +66,7 @@ void Flight::setDeparture_carrier(Carrier *value)
     {
         departure_carrier = value;
         value->attachFlight(this);
-        value->attachMission(this->dateTimeDeparture.toString() + "DEP");
+//        value->attachMission(this->dateTimeDeparture.toString() + "DEP");
         emit flightStatusChanged();
 
         QString s1 = "Departure Carrier ";
@@ -91,7 +91,7 @@ void Flight::setArrival_carrier(Carrier *value)
     {
         arrival_carrier = value;
         value->attachFlight(this);
-        value->attachMission(this->dateTimeArrival.toString() + "ARR");
+//        value->attachMission(this->dateTimeArrival.toString() + "ARR");
         emit flightStatusChanged();
 
         QString s1 = "Arrival Carrier ";

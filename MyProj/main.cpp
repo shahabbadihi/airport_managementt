@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QDir>
 
+bool ISDATACHANGED = false;
 
 int main(int argc, char *argv[])
 {    
@@ -53,6 +54,8 @@ int main(int argc, char *argv[])
 //    double price = (seconds * 5) / 72;
 //    qDebug() << QString::number(price);
 
+
+    ISDATACHANGED = false;
 
     qDebug() << "Bye";
     QApplication a(argc, argv);
