@@ -46,14 +46,9 @@ Host::Host(qlonglong personnel_code, Airline *a,
            const QString &fname, const QString &lname,
            const QDate &birth_date, const QDate &emp_date,
            qlonglong national_code)
+    : Employee(personnel_code, a, fname, lname, birth_date, emp_date, national_code)
 {
-    this->set_personnelCode(personnel_code);
     this->setAirline(a);
-    this->set_fname(fname);
-    this->set_lname(lname);
-    this->set_birthDate(birth_date);
-    this->set_employmentDate(emp_date);
-    this->set_nationalCode(national_code);
 }
 
 Host::~Host()
