@@ -7,7 +7,7 @@
 AirlineItemModel* AirlineItemModel::instance;
 
 AirlineItemModel::AirlineItemModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : MyAbstractItemModel(parent)
 {
     connect(this, SIGNAL(rowsAboutToBeRemoved(int)),
             Recorder<Airline>::getInstance(), SLOT(recordRemovedSlot(int)));
@@ -145,9 +145,4 @@ void AirlineItemModel::rowRemovedSlot(int r)
             Recorder<Airplane>::getInstance(), SLOT(recordRemovedSlot(int)));
 
     emit rowsAboutToBeRemoved(r);
-}
-
-void AirlineItemModel::rowAddedSlot()
-{
-    emit setIndexWhenRecordAdded();
 }

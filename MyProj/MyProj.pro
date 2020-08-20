@@ -21,6 +21,7 @@ SOURCES += \
     AirplaneItemModel.cpp \
     AirplanesPage.cpp \
     Carrier.cpp \
+    DataMapperPage.cpp \
     DeleteAirline.cpp \
     DeleteAirplane.cpp \
     Employee.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     Host.cpp \
     HostItemModel.cpp \
     HostsPage.cpp \
+    MyAbstractItemModel.cpp \
     Passenger.cpp \
     Pilot.cpp \
     Recorder.cpp \
@@ -79,6 +81,7 @@ HEADERS += \
     AirplaneItemModel.h \
     AirplanesPage.h \
     Carrier.h \
+    DataMapperPage.h \
     DeleteAirline.h \
     DeleteAirplane.h \
     Employee.h \
@@ -86,6 +89,7 @@ HEADERS += \
     Host.h \
     HostItemModel.h \
     HostsPage.h \
+    MyAbstractItemModel.h \
     Object.h \
     Passenger.h \
     Pilot.h \
