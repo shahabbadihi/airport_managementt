@@ -1,6 +1,13 @@
 #include "MyAbstractItemModel.h"
 
-MyAbstractItemModel::MyAbstractItemModel()
+MyAbstractItemModel::MyAbstractItemModel(QObject *parent)
+    : QAbstractItemModel(parent)
 {
 
 }
+
+void MyAbstractItemModel::rowAddedSlot()
+{
+    emit setIndexWhenRecordAdded();
+}
+

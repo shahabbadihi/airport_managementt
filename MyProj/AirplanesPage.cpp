@@ -4,17 +4,15 @@
 #include "Airplane.h"
 
 AirplanesPage::AirplanesPage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::AirplanesPage),
-    airplane_item_model(nullptr),
-    delegate(nullptr),
-    mapper(nullptr)
+    DataMapperPage(AirplaneItemModel::getInstance()
+        , parent),
+    ui(new Ui::AirplanesPage)
 {
     ui->setupUi(this);
 
-    this->mapper = new QDataWidgetMapper(this);
-    this->airplane_item_model = AirplaneItemModel::getInstance();
-    mapper->setModel(airplane_item_model);
+//    this->mapper = new QDataWidgetMapper(this);
+//    this->model = AirplaneItemModel::getInstance();
+    mapper->setModel(model);
     mapper->addMapping(ui->txtSerial, 0);
     mapper->addMapping(ui->txtNumOfRows, 1);
     ui->txtNumOfRows->setReadOnly(true);
@@ -30,12 +28,12 @@ AirplanesPage::AirplanesPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
-    connect(this->airplane_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-            this, SLOT(setCurrentIndex(int)));
-    connect(this->airplane_item_model, SIGNAL(setIndexWhenRecordAdded()),
-            this, SLOT(updateButtonsWhenRecordAdded()));
+//    connect(this->airplane_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
+//            this, SLOT(setCurrentIndex(int)));
+//    connect(this->airplane_item_model, SIGNAL(setIndexWhenRecordAdded()),
+//            this, SLOT(updateButtonsWhenRecordAdded()));
 
-    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
+//    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
     connect(ui->btnPre, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
@@ -44,8 +42,6 @@ AirplanesPage::AirplanesPage(QWidget *parent) :
 AirplanesPage::~AirplanesPage()
 {
     delete ui;
-    delete delegate;
-    delete mapper;
 }
 
 void AirplanesPage::on_btnSubmit_clicked()
@@ -57,23 +53,23 @@ void AirplanesPage::on_btnSubmit_clicked()
 void AirplanesPage::updateButtons(int row)
 {
     ui->btnPre->setEnabled(row > 0);
-    ui->btnNext->setEnabled(row < airplane_item_model->rowCount() - 1);
+    ui->btnNext->setEnabled(row < model->rowCount() - 1);
 }
 
-void AirplanesPage::setCurrentIndex(int row)
-{
-    if (row == 0)
-    {
-        this->mapper->revert();
-    }
-    else
-    {
-        this->mapper->setCurrentIndex(row - 1);
-    }
-}
+//void AirplanesPage::setCurrentIndex(int row)
+//{
+//    if (row == 0)
+//    {
+//        this->mapper->revert();
+//    }
+//    else
+//    {
+//        this->mapper->setCurrentIndex(row - 1);
+//    }
+//}
 
-void AirplanesPage::updateButtonsWhenRecordAdded()
-{
-    this->mapper->toLast();
-    this->updateButtons(this->airplane_item_model->rowCount() - 1);
-}
+//void AirplanesPage::updateButtonsWhenRecordAdded()
+//{
+//    this->mapper->toLast();
+//    this->updateButtons(this->airplane_item_model->rowCount() - 1);
+//}

@@ -1,9 +1,10 @@
 #ifndef AIRLINEITEMMODEL_H
 #define AIRLINEITEMMODEL_H
 
-#include <QAbstractItemModel>
+//#include <QAbstractItemModel>
+#include "MyAbstractItemModel.h"
 
-class AirlineItemModel : public QAbstractItemModel
+class AirlineItemModel : public MyAbstractItemModel
 {
     Q_OBJECT
 
@@ -31,11 +32,11 @@ private:
     static AirlineItemModel* instance;
 
 private slots:
-    void rowRemovedSlot(int);
-    void rowAddedSlot();
-signals:
-    void rowsAboutToBeRemoved(int);
-    void setIndexWhenRecordAdded();
+    void rowRemovedSlot(int) override;
+//    void rowAddedSlot();
+//signals:
+//    void rowsAboutToBeRemoved(int);
+//    void setIndexWhenRecordAdded();
 };
 
 #endif // AIRLINEITEMMODEL_H

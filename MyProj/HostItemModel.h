@@ -2,9 +2,10 @@
 #define HOSTITEMMODEL_H
 
 #include <QObject>
-#include <QAbstractItemModel>
+#include "MyAbstractItemModel.h"
+//#include <QAbstractItemModel>
 
-class HostItemModel : public QAbstractItemModel
+class HostItemModel : public MyAbstractItemModel
 {
     Q_OBJECT
 public:
@@ -24,11 +25,11 @@ private:
     static HostItemModel* instance;
 
 private slots:
-    void rowRemovedSlot(int);
-    void rowAddedSlot();
-signals:
-    void rowsAboutToBeRemoved(int);
-    void setIndexWhenRecordAdded();
+    void rowRemovedSlot(int) override;
+//    void rowAddedSlot();
+//signals:
+//    void rowsAboutToBeRemoved(int);
+//    void setIndexWhenRecordAdded();
 };
 
 #endif // HOSTITEMMODEL_H
