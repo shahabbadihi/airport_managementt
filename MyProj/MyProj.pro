@@ -123,7 +123,7 @@ HEADERS += \
     pd2.h \
     pd3.h \
     PO12.h \
-    PU12 \
+    PU2.h \
     P2_12.h \
     GetPassengerFactory.h \
     pilotitemmodel.h \
