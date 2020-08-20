@@ -26,7 +26,7 @@ void Flight::setAirline(Airline *value)
         airline = value;
 
         value->attachFlight(this);
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
 //        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
@@ -41,7 +41,7 @@ void Flight::setAirplane(Airplane *value)
         airplane = value;
 
         value->attachFlight(this);
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Airplane ";
         QString s2 = " Setted For Flight ";
@@ -67,7 +67,7 @@ void Flight::setDeparture_carrier(Carrier *value)
         departure_carrier = value;
         value->attachFlight(this);
 //        value->attachMission(this->dateTimeDeparture.toString() + "DEP");
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Departure Carrier ";
         QString s2 = "Setted For Flight ";
@@ -92,7 +92,7 @@ void Flight::setArrival_carrier(Carrier *value)
         arrival_carrier = value;
         value->attachFlight(this);
 //        value->attachMission(this->dateTimeArrival.toString() + "ARR");
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Arrival Carrier ";
         QString s2 = "Setted For Flight ";
@@ -327,6 +327,8 @@ void Flight::setFlightStateAsString(const QString &value)
 
 void Flight::setState()
 {
+    if (this->flightState == CANCELED)
+        return;
     if (this->flightState == DONE)
         return;
     if ((this->flightState == SUSPENDED
@@ -350,6 +352,8 @@ void Flight::setState()
             this->departure_carrier->removeFlight(this);
 
         this->setFlightState(CANCELED);
+        emit flightStatusChanged();
+        return;
     }
 
     if (this->dateTimeDeparture <= QDateTime::currentDateTime() &&
@@ -437,6 +441,8 @@ void Flight::setState()
     {
         this->setFlightState(SUSPENDED);
     }
+
+    emit flightStatusChanged();
 
 }
 
@@ -702,7 +708,7 @@ void Flight::setPilot(Pilot * p)
         this->pilot = p;
 
         p->attachFlight(this);
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Pilot ";
         QString s2 = " Setted For Flight ";
@@ -751,7 +757,7 @@ void Flight::attachHost(Host * h)
         this->hosts.push_back(h);
 
         h->attachFlight(this);
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Host ";
         QString s2 = " Setted For Flight ";
@@ -776,7 +782,7 @@ void Flight::attachTicket(Ticket * p)
 //        p->setFlight(this);
         this->numOfPassengers++;
         p->setFlight(this);
-        emit flightStatusChanged();
+//        emit flightStatusChanged();
 
         QString s1 = "Ticket ";
         QString s2 = " Setted For Flight ";
@@ -802,7 +808,7 @@ void Flight::removeHost(Host* h)
 
 //    Recorder<Flight>::getInstance()->updateFile(this);
 
-    emit flightStatusChanged();
+//    emit flightStatusChanged();
 
 //    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
@@ -858,7 +864,7 @@ void Flight::removePilot(){
 //    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
 //    this->setPilot(this->getAirline()->getFirstFreePilot(this));
 
-    emit flightStatusChanged();
+//    emit flightStatusChanged();
 
 //    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
@@ -918,7 +924,7 @@ void Flight::removePilot(){
 void Flight::removeAirplane()
 {
     this->airplane = nullptr;
-    emit flightStatusChanged();
+//    emit flightStatusChanged();
 
 //    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
@@ -999,6 +1005,7 @@ Flight::~Flight()
         Recorder<Ticket>::getInstance()->remove(t);
     }
 
+    emit flightStatusChanged();
 //    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 
@@ -1010,7 +1017,7 @@ void Flight::removeCarrier(Carrier* c){
 //        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-    if(c==departure_carrier){
+    else if(c==departure_carrier){
         departure_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeDeparture(),getSource());
 //        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
@@ -1021,7 +1028,7 @@ int Flight::getAttachedTicketsize()const{
 }
 void Flight::removeTicket(Ticket* T){
    tickets.removeOne(T);
-   emit flightStatusChanged();
+//   emit flightStatusChanged();
 }
 bool Flight::isCheckInReady()const{
     if(QDateTime::currentDateTime().secsTo(dateTimeDeparture)<=2*60*60 &&
