@@ -329,9 +329,10 @@ void Flight::setState()
 {
     if (this->flightState == DONE)
         return;
-    if (this->flightState == SUSPENDED
+    if ((this->flightState == SUSPENDED
             && QDateTime::currentDateTime().secsTo(this->dateTimeDeparture)
-            < 15 * 60)
+            < 15 * 60) || (this->flightState == SUSPENDED && QDateTime::currentDateTime()
+                           > this->dateTimeArrival))
     {
         if (pilot)
             this->pilot->removeFlight(this);
