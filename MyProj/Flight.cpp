@@ -333,15 +333,20 @@ void Flight::setState()
             && QDateTime::currentDateTime().secsTo(this->dateTimeDeparture)
             < 15 * 60)
     {
-        this->pilot->removeFlight(this);
-        this->airline->removeFlight(this);
-        this->airplane->removeFlight(this);
+        if (pilot)
+            this->pilot->removeFlight(this);
+        if (airline)
+            this->airline->removeFlight(this);
+        if (airplane)
+            this->airplane->removeFlight(this);
         foreach (Host * h, this->hosts)
         {
             h->removeFlight(this);
         }
-        this->arrival_carrier->removeFlight(this);
-        this->departure_carrier->removeFlight(this);
+        if (arrival_carrier)
+            this->arrival_carrier->removeFlight(this);
+        if (departure_carrier)
+            this->departure_carrier->removeFlight(this);
 
         this->setFlightState(CANCELED);
     }
