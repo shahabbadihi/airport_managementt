@@ -406,9 +406,11 @@ void Flight::setState()
         {
             QString s3 = "Flight ";
             QString s4 = " Now Has Enough Hosts!";
-            QMessageBox msg;
-            msg.setText(s3 + this->getSerial() + s4);
-            msg.exec();
+//            QMessageBox msg;
+//            msg.setText(s3 + this->getSerial() + s4);
+//            msg.show();
+            QString ss = s3 + this->getSerial() + s4;
+            emit flightStatusMsgSignal(ss);
         }
     }
 
@@ -1058,11 +1060,14 @@ bool Flight::isSuitable(Passenger *p, const QString &source,
 
 bool Flight::isPassengerExist(Passenger * p) const
 {
-    foreach (Ticket * t, this->tickets)
+    if (p)
     {
-        if (p == t->getPassenger())
+        foreach (Ticket * t, this->tickets)
         {
-            return true;
+            if (p == t->getPassenger())
+            {
+                return true;
+            }
         }
     }
     return false;
