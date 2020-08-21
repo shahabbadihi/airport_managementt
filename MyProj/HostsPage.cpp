@@ -7,17 +7,15 @@
 #include <QString>
 
 HostsPage::HostsPage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::HostsPage),
-    host_item_model(nullptr),
-    delegate(nullptr),
-    mapper(nullptr)
+    DataMapperPage(HostItemModel::getInstance()
+        , parent),
+    ui(new Ui::HostsPage)
 {
     ui->setupUi(this);
 
-    this->mapper = new QDataWidgetMapper(this);
-    this->host_item_model = HostItemModel::getInstance();
-    mapper->setModel(host_item_model);
+//    this->mapper = new QDataWidgetMapper(this);
+//    this->model = HostItemModel::getInstance();
+    mapper->setModel(model);
     mapper->addMapping(ui->txtName, 0);
     mapper->addMapping(ui->txtFamily, 1);
     mapper->addMapping(ui->txtNationalCode, 2);
@@ -47,12 +45,7 @@ HostsPage::HostsPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
-    connect(this->host_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-            this, SLOT(setCurrentIndex(int)));
-    connect(this->host_item_model, SIGNAL(setIndexWhenRecordAdded()),
-            this, SLOT(updateButtonsWhenRecordAdded()));
 
-    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
     connect(ui->btnPre, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
@@ -61,8 +54,6 @@ HostsPage::HostsPage(QWidget *parent) :
 HostsPage::~HostsPage()
 {
     delete ui;
-    delete delegate;
-    delete mapper;
 }
 
 void HostsPage::on_btnSubmit_clicked()
@@ -74,23 +65,23 @@ void HostsPage::on_btnSubmit_clicked()
 void HostsPage::updateButtons(int row)
 {
     ui->btnPre->setEnabled(row > 0);
-    ui->btnNext->setEnabled(row < host_item_model->rowCount() - 1);
+    ui->btnNext->setEnabled(row < model->rowCount() - 1);
 }
 
-void HostsPage::setCurrentIndex(int row)
-{
-    if (row == 0)
-    {
-        this->mapper->revert();
-    }
-    else
-    {
-        this->mapper->setCurrentIndex(row - 1);
-    }
-}
+//void HostsPage::setCurrentIndex(int row)
+//{
+//    if (row == 0)
+//    {
+//        this->mapper->revert();
+//    }
+//    else
+//    {
+//        this->mapper->setCurrentIndex(row - 1);
+//    }
+//}
 
-void HostsPage::updateButtonsWhenRecordAdded()
-{
-    this->mapper->toLast();
-    this->updateButtons(this->host_item_model->rowCount() - 1);
-}
+//void HostsPage::updateButtonsWhenRecordAdded()
+//{
+//    this->mapper->toLast();
+//    this->updateButtons(this->host_item_model->rowCount() - 1);
+//}

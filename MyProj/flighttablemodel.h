@@ -36,6 +36,7 @@ private:
 
 signals:
     void recordInsertedSignal(int);
+//    void recordInsertedSignal();
     void recordRemovedSignal(int);
 
 public slots:

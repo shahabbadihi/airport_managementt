@@ -6,7 +6,7 @@
 HostItemModel* HostItemModel::instance;
 
 HostItemModel::HostItemModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : MyAbstractItemModel(parent)
 {
 
     connect(Recorder<Host>::getInstance(), SIGNAL(recordRemovedSignal(int)),
@@ -153,9 +153,4 @@ HostItemModel *HostItemModel::getInstance()
 void HostItemModel::rowRemovedSlot(int r)
 {
     this->removeRows(r, 1);
-}
-
-void HostItemModel::rowAddedSlot()
-{
-    emit setIndexWhenRecordAdded();
 }

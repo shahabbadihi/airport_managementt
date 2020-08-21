@@ -9,17 +9,15 @@
 #include <QString>
 
 PilotsPage::PilotsPage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::PilotsPage),
-    pilot_item_model(nullptr),
-    delegate(nullptr),
-    mapper(nullptr)
+    DataMapperPage(PilotItemModel::getInstance(),
+                   parent),
+    ui(new Ui::PilotsPage)
 {
     ui->setupUi(this);
 
-    this->mapper = new QDataWidgetMapper(this);
-    this->pilot_item_model = PilotItemModel::getInstance();
-    mapper->setModel(pilot_item_model);
+//    this->mapper = new QDataWidgetMapper(this);
+//    this->model = PilotItemModel::getInstance();
+    mapper->setModel(model);
     mapper->addMapping(ui->txtNamePilot, 0);
     mapper->addMapping(ui->txtFamilyPilot, 1);
     mapper->addMapping(ui->txtNationalCodePilot, 2);
@@ -56,13 +54,6 @@ PilotsPage::PilotsPage(QWidget *parent) :
 
 //    th_update->start();
 
-    connect(this->pilot_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-            this, SLOT(setCurrentIndex(int)));
-    connect(this->pilot_item_model, SIGNAL(setIndexWhenRecordAdded()),
-            this, SLOT(updateButtonsWhenRecordAdded()));
-
-    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
-
     connect(ui->btnNextPilot, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
     connect(ui->btnPrePilot, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
 }
@@ -70,8 +61,6 @@ PilotsPage::PilotsPage(QWidget *parent) :
 PilotsPage::~PilotsPage()
 {
     delete ui;
-    delete delegate;
-    delete mapper;
 }
 
 void PilotsPage::on_btnSubmit_clicked()
@@ -83,23 +72,23 @@ void PilotsPage::on_btnSubmit_clicked()
 void PilotsPage::updateButtons(int row)
 {
     ui->btnPrePilot->setEnabled(row > 0);
-    ui->btnNextPilot->setEnabled(row < pilot_item_model->rowCount() - 1);
+    ui->btnNextPilot->setEnabled(row < model->rowCount() - 1);
 }
 
-void PilotsPage::setCurrentIndex(int row)
-{
-    if (row == 0)
-    {
-        this->mapper->revert();
-    }
-    else
-    {
-        this->mapper->setCurrentIndex(row - 1);
-    }
-}
+//void PilotsPage::setCurrentIndex(int row)
+//{
+//    if (row == 0)
+//    {
+//        this->mapper->revert();
+//    }
+//    else
+//    {
+//        this->mapper->setCurrentIndex(row - 1);
+//    }
+//}
 
-void PilotsPage::updateButtonsWhenRecordAdded()
-{
-    this->mapper->toLast();
-    this->updateButtons(this->pilot_item_model->rowCount() - 1);
-}
+//void PilotsPage::updateButtonsWhenRecordAdded()
+//{
+//    this->mapper->toLast();
+//    this->updateButtons(this->pilot_item_model->rowCount() - 1);
+//}

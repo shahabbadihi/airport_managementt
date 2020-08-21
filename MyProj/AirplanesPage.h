@@ -1,16 +1,17 @@
 #ifndef AIRPLANESPAGE_H
 #define AIRPLANESPAGE_H
 
-#include <QWidget>
-#include <QDataWidgetMapper>
-#include "delegate.h"
+//#include <QWidget>
+//#include <QDataWidgetMapper>
+//#include "delegate.h"
 #include "AirplaneItemModel.h"
+#include "DataMapperPage.h"
 
 namespace Ui {
 class AirplanesPage;
 }
 
-class AirplanesPage : public QWidget
+class AirplanesPage : public DataMapperPage
 {
     Q_OBJECT
 
@@ -21,14 +22,14 @@ public:
 private slots:
     void on_btnSubmit_clicked();
     void updateButtons(int row);
-    void setCurrentIndex(int row);
-    void updateButtonsWhenRecordAdded();
+//    void setCurrentIndex(int row);
+//    void updateButtonsWhenRecordAdded();
 private:
     Ui::AirplanesPage *ui;
 
-    AirplaneItemModel * airplane_item_model;
-    Delegate * delegate;
-    QDataWidgetMapper * mapper;
+//    AirplaneItemModel * airplane_item_model;
+//    Delegate * delegate;
+//    QDataWidgetMapper * mapper;
 };
 
 #endif // AIRPLANESPAGE_H
