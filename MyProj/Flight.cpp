@@ -162,7 +162,7 @@ bool Flight::isArrivalCarrierSetted() const
 
 void Flight::delay(qint64 milliseconds)
 {
-    Flight* temp;
+    Flight* temp = nullptr;
     if (this->pilot)
     {
         temp = this->pilot->nextFlight(this);
@@ -176,7 +176,7 @@ void Flight::delay(qint64 milliseconds)
         nexts_in_host_list.push_back(temp);
     }
 
-    Flight* temp2;
+    Flight* temp2 = nullptr;
     if (this->airplane)
     {
          temp2 = this->airplane->nextFlight(this);
