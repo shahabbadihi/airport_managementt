@@ -35,9 +35,9 @@ int main(int argc, char *argv[])
         Recorder<Airline>::getInstance()->import();
         Recorder<Pilot>::getInstance()->import();
         Recorder<Host>::getInstance()->import();
-        Recorder<Airplane>::getInstance()->import();
-        Recorder<Ticket>::getInstance()->import();
-        Recorder<Passenger>::getInstance()->import();
+//        Recorder<Airplane>::getInstance()->import();
+//        Recorder<Ticket>::getInstance()->import();
+//        Recorder<Passenger>::getInstance()->import();
 //    } catch (...) {
 //        qDebug() << "akbar";
 //    }
