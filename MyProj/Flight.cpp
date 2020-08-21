@@ -212,10 +212,10 @@ void Flight::delay(qint64 milliseconds)
 
     //foreach (Flight* f, nexts_in_pilot_list)
     //{
-        if (haveInterference(this, f))
-        {
-            f->delay(milliseconds);
-        }
+    if (haveInterference(this, f))
+    {
+        f->delay(milliseconds);
+    }
     //}
 
     //foreach (QVector<Flight*> vf, host_list)
