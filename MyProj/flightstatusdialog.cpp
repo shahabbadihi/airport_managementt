@@ -116,7 +116,7 @@ void FlightStatusDialog::reset()
         ui->lblCheckStasus->setText("Not Ready!");
     }
     ui->btnEditCheck->setDisabled(!flight_ptr->isCheckInReady());
-    ui->btnEditCheck->setDisabled(!flight_ptr->isCheckInCompleted());
+    ui->btnEditCheck->setDisabled(flight_ptr->isCheckInCompleted());
 
 }
 
