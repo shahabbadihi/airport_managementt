@@ -162,56 +162,56 @@ bool Flight::isArrivalCarrierSetted() const
 
 void Flight::delay(qint64 milliseconds)
 {
-
+    Flight* temp;
     if (this->pilot)
     {
-        Flight* temp = this->pilot->nextFlight(this);
-        
-        temp = this->pilot->nextFlight(temp);
-        
+        temp = this->pilot->nextFlight(this);
     }
 
+    QVector<Flight*> nexts_in_host_list;
     for (int i = 0; i < this->hosts.size(); i++)
     {
-        QVector<Flight*> nexts_in_host_list;
+        
         Flight* temp = this->hosts[i]->nextFlight(this);
-        while (temp)
-        {
-            nexts_in_host_list.push_back(temp);
-            temp = this->hosts[i]->nextFlight(temp);
-        }
-
-        host_list.push_back(nexts_in_host_list);
+        nexts_in_host_list.push_back(temp);
     }
 
+    Flight* temp2;
     if (this->airplane)
     {
-        Flight* temp2 = this->airplane->nextFlight(this);
-        
-        temp2 = this->airplane->nextFlight(temp2);
+         temp2 = this->airplane->nextFlight(this);
         
     }
-    if (this->airplane)
-    {
-        Flight* temp2 = this->airplane->nextFlight(this);
-        
-        temp2 = this->airplane->nextFlight(temp2);
-        
-    }
-
+    
     this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
     this->setDateTimeArrival(this->dateTimeArrival.addMSecs(milliseconds));
 
     this->setFlightState(DELAYED);
 
-    foreach (QVector<Flight*> vf, host_list)
+    if (temp)
     {
-        foreach (Flight* f, vf)
+        if (haveInterference(this, temp))
+        {
+            temp->delay(milliseconds);
+        }
+    }
+    
+    foreach (Flight* f, nexts_in_host_list)
+    {
+        if (f)
         {
             if (haveInterference(this, f))
             {
                 f->delay(milliseconds);
             }
+        }
+    }
+
+    if (temp2)
+    {
+        if (haveInterference(this, temp2))
+        {
+            temp2->delay(milliseconds);
         }
     }
 }
