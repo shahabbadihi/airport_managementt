@@ -31,9 +31,9 @@ bool Carrier::isFree(const QDateTime & t, const QString & s) const
         return false;
     else
     {
-        foreach (QString str, this->list_of_missions)
+        foreach (Flight * f, this->list_of_flights)
         {
-            if (str.contains(t.toString()))
+            if (this->getMission(f).contains(t.toString()))
             {
                 return false;
             }
@@ -52,15 +52,15 @@ bool Carrier::isFlightInList(Flight * f) const
     return false;
 }
 
-bool Carrier::isMissionInList(const QString & str) const
-{
-    foreach (QString s, this->list_of_missions)
-    {
-        if (str == s)
-            return true;
-    }
-    return false;
-}
+//bool Carrier::isMissionInList(const QString & str) const
+//{
+//    foreach (QString s, this->list_of_missions)
+//    {
+//        if (str == s)
+//            return true;
+//    }
+//    return false;
+//}
 
 //Airline *Carrier::getAirline() const
 //{
@@ -75,6 +75,28 @@ bool Carrier::isMissionInList(const QString & str) const
 QString Carrier::getPlace() const
 {
     return place;
+}
+
+QStringList Carrier::getMissionList() const
+{
+    QStringList missions;
+    foreach (Flight* f, this->list_of_flights)
+    {
+        missions.push_back(getMission(f));
+    }
+    return missions;
+}
+
+QString Carrier::getMission(Flight *f) const
+{
+    if (isFlightInList(f))
+    {
+        if (f->getSource() == this->place)
+            return f->getDateTimeDeparture().toString() + "DEP";
+        else if (f->getDestination() == this->place)
+            return f->getDateTimeArrival().toString() + "ARR";
+    }
+    return "";
 }
 
 void Carrier::setPlace(const QString &value)
@@ -102,12 +124,12 @@ Carrier::Carrier(QString & str_data)
         this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
 
-    QStringList missions = str_list[3].split('/', Qt::SkipEmptyParts);
+//    QStringList missions = str_list[3].split('/', Qt::SkipEmptyParts);
 
-    foreach (QString s, missions)
-    {
-        this->attachMission(s);
-    }
+//    foreach (QString s, missions)
+//    {
+//        this->attachMission(s);
+//    }
 }
 
 Carrier::Carrier(const QString &serial, const QString &place)
@@ -127,12 +149,12 @@ QString Carrier::get_data()
             str += f->getSearchCode() + "/";
     }
 
-    str += "|";
+//    str += "|";
 
-    foreach (QString s, this->list_of_missions)
-    {
-        str += s + "/";
-    }
+//    foreach (QString s, this->list_of_missions)
+//    {
+//        str += s + "/";
+//    }
 
     str += "\n";
 
@@ -151,17 +173,18 @@ void Carrier::attachFlight(Flight* f)
 //    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
-void Carrier::attachMission(const QString & m)
-{
-    if (!this->isMissionInList(m))
-    {
-        this->list_of_missions.push_back(m);
+//void Carrier::attachMission(const QString & m)
+//{
+//    if (!this->isMissionInList(m))
+//    {
+//        this->list_of_missions.push_back(m);
 
-//        Recorder<Carrier>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
-    }
-//    Recorder<Carrier>::getInstance()->updateFile(this);
-}
+////        Recorder<Carrier>::getInstance()->updateFileAll();
+//        ISDATACHANGED = true;
+//    }
+////    Recorder<Carrier>::getInstance()->updateFile(this);
+//}
+
 void Carrier::removeFlight(Flight *f){
     this->list_of_flights.removeOne(f);
 

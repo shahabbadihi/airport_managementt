@@ -59,6 +59,18 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
         ui->tableView->setIndexWidget(proxy->index(i, 8), status_buttons[i]);
         ui->tableView->setIndexWidget(proxy->index(i, 9), details_buttons[i]);
 
+        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+                SIGNAL(flightDoneSignal(bool)), delay_buttons[i], SLOT(setDisabled(bool)));
+        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+                SIGNAL(flightDoneSignal(bool)), status_buttons[i], SLOT(setDisabled(bool)));
+
+        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+                SIGNAL(flightCanceledSignal(bool)), delay_buttons[i], SLOT(setDisabled(bool)));
+        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+                SIGNAL(flightCanceledSignal(bool)), status_buttons[i], SLOT(setDisabled(bool)));
+        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
+                SIGNAL(flightCanceledSignal(bool)), details_buttons[i], SLOT(setDisabled(bool)));
+
         if (Recorder<Flight>::getInstance()->get_dataList()[i]->getFlightState()
                 == DONE)
         {

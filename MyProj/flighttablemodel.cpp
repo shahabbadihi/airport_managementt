@@ -115,6 +115,7 @@ void FlightTableModel::recordInserted()
     int row = rowCount() - 1;
     this->insertRows(row, 1, QModelIndex());
     emit recordInsertedSignal(row);
+//    emit recordInsertedSignal();
 }
 
 QVariant FlightTableModel::headerData(int section, Qt::Orientation orientation, int role) const

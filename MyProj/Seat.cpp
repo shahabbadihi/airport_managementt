@@ -1,4 +1,6 @@
 #include "Seat.h"
+#include <stdexcept>
+using namespace std;
 
 void Seat::setSeatInfo(int row, int col, Airplane *a)
 {
@@ -8,10 +10,13 @@ void Seat::setSeatInfo(int row, int col, Airplane *a)
 }
 
 void Seat::attachTicket(Ticket* t){
+    if (!t)
+        throw invalid_argument("Ticket Not Found!");
     tickets.push_back(t);
 }
 void Seat::removeTicket(Ticket *t){
-    tickets.removeOne(t);
+    if (t)
+        tickets.removeOne(t);
 }
 Seat::Seat(){
 

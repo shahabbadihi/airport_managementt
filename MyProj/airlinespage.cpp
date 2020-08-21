@@ -3,17 +3,15 @@
 #include "Recorder.h"
 #include "Airline.h"
 AirlinesPage::AirlinesPage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::AirlinesPage),
-    airline_item_model(nullptr),
-    delegate(nullptr),
-    mapper(nullptr)
+    DataMapperPage(AirlineItemModel::getInstance()
+        , parent),
+    ui(new Ui::AirlinesPage)
 {
     ui->setupUi(this);
-    mapper=new QDataWidgetMapper(this);
-    airline_item_model=AirlineItemModel::getInstance();
+//    mapper=new QDataWidgetMapper(this);
+//    model=AirlineItemModel::getInstance();
 
-    mapper->setModel(airline_item_model);
+    mapper->setModel(model);
     mapper->addMapping(ui->airlineNameLe,0);
     ui->airlineNameLe->setReadOnly(true);
     mapper->addMapping(ui->CodeLe,1);
@@ -33,12 +31,12 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
-    connect(this->airline_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-            this, SLOT(setCurrentIndex(int)));
-    connect(this->airline_item_model, SIGNAL(setIndexWhenRecordAdded()),
-            this, SLOT(updateButtonsWhenRecordAdded()));
+//    connect(this->airline_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
+//            this, SLOT(setCurrentIndex(int)));
+//    connect(this->airline_item_model, SIGNAL(setIndexWhenRecordAdded()),
+//            this, SLOT(updateButtonsWhenRecordAdded()));
 
-    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButton(int)));
+//    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButton(int)));
 
     connect(ui->prvBtn,SIGNAL(clicked()),mapper,SLOT(toPrevious()));
     connect(ui->nextBtn,SIGNAL(clicked()),mapper,SLOT(toNext()));
@@ -49,10 +47,10 @@ AirlinesPage::~AirlinesPage()
 {
     delete ui;
 }
-void AirlinesPage::updateButton(int row)
+void AirlinesPage::updateButtons(int row)
 {
     ui->prvBtn->setEnabled(row > 0);
-    ui->nextBtn->setEnabled(row < airline_item_model->rowCount() - 1);
+    ui->nextBtn->setEnabled(row < model->rowCount() - 1);
 }
 
 void AirlinesPage::on_subBtn_clicked()
@@ -61,21 +59,21 @@ void AirlinesPage::on_subBtn_clicked()
     Recorder<Airline>::getInstance()->updateFileAll();
 }
 
-void AirlinesPage::setCurrentIndex(int row)
-{
-    if (row == 0)
-    {
-        this->mapper->revert();
-    }
-    else
-    {
-        this->mapper->setCurrentIndex(row - 1);
-    }
-}
+//void AirlinesPage::setCurrentIndex(int row)
+//{
+//    if (row == 0)
+//    {
+//        this->mapper->revert();
+//    }
+//    else
+//    {
+//        this->mapper->setCurrentIndex(row - 1);
+//    }
+//}
 
-void AirlinesPage::updateButtonsWhenRecordAdded()
-{
-    this->mapper->toLast();
-    this->updateButton(this->airline_item_model->rowCount() - 1);
-}
+//void AirlinesPage::updateButtonsWhenRecordAdded()
+//{
+//    this->mapper->toLast();
+//    this->updateButton(this->airline_item_model->rowCount() - 1);
+//}
 

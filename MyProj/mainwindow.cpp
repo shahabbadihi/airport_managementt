@@ -32,7 +32,7 @@
 #include "ThreadedJob.h"
 #include "airlinespage.h"
 
-bool ISDATACHANGED = false;
+extern bool ISDATACHANGED;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

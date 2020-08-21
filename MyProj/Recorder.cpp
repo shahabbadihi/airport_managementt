@@ -188,6 +188,7 @@ void Recorder<T>::import()
         this->add(newObj);
     }
 
+//    file.flush();
     file.close();
 
     //this->print_dataList();
@@ -453,6 +454,7 @@ void Recorder<Pilot>::import()
         this->add(newObj);
     }
 
+//    file.flush();
     file.close();
 
     //this->print_dataList();
@@ -495,6 +497,7 @@ void Recorder<Passenger>::import()
         this->add(newObj);
     }
 
+//    file.flush();
     file.close();
 
     //this->print_dataList();

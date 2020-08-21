@@ -8,7 +8,7 @@
 PilotItemModel* PilotItemModel::instance;
 
 PilotItemModel::PilotItemModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : MyAbstractItemModel(parent)
 {
     connect(Recorder<Pilot>::getInstance(), SIGNAL(recordRemovedSignal(int)),
             this, SLOT(rowRemovedSlot(int)));
@@ -162,10 +162,10 @@ void PilotItemModel::rowRemovedSlot(int r)
     this->removeRows(r, 1);
 }
 
-void PilotItemModel::rowAddedSlot()
-{
-    emit setIndexWhenRecordAdded();
-}
+//void PilotItemModel::rowAddedSlot()
+//{
+//    emit setIndexWhenRecordAdded();
+//}
 
 //void PilotItemModel::timerHit()
 //{

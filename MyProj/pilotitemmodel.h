@@ -2,10 +2,11 @@
 #define PILOTTABLEMODEL_H
 
 //#include "mymodel.h"
-#include <QAbstractListModel>
+#include "MyAbstractItemModel.h"
+//#include <QAbstractListModel>
 #include <QObject>
 
-class PilotItemModel : public QAbstractItemModel
+class PilotItemModel : public MyAbstractItemModel
 {
     Q_OBJECT
 public:
@@ -27,11 +28,11 @@ private:
 public slots:
 
 private slots:
-    void rowRemovedSlot(int);
-    void rowAddedSlot();
-signals:
-    void rowsAboutToBeRemoved(int);
-    void setIndexWhenRecordAdded();
+    void rowRemovedSlot(int) override;
+//    void rowAddedSlot();
+//signals:
+//    void rowsAboutToBeRemoved(int);
+//    void setIndexWhenRecordAdded();
 };
 
 #endif // PILOTLISTMODEL_H
