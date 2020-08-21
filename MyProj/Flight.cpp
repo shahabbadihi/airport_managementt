@@ -167,11 +167,11 @@ void Flight::delay(qint64 milliseconds)
     if (this->pilot)
     {
         Flight* temp = this->pilot->nextFlight(this);
-        while (temp)
+        /*while (temp)
         {
-            //nexts_in_pilot_list.push_back(temp);
-            temp = this->pilot->nextFlight(temp);
-        }
+            //nexts_in_pilot_list.push_back(temp);*/
+        temp = this->pilot->nextFlight(temp);
+        //}
     }
     //QVector<QVector<Flight*>> host_list;
 //    foreach (Host* h, this->hosts)
@@ -184,11 +184,11 @@ void Flight::delay(qint64 milliseconds)
         //host_list.push_back(this->hosts[i]->getList());
         //QVector<Flight*> nexts_in_host_list;
         Flight* temp = this->hosts[i]->nextFlight(this);
-        while (temp)
+        /*while (temp)
         {
-            //nexts_in_host_list.push_back(temp);
-            temp = this->hosts[i]->nextFlight(temp);
-        }
+            //nexts_in_host_list.push_back(temp);*/
+        temp = this->hosts[i]->nextFlight(temp);
+        //}
 
         //host_list.push_back(nexts_in_host_list);
     }
@@ -198,11 +198,11 @@ void Flight::delay(qint64 milliseconds)
     if (this->airplane)
     {
         Flight* temp2 = this->airplane->nextFlight(this);
-        while (temp2)
+        /*while (temp2)
         {
-            //nexts_in_airplane_list.push_back(temp2);
-            temp2 = this->airplane->nextFlight(temp2);
-        }
+            //nexts_in_airplane_list.push_back(temp2);*/
+        temp2 = this->airplane->nextFlight(temp2);
+        //}
     }
 
     this->setDateTimeDeparture(this->dateTimeDeparture.addMSecs(milliseconds));
