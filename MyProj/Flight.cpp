@@ -1074,7 +1074,7 @@ bool Flight::isCheckInCompleted(){
                }
             }
         }
-        if(freeSeats==0){return true;}
+        if(freeSeats==tickets.size()){return true;}
         else{return false;}
     }
     return false;
