@@ -181,16 +181,16 @@ void Flight::delay(qint64 milliseconds)
 
     for (int i = 0; i < this->hosts.size(); i++)
     {
-        //host_list.push_back(this->hosts[i]->getList());
-        //QVector<Flight*> nexts_in_host_list;
+        host_list.push_back(this->hosts[i]->getList());
+        QVector<Flight*> nexts_in_host_list;
         Flight* temp = this->hosts[i]->nextFlight(this);
-        /*while (temp)
+        while (temp)
         {
-            //nexts_in_host_list.push_back(temp);*/
-        temp = this->hosts[i]->nextFlight(temp);
-        //}
+            nexts_in_host_list.push_back(temp);
+            temp = this->hosts[i]->nextFlight(temp);
+        }
 
-        //host_list.push_back(nexts_in_host_list);
+        host_list.push_back(nexts_in_host_list);
     }
 
     //QVector<Flight*> nexts_in_airplane_list;
