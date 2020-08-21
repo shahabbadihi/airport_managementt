@@ -210,6 +210,7 @@ void Flight::delay(qint64 milliseconds)
 
     this->setFlightState(DELAYED);
 
+
     //foreach (Flight* f, nexts_in_pilot_list)
     //{
     //if (haveInterference(this, f))
