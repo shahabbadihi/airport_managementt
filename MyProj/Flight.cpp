@@ -338,8 +338,8 @@ void Flight::setState()
     {
         if (pilot)
             this->pilot->removeFlight(this);
-        if (airline)
-            this->airline->removeFlight(this);
+//        if (airline)
+//            this->airline->removeFlight(this);
         if (airplane)
             this->airplane->removeFlight(this);
         foreach (Host * h, this->hosts)
