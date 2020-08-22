@@ -1028,7 +1028,9 @@ bool Flight::isSuitable(Passenger *p, const QString &source,
                         this->getDestination() == dest &&
                         this->getDateTimeDeparture().date() == dep_date &&
                         this->getNumOfPassengers() < this->getCapacity() &&
-                        !this->isPassengerExist(p)
+                        !this->isPassengerExist(p) && (flightState == SUSPENDED
+                                                       || flightState == READY ||
+                                                       flightState == DELAYED)
             )
     {
         return true;
