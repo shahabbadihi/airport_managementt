@@ -85,7 +85,7 @@ void Airplane::removeFlight(Flight * f)
 
 bool Airplane::isFree(Flight * f) const
 {
-    if (this->numOfSeats < f->getNumOfPassengers())
+    if (this->numOfSeats < f->getCapacity())
         return false;
 
     if(isFlightInList(f))
