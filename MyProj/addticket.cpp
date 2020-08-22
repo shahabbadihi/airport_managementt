@@ -101,7 +101,7 @@ void AddTicket::on_btnSubmit_clicked()
                 QString s4 = " Now Has Enough Tickets!";
                 QMessageBox msg;
                 msg.setText(s3 + ticket->getFlight()->getSerial() + s4);
-                msg.show();
+                msg.exec();
             }
         }
     }

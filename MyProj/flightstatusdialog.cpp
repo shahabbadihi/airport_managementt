@@ -102,7 +102,9 @@ void FlightStatusDialog::reset()
     ui->lblAirplaneStatus->setText(flight_ptr->isAirplaneSetted() ? "Setted!" : "Not Setted!");
     ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
     ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
-    ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
+    ui->lblTicketsStatus->setText(QString("%1 | %2 of %3").arg(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!").arg(
+                                      QString::number(flight_ptr->getNumOfPassengers())).arg
+                                  (QString::number(flight_ptr->getCapacity())));
     if(flight_ptr->isCheckInReady()){
         if(flight_ptr->isCheckInCompleted()){
             ui->lblCheckStasus->setText("Completed!");

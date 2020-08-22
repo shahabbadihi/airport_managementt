@@ -23,17 +23,23 @@ void attachTicket::on_okButton_clicked()
 {
     try
     {
+        Ticket * t = Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text());
+
+        if (!flight->isTicketInList(t))
+        {
+            throw invalid_argument("This Flight Has Not This Ticket!");
+        }
+
         if(flight->getAirplane()->getSeat(Row,Column)->isFree(flight)){
-            flight->getAirplane()->getSeat(Row,Column)->attachTicket
-                    ( Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text()));
+            flight->getAirplane()->getSeat(Row,Column)->attachTicket(t);
         }
         else{
             flight->getAirplane()->getSeat(Row,Column)->removeTicket(flight->getAirplane()->getSeat(Row,Column)->getTicket(flight));
             flight->getAirplane()->getSeat(Row,Column)->attachTicket
-                    ( Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text()));
+                    (t);
         }
 
-        ui->name->setText(Recorder<Ticket>::getInstance()->searchByCode(ui->lineEdit->text())->getPassengerName());
+        ui->name->setText(t->getPassengerName());
     }
     catch (invalid_argument e)
     {
