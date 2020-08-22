@@ -81,11 +81,12 @@ void Host::attachFlight(Flight * f)
 void Host::removeFlight(Flight *f)
 {
     if(f && isFlightInList(f)){
-        this->getFlightList().removeOne(f);
+        Employee::removeFlight(f);
+        f->removePilot();
 //        Recorder<Host>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
-        QMessageBox msg;
-        msg.setText(f->getSerial()+" removed from host "+this->getFname()+ " " +this->getLname()+ "flight list");
+//        QMessageBox msg;
+//        msg.setText(f->getSerial()+" removed from host "+this->getFname()+ " " +this->getLname()+ "flight list");
     }
 }
 
@@ -93,7 +94,7 @@ void Host::attachDoneFlight(Flight * f)
 {
     if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
     {
-        this->getDoneFlightList().push_back(f);
+        Employee::attachDoneFlight(f);
 //        Recorder<Host>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }

@@ -1073,7 +1073,7 @@ bool Flight::isCheckInCompleted(){
         if(freeSeats==airplane->getNumOfSeats()-tickets.size()){return true;}
         else{return false;}
     }
-    return false;
+    return true;
 }
 //void Flight::setDate(const QDate & d)
 //{
