@@ -35,7 +35,9 @@ void TicketPage::update(){
     ui->PriceLe->setText(QString::number(ticket->getPrice()));
     ui->FatherNameLe->setText(ticket->getPassenger()->getFatherName());
     ui->dateEdit->setDate(ticket->getPassenger()->getBirthDate());
+    ui->dateEdit->setReadOnly(true);
     ui->NationalCodeLe->setText(QString::number(ticket->getPassenger()->getNationalCode()));
+    ui->NationalCodeLe->setReadOnly(true);
 }
 
 void TicketPage::on_listView_doubleClicked(const QModelIndex &index)
@@ -56,7 +58,7 @@ void TicketPage::on_pushButton_clicked()
         msg.exec();
         return;
     }
-    ticket->getPassenger()->setBirthDate(ui->dateEdit->date());
+//    ticket->getPassenger()->setBirthDate(ui->dateEdit->date());
     QStringList str=ui->NameLe->text().split(" ");
     ticket->getPassenger()->setFname(str[0]);
     ticket->getPassenger()->setLname(str[1]);
