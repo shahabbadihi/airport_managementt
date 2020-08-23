@@ -6,6 +6,8 @@ DelayDialog::DelayDialog(QWidget *parent) :
     ui(new Ui::DelayDialog)
 {
     ui->setupUi(this);
+
+    ui->spnMinute->setRange(0, 60);
 }
 
 DelayDialog::~DelayDialog()
@@ -15,7 +17,7 @@ DelayDialog::~DelayDialog()
 
 qint64 DelayDialog::milli_delay()
 {
-    return (ui->spnHour->value() * 60 * 60 + ui->spnMinute->value() * 60) * 1000;
+    return (ui->spnMinute->value() * 60) * 1000;
 }
 
 void DelayDialog::on_buttonBox_accepted()
