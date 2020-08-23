@@ -8,6 +8,8 @@
 #include <QString>
 #include <QStringList>
 #include <stdexcept>
+#include <QMessageBox>
+#include <QDateTime>
 #include "Recorder.h"
 using namespace std;
 
@@ -162,6 +164,13 @@ bool Flight::isArrivalCarrierSetted() const
 
 void Flight::delay(qint64 milliseconds)
 {
+    if (milliseconds > 3600000)
+    {
+        QMessageBox msg;
+        msg.setText("This Amount Of Delay Is Prohibited In The Rules About Postponing!!\nPlease Decrease It If You Want To Delay This Flight");
+        msg.exec();
+        return;
+    }
     Flight* temp;
     if (this->pilot)
     {
@@ -617,6 +626,10 @@ void Flight::setDateTimeArrival(const QDateTime &d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
+    QDateTime duration = (this->dateTimeArrival) - (this->dateTimeDeparture);
+    if (duration <= 4500000)
+        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
+
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 
@@ -629,6 +642,10 @@ void Flight::setDateTimeArrival(const QDateTime && d)
 {
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
+
+    QDateTime duration = (this->dateTimeArrival) - (this->dateTimeDeparture);
+    if (duration <= 4500000)
+        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
