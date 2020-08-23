@@ -50,7 +50,7 @@ void TicketPage::on_listView_doubleClicked(const QModelIndex &index)
 void TicketPage::on_pushButton_clicked()
 {
     if(Recorder<Ticket>::getInstance()->searchByCode(ui->TicketNoLe->text())==nullptr){
-    ticket->setNo(ui->TicketNoLe->text().toLong());
+        ticket->setNo(ui->TicketNoLe->text().toLong());
     }
     else{
         QMessageBox msg;
@@ -60,6 +60,15 @@ void TicketPage::on_pushButton_clicked()
     }
 //    ticket->getPassenger()->setBirthDate(ui->dateEdit->date());
     QStringList str=ui->NameLe->text().split(" ");
+
+    if (str.size() == 1)
+    {
+        QMessageBox msg;
+        msg.setText("Please Enter Full Name!");
+        msg.exec();
+        return;
+    }
+
     ticket->getPassenger()->setFname(str[0]);
     ticket->getPassenger()->setLname(str[1]);
     ticket->getPassenger()->setFatherName(ui->FatherNameLe->text());
