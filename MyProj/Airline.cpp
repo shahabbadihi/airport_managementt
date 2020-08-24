@@ -211,7 +211,7 @@ Pilot *Airline::getFirstFreePilot(Flight* f) const
     for (int i = 0; i < this->list_of_pilots.size(); i++)
     {
         Pilot* a = this->list_of_pilots[i];
-        if(a->getFlightList().size()==-a->getDoneFlightList().size()){
+        if(a->getFlightList().size()==a->getDoneFlightList().size()){
             return a;
         }
     }
@@ -230,7 +230,7 @@ Host *Airline::getFirstFreeHost(Flight* f) const
     for (int i = 0; i < this->list_of_hosts.size(); i++)
     {
         Host* a = this->list_of_hosts[i];
-        if(a->getFlightList().size()==-a->getDoneFlightList().size()){
+        if(a->getFlightList().size()==a->getDoneFlightList().size()){
             return a;
         }
     }
