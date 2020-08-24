@@ -8,6 +8,8 @@
 #include <QString>
 #include <QStringList>
 #include <stdexcept>
+#include <QMessageBox>
+#include <QDateTime>
 #include "Recorder.h"
 using namespace std;
 
@@ -162,6 +164,13 @@ bool Flight::isArrivalCarrierSetted() const
 
 void Flight::delay(qint64 milliseconds)
 {
+    if (milliseconds > 3600000)
+    {
+        QMessageBox msg;
+        msg.setText("This Amount Of Delay Is Prohibited In The Rules About Postponing!!\nPlease Decrease It If You Want To Delay This Flight");
+        msg.exec();
+        return;
+    }
     Flight* temp = nullptr;
     if (this->pilot)
     {
@@ -617,6 +626,10 @@ void Flight::setDateTimeArrival(const QDateTime &d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
+    qint64 duration = this->dateTimeDeparture.secsTo(d);
+    if (duration < 4500)
+        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
+
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 
@@ -629,6 +642,10 @@ void Flight::setDateTimeArrival(const QDateTime && d)
 {
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
+
+    qint64 duration = this->dateTimeDeparture.secsTo(d);
+    if (duration < 4500)
+        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
@@ -1028,7 +1045,9 @@ bool Flight::isSuitable(Passenger *p, const QString &source,
                         this->getDestination() == dest &&
                         this->getDateTimeDeparture().date() == dep_date &&
                         this->getNumOfPassengers() < this->getCapacity() &&
-                        !this->isPassengerExist(p)
+                        !this->isPassengerExist(p) && (flightState == SUSPENDED
+                                                       || flightState == READY ||
+                                                       flightState == DELAYED)
             )
     {
         return true;
@@ -1073,7 +1092,7 @@ bool Flight::isCheckInCompleted(){
         if(freeSeats==airplane->getNumOfSeats()-tickets.size()){return true;}
         else{return false;}
     }
-    return false;
+    return true;
 }
 //void Flight::setDate(const QDate & d)
 //{
