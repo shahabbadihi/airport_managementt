@@ -627,7 +627,7 @@ void Flight::setDateTimeArrival(const QDateTime &d)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
     qint64 duration = this->dateTimeDeparture.secsTo(d);
-    if (duration < 4500000)
+    if (duration < 4500)
         throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
@@ -644,7 +644,7 @@ void Flight::setDateTimeArrival(const QDateTime && d)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
     qint64 duration = this->dateTimeDeparture.secsTo(d);
-    if (duration < 4500000)
+    if (duration < 4500)
         throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
