@@ -164,9 +164,6 @@ bool Flight::isArrivalCarrierSetted() const
 
 void Flight::delay(qint64 milliseconds)
 {
-<<<<<<< HEAD
-    Flight* temp = nullptr;
-=======
     if (milliseconds > 3600000)
     {
         QMessageBox msg;
@@ -174,8 +171,7 @@ void Flight::delay(qint64 milliseconds)
         msg.exec();
         return;
     }
-    Flight* temp;
->>>>>>> 08990fbc9ff161a14067f02b72243ad71b34a35a
+    Flight* temp = nullptr;
     if (this->pilot)
     {
         temp = this->pilot->nextFlight(this);
@@ -630,8 +626,8 @@ void Flight::setDateTimeArrival(const QDateTime &d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
-    QDateTime duration = (this->dateTimeArrival) - (this->dateTimeDeparture);
-    if (duration <= 4500000)
+    qint64 duration = this->dateTimeDeparture.secsTo(d);
+    if (duration < 4500000)
         throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
@@ -647,8 +643,8 @@ void Flight::setDateTimeArrival(const QDateTime && d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
-    QDateTime duration = (this->dateTimeArrival) - (this->dateTimeDeparture);
-    if (duration <= 4500000)
+    qint64 duration = this->dateTimeDeparture.secsTo(d);
+    if (duration < 4500000)
         throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
