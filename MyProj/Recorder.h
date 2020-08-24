@@ -45,6 +45,7 @@ public:
     void updateFileAll();
 
     QString getClassName();
+
     static Recorder<T>* getInstance();
 
     Recorder<T>()
@@ -66,6 +67,7 @@ private:
     QAbstractItemModel * model_ptr;
 
     void record(T* a);
+    QString getFileName();
 
 //signals:
 //    void recordAdded();

@@ -32,6 +32,16 @@ void AddFlightDialog::on_btnSubmit_clicked()
     Flight* flight = nullptr;
     try
     {
+        int index = ui->comboAirline->currentIndex();
+
+        if (index == -1)
+        {
+            QMessageBox msg;
+            msg.setText("There Is No Any Airline!");
+            msg.exec();
+            return;
+        }
+
         QString serial = ui->txtFlightSerial->text();
         QString source = ui->txtSource->text();
         QString dest = ui->txtDest->text();
@@ -39,7 +49,7 @@ void AddFlightDialog::on_btnSubmit_clicked()
         QDateTime arr = ui->dttmArrival->dateTime();
         int num_hosts = ui->spnHosts->value();
         int capacity = ui->spnPassengers->value();
-        Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
+        Airline* currentAirline = Recorder<Airline>::getInstance()->get_dataList()[index];
         if (dep < QDateTime::currentDateTime())
             throw invalid_argument("DateTime Of This Flight Has Passed!\n"
                                      "Can Not Add This Flight!!");

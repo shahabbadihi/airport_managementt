@@ -215,7 +215,7 @@ bool Employee::isFree(Flight* f) const
         return false;
     }
 
-    FlightItem::isFree(f);
+    return FlightItem::isFree(f);
 }
 
 

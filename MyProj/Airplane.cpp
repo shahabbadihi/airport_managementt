@@ -94,7 +94,7 @@ bool Airplane::isFree(Flight * f) const
     if (this->numOfSeats < f->getCapacity())
         return false;
 
-    FlightItem::isFree(f);
+    return FlightItem::isFree(f);
 }
 
 void Airplane::createSeats(int rows, int cols)

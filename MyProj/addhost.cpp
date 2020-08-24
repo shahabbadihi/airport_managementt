@@ -36,8 +36,18 @@ void AddHost::on_pushButton_clicked()
     Host * host = nullptr;
     try
     {
+        int index = ui->comboAirline->currentIndex();
+
+        if (index == -1)
+        {
+            QMessageBox msg;
+            msg.setText("There Is No Any Airline!");
+            msg.exec();
+            return;
+        }
+
         qlonglong p_code = ui->txtPersonnelCode->text().toLongLong();
-        Airline * airline = Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()];
+        Airline * airline = Recorder<Airline>::getInstance()->get_dataList()[index];
         QString fname = ui->txtFname->text();
         QString lname = ui->txtLname->text();
         QDate b_date = ui->dtBirthDate->date();
