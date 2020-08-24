@@ -24,11 +24,7 @@ AddAirplaneDialog::~AddAirplaneDialog()
 
 void AddAirplaneDialog::on_btnSubmit_clicked()
 {
-//    Airplane * airplane = new Airplane;
-//    airplane->setSerial(ui->txtSerial->text());
-//    airplane->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
 
-//    airplane->setNumOfSeats(ui->spnNumOfSeats->value());
     Airplane * airplane = nullptr;
     try
     {

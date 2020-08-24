@@ -22,7 +22,6 @@ DataMapperPage::DataMapperPage(MyAbstractItemModel *m
     }
 
     connect(flight_table_model, SIGNAL(recordInsertedSignal(int)), this, SLOT(connectFlightToMapper(int)));
-//    connect(flight_table_model, SIGNAL(recordRemovedSignal(int)), this, SLOT(removeButtonFlightTable(int)));
 
     connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 }
@@ -55,7 +54,6 @@ void DataMapperPage::connectFlightToMapper(int r)
 void DataMapperPage::Update()
 {
     int index = this->mapper->currentIndex();
-//    this->mapper->setCurrentIndex(index - 1);
     this->mapper->toFirst();
     this->mapper->setCurrentIndex(index);
 }

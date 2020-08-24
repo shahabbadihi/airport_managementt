@@ -1,5 +1,6 @@
 #include "Host.h"
 #include "Airline.h"
+#include "Flight.h"
 #include <QString>
 
 extern bool ISDATACHANGED;
@@ -61,7 +62,6 @@ Host::~Host()
     if (getAirline())
         this->getAirline()->removeHost(this);
 
-//    Recorder<Host>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
 
@@ -72,21 +72,18 @@ void Host::attachFlight(Flight * f)
         Employee::attachFlight(f);
         f->attachHost(this);
 
-//        Recorder<Host>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
-//    Recorder<Host>::getInstance()->updateFile(this);
 }
 
 void Host::removeFlight(Flight *f)
 {
     if(f && isFlightInList(f)){
         Employee::removeFlight(f);
-        f->removePilot();
-//        Recorder<Host>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
-//        QMessageBox msg;
-//        msg.setText(f->getSerial()+" removed from host "+this->getFname()+ " " +this->getLname()+ "flight list");
+
+        f->removeHost(this);
+
+//        ISDATACHANGED = true;
     }
 }
 
@@ -95,8 +92,7 @@ void Host::attachDoneFlight(Flight * f)
     if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
     {
         Employee::attachDoneFlight(f);
-//        Recorder<Host>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
 }
 
@@ -104,8 +100,7 @@ void Host::removeDoneFlight(Flight *f)
 {
     if(f && isDoneFlightInList(f) && isFlightInList(f)){
         Employee::removeDoneFlight(f);
-//        Recorder<Host>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
 }
 
@@ -117,10 +112,8 @@ void Host::setAirline(Airline *value)
 
         value->attachHost(this);
 
-//        Recorder<Host>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
-//    Recorder<Host>::getInstance()->updateFile(this);
 }
 
 double Host::wage() const

@@ -6,21 +6,6 @@
 
 extern bool ISDATACHANGED;
 
-//QString Pilot::getDegreeAsString() const
-//{
-//    switch (this->degree)
-//    {
-//    case One:
-//        return "One";
-//        break;
-//    case Two:
-//        return "Two";
-//        break;
-//    case Three:
-//        return "Three";
-//        break;
-//    }
-//}
 
 Pilot::Pilot(QString& dataStr)
 {
@@ -74,10 +59,8 @@ void Pilot::attachFlight(Flight * f)
     {
         Employee::attachFlight(f);
         f->setPilot(this);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
-    //    Recorder<Pilot>::getInstance()->updateFile(this);
 }
 
 void Pilot::removeFlight(Flight *f)
@@ -85,10 +68,7 @@ void Pilot::removeFlight(Flight *f)
     if(f && isFlightInList(f)){
         Employee::removeFlight(f);
         f->removePilot();
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
-        QMessageBox msg;
-        msg.setText(f->getSerial()+" removed from pilot "+this->getFname()+ " " +this->getLname()+ "flight list");
+//        ISDATACHANGED = true;
     }
 }
 
@@ -98,8 +78,7 @@ void Pilot::attachDoneFlight(Flight * f)
     {
         Employee::attachDoneFlight(f);
 
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
 }
 
@@ -107,8 +86,7 @@ void Pilot::removeDoneFlight(Flight *f)
 {
     if(f && isDoneFlightInList(f) && isFlightInList(f)){
         Employee::removeDoneFlight(f);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
 }
 Pilot::~Pilot(){
@@ -120,44 +98,8 @@ Pilot::~Pilot(){
     if (getAirline())
         this->getAirline()->removePilot(this);
 
-//    Recorder<Pilot>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
-//QString Pilot::get_data()
-//{
-//    QString deg;
-//    switch(this->degree)
-//    {
-//    case One:
-//        deg = "1";
-//        break;
-//    case Two:
-//        deg = "2";
-//        break;
-//    case Three:
-//        deg = "3";
-//        break;
-//    }
-//    QString data = QString::number(this->personnelCode) + "|" +
-//            this->airline->getCode() + "|" + this->fname + "|" + this->lname + "|"
-//            /*+ deg + "|"*/ + QString::number(this->nationalCode) + "|"
-
-//            + QString::number(this->birthDate.month()) + "/"
-//            + QString::number(this->birthDate.day()) + "/" + QString::number(this->birthDate.year())
-//            + "|" + QString::number(this->employmentDate.month()) + "/"
-//            + QString::number(this->employmentDate.day()) +
-//            "/" + QString::number(this->employmentDate.year()) + "|";
-
-//    for (int i = 0; i < this->list.size() && this->list[i]; i++)
-//    {
-//        if (i == this->list.size() - 1)
-//            data += this->list.at(i)->getSerial();
-//        else
-//            data += this->list.at(i)->getSerial() + "/";
-//    }
-//    data += "\n";
-//    return data;
-//}
 
 void Pilot::setAirline(Airline *value)
 {
@@ -166,26 +108,6 @@ void Pilot::setAirline(Airline *value)
         Employee::setAirline(value);
 
         value->attachPilot(this);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
-        ISDATACHANGED = true;
+//        ISDATACHANGED = true;
     }
-//    Recorder<Pilot>::getInstance()->updateFile(this);
 }
-
-//double Pilot::wage(double i = (Flight::income())) const
-//{
-//    float percent = 0.3;
-//    return percent * i;
-
-//}
-
-//void Pilot::set_degree(int deg)
-//{
-//    if (deg == 1)
-//        this->degree = One;
-//    if (deg == 2)
-//        this->degree = Two;
-//    if (deg == 3)
-//        this->degree = Three;
-//    Recorder<Pilot>::getInstance()->updateFile(this);
-//}

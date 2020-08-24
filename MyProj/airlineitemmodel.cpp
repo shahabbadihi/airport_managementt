@@ -59,16 +59,8 @@ QVariant AirlineItemModel::data(const QModelIndex &index, int role) const
     QString s3="";
     foreach (Flight* f, a->getFlightsList())
     {
-//        if(f->getFlightStateAsString()=="DONE")
-//            {s7 += f->getFlightStr() + "\n\n";}
-//        else
         s3 += f->getFlightStr() + "\n\n";
     }
-
-//    foreach (Flight* f, a->getListOfDoneFlights())
-//    {
-//        s7 += f->getFlightStr() + "\n\n";
-//    }
 
     QString s4="";
     foreach (Airplane* A, a->getAirplanesList())
@@ -124,7 +116,6 @@ bool AirlineItemModel::removeRows(int row, int count, const QModelIndex &parent)
             Recorder<Airline>::getInstance(), SLOT(recordRemovedSlot(int)));
 
     beginRemoveRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
     endRemoveRows();
     emit rowsAboutToBeRemoved(row);
     return true;

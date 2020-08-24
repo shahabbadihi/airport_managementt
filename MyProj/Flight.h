@@ -1,5 +1,3 @@
-
-
 #ifndef FLIGHT_H
 #define FLIGHT_H
 
@@ -10,11 +8,7 @@
 
 #include "Pilot.h"
 class Pilot;
-//#include "Passenger.h"
-//class Passenger;
-//#include "Price.h"
-//class Price;
-//#include "Host.h"
+
 #include "Object.h"
 class Host;
 class Ticket;

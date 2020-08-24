@@ -8,14 +8,11 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     ui(new Ui::AirlinesPage)
 {
     ui->setupUi(this);
-//    mapper=new QDataWidgetMapper(this);
-//    model=AirlineItemModel::getInstance();
 
     mapper->setModel(model);
     mapper->addMapping(ui->airlineNameLe,0);
     ui->airlineNameLe->setReadOnly(true);
     mapper->addMapping(ui->CodeLe,1);
-   // ui->CodeLe->setReadOnly(true);
     mapper->addMapping(ui->pilotPte,2);
     ui->pilotPte->setReadOnly(true);
     mapper->addMapping(ui->HostPte,3);
@@ -24,19 +21,11 @@ AirlinesPage::AirlinesPage(QWidget *parent) :
     ui->FlightPte->setReadOnly(true);
     mapper->addMapping(ui->AirplanePte,5);
     ui->AirplanePte->setReadOnly(true);
-//    mapper->addMapping(ui->DnFlightPte,6);
-//    ui->DnFlightPte->setReadOnly(true);
     delegate = new Delegate(this);
     mapper->setItemDelegate(delegate);
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
-//    connect(this->airline_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-//            this, SLOT(setCurrentIndex(int)));
-//    connect(this->airline_item_model, SIGNAL(setIndexWhenRecordAdded()),
-//            this, SLOT(updateButtonsWhenRecordAdded()));
-
-//    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButton(int)));
 
     connect(ui->prvBtn,SIGNAL(clicked()),mapper,SLOT(toPrevious()));
     connect(ui->nextBtn,SIGNAL(clicked()),mapper,SLOT(toNext()));
@@ -58,22 +47,3 @@ void AirlinesPage::on_subBtn_clicked()
     this->mapper->submit();
     Recorder<Airline>::getInstance()->updateFileAll();
 }
-
-//void AirlinesPage::setCurrentIndex(int row)
-//{
-//    if (row == 0)
-//    {
-//        this->mapper->revert();
-//    }
-//    else
-//    {
-//        this->mapper->setCurrentIndex(row - 1);
-//    }
-//}
-
-//void AirlinesPage::updateButtonsWhenRecordAdded()
-//{
-//    this->mapper->toLast();
-//    this->updateButton(this->airline_item_model->rowCount() - 1);
-//}
-

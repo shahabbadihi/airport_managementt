@@ -26,6 +26,7 @@ SOURCES += \
     DeleteAirplane.cpp \
     Employee.cpp \
     Flight.cpp \
+    FlightItem.cpp \
     Host.cpp \
     HostItemModel.cpp \
     HostsPage.cpp \
@@ -86,6 +87,7 @@ HEADERS += \
     DeleteAirplane.h \
     Employee.h \
     Flight.h \
+    FlightItem.h \
     Host.h \
     HostItemModel.h \
     HostsPage.h \

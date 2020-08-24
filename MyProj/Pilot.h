@@ -1,4 +1,3 @@
-//#pragma once
 #ifndef PILOT_H
 #define PILOT_H
 
@@ -6,7 +5,7 @@
 #include <QString>
 #include "Employee.h"
 #include "Flight.h"
-class Flight;
+//class Flight;
 //enum Degree {One, Two, Three};
 
 class Pilot : public Employee

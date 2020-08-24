@@ -1,4 +1,3 @@
-//#pragma once
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
@@ -7,11 +6,12 @@
 #include <QDateTime>
 #include <QVector>
 
+#include "FlightItem.h"
 //#include "Flight.h"
-#include "Object.h"
+
 class Flight;
 class Airline;
-class Employee : public Object
+class Employee : public FlightItem
 {
 private:
     QString fname;
@@ -20,12 +20,8 @@ private:
     qlonglong personnelCode;
     QDate birthDate;
     QDate employmentDate;
-    QVector<Flight*> list;
-    QVector<Flight*> list_of_done_flights;
-    Airline* airline;
 public:
-    Employee() : airline(nullptr) {}
-//    Employee(QString& dataStr);
+    Employee() {}
     Employee(qlonglong personnel_code, Airline *a, const QString &fname,
              const QString &lname, const QDate &birth_date,
              const QDate &emp_date, qlonglong national_code);
@@ -35,11 +31,7 @@ public:
 
     virtual double wage() const = 0;
 
-
-
-
 protected:
-
     void set_birthDate(const QDate& date);
     void set_birthDate(const QDate&& date);
     void set_employmentDate(const QDate& date);
@@ -48,24 +40,18 @@ protected:
     void removeFlight(Flight*);
     void attachDoneFlight(Flight*);
     void removeDoneFlight(Flight * f);
-    int flightListSize() const;
 
 
     void setAirline(Airline *value);
 
 public:
     bool isFree(Flight*) const;
-    bool isFlightInList(Flight*) const;
-    bool isDoneFlightInList(Flight*) const;
-    Airline *getAirline() const;
     qlonglong getPersonnelCode() const;
     qlonglong getNationalCode() const;
     QString getFname() const;
     QString getLname() const;
     QDate getBirthDate() const;
     QDate getEmploymentDate() const;
-    QVector<Flight *> getFlightList() const;
-    QVector<Flight *> getDoneFlightList() const;
     void set_fname(const QString& name);
     void set_fname(const QString&& name);
     void set_lname(const QString& family);
@@ -73,8 +59,6 @@ public:
     void set_nationalCode(qlonglong code);
     void set_personnelCode(qlonglong code);
 
-    Flight* prevFlight(Flight*) const;
-    Flight* nextFlight(Flight*) const;
 };
 
 #endif // EMPLOYEE_H

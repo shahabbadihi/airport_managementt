@@ -17,12 +17,9 @@ void Carrier::setSerial(const QString &value)
     if (value == "")
         throw invalid_argument("Serial Is Empty");
     serial = value;
-//    this->search_code = value;
     this->setSearchCode(value);
 
-//    Recorder<Carrier>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 bool Carrier::isFree(const QDateTime & t, const QString & s) const
@@ -51,26 +48,6 @@ bool Carrier::isFlightInList(Flight * f) const
     }
     return false;
 }
-
-//bool Carrier::isMissionInList(const QString & str) const
-//{
-//    foreach (QString s, this->list_of_missions)
-//    {
-//        if (str == s)
-//            return true;
-//    }
-//    return false;
-//}
-
-//Airline *Carrier::getAirline() const
-//{
-//    return airline;
-//}
-
-//void Carrier::setAirline(Airline *value)
-//{
-//    airline = value;
-//}
 
 QString Carrier::getPlace() const
 {
@@ -105,15 +82,12 @@ void Carrier::setPlace(const QString &value)
         throw invalid_argument("Place Is Empty!");
     place = value;
 
-//    Recorder<Carrier>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
 
 Carrier::Carrier(QString & str_data)
 {
     QStringList str_list = str_data.split('|');
-    //this->setAirline(Recorder<Airline>::getInstance()->searchByCode(str_list[0]));
     this->setSerial(str_list[0]);
     this->setPlace(str_list[1]);
 
@@ -123,13 +97,6 @@ Carrier::Carrier(QString & str_data)
     {
         this->attachFlight(Recorder<Flight>::getInstance()->searchByCode(s));
     }
-
-//    QStringList missions = str_list[3].split('/', Qt::SkipEmptyParts);
-
-//    foreach (QString s, missions)
-//    {
-//        this->attachMission(s);
-//    }
 }
 
 Carrier::Carrier(const QString &serial, const QString &place)
@@ -140,7 +107,7 @@ Carrier::Carrier(const QString &serial, const QString &place)
 
 QString Carrier::get_data()
 {
-    QString str = /*this->airline->getSearchCode() + "|" +*/
+    QString str =
             this->serial + "|" +
             this->place + "|";
     foreach (Flight* f, this->list_of_flights)
@@ -148,13 +115,6 @@ QString Carrier::get_data()
         if (f)
             str += f->getSearchCode() + "/";
     }
-
-//    str += "|";
-
-//    foreach (QString s, this->list_of_missions)
-//    {
-//        str += s + "/";
-//    }
 
     str += "\n";
 
@@ -167,28 +127,13 @@ void Carrier::attachFlight(Flight* f)
     {
         this->list_of_flights.push_back(f);
 
-//        Recorder<Carrier>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-//    Recorder<Carrier>::getInstance()->updateFile(this);
 }
-
-//void Carrier::attachMission(const QString & m)
-//{
-//    if (!this->isMissionInList(m))
-//    {
-//        this->list_of_missions.push_back(m);
-
-////        Recorder<Carrier>::getInstance()->updateFileAll();
-//        ISDATACHANGED = true;
-//    }
-////    Recorder<Carrier>::getInstance()->updateFile(this);
-//}
 
 void Carrier::removeFlight(Flight *f){
     this->list_of_flights.removeOne(f);
 
-//    Recorder<Carrier>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
 Carrier::~Carrier(){
@@ -197,7 +142,6 @@ Carrier::~Carrier(){
             f->removeCarrier(this);
      }
 
-//     Recorder<Carrier>::getInstance()->updateFileAll();
      ISDATACHANGED = true;
 }
 

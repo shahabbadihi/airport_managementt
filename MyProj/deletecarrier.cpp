@@ -25,8 +25,6 @@ void deleteCarrier::on_btnSubmit_clicked()
     if(c){
         if(c->getPlace()==ui->txtPlace->text() ){
 
-           //Recorder<Host>::removeFromFile(h);
-           //Recorder<Host>::removeFromFile(h);
            Recorder<Carrier>::getInstance()->remove(c);
            //
            //

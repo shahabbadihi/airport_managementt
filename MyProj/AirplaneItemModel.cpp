@@ -59,16 +59,6 @@ QVariant AirplaneItemModel::data(const QModelIndex &index, int role) const
         s += f->getFlightStr() + "\n";
     }
 
-//    QString s2 = "";
-//    foreach (Flight* f, p->getDoneFlightList())
-//    {
-//        s2 += f->getFlightStr() + "\n";
-//    }
-
-    //QStringListModel ss;
-    //ss.setStringList(s);
-
-
     if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
         switch (index.column())

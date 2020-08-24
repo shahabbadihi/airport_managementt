@@ -28,12 +28,9 @@ void Flight::setAirline(Airline *value)
         airline = value;
 
         value->attachFlight(this);
-//        emit flightStatusChanged();
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setAirplane(Airplane *value)
@@ -43,17 +40,14 @@ void Flight::setAirplane(Airplane *value)
         airplane = value;
 
         value->attachFlight(this);
-//        emit flightStatusChanged();
 
         QString s1 = "Airplane ";
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->airplane->getSerial() + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 Carrier *Flight::getDeparture_carrier() const
@@ -68,18 +62,14 @@ void Flight::setDeparture_carrier(Carrier *value)
     {
         departure_carrier = value;
         value->attachFlight(this);
-//        value->attachMission(this->dateTimeDeparture.toString() + "DEP");
-//        emit flightStatusChanged();
 
         QString s1 = "Departure Carrier ";
-        QString s2 = "Setted For Flight ";
+        QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->departure_carrier->getSerial() + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 Carrier *Flight::getArrival_carrier() const
@@ -93,18 +83,14 @@ void Flight::setArrival_carrier(Carrier *value)
     {
         arrival_carrier = value;
         value->attachFlight(this);
-//        value->attachMission(this->dateTimeArrival.toString() + "ARR");
-//        emit flightStatusChanged();
 
         QString s1 = "Arrival Carrier ";
         QString s2 = "Setted For Flight ";
         emit flightStatusMsgSignal(s1 + this->arrival_carrier->getSerial() + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 Airplane *Flight::getAirplane() const
@@ -249,7 +235,6 @@ void Flight::setCapacity(int value)
 
     capacity = value;
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
 
@@ -393,9 +378,6 @@ void Flight::setState()
         {
             QString s3 = "Flight ";
             QString s4 = " Now Has Enough Hosts!";
-//            QMessageBox msg;
-//            msg.setText(s3 + this->getSerial() + s4);
-//            msg.show();
             QString ss = s3 + this->getSerial() + s4;
             emit flightStatusMsgSignal(ss);
         }
@@ -483,14 +465,12 @@ Flight::Flight(QString & data_str)
     this->setNumOfHosts(str_list.at(12).toInt());
 
     QStringList hosts = str_list[13].split('/', Qt::SkipEmptyParts);
-    //int i = 13;
     foreach (QString s, hosts)
     {
         this->attachHost(Recorder<Host>::getInstance()->searchByCode(s));
     }
 
     this->setCapacity(str_list[14].toInt());
-    //this->setNumOfPassengers(str_list.at(15).toInt());
 
     QStringList tickets = str_list[15].split('/', Qt::SkipEmptyParts);
     foreach (QString s, tickets)
@@ -557,7 +537,6 @@ QString Flight::get_data()
     }
 
     data_str += "|" + QString::number(this->capacity) + "|";
-//            QString::number(this->getNumOfPassengers()) + "|";
 
     foreach (Ticket* t, this->tickets)
     {
@@ -584,18 +563,10 @@ void Flight::setSerial(const QString& s)
         throw invalid_argument("Serial Is Empty!");
 
     this->serial = s;
-//    this->search_code = s;
     this->setSearchCode(s);
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
-
-//void Flight::setAirplaneSerial(const QString& s)
-//{
-//    this->airplaneSerial = s;
-//}
 
 void Flight::setSource(const QString & s)
 {
@@ -604,9 +575,7 @@ void Flight::setSource(const QString & s)
 
     this->source = s;
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDestination(const QString & s)
@@ -616,9 +585,7 @@ void Flight::setDestination(const QString & s)
 
     this->destination = s;
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(const QDateTime &d)
@@ -626,16 +593,14 @@ void Flight::setDateTimeArrival(const QDateTime &d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
-    qint64 duration = this->dateTimeDeparture.secsTo(d);
-    if (duration < 4500)
-        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
+//    qint64 duration = this->dateTimeDeparture.secsTo(d);
+//    if (duration < 4500)
+//        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(const QDateTime && d)
@@ -643,16 +608,14 @@ void Flight::setDateTimeArrival(const QDateTime && d)
     if (d <= this->dateTimeDeparture)
         throw invalid_argument("Arrival DateTime Must Be After The Departure DateTime!");
 
-    qint64 duration = this->dateTimeDeparture.secsTo(d);
-    if (duration < 4500)
-        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
+//    qint64 duration = this->dateTimeDeparture.secsTo(d);
+//    if (duration < 4500)
+//        throw invalid_argument("The Duration Of The Flight Must Be At Least 1 Hour and 15 Minutes!!");
 
     this->dateTimeArrival.setDate(d.date());
     this->dateTimeArrival.setTime(d.time());
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minute, int second)
@@ -661,10 +624,6 @@ void Flight::setDateTimeArrival(int year, int month, int day, int hour, int minu
     QTime time(hour, minute, second);
     QDateTime datetime(date, time);
     this->setDateTimeArrival(datetime);
-
-//    this->dateTimeArrival.setDate(date);
-//    this->dateTimeArrival.setTime(time);
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(const QDateTime & d)
@@ -672,9 +631,7 @@ void Flight::setDateTimeDeparture(const QDateTime & d)
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(const QDateTime && d)
@@ -682,9 +639,7 @@ void Flight::setDateTimeDeparture(const QDateTime && d)
     this->dateTimeDeparture.setDate(d.date());
     this->dateTimeDeparture.setTime(d.time());
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int minute, int second)
@@ -693,9 +648,6 @@ void Flight::setDateTimeDeparture(int year, int month, int day, int hour, int mi
     QTime time(hour, minute, second);
     QDateTime datetime(date, time);
     this->setDateTimeDeparture(datetime);
-//    this->dateTimeDeparture.setDate(date);
-//    this->dateTimeDeparture.setTime(time);
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setPilot(Pilot * p)
@@ -705,18 +657,14 @@ void Flight::setPilot(Pilot * p)
         this->pilot = p;
 
         p->attachFlight(this);
-//        emit flightStatusChanged();
 
         QString s1 = "Pilot ";
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(this->getPilot()->getPersonnelCode()) + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
-
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setNumOfHosts(int n)
@@ -726,10 +674,7 @@ void Flight::setNumOfHosts(int n)
 
     this->numOfHosts = n;
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::setNumOfPassengers(int n)
@@ -739,34 +684,25 @@ void Flight::setNumOfPassengers(int n)
 
     this->numOfPassengers = n;
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::attachHost(Host * h)
 {
-//    if (!h)
-//        throw QException();
     if (h && !this->isHostInList(h))
     {
         this->hosts.push_back(h);
 
         h->attachFlight(this);
-//        emit flightStatusChanged();
 
         QString s1 = "Host ";
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(h->getPersonnelCode()) + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
 
-        //this->setFlightState()
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 
@@ -775,166 +711,38 @@ void Flight::attachTicket(Ticket * p)
     if (p && !this->isTicketInList(p))
     {
         this->tickets.push_back(p);
-//    if (p)
-//        p->setFlight(this);
         this->numOfPassengers++;
         p->setFlight(this);
-//        emit flightStatusChanged();
 
         QString s1 = "Ticket ";
         QString s2 = " Setted For Flight ";
         emit flightStatusMsgSignal(s1 + QString::number(p->getNo()) + s2 +
                                    this->getSerial());
 
-//        Recorder<Flight>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
 
     }
-//    Recorder<Flight>::getInstance()->updateFile(this);
 }
 
 void Flight::removeHost(Host* h)
 {
-
-//    try
-//    {
     this->hosts.removeOne(h);
-    //this->attachHost(Recorder<Host>::getFirstFree(this));
-//    this->attachHost(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreeHost(this));
-//    this->attachHost(this->getAirline()->getFirstFreeHost(this));
 
-//    Recorder<Flight>::getInstance()->updateFile(this);
-
-//    emit flightStatusChanged();
-
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-
-//    foreach (Host* h, this->getHostsList())
-//    {
-//        if (h == nullptr)
-//        {
-//            QMessageBox msg;
-//            msg.setText("Not Enough Hosts!");
-//            msg.exec();
-//            delete this;
-//            //this = nullptr;
-//            return;
-//        }
-//    }
-
-//        if (h == nullptr)
-//        {
-//            QMessageBox msg;
-//            msg.setText("Not Enough Hosts!");
-//            msg.exec();
-//            delete this;
-//            //this = nullptr;
-//            Recorder<Flight>::remove(this);
-//            return;
-//        }
-    //}
-//    QMessageBox msg;
-//    QString str3 = "The Flight's new Hosts Are:\n";
-//    foreach (Host* h, this->getHostsList())
-//    {
-//        str3 += h->getFname() + " " + h->getLname() + "\n";
-//    }
-//    msg.setText(str3);
-//    msg.exec();
-//    }
-//    catch (QException e)
-//    {
-////        Recorder<Flight>::getInstance()->updateFile(this);
-//        QMessageBox msg;
-//        msg.setText("Not Enough Hosts!");
-//        msg.exec();
-////        //this = nullptr;
-//        return;
-//    }
 }
 void Flight::removePilot(){
-    //try
-    //{
+
     this->pilot = nullptr;
-    //this->attachHost(Recorder<Host>::getFirstFree(this));
-//    this->setPilot(Recorder<Airline>::getInstance()->searchByCode(h->getAirline()->getCode())->getFirstFreePilot(this));
-//    this->setPilot(this->getAirline()->getFirstFreePilot(this));
 
-//    emit flightStatusChanged();
-
-//    Recorder<Flight>::getInstance()->updateFileAll();
-    ISDATACHANGED = true;
-
-    //Recorder<Flight>::getInstance()->updateFile(this);
-//    foreach (Host* h, this->getHostsList())
-//    {
-//        if (h == nullptr)
-//        {
-//            QMessageBox msg;
-//            msg.setText("Not Enough Hosts!");
-//            msg.exec();
-//            delete this;
-//            //this = nullptr;
-//            return;
-//        }
-//    }
-
-//        if (h == nullptr)
-//        {
-//            QMessageBox msg;
-//            msg.setText("Not Enough Hosts!");
-//            msg.exec();
-//            delete this;
-//            //this = nullptr;
-//            Recorder<Flight>::remove(this);
-//            return;
-//        }
-    //}
-//    if (this->pilot)
-//    {
-//        QMessageBox msg;
-//        QString str3 = "The Flight's new Pilot Is:\n" + this->pilot->getFname() + " " + this->pilot->getLname();
-//    //    foreach (Host* h, this->getHostsList())
-//    //    {
-//    //        str3 += h->getFname() + " " + h->getLname() + "\n";
-//    //    }
-//        msg.setText(str3);
-//        msg.exec();
-//    }
-    //}
-    //catch (QException e)
-    //{
-//    else
-//    {
-//        //Recorder<Flight>::updateFile(this);
-//        QMessageBox msg;
-//        msg.setText("No Free Pilot Here!");
-//        msg.exec();
-////        delete this;
-////        //this = nullptr;
-//        return;
-//    }
-    //}
+    ISDATACHANGED = true;    
 }
 
 void Flight::removeAirplane()
 {
     this->airplane = nullptr;
-//    emit flightStatusChanged();
 
-//    Recorder<Flight>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-
 }
-
-//void Flight::attachPassenger(Passenger * p)
-//{
-//    this->tickets.push_back(p);
-//    if (p)
-//        p->setFlight(this);
-//    this->numOfPassengers--;
-//}
 
 QDateTime Flight::getDateTimeArrival() const
 {
@@ -1069,6 +877,7 @@ bool Flight::isPassengerExist(Passenger * p) const
     }
     return false;
 }
+
 double Flight::income() const
 {
     double in = 0;
@@ -1078,6 +887,7 @@ double Flight::income() const
     }
     return in;
 }
+
 bool Flight::isCheckInCompleted(){
     if (this->airplane)
     {
@@ -1094,33 +904,3 @@ bool Flight::isCheckInCompleted(){
     }
     return true;
 }
-//void Flight::setDate(const QDate & d)
-//{
-//    this->date.setDate(d.year(), d.month(), d.day());
-//}
-
-//void Flight::setDate(const QDate && d)
-//{
-//    this->date.setDate(d.year(), d.month(), d.day());
-//}
-
-//void Flight::setDate(int year, int month, int day)
-//{
-//    this->date.setDate(year, month, day);
-//}
-
-//void Flight::setTime(const QTime & t)
-//{
-//    this->time.setHMS(t.hour(), t.minute(), t.second());
-//}
-
-//void Flight::setTime(const QTime && t)
-//{
-//    this->time.setHMS(t.hour(), t.minute(), t.second());
-//}
-
-//void Flight::setTime(int hour, int minute, int second)
-//{
-//    this->time.setHMS(hour, minute, second);
-//}
-

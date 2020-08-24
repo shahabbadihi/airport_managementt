@@ -10,8 +10,6 @@ AirplanesPage::AirplanesPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    this->mapper = new QDataWidgetMapper(this);
-//    this->model = AirplaneItemModel::getInstance();
     mapper->setModel(model);
     mapper->addMapping(ui->txtSerial, 0);
     mapper->addMapping(ui->txtNumOfRows, 1);
@@ -28,12 +26,6 @@ AirplanesPage::AirplanesPage(QWidget *parent) :
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->toFirst();
 
-//    connect(this->airplane_item_model, SIGNAL(rowsAboutToBeRemoved(int)),
-//            this, SLOT(setCurrentIndex(int)));
-//    connect(this->airplane_item_model, SIGNAL(setIndexWhenRecordAdded()),
-//            this, SLOT(updateButtonsWhenRecordAdded()));
-
-//    connect(this->mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(updateButtons(int)));
 
     connect(ui->btnNext, SIGNAL(clicked()), this->mapper, SLOT(toNext()));
     connect(ui->btnPre, SIGNAL(clicked()), this->mapper, SLOT(toPrevious()));
@@ -55,21 +47,3 @@ void AirplanesPage::updateButtons(int row)
     ui->btnPre->setEnabled(row > 0);
     ui->btnNext->setEnabled(row < model->rowCount() - 1);
 }
-
-//void AirplanesPage::setCurrentIndex(int row)
-//{
-//    if (row == 0)
-//    {
-//        this->mapper->revert();
-//    }
-//    else
-//    {
-//        this->mapper->setCurrentIndex(row - 1);
-//    }
-//}
-
-//void AirplanesPage::updateButtonsWhenRecordAdded()
-//{
-//    this->mapper->toLast();
-//    this->updateButtons(this->airplane_item_model->rowCount() - 1);
-//}

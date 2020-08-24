@@ -4,8 +4,8 @@
 
 #include <QVector>
 #include "Employee.h"
-#include "Flight.h"
-class Flight;
+//#include "Flight.h"
+//class Flight;
 class Host : public Employee
 {
 private:

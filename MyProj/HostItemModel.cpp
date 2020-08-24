@@ -1,6 +1,7 @@
 #include "HostItemModel.h"
 #include "Recorder.h"
 #include "Host.h"
+#include "Flight.h"
 #include "Airline.h"
 
 HostItemModel* HostItemModel::instance;

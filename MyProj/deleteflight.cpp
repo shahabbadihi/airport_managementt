@@ -19,10 +19,6 @@ deleteFlight::~deleteFlight()
 
 void deleteFlight::on_pushButton_2_clicked()
 {
-//    Flight * f = Recorder<Flight>::getInstance()->searchByCode(ui->flightsSerialTxt->text());
-//    if(f){
-//        if(f->getSource()==ui->flightSourceTxt->text() && f->getDestination()==ui->flightDestinationTxt->text()){
-//           Recorder<Flight>::getInstance()->remove(f);
             QModelIndex index = ui->listView->currentIndex();
             this->model->removeRows(index.row(), 1);
            QMessageBox msg;
