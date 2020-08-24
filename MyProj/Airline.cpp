@@ -267,10 +267,13 @@ Pilot *Airline::getFirstFreePilot(Flight* f) const
         if(a->getFlightList().size()==-a->getDoneFlightList().size()){
             return a;
         }
-        else{
+    }
+    for (int i = 0; i < this->list_of_pilots.size(); i++)
+    {
+        Pilot* a = this->list_of_pilots[i];
         if (a->isFree(f))
             return a;
-        }
+
     }
     return nullptr;
 }
@@ -283,11 +286,14 @@ Host *Airline::getFirstFreeHost(Flight* f) const
         if(a->getFlightList().size()==-a->getDoneFlightList().size()){
             return a;
         }
-        else{
+    }
+    for (int i = 0; i < this->list_of_hosts.size(); i++)
+    {
+        Host* a = this->list_of_hosts[i];
         if (a->isFree(f))
             return a;
 
-        }
+
     }
     return nullptr;
 }
@@ -306,6 +312,10 @@ Airplane *Airline::getFirstFreeAirplane(Flight * f) const
         if(a->getFlightList().size()==s){
             return a;
         }
+    }
+        for (int i = 0; i < this->list_of_airplanes.size(); i++)
+        {
+            Airplane* a = this->list_of_airplanes[i];
         if (a->isFree(f))
             return a;
 
