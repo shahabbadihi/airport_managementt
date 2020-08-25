@@ -87,23 +87,6 @@ void Host::removeFlight(Flight *f)
     }
 }
 
-void Host::attachDoneFlight(Flight * f)
-{
-    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
-    {
-        Employee::attachDoneFlight(f);
-//        ISDATACHANGED = true;
-    }
-}
-
-void Host::removeDoneFlight(Flight *f)
-{
-    if(f && isDoneFlightInList(f) && isFlightInList(f)){
-        Employee::removeDoneFlight(f);
-//        ISDATACHANGED = true;
-    }
-}
-
 void Host::setAirline(Airline *value)
 {
     if (value && !this->getAirline())

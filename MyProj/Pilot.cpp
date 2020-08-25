@@ -72,23 +72,6 @@ void Pilot::removeFlight(Flight *f)
     }
 }
 
-void Pilot::attachDoneFlight(Flight * f)
-{
-    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
-    {
-        Employee::attachDoneFlight(f);
-
-//        ISDATACHANGED = true;
-    }
-}
-
-void Pilot::removeDoneFlight(Flight *f)
-{
-    if(f && isDoneFlightInList(f) && isFlightInList(f)){
-        Employee::removeDoneFlight(f);
-//        ISDATACHANGED = true;
-    }
-}
 Pilot::~Pilot(){
     for (int i = 0; i < this->flightListSize() && this->getFlightList()[i]; i++)
     {

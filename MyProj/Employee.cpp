@@ -178,21 +178,6 @@ void Employee::attachFlight(Flight* f)
     }
 }
 
-void Employee::attachDoneFlight(Flight * f)
-{
-    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
-    {
-        FlightItem::attachDoneFlight(f);
-    }
-}
-
-void Employee::removeDoneFlight(Flight * f)
-{
-    if(f && isDoneFlightInList(f) && isFlightInList(f)){
-        FlightItem::removeDoneFlight(f);
-    }
-}
-
 QString Employee::getFname() const
 {
     return this->fname;

@@ -37,9 +37,6 @@ protected:
     void set_employmentDate(const QDate&& date);
     void attachFlight(Flight*);
     void removeFlight(Flight*);
-    void attachDoneFlight(Flight*);
-    void removeDoneFlight(Flight * f);
-
 
     void setAirline(Airline *value);
 

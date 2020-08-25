@@ -25,6 +25,8 @@ public:
 
     void attachFlight(Flight*);
     void removeFlight(Flight*);
+
+
     void attachDoneFlight(Flight*);
     void removeDoneFlight(Flight * f);
 

@@ -38,9 +38,6 @@ public:
 
     void removeFlight(Flight*);
 
-    void attachDoneFlight(Flight*);
-    void removeDoneFlight(Flight * f);
-
     bool isFree(Flight*) const;
     int getRowCount() const;
     int getcolumnCount() const;

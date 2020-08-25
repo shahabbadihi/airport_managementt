@@ -72,23 +72,6 @@ void Airplane::removeFlight(Flight * f)
     }
 }
 
-void Airplane::attachDoneFlight(Flight * f)
-{
-    if (f && !this->isDoneFlightInList(f) && isFlightInList(f))
-    {
-        FlightItem::attachDoneFlight(f);
-//        ISDATACHANGED = true;
-    }
-}
-
-void Airplane::removeDoneFlight(Flight *f)
-{
-    if(f && isDoneFlightInList(f) && isFlightInList(f)){
-        FlightItem::removeDoneFlight(f);
-//        ISDATACHANGED = true;
-    }
-}
-
 bool Airplane::isFree(Flight * f) const
 {
     if (this->numOfSeats < f->getCapacity())
