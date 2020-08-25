@@ -795,20 +795,20 @@ Flight::~Flight()
 {
     foreach (Host* h, this->getHostsList())
     {
-        h->removeFlight(this);
         h->removeDoneFlight(this);
+        h->removeFlight(this);
     }
     if (this->pilot)
     {
-        this->pilot->removeFlight(this);
         this->pilot->removeDoneFlight(this);
+        this->pilot->removeFlight(this);
     }
     if (this->airline)
         this->airline->removeFlight(this);
     if (this->airplane)
     {
-        this->airplane->removeFlight(this);
         this->airplane->removeDoneFlight(this);
+        this->airplane->removeFlight(this);
     }
     if (this->departure_carrier)
         this->departure_carrier->removeFlight(this);
