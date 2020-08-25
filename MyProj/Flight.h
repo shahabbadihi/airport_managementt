@@ -26,11 +26,8 @@ class Flight : public Object
 private:
     QString serial;
     state flightState;
-    //QString airplaneSerial;
     QString source;
     QString destination;
-    //QDate date;
-    //QTime time;
     QDateTime dateTimeDeparture;
     QDateTime dateTimeArrival;
     int numOfPassengers;
@@ -38,13 +35,11 @@ private:
     int numOfHosts;
     Pilot* pilot;
     QVector<Host*> hosts;
-    //QVector<Employee*> emps;
     QVector<Ticket*> tickets;
     Airline* airline;
     Airplane* airplane;
     Carrier* departure_carrier;
     Carrier* arrival_carrier;
-//    Price ticketsSaleCost;
 public:
     Flight();
     Flight(QString&);
@@ -74,10 +69,8 @@ public:
     void attachTicket(Ticket*);
 
     void removeHost(Host*);
-    //void attachPassenger(Passenger*);
     void removePilot();
     void removeAirplane();
-    //void attachPassenger(Passenger*);
     void removeCarrier(Carrier*);
     void removeTicket(Ticket*);
 
@@ -93,8 +86,6 @@ public:
     Airline *getAirline() const;
     void setAirline(Airline *value);
     void setAirplane(Airplane *value);
-//    Carrier *getCarrier() const;
-//    void setCarrier(Carrier *value);
     Carrier *getDeparture_carrier() const;
     void setDeparture_carrier(Carrier *value);
     Carrier *getArrival_carrier() const;

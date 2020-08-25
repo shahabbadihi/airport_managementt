@@ -58,7 +58,7 @@ void TicketPage::on_pushButton_clicked()
         msg.exec();
         return;
     }
-//    ticket->getPassenger()->setBirthDate(ui->dateEdit->date());
+
     QStringList str=ui->NameLe->text().split(" ");
 
     if (str.size() == 1)

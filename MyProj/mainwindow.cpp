@@ -39,14 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , tab_widget(new QTabWidget(this))
 {
-//    Recorder<Flight>::getInstance()->import();
-//    Recorder<Airline>::getInstance()->import();
-//    Recorder<Pilot>::getInstance()->import();
-//    Recorder<Host>::getInstance()->import();
-//    Recorder<Airplane>::getInstance()->import();
-//    Recorder<Carrier>::getInstance()->import();
-//    Recorder<Ticket>::getInstance()->import();
-//    Recorder<Passenger>::getInstance()->import();
 
     ui->setupUi(this);
 
@@ -59,42 +51,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(Recorder<Flight>::getInstance(), SIGNAL(recordAdded()),
             this, SLOT(connectNewFlightToStatusBar()));
-    //this->timer = new QTimer(this);
-    //connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFiles()));
-//    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightModel()));
-    //timer->start(1000);
-//    Recorder<Airline>::getInstance()->import();
-//    Recorder<Pilot>::getInstance()->import();
-//    Recorder<Host>::getInstance()->import();
-//    Recorder<Airplane>::getInstance()->import();
-//    Recorder<Carrier>::getInstance()->import();
-//    Recorder<Flight>::getInstance()->import();
-//    Recorder<Ticket>::getInstance()->import();
-//    Recorder<Passenger>::getInstance()->import();
-
-
-
 
 
     tab_widget->setStyleSheet("background-color : black;");   
     this->setCentralWidget(tab_widget);
-//    ui->verticalLayout->addWidget(tab_widget);
-//    QPushButton * save_button = new QPushButton("Save", this);
 
-//    save_button->setStyleSheet("background-color:  rgb(255, 246, 0);color: black;border-radius : 3px;padding : 2px;");
-//    connect(save_button, SIGNAL(clicked()), this, SLOT(update_files_slot()));
-
-//    ui->verticalLayout->addWidget(save_button);
     tab_widget->addTab(new FlightTablePage(this), "Flights");
     tab_widget->addTab(new AirlinesPage(this), "Airlines");
     tab_widget->addTab(new PilotsPage(this), "Pilots");
     tab_widget->addTab(new HostsPage(this), "Hosts");
     tab_widget->addTab(new AirplanesPage(this), "Airplanes");
 
-    //connect(this->model, SIGNAL(dataChanged()), ui->tableView, SLOT(refresh()));
-
-    //ui->tableView.setC
-    //ui->tableView->setModel();
 
     QThread * th_update = new QThread();
     ThreadedJob * tj_update = new ThreadedJob();
@@ -198,58 +165,6 @@ void MainWindow::on_actioncarrier_triggered()
     deleteCarrierDialog->exec();
     delete deleteCarrierDialog;
 }
-
-//void MainWindow::updateFiles()
-//{
-//    Recorder<Airline>::getInstance()->updateFileAll();
-//    Recorder<Airplane>::getInstance()->updateFileAll();
-//    Recorder<Host>::getInstance()->updateFileAll();
-//    Recorder<Pilot>::getInstance()->updateFileAll();
-//    Recorder<Flight>::getInstance()->updateFileAll();
-//    Recorder<Passenger>::getInstance()->updateFileAll();
-//    Recorder<Ticket>::getInstance()->updateFileAll();
-//    Recorder<Carrier>::getInstance()->updateFileAll();
-//}
-
-
-//void MainWindow::updateFlightModel()
-//{
-//    for (int row = 0; row < Recorder<Flight>::getInstance()->get_dataList().size(); row++)
-//    {
-//        QModelIndex index0 = this->model->index(row, 0);
-//        this->model->setData(index0, Recorder<Flight>::getInstance()->get_dataList()[row]->getAirline()->getName());
-//        QModelIndex index1 = this->model->index(row, 1);
-//        this->model->setData(index1, Recorder<Flight>::getInstance()->get_dataList()[row]->getSerial());
-//        QModelIndex index2 = this->model->index(row, 2);
-//        this->model->setData(index2, Recorder<Flight>::getInstance()->get_dataList()[row]->getSource());
-//        QModelIndex index3 = this->model->index(row, 3);
-//        this->model->setData(index3, Recorder<Flight>::getInstance()->get_dataList()[row]->getDestination());
-//        QModelIndex index4 = this->model->index(row, 4);
-//        this->model->setData(index4, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeDeparture());
-//        QModelIndex index5 = this->model->index(row, 5);
-//        this->model->setData(index5, Recorder<Flight>::getInstance()->get_dataList()[row]->getDateTimeArrival());
-//    }
-//    QModelIndex i1 = this->model->index(0, 0);
-//    QModelIndex i2 = this->model->index(, 0);
-//    this->model->dataChanged();
-//}
-//<<<<<<< HEAD
-//=======
-//void MainWindow::on_actionFlight_triggered()
-//{
-//    this->deleteFlightDialog=new deleteFlight;
-//    deleteFlightDialog->setModal(true);
-//    deleteFlightDialog->exec();
-//    delete deleteFlightDialog;
-//}
-
-//void MainWindow::on_actioncarrier_triggered()
-//{
-//    this->deleteCarrierDialog=new deleteCarrier;
-//    deleteCarrierDialog->setModal(true);
-//    deleteCarrierDialog->exec();
-//    delete deleteCarrierDialog;
-//}
 
 void MainWindow::on_actionTicket_triggered()
 {

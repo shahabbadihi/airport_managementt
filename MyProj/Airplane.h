@@ -9,7 +9,6 @@
 class Seat;
 class Airline;
 #include "Flight.h"
-//class Flight;
 
 class Airplane : public FlightItem
 {

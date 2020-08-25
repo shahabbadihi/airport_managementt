@@ -13,8 +13,6 @@ HostsPage::HostsPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    this->mapper = new QDataWidgetMapper(this);
-//    this->model = HostItemModel::getInstance();
     mapper->setModel(model);
     mapper->addMapping(ui->txtName, 0);
     mapper->addMapping(ui->txtFamily, 1);
@@ -67,21 +65,3 @@ void HostsPage::updateButtons(int row)
     ui->btnPre->setEnabled(row > 0);
     ui->btnNext->setEnabled(row < model->rowCount() - 1);
 }
-
-//void HostsPage::setCurrentIndex(int row)
-//{
-//    if (row == 0)
-//    {
-//        this->mapper->revert();
-//    }
-//    else
-//    {
-//        this->mapper->setCurrentIndex(row - 1);
-//    }
-//}
-
-//void HostsPage::updateButtonsWhenRecordAdded()
-//{
-//    this->mapper->toLast();
-//    this->updateButtons(this->host_item_model->rowCount() - 1);
-//}

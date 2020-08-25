@@ -21,7 +21,8 @@ void Seat::removeTicket(Ticket *t){
 Seat::Seat(){
 
 }
-bool Seat::isFree(Flight*f){
+
+bool Seat::isFree(Flight*f) const{
     foreach(Ticket *t,this->tickets){
         if(t->getFlight()==f){
             return false;

@@ -20,9 +20,7 @@ Passenger::Passenger(QString & data_str)
                        birth_date.at(0).toInt(),
                        birth_date.at(1).toInt());
     
-    //this->setTicketNo(str_list.at(5).toLong());
 
-    //this->setTicket(Recorder<Ticket>::getInstance()->searchByCode(str_list[5]));
     QStringList tickets = str_list[5].split('/', Qt::SkipEmptyParts);
     foreach (QString s, tickets)
     {
@@ -50,7 +48,6 @@ QString Passenger::get_data()
             QString::number(this->birthDate.day()) + "/" +
             QString::number(this->birthDate.year()) + "|";
 
-            //(this->ticket ? this->ticket->getSearchCode() : "") + "\n";
 
     foreach (Ticket* t, this->list_of_tickets)
     {
@@ -67,7 +64,6 @@ void Passenger::setLname(const QString & lname)
         throw invalid_argument("Last Name Is Empty!");
 
     this->lname = lname;
-//    Recorder<Passenger>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
 
@@ -78,9 +74,7 @@ void Passenger::setFname(const QString & fname)
 
     this->fname = fname;
 
-//    Recorder<Passenger>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setFatherName(const QString & father_name)
@@ -90,21 +84,13 @@ void Passenger::setFatherName(const QString & father_name)
 
     this->fatherName = father_name;
 
-//    Recorder<Passenger>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-    //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setNationalCode(qlonglong n)
 {
     this->nationalCode = n;
 }
-
-//void Passenger::setNationalCode(long n)
-//{
-//    this->nationalCode = n;
-//    this->setSearchCode(QString::number(n));
-//}
 
 void Passenger::setBirthDate(const QDate & date)
 {
@@ -113,9 +99,7 @@ void Passenger::setBirthDate(const QDate & date)
 
     this->birthDate.setDate(date.year(), date.month(), date.day());
 
-//    Recorder<Passenger>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(const QDate && date)
@@ -125,19 +109,13 @@ void Passenger::setBirthDate(const QDate && date)
 
     this->birthDate.setDate(date.year(), date.month(), date.day());
 
-//    Recorder<Passenger>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
-//    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::setBirthDate(int year, int month, int day)
 {
     QDate date(year, month, day);
     this->setBirthDate(date);
-
-//    Recorder<Passenger>::getInstance()->updateFileAll();
-//    this->birthDate.setDate(year, month, day);
-    //    Recorder<Passenger>::getInstance()->updateFile(this);
 }
 
 void Passenger::attachTicket(Ticket * t)
@@ -147,7 +125,6 @@ void Passenger::attachTicket(Ticket * t)
         this->list_of_tickets.push_back(t);
         t->setPassenger(this);
 
-//        Recorder<Passenger>::getInstance()->updateFileAll();
         ISDATACHANGED = true;
     }
 }
@@ -157,7 +134,7 @@ void Passenger::removeTicket(Ticket * t)
     if (t && this->isTicketInList(t))
     {
         this->list_of_tickets.removeOne(t);
-//        Recorder<Passenger>::getInstance()->updateFileAll();
+
         ISDATACHANGED = true;
     }
 }
@@ -176,23 +153,6 @@ bool Passenger::isTicketListEmpty() const
 {
     return this->list_of_tickets.size() ? false : true;
 }
-
-//void Passenger::setTicketNo(long n)
-//{
-//    this->ticket_no = n;
-//    Recorder<Passenger>::getInstance()->updateFile(this);
-//}
-
-//void Passenger::setTicket(Ticket * t)
-//{
-//    if (t && !this->ticket)
-//    {
-//        this->ticket = t;
-//        t->setPassenger(this);
-//    }
-    //this->ticket_no = t->getNo();
-//    Recorder<Passenger>::getInstance()->updateFile(this);
-//}
 
 QString Passenger::getFname() const
 {

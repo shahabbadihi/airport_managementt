@@ -7,7 +7,6 @@
 #include <QVector>
 
 #include "FlightItem.h"
-//#include "Flight.h"
 
 class Flight;
 class Airline;

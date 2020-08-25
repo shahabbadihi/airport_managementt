@@ -19,27 +19,6 @@ FlightStatusDialog::FlightStatusDialog(Flight* flight, QWidget *parent) :
     ui->lblFromTo->setText("From " + flight->getSource() + " To " + flight->getDestination());
 
     this->reset();
-
-//    ui->lblPilotStatus->setText(flight_ptr->isPilotSetted() ? "Setted!" : "Not Setted!");
-//    ui->lblHostsStatus->setText(flight_ptr->isHostEnough() ? "Enough!" : "Not Enough!");
-//    ui->lblAirplaneStatus->setText(flight_ptr->isAirplaneSetted() ? "Setted!" : "Not Setted!");
-//    ui->lblDepartureCarrierStatus->setText(flight_ptr->isDepartureCarrierSetted() ? "Setted!" : "Not Setted!");
-//    ui->lblArrivalCarrierStatus->setText(flight_ptr->isArrivalCarrierSetted() ? "Setted!" : "Not Setted!");
-//    ui->lblTicketsStatus->setText(flight_ptr->isPassengerEnough() ? "Enough!" : "Not Enough!");
-//    if(flight_ptr->isCheckInReady()){
-//        if(flight_ptr->isCheckInCompleted()){
-//            ui->lblCheckStasus->setText("Completed!");
-//        }
-//        else{
-//            ui->lblCheckStasus->setText("Ready!");
-//        }
-
-//    }
-//    else{
-//        ui->lblCheckStasus->setText("Not Ready!");
-//    }
-//    ui->btnEditCheck->setDisabled(!flight_ptr->isCheckInReady());
-//    ui->btnEditCheck->setDisabled(!flight_ptr->isCheckInCompleted());
 }
 
 FlightStatusDialog::~FlightStatusDialog()

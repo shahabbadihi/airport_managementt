@@ -41,15 +41,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-//signals:
-//    void updateFlightModel();
 private slots:
 
     void on_actionAddPilot_triggered();
 
     void on_actionAdd_Host_triggered();
-
-    //void on_actionhost_triggered();
 
     void on_actionDeleteHost_triggered();
 
@@ -62,15 +58,9 @@ private slots:
 
     void on_actionAddAirplane_triggered();
 
-//    void on_actionPilot_triggered();
-
     void on_actionDeletePilot_triggered();
 
     void on_actionAddCarrier_triggered();
-
-    //void updateFiles();
-    //void updateFlightModel();
-    //void print();
 
     void on_actionFlight_triggered();
 
@@ -110,7 +100,6 @@ private:
     DeleteAirplane * deleteAirplaneDialog;
     DeleteAirline * deleteAirlineDialog;
 
-    //QTimer * timer;
 
     QTabWidget * tab_widget;
 

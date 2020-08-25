@@ -59,6 +59,7 @@ Passenger *GetPassengerFactory::getPassenger(const QDate &birth, const QDate &de
         else
             return Recorder<Passenger>::getInstance()->searchByCode(search_code);
     }
+    return nullptr;
 }
 
 

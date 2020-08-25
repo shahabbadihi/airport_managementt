@@ -62,12 +62,7 @@ QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
 
     QString s3 = QString::number(p->wage());
 
-    //QStringListModel ss;
-    //ss.setStringList(s);
 
-
-//    if (role == Qt::DisplayRole)
-//    {
     switch (index.column())
     {
     case 0:
@@ -104,7 +99,6 @@ QVariant PilotItemModel::data(const QModelIndex &index, int /*role*/) const
         return s3;
         break;
     }
-    //}
     return QVariant();
 }
 
@@ -126,24 +120,20 @@ bool PilotItemModel::setData(const QModelIndex &index, const QVariant &value, in
             p->set_nationalCode(value.toLongLong());
             break;
         case 3:
-//            p->set_personnelCode(value.toLongLong());
             break;
         case 4:
-            //p->setAirline();
             break;
         case 5:
-//            p->set_birthDate(value.toDate());
             break;
         case 6:
-//            p->set_employmentDate(value.toDate());
             break;
         case 7:
-            //return s;
             break;
         case 8:
-            //p->;
             break;
         case 9:
+            break;
+        case 10:
             break;
         }
     }
@@ -161,14 +151,3 @@ void PilotItemModel::rowRemovedSlot(int r)
 {
     this->removeRows(r, 1);
 }
-
-//void PilotItemModel::rowAddedSlot()
-//{
-//    emit setIndexWhenRecordAdded();
-//}
-
-//void PilotItemModel::timerHit()
-//{
-//    beginResetModel();
-//    endResetModel();
-//}

@@ -1,9 +1,6 @@
 #ifndef FLIGHTTABLEMODEL_H
 #define FLIGHTTABLEMODEL_H
 
-//#include "mymodel.h"
-//class Flight;
-//#include "Recorder.h"
 #include <QAbstractItemModel>
 #include <QObject>
 #include <QTimer>
@@ -19,9 +16,6 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     bool insertRows(int row, int count, const QModelIndex &parent) override;
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-//    QModelIndex parent(const QModelIndex &index) const override;
-//    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
-//    bool insertRows(int row, int count, const QModelIndex &parent) override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 

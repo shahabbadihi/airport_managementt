@@ -2,7 +2,6 @@
 #define FLIGHTITEM_H
 
 #include "Object.h"
-//#include "Flight.h"
 class Flight;
 class Airline;
 

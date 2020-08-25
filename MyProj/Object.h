@@ -15,22 +15,15 @@ public:
     }
 protected:
     virtual QString get_data() = 0;
-    //Object() {}
     virtual ~Object() {}
-    /*Recorder<Object>& get_recorder()
-    {
-        return *recorder;
-    }*/
 
 
     void setSearchCode(const QString& s)
     {
-
         this->search_code = s;
     }
 
 private:
-    //Recorder<Object>* recorder;
     QString search_code;
 };
 

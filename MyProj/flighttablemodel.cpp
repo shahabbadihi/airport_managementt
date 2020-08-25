@@ -10,19 +10,7 @@ FlightTableModel* FlightTableModel::instance;
 
 FlightTableModel::FlightTableModel(QObject *parent)
     : QAbstractItemModel(parent)
-      //timer(new QTimer(this))
 {
-    //this->recorder = Recorder<Flight>::getInstance();
-    //connect(this->timer, SIGNAL(timeout()), this, SLOT(timerHit()));
-    //timer->start(1000);
-//    QThread * th_update_flight_table = new QThread();
-//    ThreadedJob * tj_update_flight_table = new ThreadedJob();
-//    tj_update_flight_table->moveToThread(th_update_flight_table);
-
-//    connect(th_update_flight_table, SIGNAL(started()), tj_update_flight_table,
-//            SLOT(slt_update_flight_table()));
-
-//    th_update_flight_table->start();
 }
 
 int FlightTableModel::rowCount(const QModelIndex & /*parent*/) const
@@ -115,7 +103,6 @@ void FlightTableModel::recordInserted()
     int row = rowCount() - 1;
     this->insertRows(row, 1, QModelIndex());
     emit recordInsertedSignal(row);
-//    emit recordInsertedSignal();
 }
 
 QVariant FlightTableModel::headerData(int section, Qt::Orientation orientation, int role) const

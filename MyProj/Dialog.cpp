@@ -11,9 +11,6 @@
 #include <stdexcept>
 using namespace std;
 
-//template <class T>
-//QVector<T*> Recorder<T>::dataList;
-
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -34,7 +31,6 @@ Dialog::~Dialog()
 void Dialog::on_pushButton_2_clicked()
 {
     this->close();
-    //this->~Dialog();
 }
 
 void Dialog::on_pushButton_clicked()
@@ -74,20 +70,7 @@ void Dialog::on_pushButton_clicked()
             pilot = new PD3(p_code, airline, fname, lname, b_date,
                             e_date, n_code);
 
-//        pilot->set_personnelCode(ui->txtPersonnelCode->text().toLongLong());
-//        pilot->setAirline(Recorder<Airline>::getInstance()->get_dataList()[ui->comboAirline->currentIndex()]);
-//        pilot->set_fname(ui->txtFname->text());
-//        pilot->set_lname(ui->txtLname->text());
-//        pilot->set_birthDate(ui->dtBirthDate->date());
-//        pilot->set_employmentDate(ui->dtEmploymentDate->date());
-//        pilot->set_nationalCode(ui->txtNationalCode->text().toLongLong());
 
-
-
-
-        //Recorder<Pilot>::record(pilot);
-        //Recorder<Pilot>::addToFile(pilot);
-        //pilot->get_recorder().addToFile(pilot);
         Recorder<Pilot>::getInstance()->add(pilot);
 
         QMessageBox msg;
@@ -95,7 +78,6 @@ void Dialog::on_pushButton_clicked()
         msg.exec();
 
         Recorder<Pilot>::getInstance()->print_dataList();
-        //delete pilot;
     }
 
     catch (invalid_argument e)

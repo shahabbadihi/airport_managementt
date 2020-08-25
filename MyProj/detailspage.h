@@ -3,7 +3,7 @@
 #include "Flight.h"
 #include <QDialog>
 #include "ticketlistmodel.h"
-#include "QSortFilterProxyModel"
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class DetailsPage;

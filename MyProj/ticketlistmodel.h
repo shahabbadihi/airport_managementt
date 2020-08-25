@@ -17,9 +17,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    //int rootPath();
 public slots:
-   //void updateFilter(QString filter);
 public:
    static TicketListModel* getInstance();
 signals:
@@ -27,7 +25,6 @@ signals:
 
 private:
     static TicketListModel* instance;
-    //QString _fliter;
 };
 
 #endif // TICKETLISTMODEL_H

@@ -22,10 +22,7 @@ class Carrier;
 template <class T>
 class Recorder : public SignalSlotRecorder
 {
-    //Q_OBJECT
 public:
-//    void addToFile(T* a);
-//    void removeFromFile(T* a);
 
     friend class Ticket;
 
@@ -41,7 +38,6 @@ public:
 
     void remove(T * a);
 
-//    void updateFile(T * ptr);
     void updateFileAll();
 
     QString getClassName();
@@ -69,8 +65,6 @@ private:
     void record(T* a);
     QString getFileName();
 
-//signals:
-//    void recordAdded();
 
 public slots:
     virtual void recordRemovedSlot(int);

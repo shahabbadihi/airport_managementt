@@ -1,11 +1,9 @@
-//#pragma once
 #ifndef HOST_H
 #define HOST_H
 
 #include <QVector>
 #include "Employee.h"
-//#include "Flight.h"
-//class Flight;
+
 class Host : public Employee
 {
 private:
@@ -18,7 +16,6 @@ public:
          const QDate &emp_date, qlonglong national_code);
     ~Host();
 
-    //QString get_data();
     virtual double wage() const override;
 
     void attachFlight(Flight *f);

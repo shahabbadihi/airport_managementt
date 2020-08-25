@@ -9,15 +9,11 @@
 #include "Ticket.h"
 #include "Passenger.h"
 #include "getpassengerfactory.h"
-//#include "pu2.h"
-//#include "po12.h"
-//#include "p2_12.h"
 #include "Airline.h"
 #include "Airplane.h"
 #include <QVector>
 #include <stdexcept>
 using namespace std;
-//#include "mymodel.h"
 #include "flighttablemodel.h"
 
 extern bool ISDATACHANGED;
@@ -30,7 +26,6 @@ void Recorder<T>::record(T *a)
         this->dataList.push_back(a);
         emit recordAdded();
     }
-    //Recorder<T>::print_dataList();
 }
 
 template<class T>
@@ -178,12 +173,10 @@ template<class T>
 void Recorder<T>::remove(T *a)
 {
     int index = this->dataList.indexOf(a);
-    //this->removeFromFile(a);
     this->dataList.removeOne(a);
     delete a;
     emit recordRemovedSignal(index);
 
-//    Recorder<T>::getInstance()->updateFileAll();
     ISDATACHANGED = true;
 }
 
@@ -214,8 +207,6 @@ template<class T>
 QString Recorder<T>::getClassName()
 {
     std::string f = std::string(typeid(T).name()).substr(1);
-//    int len = f.length();
-//    char* s = new char[len];
     char s[20];
     strcpy(s, f.c_str());
     QString filename = QString(s);
@@ -256,7 +247,7 @@ void Recorder<Host>::add(Host * h)
     {
         this->record(h);
         Recorder<Employee>::getInstance()->add(h);
-//        Recorder<Host>::getInstance()->updateFileAll();
+
         ISDATACHANGED = true;
     }
 }
@@ -276,7 +267,7 @@ void Recorder<Pilot>::add(Pilot * p)
     {
         this->record(p);
         Recorder<Employee>::getInstance()->add(p);
-//        Recorder<Pilot>::getInstance()->updateFileAll();
+
         ISDATACHANGED = true;
     }
 }

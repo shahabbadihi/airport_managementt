@@ -29,8 +29,6 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
 
     ui->tableView->setModel(proxy);
 
-    //ui->tableView->setItemDelegateForColumn(7, delegate);
-    //ui->tableView->resizeRowsToContents();
     ui->tableView->resizeColumnsToContents();
     ui->tableView->setColumnWidth(0, 80);
     ui->tableView->setColumnWidth(1, 80);
@@ -54,7 +52,6 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
         status_buttons.push_back(new QPushButton("Status", ui->tableView));
         details_buttons.push_back(new QPushButton("Details", ui->tableView));
 
-//        connect(delay_buttons[i], SIGNAL(clicked()), this, SLOT(showDelayDialog()));
         ui->tableView->setIndexWidget(proxy->index(i, 7), delay_buttons[i]);
         ui->tableView->setIndexWidget(proxy->index(i, 8), status_buttons[i]);
         ui->tableView->setIndexWidget(proxy->index(i, 9), details_buttons[i]);
@@ -85,8 +82,6 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
             status_buttons[i]->setDisabled(true);
             details_buttons[i]->setDisabled(true);
         }
-//        connect(Recorder<Flight>::getInstance()->get_dataList()[i],
-//                SIGNAL(flightDoneSignal(bool)), delay_buttons[i], SLOT(setDisabled(bool)));
 
         signal_mapper_delay->setMapping(delay_buttons[i], i);
         signal_mapper_status->setMapping(status_buttons[i], i);
@@ -115,9 +110,6 @@ FlightTablePage::FlightTablePage(QWidget *parent) :
 
     th_update_flight_table->start();
 
-//    connect(this->timer, SIGNAL(timeout()), this, SLOT(updateFlightState()));
-
-
 }
 
 FlightTablePage::~FlightTablePage()
@@ -130,30 +122,8 @@ void FlightTablePage::showClock()
     ui->lblClock->setText(QDateTime::currentDateTime().toString());
 }
 
-//void FlightTablePage::updateFlightState()
-//{
-//    foreach (Flight* f, Recorder<Flight>::getInstance()->get_dataList())
-//    {
-//        f->setState();
-//    }
-//}
-
 void FlightTablePage::addButtonFlightTable(int row)
 {
-//    delete proxy;
-//    this->proxy = new QSortFilterProxyModel(this);
-//    this->proxy->setSourceModel(flight_table_model);
-//    this->proxy->setFilterKeyColumn(4);
-//    this->proxy->setDynamicSortFilter(true);
-
-//    ui->tableView->setModel(proxy);
-
-//    for (int i = 0; i < flight_table_model->rowCount() - 1; i++)
-//    {
-//        ui->tableView->setIndexWidget(proxy->index(i, 7), delay_buttons[i]);
-//        ui->tableView->setIndexWidget(proxy->index(i, 8), status_buttons[i]);
-//    }
-
     this->proxy->setSortRole(Qt::InitialSortOrderRole);
     this->proxy->invalidate();
 

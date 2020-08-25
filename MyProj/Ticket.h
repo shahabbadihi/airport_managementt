@@ -1,4 +1,3 @@
-//#pragma once
 #ifndef TICKET_H
 #define TICKET_H
 
@@ -6,7 +5,6 @@
 #include <QString>
 #include <QDate>
 #include <QDateTime>
-//#include "Price.h"
 #include "Object.h"
 #include "Seat.h"
 class Flight;
@@ -18,11 +16,9 @@ private:
     Flight* flight;
     Passenger* passenger;
     double price;
-//    int interestRate;
     Seat * seat;
     long no;
 
-//    void setNo(long value);
 public:
     Ticket();
     Ticket(QString&);

@@ -6,7 +6,7 @@
 #include <QDataWidgetMapper>
 #include "delegate.h"
 #include "ticketlistmodel.h"
-#include "QSortFilterProxyModel"
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class TicketPage;

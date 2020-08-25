@@ -7,9 +7,7 @@ class Pilot;
 class Employee;
 class Flight;
 class Airplane;
-//class Ticket;
 class Carrier;
-//class Vehicle;
 #include "Object.h"
 class Airline : public Object
 {
@@ -24,17 +22,13 @@ public:
     void attachHost(Host*);
     void attachPilot(Pilot*);
     void attachFlight(Flight*);
-//    void attachDoneFlight(Flight*);
     void attachAirplane(Airplane*);
     void removeHost(Host*);
     void removePilot(Pilot*);
     void removeFlight(Flight*);
     void removeAirplane(Airplane*);
-    //void attachTicket(Ticket*);
-    //void attachCarrier(Carrier*);
 
     bool isFlightInList(Flight*) const;
-//    bool isDoneFlightInList(Flight*) const;
 
     void setName(const QString &value);
 
@@ -47,7 +41,6 @@ public:
     Pilot* getFirstFreePilot(Flight*) const;
     Host* getFirstFreeHost(Flight*) const;
     Airplane* getFirstFreeAirplane(Flight*) const;
-    //Employee* getFirstFreeEmp(Flight*) const;
 
     Flight* searchFlightByCode(QString&) const;
 
@@ -55,7 +48,6 @@ public:
     QVector<Host*>getHostsList() const;
     QVector<Flight*>getFlightsList() const;
     QVector<Airplane*>getAirplanesList() const;
-//    QVector<Flight *> getListOfDoneFlights() const;
 
 private:
 
@@ -63,13 +55,8 @@ private:
     QString code;
     QVector<Host*> list_of_hosts;
     QVector<Pilot*> list_of_pilots;
-    //QVector<Employee*> list_of_emps;
     QVector<Flight*> list_of_flights;
-//    QVector<Flight*> list_of_done_flights;
     QVector<Airplane*> list_of_airplanes;
-    //QVector<Ticket*> list_of_tickets;
-    //QVector<Carrier*> list_of_carriers;
-    //QVector<Vehicle*> list_of_vehicles;
 };
 
 #endif // AIRLINE_H

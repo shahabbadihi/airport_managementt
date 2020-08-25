@@ -1,4 +1,3 @@
-
 #ifndef SEAT_H
 #define SEAT_H
 #include "Airplane.h"
@@ -20,7 +19,7 @@ public:
     int getRow(){return row;}
     int getColumn(){return column;}
     friend class Airplane;
-    bool isFree(Flight*);
+    bool isFree(Flight*) const;
 };
 
 #endif // SEAT_H

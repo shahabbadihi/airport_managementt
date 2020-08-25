@@ -1,4 +1,3 @@
-//#pragma once
 #ifndef PASSENGER_H
 #define PASSENGER_H
 #include <QVector>
@@ -15,9 +14,7 @@ protected:
     QString fatherName;
     qlonglong nationalCode;
     QDate birthDate;
-    //Ticket* ticket;
     QVector<Ticket*> list_of_tickets;
-    //long ticket_no;
 public:
     Passenger() {}
     Passenger(QString&);
@@ -36,7 +33,6 @@ public:
     void setBirthDate(const QDate&);
     void setBirthDate(const QDate&&);
     void setBirthDate(int year, int month, int day);
-    //void setTicketNo(long);
     void attachTicket(Ticket*);
     void removeTicket(Ticket*);
 
