@@ -324,8 +324,11 @@ void Flight::setState()
         }
         if (arrival_carrier)
             this->arrival_carrier->removeFlight(this);
+        this->removeCarrier(arrival_carrier);
+
         if (departure_carrier)
             this->departure_carrier->removeFlight(this);
+        this->removeCarrier(departure_carrier);
 
         this->setFlightState(CANCELED);
         emit flightStatusChanged();
@@ -816,11 +819,11 @@ Flight::~Flight()
 
 void Flight::removeCarrier(Carrier* c){
     if(c==arrival_carrier){
-        arrival_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeArrival(),getDestination());
+        arrival_carrier=nullptr;
         ISDATACHANGED = true;
     }
     else if(c==departure_carrier){
-        departure_carrier=Recorder<Carrier>::getInstance()->getFirstFree(getDateTimeDeparture(),getSource());
+        departure_carrier=nullptr;
         ISDATACHANGED = true;
     }
 }
