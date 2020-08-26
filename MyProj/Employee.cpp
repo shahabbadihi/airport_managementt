@@ -27,7 +27,7 @@ Employee::Employee(qlonglong personnel_code, Airline *a, const QString &fname,
                    const QDate &emp_date, qlonglong national_code)
 {
     this->set_personnelCode(personnel_code);
-    this->setAirline(a);
+//    this->setAirline(a);
     this->set_fname(fname);
     this->set_lname(lname);
     this->set_birthDate(birth_date);
