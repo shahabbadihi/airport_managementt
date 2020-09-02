@@ -151,5 +151,5 @@ Passenger * Ticket::getPassenger(){
 
 void Ticket::setPrice(double p)
 {
-    this->price = p;
+    this->price = this->passenger->getPrice(p);
 }
